@@ -14,3 +14,13 @@ git cherry-pick ${COMMIT_ID}
 # commitはしたくない
 git cherry-pick --no-commit ${COMMIT_ID}
 ```
+
+### delete remote branch
+
+```console
+git push origin --delete ${BRANCH_NAME}
+
+# reomoteの削除をlocalに反映。
+# git-trimがオススメ。
+git fetch --prune 
+```
