@@ -24,3 +24,9 @@ git push origin --delete ${BRANCH_NAME}
 # git-trimがオススメ。
 git fetch --prune 
 ```
+
+### push to remote branch with a different name
+
+```console
+git push origin local-name:remote-name
+```
