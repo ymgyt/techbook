@@ -1,5 +1,24 @@
 # DDL
 
+## Data Types
+
+### `TEXT`
+
+* `TEXT`は最大が固定で、storage engineによるが参照で保持するのでrowの最大サイズ制限を回避できる。
+* `TEXT`にはindex貼れるかについて制限がある。
+
+### `VARCHAR`
+
+* `CHAR`と違い可変長。長さを保持するので余計に1~2byte増える。
+* `VARCHAR(10)`が実際に何bytesになるかはencodingによる。`utf8mb4`を指定したら1文字あたり4bytesになる。
+* `TEXT`と違いindexをはれる。
+
+### `CHAR`
+
+* 固定長のデータ型。データをspaceでpaddingして固定長にする。
+* 実データのspaceとpaddingのspaceは区別されず取得時に捨てられる。
+
+
 ## `CREATE TABLE`
 
 ```sql
