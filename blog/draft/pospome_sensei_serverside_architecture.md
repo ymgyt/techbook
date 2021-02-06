@@ -104,3 +104,53 @@ func (s *XxxSpecification) SelectXXX() []*User {
 	// ...
 }
 ```
+
+###### 仕様パターンとリポジトリパターンの併用
+
+仕様をもらって、SQLで全件取得するパターン。  
+メモリに全件のるので使える場面が限られる。
+
+```go
+type UserSpecification struct {}
+
+func (u *UserSpecification) IsSatisfyPremiumUser(user *User) bool { 
+	return user.Status == "premium"
+}
+
+func (u *UserRepository) GetPremiumUser(spec *UserSpecification) []*User { 
+	allUsers := db.GetAllUser()
+    result := make([]*User, 0)
+    
+    for _, user := range allUsers {
+        if spec.IsSatisfyPremiumUser(user) { 
+        	result = append(result, user)
+        } 
+    }
+    return result
+}
+```
+
+仕様側にSQLを定義する。
+
+```go
+type UserSpecification interface {
+	SQL() string
+}
+
+type PremiumUserSpecification struct {}
+
+func (p *PremiumUserSpecification) SQL() string {
+    return "WHERE status = 'premium'"
+}
+```
+
+##### 生成
+
+
+## 4 
+
+### 本質的な設計スキル
+
+* 人によって階層を切る際の粒度が異なる可能性があるので、packageの責務の粒度と階層について方針を決めておく必要がある。
+
+

@@ -1,6 +1,7 @@
 # MySQL
 
 * [DDL](./ddl.md)
+* [DML](./dml.md)  
 * [tips](./tips.md)
 
 ## Character Sets
