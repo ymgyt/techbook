@@ -3,7 +3,6 @@
 * [attribute](attribute.md)
 * [control_flow](control_flow.md)
 * [test](test.md)
-* [tokio](tokio.md)
 
 ## Rules
 
