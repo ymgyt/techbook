@@ -41,3 +41,15 @@ git commit --amend
 # addしたい変更はstagingされている想定。
 git commit --amend --no-edit
 ```
+
+### Submodule
+
+設定fileは`.gitmodules`
+
+```console
+# 既に登録されているsubmoduleをfetchしてくる
+git submodule update [-i]
+
+# submoduleの変更を取り込む
+git submodule update --remote
+```

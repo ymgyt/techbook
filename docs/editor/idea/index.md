@@ -2,11 +2,11 @@
 
 ## Key bind
 
-### Read
+### Tab
 
-code読む時関連。
+* `Move to Oppsite group`: tabを別のwindow?にうつす。
 
-#### Fold
+### Fold
 
 * `Cmd =` Unfold code block
 * `Cmd -` Fold code block
