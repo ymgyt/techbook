@@ -42,6 +42,20 @@ git commit --amend
 git commit --amend --no-edit
 ```
 
+### Reset
+
+```console
+# single fileのreset
+git checkout HEAD target.go
+
+# workingを維持したまま特定のcommitまでreset
+git reset ${COMMIT_ID}
+
+# unstage files
+git reset HEAD -- target.go
+```
+
+
 ### Submodule
 
 設定fileは`.gitmodules`
