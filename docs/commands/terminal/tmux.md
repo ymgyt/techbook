@@ -66,7 +66,35 @@ Ctrl-b &
 exit
 ```
 
+### Command mode
+
+```shell
+# command mode
+Ctrl-b :
+```
+
+### Reload config
+
+confの書き換えを反映させたい。 killしなくてもいけるよ。
+```
+# tmux session外
+tmux source path/to/.tmux.conf
+
+# tmux session内
+Ctrl-b :source path/to/.tmux.conf
+```
+
+## Key binding
+
+bindの仕様はよくわかっていない。doc見つけて読んでおきたい。  
+`-n` はprefixを要求しないという意味。
+
+```
+# clear screen
+bind -n C-k send-keys -R \; send-keys C-l \; clear-history
+```
+
 ## 参考
 
-[tmux入門](http://www.tohoho-web.com/ex/tmux.html)
- 
+* [tmux入門](http://www.tohoho-web.com/ex/tmux.html)
+* https://hkdnet.hatenablog.com/entry/2016/03/02/235808 

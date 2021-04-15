@@ -10,6 +10,7 @@ jupyter notebook
 ## Recipe
 
 logistic regression cost function
+
 ```
 import matplotlib.pyplot as plt
 import numpy as np

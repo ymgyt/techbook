@@ -23,3 +23,20 @@ fn check() -> bool { false }
 // Violates
 check();
 ```
+
+## conditional compilation
+
+### `#[cfg(target_family = xxx)`
+
+targetのOS。 macもunix familyに含まれる。
+```rust
+#[cfg(target_family = "unix")]
+fn create_file() {}
+
+#[cfg(target_family = "windows")]
+fn create_file() {}
+```
+
+## 参考
+
+* [Rustでプラットフォーム依存の処理を書く](https://ryochack.hatenablog.com/entry/2018/10/14/112957)
