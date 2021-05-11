@@ -4,9 +4,9 @@
 
 ## Options
 
-* `-f`: Serverがコンテンツを返せない時にerror code 22で失敗する。(失敗用のHTMLをうけとるのではなく)
-* `-s`: silent
-* `-S`: だけどエラーメッセージをだす
+* `-f`, `--fail` : Serverがコンテンツを返せない時にerror code 22で失敗する。(失敗用のHTMLをうけとるのではなく)
+* `-s`, `--silent`: silent
+* `-S`, `--show-error`: だけどエラーメッセージをだす
 * `-L`: redirectに従う
 * `o[O]`:  取得したresponseをファイルに書き出す。Oはサーバー側のファイル名を使う. -oは指定できる
 * `-i`: レスポンスの詳細情報

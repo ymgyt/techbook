@@ -22,6 +22,7 @@ where
 
 共通点は両者とも`T`への参照を提供をできる。 
 
+
 `Borrow<T>`のほうが`AsRef<T>`より制約が強い。  
 例えば、`impl Borrow<T> for K`の場合、`T`と`K`は`Eq`は`Hash`で整合性があるようにしなければならない。  
 具体的には、`x == y` => `x.borrow() == y.borrow()`, `x != y` => `x.borrow() != y.borrow()`を守る。

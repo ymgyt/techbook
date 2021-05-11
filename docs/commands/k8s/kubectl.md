@@ -27,7 +27,12 @@ kubectl exec <pod> --container <container> -n <namespace> --tty --stdin -- /path
 ### podの一覧を表示する
 
 ```shell
-
 # labelでfilterできる
 kubectl get pods -n <namespace> -l <label_name>=<label_value>
+```
+
+### jobを実行する
+
+```shell
+kubectl apply -f ./job_manifest.yaml
 ```

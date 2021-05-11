@@ -24,6 +24,9 @@ fn check() -> bool { false }
 check();
 ```
 
+
+
+
 ## conditional compilation
 
 ### `#[cfg(target_family = xxx)`
@@ -40,3 +43,16 @@ fn create_file() {}
 ## 参考
 
 * [Rustでプラットフォーム依存の処理を書く](https://ryochack.hatenablog.com/entry/2018/10/14/112957)
+
+## Crate Level Attribute
+
+crate全体に影響する設定。
+
+### `#![no_std]`
+
+compilerがstdではなく、coreを使うようになる。
+
+### `#![no_main]`
+
+OSに依存する`main()`の前処理用のコードが生成されないようにする。
+
