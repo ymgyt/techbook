@@ -27,3 +27,7 @@ MySQLでは、Server,DB,Table,Column単位でcharacter setとcollationを指定�
 VARCHAR(10) BINARY
 VARCHAR(10) CHARACTER SET latin1 COLLATE latin1_bin
 ```
+
+## `ANALYZE TABLE`
+
+統計情報を更新するらしいが、よくわかってないので調べたい。
