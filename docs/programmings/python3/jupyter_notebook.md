@@ -9,9 +9,11 @@ jupyter notebook
 
 ## Recipe
 
+### plot function
+
 logistic regression cost function
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -21,6 +23,18 @@ x = np.linspace(-3, 3)
 y = -1 * np.log(1 / (1 + np.exp(-x)))
 
 plt.plot(x,y)
+```
+
+円を表す関数
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(-3, 3)
+y1 = np.sqrt(9 - x ** 2)
+y2 = -1 * np.sqrt(9 - x ** 2)
+plt.plot(x,y1)
+plt.plot(x,y2)
 ```
 
 ### import 

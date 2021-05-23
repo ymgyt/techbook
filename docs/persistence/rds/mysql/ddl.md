@@ -21,6 +21,9 @@
 
 ## `CREATE TABLE`
 
+CHARACTER SETとCOLLATEを明示的に指定したほうがよい。  
+collateはunicode_520を使っておくとemojiにも対応できる。
+
 ```sql
 CREATE TABLE IF NOT EXISTS `table`
 (
@@ -33,6 +36,8 @@ CREATE TABLE IF NOT EXISTS `table`
     ,CONSTRAINT my_unique UNIQUE (col_1, col_2)
 )
     ENGINE = InnoDB
+    CHARACTER SET utf8mb4           -- never use utf8
+    COLLATE utf8mb4_unicode_520_ci  -- never use utf8mb4_general_ci
     COMMENT = 'DESCRIBE TABLE COMMENT';
 ```
 
