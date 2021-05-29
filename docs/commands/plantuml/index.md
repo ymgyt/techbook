@@ -52,6 +52,15 @@ https://bschwarz.github.io/puml-themes/gallery.html
 @enduml
 ```
 
+### skinparam
+
+```puml
+' 線が直線になる
+skinparam linetype ortho
+' 線が比較的直線になる
+skinparam linetype polyline
+```
+
 ## color
 
 https://plantuml.com/color
