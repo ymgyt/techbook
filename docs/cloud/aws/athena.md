@@ -103,6 +103,12 @@ CREATE EXTERNAL TABLE IF NOT EXISTS cloudfront_logs (
   ) LOCATION 's3://athena-examples-myregion/cloudfront/plaintext/';
 ```
 
+#### DROP TABLE
+
+```sql
+DROP TABLE [IF EXISTS] table_name
+```
+
 ## Partition
 
 * tableを日付や、国といったcolumnの値単位でまとめることをさす。
@@ -193,7 +199,16 @@ Prestoのtuning。
 
 * SELECTで`*`使わない
 
+## Workgroups
+
+* IAMが紐づく単位
+* Cost, Limitが紐づく単位
+
 ## 参考
 
 * [performance tips](https://aws.amazon.com/jp/blogs/news/top-10-performance-tuning-tips-for-amazon-athena/)
 * [partition projection](https://aws.amazon.com/blogs/big-data/speed-up-your-amazon-athena-queries-using-partition-projection/)
+
+## 確認事項
+
+* `MSCK REPAIR TABLE` コマンドは新しいpartitionができたら毎回実行する必要がある?

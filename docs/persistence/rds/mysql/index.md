@@ -49,3 +49,23 @@ VARCHAR(10) CHARACTER SET latin1 COLLATE latin1_bin
 ## `ANALYZE TABLE`
 
 統計情報を更新するらしいが、よくわかってないので調べたい。
+
+## `CASE`式
+
+式なので、任意のexpressionを書けるところに書ける。
+
+```sql
+--単純CASE式
+CASE sex
+WHEN '1' THEN '男'
+WHEN '2' THEN '女'
+ELSE 'その他'
+END
+```
+
+```sql
+--検索CASE式
+CASE WHEN sex = '1' THEN '男'
+WHEN sex = '2' THEN '女'
+ELSE 'その他' END 
+```
