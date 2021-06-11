@@ -109,6 +109,10 @@ CREATE EXTERNAL TABLE IF NOT EXISTS cloudfront_logs (
 DROP TABLE [IF EXISTS] table_name
 ```
 
+### CTAS
+
+`CREATE TABLE AS SELECT` queryの結果を利用してテーブルを作成できる。
+
 ## Partition
 
 * tableを日付や、国といったcolumnの値単位でまとめることをさす。

@@ -41,3 +41,28 @@ VALUES (1,1,1),(2,2,2),(3,3,3)
 ```sql
 TRUNCATE `table_name`
 ```
+
+## User
+
+### LIST
+
+```sql
+SELECT user FROM mysql.user;
+```
+
+### CREATE
+```sql
+CREATE USER 'user_xxx'@'localhost' IDENTIFIED BY 'passwordXYZ';
+GRANT ALL PRIVILEGES ON *.* TO 'user_xxx'@'localhost' WITH GRANT OPTION;
+
+CREATE USER 'user_xxx'@'%' IDENTIFIED BY 'passwordXYZ';
+GRANT ALL PRIVILEGES ON *.* TO 'user_xxx'@'%' WITH GRANT OPTION;
+```
+
+### DROP
+
+```sql
+DROP USER 'user_xxx'@'%';
+```
+
+`user_xxx@localhost`と`user_xxx@%`は異なるユーザとして扱われる点に注意。
