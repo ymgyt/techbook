@@ -3,6 +3,7 @@
 * [3339 Date and Time on the Internet](./3339.md)
 * [4180 CSV](https://tools.ietf.org/html/rfc4180)
 * [4627 JSON](https://www.ietf.org/rfc/rfc4627)
+* [4648 Base64](https://datatracker.ietf.org/doc/html/rfc4648)  
 * [6750 Bearer Token Usage](./6750.md)  
 * [6838 MIME](https://tools.ietf.org/html/rfc6838) 
   * [MIMEについてはprotocol側に記載](../protocol/http/)
