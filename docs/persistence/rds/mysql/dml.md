@@ -4,7 +4,8 @@
 ## `INSERT INTO ON DUPLICATE KEY UPDATE`
 
 テーブルに指定してあるunique制約で重複した場合にはUPDATEできる。  
-ONのあとに`VALUES`をかくとINSERTしようとした値を利用して更新ができる。
+ONのあとに`VALUES`をかくとINSERTしようとした値を利用して更新ができる。  
+**AUTO INCREMENTが設定されたcolumnの値が実際に新規のINSERTが走らなくても増加するので注意**
 
 ```sql
 INSERT INTO `table_name` (col_1, col_2, col_3)
@@ -41,6 +42,27 @@ VALUES (1,1,1),(2,2,2),(3,3,3)
 ```sql
 TRUNCATE `table_name`
 ```
+
+## Control flow
+
+### CASE
+
+* CASE value WHEN compare_value THEN result [WHEN  compare_value THEN result ...] ELSE result END
+
+* CASE WHEN condition THEN result [WHEN condition THEN result ...] ELSE result END
+
+
+### IF
+
+* IF(expr1, expr2, expr3)
+
+expr1がTRUE(0かNULLでない)とき、expr2を返し、それ以外はexpr3を返す
+
+### IFNULL
+
+* IFNULL(expr1, expr2)
+
+expr1がNULLのときexpr2を返す
 
 ## User
 

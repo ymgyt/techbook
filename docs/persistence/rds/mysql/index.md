@@ -69,3 +69,20 @@ CASE WHEN sex = '1' THEN '男'
 WHEN sex = '2' THEN '女'
 ELSE 'その他' END 
 ```
+
+## `WITH`
+
+INNER JOINじゃなくて先に一時テーブルを書ける。
+
+```sql
+WITH aaa AS 
+(
+    SELECT * FROM xxx
+)
+, bbb AS 
+(
+    SELECT * FROM yyy
+)
+SELECT ccc.*, aaa.A, bbb.B
+FROM ccc
+```

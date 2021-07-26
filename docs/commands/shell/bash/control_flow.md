@@ -85,3 +85,8 @@ do
   # process
 done
 ```
+
+```shell
+# one line
+while true; do <command>; sleep 30; done
+```

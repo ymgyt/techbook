@@ -41,6 +41,9 @@ CREATE TABLE IF NOT EXISTS `table`
     COMMENT = 'DESCRIBE TABLE COMMENT';
 ```
 
+* CHARACTER SETには `utf8mb4`を指定しておくのがよい。
+* COLLATEには`utf8mb4_unicode_520_ci`を指定しておくとemoji対応ができる。
+
 ## `ALTER TABLE`
 
 ```sql
@@ -51,4 +54,24 @@ ALTER TABLE `table` ADD CONSTRAINT `constraint_name` FOREIGN KEY (`fk_col`) REFE
 
 -- 外部キー制約の削除。
 ALTER TABLE `table` DROP FOREIGN KEY `constraint_name`;
+
+-- columnの追加
+ALTER TABLE `table` ADD COLUMN `new_column` <data_type> COMMENT '...' AFTER `prev_column`;
+
+-- columnの削除
+ALTER TABLE `table` DROP COLUMN <column>;
+```
+
+## `RENAME TABLE`
+
+### Tableをswapする
+
+一時的に別のtableにデータをINSERTしておき、tableをswapさせることができる。  
+
+`old_table`と`new_table`をswapさせる。
+
+```sql
+RENAME TABLE old_table TO tmp_table,
+             new_table TO old_table,
+             tmp_table TO new_table;
 ```

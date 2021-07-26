@@ -62,6 +62,19 @@ defaultのeventually-consistentの場合、1RCUで8KBまでのitemを扱える�
 
 * table設計の時点からUse caseのQueryを念頭においた設計が求められる。
   * 検索条件を特定して、Primary key, GSIを作成しておく必要があるから。
+    
+## PITR
+
+* Point In Time Recovery。偶発的なデータ消失に対する追加の保険として機能する。
+* パフォーマンスに影響しない
+* PITR APIはCloudTrailに記録される
+* Costはstorage size単位(Tokyo region 1G 10円)
+    
+## Export
+
+* 過去35日間、1秒あたりの粒度で任意のポイントインタイム
+* RCUに影響しない
+
 
 ## 参考
 

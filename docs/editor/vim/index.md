@@ -14,6 +14,31 @@ zz
 zb
 ```
 
+### surround
+
+```
+
+# 文字をかこむ
+
+a[a]a
+
+# you surround inner word
+ysiw'
+
+"aaa"
+
+'a[a]a'
+
+cs'"
+
+"aaa"
+
+# `(` で囲むと余分なspaceが加えられる
+# `)` で囲むとよい
+
+```
+
+
 ## Charset
 
 開いているファイルのcharsetを変えて開き直す。
@@ -31,3 +56,4 @@ zb
 :set fileencoding=sjis
 :se fenc=cp932
 ```
+

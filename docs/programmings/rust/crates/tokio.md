@@ -25,3 +25,14 @@ tokio::time::sleep(interval).await;
         })
 ```
 
+
+### test
+
+```rust
+#[test]
+fn test_case() {
+    tokio_test::block_on(async move {
+        // test logic...
+    })
+}
+```

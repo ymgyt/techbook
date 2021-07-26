@@ -65,5 +65,20 @@ git reset HEAD -- target.go
 git submodule update [-i]
 
 # submoduleの変更を取り込む
-git submodule update --remote
+git submodule update --remote [--merge]
 ```
+
+#### submoduleの変更を取り込む
+
+```console
+# submoduleで管理しているdirにcd
+cd path/to/submodule_dir
+git pull origin master
+cd ..
+
+# modified: submodule_dir (new commits)
+git status
+git add path/to/submodule_dir
+git commit -m "update submodule"
+```
+

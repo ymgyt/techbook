@@ -13,6 +13,8 @@ EventSource(Kinesis/DynamoDB) -> λの処理を作成する際に登場するリ
 * `MaximumRetryAttempts` 最大リトライ数。これ設定できるのはかなり大きい。
 * `ParallelizationFactor` 1 shard 1λが原則だけど、1 shard nλができる。 shardを並列に処理できる要件なら有効
 * `StartingPosition` : streamに残ってるbufferのどこから読むか。これでLATESTできるの知らなかったから、先にdeployして処理しきってから、有効とかにしていた。
+    * `StartingPositionTimestamp`
+    * serverless/CloudFormationでは使えなかった。対応されるかは微妙。
 
 ### 参考
 * [CloudFormation Document](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-destinationconfig)

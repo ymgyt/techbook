@@ -64,6 +64,12 @@ Ctrl-b w
 # windowの終了
 Ctrl-b &
 exit
+
+# scroll
+Ctrl-b [
+
+# scrollやめたいとき
+q
 ```
 
 ### Command mode

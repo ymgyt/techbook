@@ -126,10 +126,16 @@ DROP TABLE [IF EXISTS] table_name
     
 * partitionを単一かつstringにしておくと最適化がきくらしい
 
-* 疑問点
-  * partitionを有効にするために、`CREATE TABLE`での指定以外にさらに、追加のDDLうつ必要がある？
-    * https://docs.aws.amazon.com/athena/latest/ug/alter-table-add-partition.html
-    * https://docs.aws.amazon.com/athena/latest/ug/msck-repair-table.html
+### Partitionの更新
+
+２つの方法がある。
+
+* `MSCK REPAIR TABLE <table_name>` を実行。
+  * すべてのpartitionが有効化される(athenaで認識される)
+    
+* `ALTER TABLE <athena_database>.<athena_table> ADD IF NOT EXISTS PARTITION (key=value, [key=value,...])`
+  * 追加したpartitionがわかっているときはこれで明示的に作成できる。
+    
     
 ### 考慮事項
 
