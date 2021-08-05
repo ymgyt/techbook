@@ -35,4 +35,10 @@ kubectl get pods -n <namespace> -l <label_name>=<label_value>
 
 ```shell
 kubectl apply -f ./job_manifest.yaml
+
+# cronjobからjobを実行する
+kubectl create job <job_name> --from=cronjob/<cronjob_name> -n <namespace>
+
+# 必要なら完了後のjobを削除する
+kubectl delete job <job_name> -n <namespace>
 ```

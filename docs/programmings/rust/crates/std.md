@@ -1,5 +1,32 @@
 # std
 
+## fmt
+
+### debug struct
+
+`1.53.0`から
+```rust
+use std::fmt;
+
+struct Bar {
+    bar: i32,
+    hidden: f32,
+}
+
+impl fmt::Debug for Bar {
+    fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+        fmt.debug_struct("Bar")
+           .field("bar", &self.bar)
+           .finish_non_exhaustive() // 他にもフィールドがあることを表示
+    }
+}
+
+assert_eq!(
+    format!("{:?}", Bar { bar: 10, hidden: 1.0 }),
+    "Bar { bar: 10, .. }",
+);
+```
+
 ## fs
 
 ### create file
