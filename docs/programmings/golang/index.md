@@ -1,5 +1,5 @@
 # Golang
 
 * [recipe](recipe.md)
-* [delve](delve.md)
+* [delve](packages/delve.md)
 * [reflection](reflection.md)

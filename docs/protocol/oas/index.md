@@ -34,6 +34,32 @@ exclusiveMinimum: false
 exclusiveMaximum: true
 ```
 
+### String
+
+`minLength`と`maxLength`で長さを制限できる。  
+https://swagger.io/docs/specification/data-models/data-types/#string
+
+```yaml
+type: string
+minLength: 3
+maxLength: 20
+```
+
+#### enum
+
+`nullable`を`true`にした場合は明示的に選択肢に`null`が必要。
+
+```yaml
+schema:
+  type: string
+  nullable: true
+  enum: [asc, desc, null]
+description: |
+  Sort order:
+   * `asc` - Ascending, from A to Z
+   * `desc` - Descending, from Z to A
+```
+
 ## Inheritance
 
 ### composition
@@ -58,3 +84,22 @@ components:
             field:
               # ...
 ```
+
+## `$ref`
+
+参照先の定義をその場に展開できる。したがって、siblingは無視される。   
+どこでも使えるわけではなく、使える場所は仕様でref objectが使えると定義されている。
+
+```yaml
+components:
+  schemas:
+    Date:
+      type string
+      format date
+    Xxx:
+      $ref: '#/components/schemas/Date'
+      description: this is ignored!
+```
+
+こう書いた場合、`Xxx.description`は無視される。  
+`$ref: path_to_file#/json_path`として外部のfileも参照できる。

@@ -65,7 +65,7 @@ CREATE EXTERNAL TABLE [IF NOT EXISTS]
   * `MAP <primitive_type, data_type` 
   * `STRUCT <col_name: data_type [COMMENT col_comment] [,...]>`  
 
-* `[PARTITION BY (col_name data_type [COMMENT col_comment], ...)]`. partitioned tableを作成する。
+* `[PARTITIONED BY (col_name data_type [COMMENT col_comment], ...)]`. partitioned tableを作成する。
   * partitioned columnsはtable data側には存在しない、`col_name`が同じだとエラーになる。
     
 * `[CLUSTER BY (col_name, col_name, ...) INTO num_buckets BUCKETS]`
@@ -221,4 +221,52 @@ Prestoのtuning。
 
 ## 確認事項
 
-* `MSCK REPAIR TABLE` コマンドは新しいpartitionができたら毎回実行する必要がある?
+* `MSCK REPAIR TABLE` コマンドは新しいpartitionができたら毎回実行する必要がある? => 必要がある
+
+
+## DynamoDB exportを分析する
+
+DynamoDBの`ExportTablePointInTime` APIの結果をathenaから分析する。  
+exportされたfileには以下のjsonが複数格納されているとする。  
+```json
+{
+  "Item": {
+    "UserID": {
+      "N": "10"
+    },
+    "UserName": {
+      "S": "ymgyt"
+    }
+  }
+}
+```
+
+DDLは以下のようになる
+
+```text
+CREATE EXTERNAL TABLE IF NOT EXISTS xxx_table (
+  Item struct <
+    UserID:struct<N:string>,
+    UserName:struct<S:string>>
+)
+PARTITIONED BY (year STRING, month STRING)
+ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
+LOCATION 's3://export-table/prefix
+TBLPROPERTIES ( 'has_encrypted_data'='false')
+;
+```
+
+query
+
+```sql
+SELECT
+ item.userid.n as user_id,
+ item.username.s as user_name
+FROM xxx_table
+WHERE year = '2021' AND month = '7'
+LIMIT 10
+;
+```
+
+
+
