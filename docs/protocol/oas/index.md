@@ -103,3 +103,21 @@ components:
 
 こう書いた場合、`Xxx.description`は無視される。  
 `$ref: path_to_file#/json_path`として外部のfileも参照できる。
+
+
+## Authentication
+
+### ApiKey
+
+```yaml
+components:
+  securitySchemes:
+    apiKeyXXX: # ここは何でもよい
+      type: apiKey
+      in: header
+      name: x-api-key # http header name
+
+
+security:
+  - apiKey: [] # ここに書いてはじめて有効になる。
+```

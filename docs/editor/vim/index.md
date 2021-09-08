@@ -35,11 +35,24 @@ cs'"
 
 # `(` で囲むと余分なspaceが加えられる
 # `)` で囲むとよい
+```
+### yank
+
+clipboardにyankする
 
 ```
+# *がsystem register
+"*y
+```
+## Command
 
+### ロードしている設定ファイルの場所
 
-## Charset
+```
+:scriptnames
+```
+
+### Charset
 
 開いているファイルのcharsetを変えて開き直す。
 ```
@@ -56,4 +69,5 @@ cs'"
 :set fileencoding=sjis
 :se fenc=cp932
 ```
+
 

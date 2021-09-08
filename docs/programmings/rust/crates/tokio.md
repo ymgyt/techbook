@@ -25,6 +25,28 @@ tokio::time::sleep(interval).await;
         })
 ```
 
+### `try_join!`
+
+複数のfeatureをconcurrentに実行する。FutAが`Poll::Pending`返したら、FutBを`poll`する。 
+parallelにしたければ、`tokio::spawn()`をjoinするようにする。
+
+```rust
+async fn fetch_thing(name: &str) -> Result<()> {
+    // ...
+}
+
+let res = tokio::try_join!(fetch_thing("first"), fetch_thing("second"));
+
+match rest {
+    Ok((first, second)) => {
+        // do something...
+    }
+    Err(err) => {
+        println!("error: {}", err);
+    }
+}
+
+```
 
 ### test
 

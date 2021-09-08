@@ -29,3 +29,6 @@ func UpdateResource(current: Resource, action: UpdateAction) (Resourece, error) 
 
 jobを作ったときに、リカバリー用だったりして状況を限定したいことなんかがあった。
 
+## 副作用をできるだけ分離する
+
+それだけテストがしやすくなる。
