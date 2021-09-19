@@ -12,6 +12,7 @@
 * `-i`: レスポンスの詳細情報
 * `-v`: verbose
 * `--request|-X`: methodの指定
+* `--dump-header`: レスポンスヘッダーをdumpする。出力先のファイルを引数にとるので、`--dump-header -`とするとstdoutにだせる。
 
 
 ## POST
