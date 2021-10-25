@@ -66,3 +66,41 @@ pub fn opt() -> Opt {
     Opt::from_args()
 }
 ```
+
+## enum
+
+マクロを使うと、`variants()`をenumに生成してくれるので、選択肢を限定したい場合に便利。
+
+```rust
+use structopt::clap::arg_enum;
+
+arg_enum! {
+    #[derive(Debug,Serialize,Deserialize,Clone,Copy)]
+    pub enum SentimentFeatureReaction {
+        Context,
+        Emoji,
+    }
+}
+
+impl Default for SentimentFeatureReaction {
+    fn default() -> Self {
+        SentimentFeatureReaction::Emoji
+    }
+}
+```
+
+```rust
+use structopt::StructOpt;
+
+#[derive(StructOpt, Debug)]
+pub struct EnableOpt {
+    #[structopt(
+    long,
+    help = "specify how bot reaction",
+    possible_values = &spec::SentimentFeatureReaction::variants(),
+    default_value = spec::SentimentFeatureReaction::default().as_str(),
+    case_insensitive = true,
+    )]
+    pub reaction: spec::SentimentFeatureReaction,
+}
+```

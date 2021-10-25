@@ -55,6 +55,14 @@ git reset ${COMMIT_ID}
 git reset HEAD -- target.go
 ```
 
+force pull
+
+```shell
+# remote(origin)のmasterを強制的にpullする。
+git fetch --all
+git reset --hard origin/master
+```
+
 
 ### Submodule
 
@@ -62,6 +70,7 @@ git reset HEAD -- target.go
 
 ```console
 # 既に登録されているsubmoduleをfetchしてくる
+# submoduleを利用しているprojectで最初にうつ
 git submodule update [-i]
 
 # submoduleの変更を取り込む

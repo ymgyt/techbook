@@ -27,6 +27,9 @@ rustup doc --std
 # 特定のversionを利用する
 rustup install 1.15.1
 rustup override set 1.15.1
+
+# target tripleを確認する
+rustup show
 ```
 
 ## toolchainの指定
