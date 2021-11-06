@@ -20,3 +20,23 @@ runnerを指定すると、`cargo run`実行時に、runnerをよびだしてく
 `hf2 elf target/thumbv7em-none-eabihf/debug/app`がよばれる。
 
 
+## multi binary
+
+crateに複数のbinaryを用意したい場合
+
+```yaml
+[package]
+# ...
+# cargo実行時に指定がなくても動くようにする 
+default-run = "fleetops"
+
+[[bin]]
+name = "xxx"
+path = "src/main.rs"
+
+[[bin]]
+name = "yyy"
+path = "src/yyy/bin/yyy.rs"
+```
+
+`cargo run --bin yyy`のように実行時に指定する必要がある。ない場合はdefaultが利用される。
