@@ -29,6 +29,20 @@ check();
 
 ## conditional compilation
 
+`[cfg]`はRustのitemsの前に書ける。(function, impl, module, use)
+
+```rust
+// feature f1かf2が有効なら
+#[cfg(any(feature = "f1", feature = "f2"))]
+
+// mac
+#[cfg(target_os = "macos")]
+
+// miriにignoreを渡す
+#[cfg_attr(miri, ignore)]
+
+```
+
 ### `#[cfg(target_family = xxx)`
 
 targetのOS。 macもunix familyに含まれる。
@@ -39,6 +53,11 @@ fn create_file() {}
 #[cfg(target_family = "windows")]
 fn create_file() {}
 ```
+
+### `#[cfg(feature = "some-feature")`
+
+
+crateのfeatureで制御できる。
 
 ## 参考
 
