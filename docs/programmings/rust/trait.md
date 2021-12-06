@@ -1,5 +1,16 @@
 # Trait
 
+* `Self`はそのtraitを実装している型のalias
+
+## `T: 'static`
+
+Tはownedか`&'static`なfieldだけをもつことを要求。  
+threadまたぐ際に要求されがち。threadまたぐと、元threadのcallstackの存在を仮定できなくなるから。
+
+## `T: 'a`
+
+`T: 'a` is saying is that any references in T must outlive 'a.
+
 ## `Borrow<T>`と`AsRef<T>`
 
 ```rust
@@ -26,3 +37,101 @@ where
 `Borrow<T>`のほうが`AsRef<T>`より制約が強い。  
 例えば、`impl Borrow<T> for K`の場合、`T`と`K`は`Eq`は`Hash`で整合性があるようにしなければならない。  
 具体的には、`x == y` => `x.borrow() == y.borrow()`, `x != y` => `x.borrow() != y.borrow()`を守る。
+
+
+## `Sized`
+
+その型のメモリ上のsizeがcompile時にわかっていることを要求するtrait。  
+trait objectとslice以外には基本的には自動的にimplされている。
+
+基本的にRustでは型にSizedが要求される。
+* local変数はSized(stack frameの割当計算できないから)
+* 関数の引数/戻り値はSized
+* Struct FieldはSized
+
+*Generic Type parameters are sized by default*  
+`T: Sized`が暗黙的に要求されている。  
+なので、TにSizedを要求しない場合は明示的にopt outしてやる必要がある  
+`T: ?Sized` (?はmay not be)
+
+`&str`を引数にとれるGenericsを書きたければ
+```rust
+fn f<T: ?Sized>(x: &T) { }
+```
+`str`はunsized。
+
+ただし、traitの暗黙的type parameterのSelfについては、デフォルトのSizedが適用されていない。  
+なので、traitの宣言では、Sizedを要求する場合明示する必要がある
+
+```rust
+trait A: Sized { ... }
+
+trait WithConstructor {
+    fn new_with_param(param: usize) -> Self;
+
+    fn new() -> Self
+        where
+            Self: Sized,
+    {
+        Self::new_with_param(0)
+    }
+}
+```
+
+## Trait Object
+
+* 実態はその型のinstanceへのpointerとvtableへのpointerからなるwide pointer
+* `!Sized`なので、Sizedが要求される場合は、`Box<dyn T>`, `&dyn T`, `&mut dyn T`のように表現される。
+
+### Object Safety
+
+全てのtraitをtrait objectとして扱えるわけではなく、以下の条件を満たすtraitだけがtrait objectとして扱える
+
+* The return type is not `Self`
+* There are no generic type parameters
+
+## Orphan Rule
+
+you can implement a trait for a type only if the trait or the type is local to your crate.  
+
+* `Debug`を自前の型に書ける
+* `MyTrait`をboolに実装できる
+* `Debug`をboolに実装できない
+
+## Marker Traits
+
+* methodをもたない
+* ある型がある方法で使える/使えないを示すためにある
+  * Sendがthreadまたげるとか
+
+## Higher-ranked trait bound
+
+まったく謎の概念。  
+Rustforrustacieansのコードを一応載せておく。
+
+```rust
+use std::fmt::Debug;
+
+impl Debug for AnyIterable
+where
+    for<'a> &'a Self: IntoIterator,
+    for<'a> <&'a Self as IntoIterator>::Item: Debug,
+{
+    fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
+        f.debug_list().entries(self).finish()
+    }
+}
+```
+
+## Existential Types
+
+```rust
+fn foo() -> impl Iterator<Item=String> {
+  todo!()
+}
+```
+
+* 戻り値に`impl Trait`を書ける。
+* 具体的な戻り値の型はcompilerが推測してくれる。
+* closureを返したり、具体型を隠蔽したりできる。
+* genericsが複雑で戻り値の型がわからない場合にも利用できる。

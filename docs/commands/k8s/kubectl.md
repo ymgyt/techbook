@@ -23,7 +23,6 @@ kubectl exec <pod> --container <container> -n <namespace> --tty --stdin -- /bin/
 kubectl exec <pod> --container <container> -n <namespace> --tty --stdin -- /path/app command --arg value
 ```
 
-
 ### podの一覧を表示する
 
 ```shell
@@ -41,4 +40,19 @@ kubectl create job <job_name> --from=cronjob/<cronjob_name> -n <namespace>
 
 # 必要なら完了後のjobを削除する
 kubectl delete job <job_name> -n <namespace>
+```
+
+### yamlを適用する
+
+```shell
+kubectl apply -f path/to/object.yaml
+```
+
+### configを確認する
+
+```shell
+kubectl config view
+
+# 適用されているcontextを表示
+kubectl config current-context
 ```

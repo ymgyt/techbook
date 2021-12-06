@@ -12,7 +12,7 @@ rustup install nightly
 
 
 # 最新版にupdate
-rustup update
+rustup update [stable]
 
 # nightly版を実行
 rustup run nightly rustc -V

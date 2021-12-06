@@ -40,6 +40,38 @@ defaults write TeXShop FixPreviewBlur YES
 \end{document}
 ```
 
+## Title
+
+```latex
+
+\title{タイトル}
+\author{ymgyt}
+\date{2021年12月6日}
+
+\begin{document}
+
+    \maketitle
+    
+\end{document}
+```
+
+## 文章構造
+
+```latest
+\begin{document}
+    \section{sectionA}
+
+    \subsection{subSectionA1}
+
+    \subsection{subSectionA2}
+
+    \subsubsection{subSubSectionA2-1}
+
+    \section{sectionB}
+
+\end{document}
+```
+
 ## 論理記号
 
 ```latex

@@ -6,17 +6,17 @@
 
 ### Global Secondary Indexes(GSI)
 
-* base tableとは異なるpartition keyとsort keyをもてる。  
+* base tableとは異なるpartition keyとsort keyをもてる。
 * local secondary indexとの対比でglobalといわれる、要は制約がない。
 * tableとは独立してCreate/Deleteできる
 * eventual consistencyのみサポート
 * base tableとは別にCUをもつ
-  * GSIへのQuery時にRCU超えたらエラーになる。
-  * base tableの書き込み時に、GSIのWCU超えたら、writeが失敗する  
+    * GSIへのQuery時にRCU超えたらエラーになる。
+    * base tableの書き込み時に、GSIのWCU超えたら、writeが失敗する
 * indexにprojectedされたattributeしかquery/scanできない
 * base table key attributes(primary,sort)は必ずprojectedされる
 * indexのkey attributesがbase tableにinsertされたitemに存在しない場合は、index側に反映されない。
-  * この性質を利用して、GSIのprimary keyをbase tableのフラグ的な情報にしておくと、GSIのitem数を低く抑えられる。
+    * この性質を利用して、GSIのprimary keyをbase tableのフラグ的な情報にしておくと、GSIのitem数を低く抑えられる。
 
 #### Projection
 
@@ -36,7 +36,7 @@ base tableが更新されると自動でGSIが非同期で更新される。appl
 
 ### Local Secondary index(LSI)
 
-* base tableと同じ、partition keyをもつが、sort keyが異なる。  
+* base tableと同じ、partition keyをもつが、sort keyが異なる。
 * 1 partition key valueに対して10 GBの制限がある。
 * table作成時にcreateする必要がある。
 * strong consistencyもサポート。
@@ -61,19 +61,28 @@ defaultのeventually-consistentの場合、1RCUで8KBまでのitemを扱える�
 [公式のBest Practices](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html) まとめ
 
 * table設計の時点からUse caseのQueryを念頭においた設計が求められる。
-  * 検索条件を特定して、Primary key, GSIを作成しておく必要があるから。
-    
+    * 検索条件を特定して、Primary key, GSIを作成しておく必要があるから。
+
 ## PITR
 
 * Point In Time Recovery。偶発的なデータ消失に対する追加の保険として機能する。
 * パフォーマンスに影響しない
 * PITR APIはCloudTrailに記録される
 * Costはstorage size単位(Tokyo region 1G 10円)
-    
+
 ## Export
 
 * 過去35日間、1秒あたりの粒度で任意のポイントインタイム
 * RCUに影響しない
+
+
+## API
+
+### Expressions
+
+`projection-expression`で`#pr.FiveStar, #pr.ThreeStar`と書いて  
+`expression-attribute-names`で`{"#pr": "ProductReviews"}`のように置換後の値をかける。  
+重複を排除したり、予約後との衝突を回避するために利用できる。
 
 
 ## 参考

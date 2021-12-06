@@ -7,7 +7,12 @@
 
 ### `#[repr(transparent)]`
 
-定義しようとしている型はその内部の型と同じメモリレイアウトをもつ必要がある。
+定義しようとしている型はその内部の型と同じメモリレイアウトをもつ必要がある。  
+newtype patternのようにひとつのfieldだけをもつ型で利用できる。
+```rust
+#[repr(transparent)]
+struct UserID(String)
+```
 
 [参考](https://blog.cardina1.red/2020/12/24/defining-custom-slice-types/#defining-slice-types--repr-transparent)
 

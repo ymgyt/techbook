@@ -19,8 +19,9 @@ rustflags = [
 runnerを指定すると、`cargo run`実行時に、runnerをよびだしてくれる。  
 `hf2 elf target/thumbv7em-none-eabihf/debug/app`がよばれる。
 
+## Cargo.toml
 
-## multi binary
+### multi binary
 
 crateに複数のbinaryを用意したい場合
 
@@ -40,3 +41,15 @@ path = "src/yyy/bin/yyy.rs"
 ```
 
 `cargo run --bin yyy`のように実行時に指定する必要がある。ない場合はdefaultが利用される。
+
+
+### workspace
+
+```toml
+[workspace]
+
+members = [
+    "xxx",
+    "yyy",
+]
+```
