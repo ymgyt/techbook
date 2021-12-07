@@ -38,6 +38,11 @@ where
 例えば、`impl Borrow<T> for K`の場合、`T`と`K`は`Eq`は`Hash`で整合性があるようにしなければならない。  
 具体的には、`x == y` => `x.borrow() == y.borrow()`, `x != y` => `x.borrow() != y.borrow()`を守る。
 
+## `Deref`
+
+* Rustは継承という概念をもっていないが、`Deref`を使って、同様の機能を実現している。  
+* `T: Deref<Target = U>`ならUに実装されているmethodを直接Tの値をreceiverとして呼ぶことができる。
+
 
 ## `Sized`
 
@@ -82,6 +87,7 @@ trait WithConstructor {
 
 * 実態はその型のinstanceへのpointerとvtableへのpointerからなるwide pointer
 * `!Sized`なので、Sizedが要求される場合は、`Box<dyn T>`, `&dyn T`, `&mut dyn T`のように表現される。
+* `where Self: Sized`と書くと、そのtraitはtrait objectからは呼ばれず、必ずconcrete typeに呼ばれることを強制できる。
 
 ### Object Safety
 
@@ -135,3 +141,13 @@ fn foo() -> impl Iterator<Item=String> {
 * 具体的な戻り値の型はcompilerが推測してくれる。
 * closureを返したり、具体型を隠蔽したりできる。
 * genericsが複雑で戻り値の型がわからない場合にも利用できる。
+
+## Blanket Implementation
+
+ある型Tにtraitを実装した場合でも、&Tにそのtraitは自動的に実装されない。
+traitが`&self`しかとらない場合、`&T`にそのtraitが実装されていることをユーザは期待する。
+
+そこで可能なら以下のblanket implementationを提供しておくとよい
+* `&T where T: Trait`
+* `&mut T where T: Trait`
+* `Box<T> where T: Trait`

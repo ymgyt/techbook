@@ -9,6 +9,14 @@ minikube kubectl -- get pods -A
 
 # dashboardを起動する
 minikube dashboard
+
+# deleteする
+minikube delete
+
+# minikubeのVM?にアクセスする
+minikube ssh
+
+# 
 ```
 
 ## Install
