@@ -83,19 +83,6 @@ trait WithConstructor {
 }
 ```
 
-## Trait Object
-
-* 実態はその型のinstanceへのpointerとvtableへのpointerからなるwide pointer
-* `!Sized`なので、Sizedが要求される場合は、`Box<dyn T>`, `&dyn T`, `&mut dyn T`のように表現される。
-* `where Self: Sized`と書くと、そのtraitはtrait objectからは呼ばれず、必ずconcrete typeに呼ばれることを強制できる。
-
-### Object Safety
-
-全てのtraitをtrait objectとして扱えるわけではなく、以下の条件を満たすtraitだけがtrait objectとして扱える
-
-* The return type is not `Self`
-* There are no generic type parameters
-
 ## Orphan Rule
 
 you can implement a trait for a type only if the trait or the type is local to your crate.  

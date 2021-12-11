@@ -29,6 +29,50 @@ fn check() -> bool { false }
 check();
 ```
 
+## `[non_exhaustive]`
+
+```rust
+#[non_exhaustive]
+pub struct Config {
+    pub window_width: u16,
+    pub window_height: u16,
+}
+
+#[non_exhaustive]
+pub enum Error {
+    Message(String),
+    Other,
+}
+
+pub enum Message {
+    #[non_exhaustive] Send { from: u32, to: u32, contents: String },
+    #[non_exhaustive] Reaction(u32),
+    #[non_exhaustive] Quit,
+}
+```
+
+使う側
+```rust
+// `Config`, `Error`, and `Message` are types defined in an upstream crate that have been
+// annotated as `#[non_exhaustive]`.
+use upstream::{Config, Error, Message};
+
+// Cannot construct an instance of `Config`, if new fields were added in
+// a new version of `upstream` then this would fail to compile, so it is
+// disallowed.
+let config = Config { window_width: 640, window_height: 480 };
+
+// enumの場合はwildcardをいれることが強制される。
+match error {
+    Error::Message(ref s) => { },
+    Error::Other => { },
+    // would compile with: `_ => {},`
+}
+```
+structに付与した場合、将来的なfieldの追加可能性を明示している。  
+crate外でのconstruct処理ができなくなる。  
+enumに付与した場合は、matchでwildcardを指定しておくことが強制される。
+
 
 
 

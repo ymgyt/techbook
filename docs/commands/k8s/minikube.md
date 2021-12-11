@@ -16,7 +16,9 @@ minikube delete
 # minikubeのVM?にアクセスする
 minikube ssh
 
-# 
+# mountを起動時に行う
+# portsをあけておかないと外からminikubeにアクセスできない
+minikube start --mount-string "/Users/ymgyt/ws/minikubemnt:/data" --mount --ports=32488:32488
 ```
 
 ## Install
