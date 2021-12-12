@@ -29,7 +29,7 @@ crateに複数のbinaryを用意したい場合
 [package]
 # ...
 # cargo実行時に指定がなくても動くようにする 
-default-run = "fleetops"
+default-run = "ops"
 
 [[bin]]
 name = "xxx"
@@ -41,6 +41,24 @@ path = "src/yyy/bin/yyy.rs"
 ```
 
 `cargo run --bin yyy`のように実行時に指定する必要がある。ない場合はdefaultが利用される。
+
+
+### features
+
+```yaml
+[package]
+name = "foo"
+...
+[features] 
+derive = ["syn"]
+default = ["derive"]
+
+[dependencies.syn]
+version = "1"
+default-features = false
+features = ["derive", "parsing", "printing"] optional = true
+```
+
 
 
 ### workspace

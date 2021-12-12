@@ -1,5 +1,21 @@
 # Test
 
+## Mechanisms
+
+* `cargo test --lib`を実行すると
+  * cargoは`--test` flagをrustcに渡すだけ
+  * rustcはtest binaryを生成する
+    * `cfg(test)`が有効になる
+    * `#[test]`をつけた関数を実行するtest harness(main)を生成する
+
+## Integration test
+
+* `tests/`以下のfileはintegration testとして認識される
+  * fileごとにtest harnessが生成される
+  * directoryは対象にならないので、test organize用の処理書きたかったらここ。
+* crateは`cfg(test)`がない状態でbuildされる
+* 
+
 ## `cargo test`
 
 * test時のstdoutを出力する。 `cargo test -- --nocapture`
@@ -32,3 +48,8 @@ mod tests {
 }
 ```
 
+## Doctests
+
+* 自動的に`fn main()`の中に書かれる。
+  * opt outして自分で書くこともできる。
+* `/// #`のように`#`つけると、doctestには含まれるが、生成されるdocumentationには含まれない。

@@ -1,10 +1,14 @@
-# Macro
+# Declarative Macro
+
+* suffixに`!`がついているとparserがmacro展開と認識してくれる。
+  * 大体直感的に使えるが、全ての場所で使えるわけではない。
 
 ## Fragment types
 
 `$name:ident`のようにmatchする種別を指定できる
 
 * `:ident` 変数名
+  * 呼び出し側の変数に影響をあたえるためにはこれでもらう必要がある。
 * `:expr` expression
 * `:ty` 型名
 * `:tt` token tree. なんでもマッチする。
@@ -14,6 +18,25 @@
 `$()`これを繰り返し表現と読むとよみやすくなる。
 
 * `$($key:expr => $value:expr),+`
+
+## Hygiene
+
+```rust
+macro_rules! let_foo { 
+  ($x:expr) => {
+    let foo = $x; 
+  }
+}
+let foo = 1;
+// expands to let foo = 2; 
+let_foo!(2); 
+assert_eq!(foo, 1);
+```
+
+macroの中のfooのassignは外に影響をあたえない!
+
+* 衛生的
+  * 明示的に渡された変数以外には影響を与えない
 
 ## Recipe
 
@@ -70,14 +93,3 @@ macro_rules! clone_from_copy {
 clone_from_copy![bool, f32, f64, u8, i8, /* ... */];
 ```
 
-## `format!`
-
-```rust
-// 小数点の精度
-println!("{:.1}", 0.123456); // 0.1
-println!("{:.2}", 0.123456); // 0.12
-println!("{:.3}", 0.123456); // 0.123
-println!("{:.4}", 0.123456); // 0.1235
-
-println!("{name} {value}", name = "ymgyt", value = 10);
-```

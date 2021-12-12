@@ -1,6 +1,6 @@
 # Rust
 
-* [attribute](attribute.md)
+* [attribute](attributes/attribute.md)
 * [control_flow](control_flow.md)
 * [test](test.md)
 

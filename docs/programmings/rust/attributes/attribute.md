@@ -73,54 +73,12 @@ structに付与した場合、将来的なfieldの追加可能性を明示して
 crate外でのconstruct処理ができなくなる。  
 enumに付与した場合は、matchでwildcardを指定しておくことが強制される。
 
+## `#[allow(clippy::name_of_lint)]`
 
+clippyの特定のlintを許したい。
 
-
-## conditional compilation
-
-`[cfg]`はRustのitemsの前に書ける。(function, impl, module, use)
-
-```rust
-// feature f1かf2が有効なら
-#[cfg(any(feature = "f1", feature = "f2"))]
-
-// mac
-#[cfg(target_os = "macos")]
-
-// miriにignoreを渡す
-#[cfg_attr(miri, ignore)]
-
-```
-
-### `#[cfg(target_family = xxx)`
-
-targetのOS。 macもunix familyに含まれる。
-```rust
-#[cfg(target_family = "unix")]
-fn create_file() {}
-
-#[cfg(target_family = "windows")]
-fn create_file() {}
-```
-
-### `#[cfg(feature = "some-feature")`
-
-
-crateのfeatureで制御できる。
 
 ## 参考
 
 * [Rustでプラットフォーム依存の処理を書く](https://ryochack.hatenablog.com/entry/2018/10/14/112957)
-
-## Crate Level Attribute
-
-crate全体に影響する設定。
-
-### `#![no_std]`
-
-compilerがstdではなく、coreを使うようになる。
-
-### `#![no_main]`
-
-OSに依存する`main()`の前処理用のコードが生成されないようにする。
 
