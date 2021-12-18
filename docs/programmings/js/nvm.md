@@ -8,5 +8,4 @@ nvm ls-remote
 
 # versionをinstall
 nvm install v16.13.1
-
 ```

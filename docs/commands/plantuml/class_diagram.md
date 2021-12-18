@@ -7,3 +7,18 @@
 
 
 
+## Note
+
+```puml
+entity Device {
+    Code string
+    Name string
+    -- ubiquitous --
+    端末
+}
+note left of Device::Code
+    Sigfox上の識別子
+end note
+```
+
+特定のfiledにnoteを生やす
