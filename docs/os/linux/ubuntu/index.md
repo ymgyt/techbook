@@ -1,5 +1,7 @@
 # Ubuntu
 
+* カノニカル社が主体
+
 ## version確認
 
 ```shell
