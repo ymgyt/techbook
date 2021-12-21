@@ -1,0 +1,27 @@
+@startuml
+
+participant Client
+participant HttpServer
+participant HeadlessChrome
+participant InternalHttpServer
+
+Client         -> HttpServer         : Generate PDF Request
+HttpServer     -> HeadlessChrome     : Start
+activate HeadlessChrome
+
+HeadlessChrome -> InternalHttpServer : Request index.html
+HeadlessChrome <- InternalHttpServer : Response index.html
+HeadlessChrome -> HeadlessChrome     : Start React
+
+HeadlessChrome -> InternalHttpServer : Request PDF Param
+HeadlessChrome <- InternalHttpServer : Response PDF Param
+
+HeadlessChrome -> HeadlessChrome     : Render PDF like dom
+HeadlessChrome -> HeadlessChrome     : Convert to PDF
+
+HttpServer    <- HeadlessChrome      : PDF bytes
+deactivate HeadlessChrome
+
+Client        <- HttpServer          : Generate PDF Response
+
+@enduml
