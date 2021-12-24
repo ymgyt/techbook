@@ -2,8 +2,7 @@
 
 ## Build and Push
 
-docker imageを生成して、docker hubに公開する。
-
+* docker imageを生成して、docker hubに公開する。
 
 ```console
 docker build --tag ymgyt/xxx:0.1.0 .

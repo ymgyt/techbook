@@ -1,5 +1,11 @@
 # CDK
 
+## Install
+
+```
+npm install -g aws-cdk
+```
+
 ## Bootstrapping
 
 ```console

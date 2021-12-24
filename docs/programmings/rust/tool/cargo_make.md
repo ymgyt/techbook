@@ -74,7 +74,10 @@ script = "./docs/puml/generate.sh"
 ```yaml
 [tasks.xxx]
 dependencies = ["task_a", "task_b"]
-run_task = ["task_x", "task_y"]
+run_task = [
+  { name = ["docker_build", "docker_push"] }
+]
+
 ```
 
 * `dependencies`は実行前に起動される
