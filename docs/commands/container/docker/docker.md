@@ -21,3 +21,14 @@ docker run --rm -v $(pwd):/container/workingdir ymgyt/plantuml:latest example.pu
 ```
 
 image名以降の引数はDockerfileのCMDとして、ENTRYPOINTの引数になる。
+
+## Tagging
+
+* localで生成したimageを別のrepositoryにpushするために必要
+
+```shell
+ docker tag ymgyt/tinypod:0.1.0 111122223333.dkr.ecr.ap-northeast-1.amazonaws.com/reponame:0.1.0
+ 
+ # repositoryにpush
+ docker image push 111122223333.dkr.ecr.ap-northeast-1.amazonaws.com/reponame:0.1.0
+```

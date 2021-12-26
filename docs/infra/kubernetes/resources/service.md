@@ -23,3 +23,21 @@ spec:
 
 * この定義は、`app=MyApp`のlabelをもち、port 9376でlistenしているPod群を抽象化している。
 * ServiceにはClusterIPが付与される
+* `metadata.name`がDNS名になる
+
+### LoadBalancer
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: tinypod
+spec:
+  type: LoadBalaner
+  selector:
+    app: applabel
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8001
+```

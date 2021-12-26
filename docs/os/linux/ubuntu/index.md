@@ -8,6 +8,12 @@
 cat /etc/os-release
 ```
 
+## Memo
+
+* `cc` not found
+  * `apt install gcc`
+* terminalのCopy/PasteはCmd + Shift + (c|v)
+
 ## 環境構築memo
 
 ### Google Chromeのinstall
