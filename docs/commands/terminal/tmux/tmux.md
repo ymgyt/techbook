@@ -8,6 +8,9 @@ brew install tmux
 
 # Ubuntu
 sudo apt install tmux
+
+# check version
+tmux -V
 ```
 
 ## Usage
