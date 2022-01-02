@@ -14,3 +14,7 @@
 * L2. intent-based API
   * default値を設定してくれている
   * `bucket.addLifeCycleRule()`とかでbucketの設定できるイメージ
+
+## Env
+
+* AWS accountとRegionの組み合わせのこと

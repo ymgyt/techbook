@@ -27,3 +27,39 @@ spec:
 
 * ingress controllerをmetadata.annotationsで制御する
 * きたrequestをどこに流すかだけを定義している
+
+## ALB
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tinypod
+  namespace: tinypod
+  annotations:
+    # https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/ingress/annotations/#authentication
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/tags: env=staging
+    alb.ingress.kubernetes.io/target-type: instance
+    # ALB ListenerのAuthenticationにcognitoを指定する場合
+    alb.ingress.kubernetes.io/auth-type: cognito
+    # cognitoを利用する場合の設定
+    alb.ingress.kubernetes.io/auth-idp-cognito: '{"userPoolARN":"arn:aws:cognito-idp:ap-northeast-1:111122223333:userpool/xxx", "userPoolClientID":"XxxxYyyy", "userPoolDomain": "my-domain"}'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: 'ACM-Cert-ARN'
+spec:
+  rules:
+  - http:
+      paths:
+      -  path: /
+         pathType: Prefix
+         backend:
+           service:
+             name: tinypod
+             port:
+               number: 80
+```
+
+* alb controllerを通してALBを作成するIngress
+* annotationsでALBの各種設定をおこなう

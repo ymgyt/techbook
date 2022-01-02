@@ -60,10 +60,11 @@ base imageを指定する
 * `RUN apt-get install -y nginx` とするとDockerコンテナ内で `/bin/sh -c` でコマンド実行するのと同じことがおきる
 * `RUN ["echo", "hello from docker"]` 引数をjson配列(EXEC方式)にするとshellをかえさないで実行される.
 * `RUN ["/bin/bash", "-c", "echo", "hoge"]` とすると明示的にbashで実行できる
+* `apt-get`には`--no-install-recommends`を付与するのがBP
 
 ```
 RUN apt-get update \
-    && apt-get install --assume-yes --quiet \
+    && apt-get install --assume-yes --quiet --no-install-recommends\
         fonts-takao \
         graphviz \
         wget

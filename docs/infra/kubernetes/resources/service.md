@@ -18,6 +18,8 @@ spec:
   ports:
     - protocol: TCP
       port: 80
+      # targetPort: httpも可能
+      # その場合はPod側でportにname指定が必要
       targetPort: 9376
 ```
 
