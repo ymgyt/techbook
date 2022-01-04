@@ -1,0 +1,4 @@
+# GitOps
+
+InfraとApplicationが宣言的にdescribedされていて、gitでversion管理されている運用手法。  
+また、repositoryの状態とdeployされている状態が一致する仕組みを備えている。
