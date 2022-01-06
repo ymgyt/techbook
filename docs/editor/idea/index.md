@@ -9,3 +9,7 @@
 ### Code
 
 * Expand CodeBlock: `Cmd -` / `Cmd =`
+
+### Navigate
+
+* Goto Next Splitter: となりのwindow(splitter)に移動する

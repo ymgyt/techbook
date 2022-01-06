@@ -56,3 +56,15 @@ kubectl config view
 # 適用されているcontextを表示
 kubectl config current-context
 ```
+
+### secretの中身をみる
+
+```shell
+kubectl get secret xxx-secret -o jsonpath="{.data.key1}" | base64 -d; 
+```
+
+### cluster IPで公開されているserviceにlocalから接続する
+
+```shell
+kubectl port-forward svc/service-xxx 8080:443
+```

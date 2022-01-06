@@ -42,6 +42,31 @@ git commit --amend
 git commit --amend --no-edit
 ```
 
+### Handle Conflicts
+
+feature branchをcheckoutしている状態で、masterをmergeしているケース
+
+```console
+# featureの内容が反映される
+git checkout conflicted_file.rs --ours
+
+# master側が反映される
+git checkout conflicted_file.rs --theirs
+```
+
+### Checkout Remote Branch
+
+```console
+git fetch
+git branch -v -a
+...
+remotes/origin/test
+
+git switch test
+```
+
+* `git switch`でremoteからlocal branchを作成してcheckoutできる。
+
 ### Reset
 
 ```console
