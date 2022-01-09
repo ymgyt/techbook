@@ -30,3 +30,11 @@ commit messageを以下のformatにする
   * codeの意味に影響を与えない
 * `test`
 
+### Initial commit
+
+```
+$ git init # creates repository
+$ git commit --allow-empty -m'Initial empty commit' # creates empty commit`
+```
+
+* `--allow-empty` を指定すると空のcommitが作れる
