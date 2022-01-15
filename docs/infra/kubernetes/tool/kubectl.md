@@ -68,3 +68,10 @@ kubectl get secret xxx-secret -o jsonpath="{.data.key1}" | base64 -d;
 ```shell
 kubectl port-forward svc/service-xxx 8080:443
 ```
+
+### APIに登録されている全てのresourceを確認する
+
+```shell
+# kubectl get all --all-namespace はすべてを表示しない
+kubectl api-resources
+```
