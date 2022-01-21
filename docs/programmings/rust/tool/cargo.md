@@ -71,3 +71,12 @@ members = [
     "yyy",
 ]
 ```
+
+## install
+
+```sh
+cargo install --path . --locked
+```
+
+* defaultでは`Cargo.lock`が参照されない
+  * `--locked`を付与すると`Cargo.lock`が参照されinstallの再現性が向上する
