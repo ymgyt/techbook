@@ -35,6 +35,14 @@ let mut parser = pair(tag("abc"), tag("efg"));
 assert_eq!(parser("abcefghij"), Ok(("hij", ("abc", "efg"))));
 ```
 
+pairのseperatorがある場合は`separated_pair`を利用する
+
+```rust
+fn key_value(input: &str) -> IResult<&str, (&str, &str)> {
+    sequence::separated_pair(key, bytes::complete::tag("="), value)(input)
+}
+```
+
 ## use parse result
 
 * parse結果からstructを組み立てる
