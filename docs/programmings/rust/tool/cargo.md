@@ -59,8 +59,6 @@ default-features = false
 features = ["derive", "parsing", "printing"] optional = true
 ```
 
-
-
 ### workspace
 
 ```toml
@@ -71,6 +69,13 @@ members = [
     "yyy",
 ]
 ```
+
+### Specifying dependencies version
+
+* `xxx = "0.1.2`は`"^0.1.2"`と解釈される
+* `^1.2.3`のような指定をcaret requirementsという
+  * 一番左の0でない数字をincrementしないかぎりupdateが許可されると解釈する
+  * `^1.2.3`の場合は`2.0.0`にならない限りどのversion upもうけいれる
 
 ## install
 
