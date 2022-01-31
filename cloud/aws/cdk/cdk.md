@@ -30,6 +30,8 @@ cdk ls
 
 ```consle
 cdk synth
+# stackを指定することもできる
+cdk synth stack1
 ```
 
 * cdk appをCloudFormationに変換する

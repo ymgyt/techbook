@@ -1,20 +1,14 @@
 # CDK Concepts
 
-## Construct
+## Physical Name
 
-* represents "cloud component"
-  * 再利用の単位
-  * CloudFormationをどの程度抽象化しているかでL1とL2に分かれる
-  * CDK v2から、`constructs` moduleに分離された(v1ではcore)
+* 実際に作成されるResourceの名前のこと
+* `<resourceType>Name`のpropertyで指定もできる
+* **あるpropertyの変更がresourceのcreate deleteを引き起こす場合、指定してあると失敗する**
 
-### Construct Layer
+```typescript
+const bucket = new s3.Bucket(this, 'MyBucket', {
+  bucketName: 'my-bucket-name',
+});
+```
 
-* L1.CfnResource
-  * Cloudformationに対応する
-* L2. intent-based API
-  * default値を設定してくれている
-  * `bucket.addLifeCycleRule()`とかでbucketの設定できるイメージ
-
-## Env
-
-* AWS accountとRegionの組み合わせのこと
