@@ -36,3 +36,26 @@
 ## Objectを操作する方法の概要
 
 https://kubernetes.io/docs/concepts/overview/working-with-objects/object-management/
+
+## `metadata`
+
+### `labels`
+
+* `app.kubernetes.io`のprefixがついているものは命名規約
+  * できるだけ従っておくとtoolとよく統合される
+  * https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/
+
+```yaml
+# This is an excerpt
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/instance: mysql-abcxzy
+    app.kubernetes.io/version: "5.7.21"
+    app.kubernetes.io/component: database
+    app.kubernetes.io/part-of: wordpress
+    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/created-by: controller-manager
+```

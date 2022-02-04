@@ -26,4 +26,7 @@ fnm install v16.13.1
 
 # pin specific node version to project(directory)
 fnm use v16.13.1
+
+# set default version
+fnm default v16.13.1
 ```
