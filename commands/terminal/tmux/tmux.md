@@ -75,6 +75,19 @@ Ctrl-b [
 q
 ```
 
+### Panel
+
+```text
+# 移動するpanelのindexを表示
+<Prefix> + q
+
+# splitしたpanelの高さを合わせる
+<Prefix> + :
+select-layout even-vertical
+
+
+```
+
 ### Command mode
 
 ```shell
