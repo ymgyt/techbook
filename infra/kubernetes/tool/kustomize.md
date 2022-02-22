@@ -61,6 +61,28 @@ resources:
 commonLabels:
   app: tinypod
   env: staging
+ 
+# ConfigMapを生成する 
+configMapGenerator:
+- name: postgres-init-sql
+  files:
+     # file名がkey, fileのcontentがvalueになる。
+  -  init.sql
+  options:
+    # 生成されるconfig mapを他で参照する際にrandomな値があると参照できない
+    disableNameSuffixHash: true
+    
+# Secretsを生成する
+# 考え方はconfigMapGeneratorと同じ
+# base64 encodeは自動で行われるので、fileはリテラルで書いて良い
+secretGenerator:
+- name: pgo-s3-cred
+  files:
+  - s3.conf
+  options:
+    disableNameSuffixHash: true
+
+
 
 # 古いdocだとpatchesになっているところはこれを使う
 patchesStrategicMerge:

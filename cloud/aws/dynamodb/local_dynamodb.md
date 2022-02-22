@@ -8,7 +8,7 @@
 FROM amazon/dynamodb-local:1.17.0
 EXPOSE 8000
 WORKDIR /home/dynamodblocal
-CMD ["-jar", "DynamoDBLocal.jar", "sharedDb", "-dbPath", ".", "-delayTransientStatuses", "-port", "8000"]
+CMD ["-jar", "DynamoDBLocal.jar", "-sharedDb", "-dbPath", ".", "-delayTransientStatuses", "-port", "8000"]
 ```
 
 docker-compose

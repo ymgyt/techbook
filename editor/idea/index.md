@@ -1,5 +1,16 @@
 # IDEA
 
+## メモリ設定
+
+* file sizeが大きい場合Intellijが補完の対象にしてくれない場合がある(巨大なSDKとか)
+  * Help > Edit Custom Propertiesで設定値を変更できる
+
+```text
+# 単位はKB
+idea.max.content.load.filesize=100000
+idea.max.intellisense.filesize=20000
+```
+
 ## Key bind
 
 ### Tab

@@ -4,6 +4,11 @@
 
 `kubectl options` ですべてのcommandに適用できるoptionを確認できる。(`-n` namespace設定とか)
 
+### Logging Level
+
+* `kubectl --v=1`のように指定する。0~9まで指定できて、9が一番詳しい
+  * `--v=2`がrecommendedと書いてある
+
 ## config
 
 `KUBECONFIG`環境変数で指定できる。もちろんflagでも指定できる。

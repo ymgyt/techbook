@@ -58,3 +58,23 @@ fn test_case() {
     })
 }
 ```
+
+macroもある
+
+```rust
+#[tokio::test(flavor = "multi_thread", worker_threads = 1)]
+async fn my_test() {
+    assert!(true);
+}
+
+#[tokio::test]
+async fn my_test() {
+    assert!(true);
+}
+```
+
+Cargo.toml
+```toml
+[dev-dependencies]
+tokio = { version = "1", features = ["rt", "macros"], default_features = false }
+```

@@ -72,3 +72,8 @@ spec:
 spec:
   clusterIP: None
 ```
+
+## DNS
+
+* serviceのdns名は`<service>.<namespace>.svc.cluster.local`
+  * `/etc/resolve.conf`の設定のおかげで、`svc.cluster.local`, `cluster.local`を勝手に付与してくれる

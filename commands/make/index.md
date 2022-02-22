@@ -25,6 +25,9 @@ OBJS = main.o
 xxx.o: $(OBJS)
 ```
 
+* `AAA := BBB` BBBを評価してAAAにassignする。`=`は遅延評価される
+* `AAA ?= BBB` AAAに値がないor空文字だったらBBBをassignする。評価は遅延。
+
 ### Builtin Variable
 
 | variable | description                           |

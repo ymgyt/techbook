@@ -21,3 +21,8 @@ npm install -g <package>
 //npm.pkg.github.com/:_authToken=GH_TOKEN
 @ymgyt:registry=https://npm.pkg.github.com/
 ```
+
+### Dockerfile内でのinstall
+
+Dockerfile内で`{yarn,npm} install`うつ場合はbuild contextに`.npmrc`を含めるように注意。  
+多分yarnも`.npmrc`を参照してくれているっぽい。
