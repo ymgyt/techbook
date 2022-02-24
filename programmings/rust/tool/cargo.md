@@ -85,3 +85,13 @@ cargo install --path . --locked
 
 * defaultでは`Cargo.lock`が参照されない
   * `--locked`を付与すると`Cargo.lock`が参照されinstallの再現性が向上する
+  * `--locked`を付与しないと`Cargo.toml`で許される限りsemverの最新を利用しようとする
+
+## update
+
+* dependencyのversionをあげる
+
+```shell
+# xxxのversionをあげる
+cargo update --package xxx
+```

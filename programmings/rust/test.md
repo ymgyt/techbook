@@ -53,3 +53,23 @@ mod tests {
 * 自動的に`fn main()`の中に書かれる。
   * opt outして自分で書くこともできる。
 * `/// #`のように`#`つけると、doctestには含まれるが、生成されるdocumentationには含まれない。
+
+```rust
+/// # Examples
+///
+/// ```
+/// let x = 5;
+/// ```
+```
+
+* triple backtickで囲むとdoctestの対象になる
+
+### ignore
+
+```text
+/// ```ignore
+/// fn foo() {
+/// ```
+```
+
+* `ignore`をつけるとdoctestの範囲外にできる

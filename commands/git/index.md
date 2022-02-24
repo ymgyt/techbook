@@ -2,6 +2,15 @@
 
 ## Usecase
 
+### Initial commit
+
+```
+$ git init # creates repository
+$ git commit --allow-empty -m'Initial empty commit' # creates empty commit`
+```
+
+* `--allow-empty` を指定すると空のcommitが作れる
+
 ### Cherry-pick
 
 他branchの特定のcommitだけ取り組みたいときに利用する。  

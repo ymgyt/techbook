@@ -13,6 +13,28 @@
 
 `KUBECONFIG`環境変数で指定できる。もちろんflagでも指定できる。
 
+## Plugin
+
+* cargoのように`kubectl xxx`が実行されると`PATH`から`kubectl-xxx`という実行fileを探して実行してくれる
+* `kubectl plugin list`で一覧を確認できる
+
+### `kubectl whoami`
+
+`kubectl-whoami`として保存する。
+```shell
+#!/bin/bash
+
+# this plugin makes use of the `kubectl config` command in order to output
+# information about the current user, based on the currently selected context
+kubectl config view --template='{{ range .contexts }}{{ if eq .name "'$(kubectl config current-context)'" }}Current user: {{ printf "%s\n" .context.user }}{{ end }}{{ end }}'
+```
+
+```shell
+chmod +x ./kubectl-whoami
+sudo mv ./kubectl-whoami /usr/local/bin/
+kubectl whoami
+```
+
 ## Usage
 
 ### podに接続する(containerの中でcommandを実行する) 

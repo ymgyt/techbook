@@ -14,7 +14,7 @@
 
 ## Features
 
-* Cargo.tomlでのdepenency制御
+* Cargo.tomlでのdependency制御
 * `#[cfg()]`での参照によるincluding componentsの制御
 * removeしたりtypeはfunctionのreplaceはできない
   * できるような気もするが
