@@ -95,3 +95,33 @@ cargo install --path . --locked
 # xxxのversionをあげる
 cargo update --package xxx
 ```
+
+## Use specific version
+
+* `cargo +1.59.0 run`
+
+```console
+# if not installed
+rustup install 1.41.0
+
+cargo +1.41.0 run
+```
+
+## Cross compile
+
+* https://github.com/messense/homebrew-macos-cross-toolchains
+
+```shell
+brew install x86_64-unknown-linux-musl
+
+export CC_x86_64_unknown_linux_musl=x86_64-unknown-linux-musl-gcc
+export CXX_x86_64_unknown_linux_musl=x86_64-unknown-linux-musl-g++
+export AR_x86_64_unknown_linux_musl=x86_64-unknown-linux-musl-ar
+export CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=x86_64-unknown-linux-musl-gcc
+
+rustup target add x86_64-unknown-linux-musl
+
+cargo build --target x86_64-unknown-linux-musl
+
+file ./target/x86_64-unknown-linux-musl/debug/binname
+```

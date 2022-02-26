@@ -2,6 +2,11 @@
 
 ## Key bind 
 
+### convert
+
+* `U`: 選択範囲をuppercase
+* `u`: 選択範囲をlowercase
+
 ### move
 ```
 # cursolを画面先頭

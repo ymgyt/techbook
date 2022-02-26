@@ -24,3 +24,8 @@ spec:
 
 * `env.[].valueFrom.secretKeyRef`でsecretを参照できる
 * `env.[].valueFrom.configMapKeyRef`でconfigmapを参照できる
+
+## Image Pull Policy
+
+* `imagePullPolicy`が指定されておらず、(tagが`:latest`の場合 or tagが指定されていない場合)、`Always`になる
+* `imagepullPolicy`が指定されておらず、tagが指定されている場合、`IfNotPresent`になる

@@ -1,6 +1,5 @@
 # bash
 
-
 ## option
 
 * `set -e` : shortで有効

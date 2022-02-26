@@ -48,6 +48,8 @@ metadata:
     alb.ingress.kubernetes.io/auth-idp-cognito: '{"userPoolARN":"arn:aws:cognito-idp:ap-northeast-1:111122223333:userpool/xxx", "userPoolClientID":"XxxxYyyy", "userPoolDomain": "my-domain"}'
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     alb.ingress.kubernetes.io/certificate-arn: 'ACM-Cert-ARN'
+    # 複数ingressがある場合でも、一つのALBにmergeされる
+    alb.ingress.kubernetes.io/group.name: ingress-a
 spec:
   rules:
   - http:
@@ -63,3 +65,9 @@ spec:
 
 * alb controllerを通してALBを作成するIngress
 * annotationsでALBの各種設定をおこなう
+
+### Ingress Group
+
+`alb.ingress.kubernetes.io/group.name`が同じIngressは裏側で一つのALBにmergeされる。 
+
+https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/ingress/annotations/#group.name
