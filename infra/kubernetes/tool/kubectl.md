@@ -55,6 +55,9 @@ kubectl exec <pod> --container <container> -n <namespace> --tty --stdin -- /path
 ```shell
 # labelでfilterできる
 kubectl get pods -n <namespace> -l <label_name>=<label_value>
+
+# nameのみを表示する
+kubectl get pods -o 'go-template={{range .items}}{{printf "%s\n" .metadata.name}}{{end}}'
 ```
 
 ### jobを実行する

@@ -18,15 +18,21 @@ target: dependency
 
 ## Variable
 
-* `$()`で参照する。
+* `$()`か`${}`で参照する。
 ```makefile
 OBJS = main.o
 
 xxx.o: $(OBJS)
 ```
 
-* `AAA := BBB` BBBを評価してAAAにassignする。`=`は遅延評価される
+* `AAA := BBB` BBBを評価してAAAにassignする。
+* `=`は遅延評価される。その変数が評価されるたびに、right armが評価される。
 * `AAA ?= BBB` AAAに値がないor空文字だったらBBBをassignする。評価は遅延。
+
+### 変数の渡し方
+
+* `make KEY=VALUE`とすると、Makefile内の`KEY`を上書きできる。
+* `KEY=VALUE make`とするとshellが解釈することになるがMakefile内の`KEY`は上書きされない
 
 ### Builtin Variable
 
@@ -37,6 +43,9 @@ xxx.o: $(OBJS)
 | `$@`     | target(拡張子含む)                    | 
 | `$*`     | patternのstem                         |
 
+## shell
+
+* `contents := $(shell cat hello.txt)`のように`$(shell xxx)`でshellの実行結果を利用できる。
 ## PHONY
 
 targetが実在しないファイルであることを表す。
