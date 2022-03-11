@@ -70,3 +70,13 @@ do
 done
 echo " ok"
 ```
+
+## Commands
+
+```shell
+# switch current db
+use app
+
+# list collections
+show collections
+```

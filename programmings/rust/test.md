@@ -11,10 +11,24 @@
 ## Integration test
 
 * `tests/`以下のfileはintegration testとして認識される
-  * fileごとにtest harnessが生成される
+  * fileごとにtest harness(binary)が生成される
   * directoryは対象にならないので、test organize用の処理書きたかったらここ。
 * crateは`cfg(test)`がない状態でbuildされる
-* 
+* `tests/fixtures/main.rs`のように`main.rs`を定義すると独立したtest binaryが作成される
+  * `#[test]`は書かないと実行されない
+
+### `#[ignore]`
+
+```rust
+#[test]
+#[ignore]
+fn case1() {
+   assert!(true); 
+}
+```
+
+* 付与すると通常のtest実行ではskipされる
+* `cargo test -- --ignored`のようにflagを付与すると実行される
 
 ## `cargo test`
 

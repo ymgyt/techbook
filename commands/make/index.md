@@ -46,6 +46,9 @@ xxx.o: $(OBJS)
 ## shell
 
 * `contents := $(shell cat hello.txt)`のように`$(shell xxx)`でshellの実行結果を利用できる。
+* `@`をつけるとechoが走らない
+  * 実行時のoutputに実行されるコマンドが表示されない
+
 ## PHONY
 
 targetが実在しないファイルであることを表す。

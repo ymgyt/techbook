@@ -32,3 +32,13 @@ image名以降の引数はDockerfileのCMDとして、ENTRYPOINTの引数にな�
  # repositoryにpush
  docker image push 111122223333.dkr.ecr.ap-northeast-1.amazonaws.com/reponame:0.1.0
 ```
+
+## Volume
+
+### 不要なvolumeの削除
+
+```shell
+docker volume prune
+```
+
+* docker-composeで毎回volumeが作成されるらしい?

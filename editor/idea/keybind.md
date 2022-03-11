@@ -17,10 +17,15 @@
 * Jump to Navigation Bar: Cmd+↑ 上段のfile treeから移動できる
 * Next Highlight Error: F2 エラーにとべる
 * Switch Focus To Editor: 別のwindowからeditorにfocusを切り替える。
+* File Structure: 型の粒度で構造化してくれてjumpできる
 
 ## Action
 
 * Show Context Actions: Meta+Enter エラー出ていたりする場合適切なアクション選べる。
+
+## Tool Window
+
+* Maximize Tool Window: 今activeなwindowを最大化する。terminalとかで便利
 
 ## Appearance
 

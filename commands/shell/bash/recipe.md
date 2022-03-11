@@ -84,3 +84,10 @@ set -o errexit
 ```
 
 シェバンは`env`をかませるとかしたほうがいいかもしれない。
+
+### redirect
+
+```shell
+# stdout/stderrを無視する
+ping xxx > /dev/null 2>&1
+```

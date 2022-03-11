@@ -52,7 +52,7 @@ pub enum Message {
 ```
 
 使う側
-```rust
+```text
 // `Config`, `Error`, and `Message` are types defined in an upstream crate that have been
 // annotated as `#[non_exhaustive]`.
 use upstream::{Config, Error, Message};
@@ -77,6 +77,20 @@ enumに付与した場合は、matchでwildcardを指定しておくことが強
 
 clippyの特定のlintを許したい。
 
+## `#[ignore]`
+
+* test時に通常は無視されるようになる。実行するには`cargo test -- --ignored`のような指定が必要になる
+
+## `#[path = ./test.rs]`
+
+```rust
+#[path = "../helper/mod.rs"]
+pub mod helper;
+```
+
+* modの参照先を指定できる。defaultでは`./helper.rs`が参照されるが変えることできる。
+  * 使い所としては、`xxx.rs`と`xxx_test.rs`のようにgoっぽくできる。
+  * `tests/integration/main.rs`から`tests/helper/mod.rs`のように親のmodを参照できる
 
 ## 参考
 
