@@ -5,14 +5,17 @@
 ### sleep
 
 ```rust
-let interval = tokio::time::Duration::from_secs(1);
-tokio::time::sleep(interval).await;
+async fn example() {
+    let interval = tokio::time::Duration::from_secs(1);
+    tokio::time::sleep(interval).await;
+}
 ```
 
 ### setup runtime
 
 ```rust
- tokio::runtime::Builder::new_multi_thread()
+async fn example() {
+    tokio::runtime::Builder::new_multi_thread()
         .worker_threads(num_cpus::get())
         .on_thread_start(|| tracing::trace!("thread start"))
         .on_thread_stop(|| tracing::trace!("thread stop"))
@@ -23,6 +26,7 @@ tokio::time::sleep(interval).await;
         .block_on(async {
             run().await;
         })
+}
 ```
 
 ### `try_join!`
@@ -35,18 +39,39 @@ async fn fetch_thing(name: &str) -> Result<()> {
     // ...
 }
 
-let res = tokio::try_join!(fetch_thing("first"), fetch_thing("second"));
+async fn example() {
+    let res = tokio::try_join!(fetch_thing("first"), fetch_thing("second"));
 
-match rest {
-    Ok((first, second)) => {
-        // do something...
-    }
-    Err(err) => {
-        println!("error: {}", err);
+    match rest {
+        Ok((first, second)) => {
+            // do something...
+        }
+        Err(err) => {
+            println!("error: {}", err);
+        }
     }
 }
-
 ```
+
+### timeout
+
+```rust
+use tokio::time::timeout;
+use tokio::sync::oneshot;
+
+use std::time::Duration;
+
+async fn example() {
+    let (tx, rx) = oneshot::channel();
+
+    // Wrap the future with a `Timeout` set to expire in 10 milliseconds.
+    if let Err(_) = timeout(Duration::from_millis(10), rx).await {
+        println!("did not receive value within 10 ms");
+    }
+}
+```
+
+* `Result<T, Elapsed>`にwrapされる
 
 ### test
 

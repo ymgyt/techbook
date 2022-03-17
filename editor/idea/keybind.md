@@ -31,4 +31,8 @@
 
 * Quick Switch Schema: "Ctrl+`" 見た目系を色々変更できる
 
+## Bookmark
 
+* Option + F3: Bookmarkの設定
+* Cmd + F3: 作成したBookmarkに移動
+* Cmd + 2: Bookmark menuを表示

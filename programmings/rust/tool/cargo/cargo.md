@@ -125,3 +125,17 @@ cargo build --target x86_64-unknown-linux-musl
 
 file ./target/x86_64-unknown-linux-musl/debug/binname
 ```
+
+## Profile
+
+* compiler settingsを変更する方法。  
+  * https://doc.rust-lang.org/cargo/reference/profiles.html
+* defaultでは`dev`,`release`,`test`,`bench`がある。
+* `Cargo.toml`で指定できる
+
+```toml```
+[profile.dev]
+opt-level = 1
+overflow-checks = false
+```
+

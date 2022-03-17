@@ -50,3 +50,10 @@ runtime時にはメモリ割り当てをもたず、static analysisのためだ�
 atomicなaccessはcompilerとhardwareにprogramがmulti-threadedであることを伝えるる。  
 compilerとhardwareにできないことを伝えることになる。  
 compilerには命令の並び替えに関して、hardware(CPU)では書き込みが他のthreadにどのように伝播されるかに関係する。
+
+## `use`
+
+* useに書く依存packageのグルーピングは以下の順番で空行入れないのが一般的?
+  * 自crate
+  * third party
+  * std
