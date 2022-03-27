@@ -20,10 +20,17 @@ spec:
         configMapKeyRef:
           name: mongodb-configmap
           key: database_url
+    envFrom:    
+   - configMapRef:    
+       name: ceph-bucket    
+   - secretRef:    
+       name: ceph-bucket    
 ```
 
 * `env.[].valueFrom.secretKeyRef`でsecretを参照できる
 * `env.[].valueFrom.configMapKeyRef`でconfigmapを参照できる
+* `envFrom.{configMapRef,secretRef}`でconfig/secretの値をすべて環境変数として取り込める
+  * 衝突した際の挙動は要調査。
 
 ## Image Pull Policy
 

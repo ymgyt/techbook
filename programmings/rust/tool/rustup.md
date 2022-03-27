@@ -1,5 +1,16 @@
 # rustup
 
+## Concepts
+
+* stableやnightlyといったchannelからreleaseされる単位が`toolchain`
+* `toolchain`は`component`の集合
+  * `component`は`rustc`,`clippy`とか
+  * `toolchain`に含まれている`component`はchannelにより変わる
+* `profile`は`component`の集合
+  * `minimal`
+  * `default`
+  * `complete` がある
+
 ## Usage
 
 ```

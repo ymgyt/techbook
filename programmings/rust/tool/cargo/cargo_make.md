@@ -29,6 +29,18 @@ command = "rustup"
 args = ["target","add", "wasm32-unknown-unknown"]
 ```
 
+## Workspace
+
+* workspace top levelで`cargo make my-task`を実行すると各member dirで`my-task`を実行する動きになる
+* memberではなくtop level直下でtaskを実行したい場合は
+  * `--no-workspace`を付与する `cargo make --no-workspace mytask`
+  * task定義に`workspace = false`を付与する
+
+```yaml
+[tasks.lint]
+workspace = false
+```
+
 ## `[config]`
 ```yaml
 [config]

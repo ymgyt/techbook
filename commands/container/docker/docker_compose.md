@@ -22,3 +22,20 @@ services:
 
 意外なことにdocker-composeで環境変数のsubstitutionが使える。
 https://docs.docker.com/compose/environment-variables/
+
+## Examples
+
+### minio
+
+```yaml
+version: '3.8'
+services:
+  # console credentials
+  # minioadmin:minioadmin
+  minio:
+    image: minio/minio:RELEASE.2022-03-24T00-43-44Z
+    command: ["server", "/data", "--console-address", ":9001"]
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+```

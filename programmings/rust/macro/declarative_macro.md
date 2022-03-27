@@ -19,6 +19,27 @@
 
 * `$($key:expr => $value:expr),+`
 
+* 繰り返しはnestさせることができる
+* 利用する場合も同様に`$()*`を使う
+  * 利用側でもnestさせるとnestに応じた変数が見えるようになる
+```rust
+macro_rules! foo {
+    ( $( { $($key:expr => $value:expr),* }),* ) => {
+        $(
+            $(
+                println!("{}:{}",$key, $value);
+            )*
+        )*
+    }
+}
+
+fn main() {
+    foo!({"a1" => "b", "a2" => "b"}, {"c1" => "d"});
+}
+```
+
+
+
 ## Hygiene
 
 ```rust

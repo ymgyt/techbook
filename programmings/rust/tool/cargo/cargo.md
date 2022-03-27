@@ -19,64 +19,6 @@ rustflags = [
 runnerを指定すると、`cargo run`実行時に、runnerをよびだしてくれる。  
 `hf2 elf target/thumbv7em-none-eabihf/debug/app`がよばれる。
 
-## Cargo.toml
-
-### multi binary
-
-crateに複数のbinaryを用意したい場合
-
-```yaml
-[package]
-# ...
-# cargo実行時に指定がなくても動くようにする 
-default-run = "ops"
-
-[[bin]]
-name = "xxx"
-path = "src/main.rs"
-
-[[bin]]
-name = "yyy"
-path = "src/yyy/bin/yyy.rs"
-```
-
-`cargo run --bin yyy`のように実行時に指定する必要がある。ない場合はdefaultが利用される。
-
-
-### features
-
-```yaml
-[package]
-name = "foo"
-...
-[features] 
-derive = ["syn"]
-default = ["derive"]
-
-[dependencies.syn]
-version = "1"
-default-features = false
-features = ["derive", "parsing", "printing"] optional = true
-```
-
-### workspace
-
-```toml
-[workspace]
-
-members = [
-    "xxx",
-    "yyy",
-]
-```
-
-### Specifying dependencies version
-
-* `xxx = "0.1.2`は`"^0.1.2"`と解釈される
-* `^1.2.3`のような指定をcaret requirementsという
-  * 一番左の0でない数字をincrementしないかぎりupdateが許可されると解釈する
-  * `^1.2.3`の場合は`2.0.0`にならない限りどのversion upもうけいれる
-
 ## install
 
 ```sh
@@ -139,3 +81,25 @@ opt-level = 1
 overflow-checks = false
 ```
 
+## Publish
+
+* crates.ioへのpackageの公開
+
+```shell
+# login
+cargo login ${CRATES_IO_TOKEN}
+
+# check
+cargo publish --dry-run
+
+# publish
+cargo publish
+
+# workspaceの場合はpackageを指定できる
+cargo publish --package member
+```
+
+* workspaceでmember間を`mycrate-lib = { path = "../mycrate-lib", version = 0.1.1 }`に指定すると
+  * localではpathが利用される
+  * cargo publish時にはversionが利用される
+  * 従って、依存先が先にcrates.ioにpublishされていなければならない
