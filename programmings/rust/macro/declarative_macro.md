@@ -15,13 +15,18 @@
 
 ## 繰り返し表現
 
-`$()`これを繰り返し表現と読むとよみやすくなる。
+* `$(...)sep rep`の形で繰り返しのpatternを表現する
+  * `$(...)`の表現がsepで区切られることを表現している
 
 * `$($key:expr => $value:expr),+`
 
 * 繰り返しはnestさせることができる
 * 利用する場合も同様に`$()*`を使う
-  * 利用側でもnestさせるとnestに応じた変数が見えるようになる
+    * 利用側でもnestさせるとnestに応じた変数が見えるようになる
+    * 利用時にも繰り返し表現を何でseparateするか指定できる
+    * `$(x:expr),*`で受けて`$( v.push($x) )*`のようにseparatorをしないことも可能
+    * patternとexpansionでseparatorは一致している必要はない
+
 ```rust
 macro_rules! foo {
     ( $( { $($key:expr => $value:expr),* }),* ) => {
@@ -38,7 +43,52 @@ fn main() {
 }
 ```
 
+###`$($x:expr),*`と`$($x:expr,)*`の違い
 
+* separatorが繰り返し表現の一部かどうかが違う
+* 後者は末尾にカンマが必須になる
+  * `foo!("a","b",)`
+
+### trailingカンマの両対応
+
+* `foo!(1,2)`と`foo!(1,2,)`のように末尾のカンマがあってもなくてもよいようにしたい
+* `$( $x:expr ),* $(,)?`とする
+  * `,`で区切りつつ最後に任意の一つのカンマを許容する
+ 
+## Publish macro
+
+* `macro_rules!`で定義したmacroを公開するには
+
+### Within same crate
+
+```rust
+foo::bar!();  // works
+
+mod foo {
+    macro_rules! bar {
+        () => ()
+    }
+
+    pub(crate) use bar;    // <-- the trick
+}
+
+foo::bar!();  // works
+```
+
+* `pub use bar`でre-exportする
+  * 定義の前後にかかわらず参照できる
+  * crate内にとどめたければ`pub(crate) use bar`
+
+### Across crates
+
+```rust
+#[macro_export]
+macro_rules! foo {
+    () => ()
+}
+```
+
+* `#[macro_export]`をつける
 
 ## Hygiene
 
