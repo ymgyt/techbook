@@ -91,3 +91,11 @@ set -o errexit
 # stdout/stderrを無視する
 ping xxx > /dev/null 2>&1
 ```
+
+### Output as file
+
+* コマンドの実行結果をfileに見せる
+
+```shell
+diff <(cat A.txt) <(cat B.txt)
+```

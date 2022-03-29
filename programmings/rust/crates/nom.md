@@ -78,3 +78,10 @@ pub fn parse_input(s: &str) -> Vec<Line> {
     lines
 }
 ```
+
+## `nom::Parser`
+
+* `FnMut(I) -> IResult<I,O,E>`にimplされているので、`use nom::Parser`しておくと以下のようにchainできるようになる
+```
+map( ... ).map().and_then(...)
+```
