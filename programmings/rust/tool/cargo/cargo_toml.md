@@ -35,8 +35,11 @@ default = ["derive"]
 [dependencies.syn]
 version = "1"
 default-features = false
-features = ["derive", "parsing", "printing"] optional = true
+features = ["derive", "parsing", "printing"]
+optional = true
 ```
+
+* `[features]`で定義してそれぞれの依存先を指定する
 
 ## workspace
 
@@ -70,7 +73,13 @@ repository = "https://github.com/ymgyt/calculator"
 readme = "README.md"
 keywords = ["calculator"]
 categories = ["command-line-utilities"]
+# cargo publish時の制御
+exclude = ["/.project", "!/.project/scripts/version.rs"]
+default-run = "ops"
 ```
 
 * categoriesはある程度決まったものがあるのでハマるならそれを利用する
   * https://crates.io/category_slugs
+
+* `exclude`でcargo publishされる際に除外するファイルを指定する
+  * gitignore styleらしい
