@@ -3,6 +3,7 @@
 * Source codeを提供するかContainer Imageを提供するか大きく二つに別れる
   * service source repository
   * service source source image
+    * node,python,javaしかサポートされていない?
 
 ## Image repository provider
 
@@ -12,6 +13,9 @@
 
 ## Deploy
 
+* container(image)に対して行える設定は
+  * 起動時の環境変数
+  * 起動コマンド(Dockerfile CMD directive)の上書き
 * `8080`にhttp serverがlistenしている前提
   * 上書きできる(imageConfiguration)
 * HTTPSはApp Runnerがterminateしてくれる
@@ -31,6 +35,16 @@
 * Automatic deployment
   * 新しいImageをECRにpushするとdeployが走る
   * ECR Publicと異なるAWS Accountには対応していない
+  
+* Manualはconsole(api)で都度都度起動する
+
+### Deploy Image
+
+* deploy対象はtagまで含めて指定する必要がある
+  * <registry>/<repository>:tag
+* 違うtagをpushしても無視される
+  * これを利用して`:dev`と`:prod`tagのように運用すれば開発と本番の出し分けができそう
+* tagのprefix指定ができないので、tagにversionをふる運用ができなそう
 
 * Manual deployment
 
@@ -54,12 +68,38 @@
   * SecurityGroupを指定できる
     * 指定しないとVPCのdefault sgが利用される
 
+* Elasticache(redis)に接続できるのは検証済み
+
+## Autoscaling
+
+* Cloudformationからまだ作成できない
+  * https://github.com/aws/apprunner-roadmap/issues/88
+* Consoleから指定することになりそう。
+
+## Logging
+
+* applicationのstd{out,err}はcloudwatchにそのまま出力される
+  * error検知等はここからできそう
+* application logの他にdeploy/update時に別のlog groupにlogが出力される
+* CloudWatch LogGroupは自動生成なのでRetention設定しておかないと Never expireになる
+  * https://github.com/aws/apprunner-roadmap/issues/97
+
+## Pricing
+
+* provisioningしたメモリと実際のCPUベースで課金される
+* request来なくてもメモリ分は課金されそう
 
 ## ハマったところ
 
 * cdkで1stackの中でECR RepositoryとApp Runner Serviceを作ろうとしてエラーになった。
   * 事前にECR Repo + imageが必要と思われる
 
+* Consoleから環境変数を追加しようとしたがUpdateが失敗し続けた
+  * 機能としては対応されている
+    * https://github.com/aws/apprunner-roadmap/issues/18
+  * cdkから追加したらできた
+
 ## Memo
 
-* CloudWatch LogGroupは自動生成なのでRetention設定しておかないと Never expireになる
+* Update failed. For details, see service logsとでるがどこにもdetailが出力されていない
+  * https://github.com/aws/apprunner-roadmap/issues/46
