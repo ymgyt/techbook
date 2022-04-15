@@ -78,5 +78,58 @@ new MyFirstStack(app, 'first-stack-eu', { env: envEU });
 ```typescript
 // こうするとstackNameを指定できる
 new MyStack(this, 'not:a:stack:name', { stackName: 'this-is-stack-name' });
-
 ```
+
+## Cross Stack Reference
+
+stack間で値を参照する方法
+
+### exportする側(被参照)
+
+```typescript
+import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
+
+export interface ExportStackProps extends StackProps {}
+
+export class EcrRepositoryStack extends Stack {
+  constructor(scope: Construct, id: string, props: ExportStackProps) {
+    super(scope, id, props);
+    
+    new CfnOutput(this, "cfnExportValueA", {
+      // 大抵作成したresourceのarnや名前
+      value: "exportResourceArn",
+      // 参照時の識別子
+      exportName: "exportValueA",
+    });
+  }
+}
+```
+
+### exportされた値を利用する側(参照)
+
+```typescript
+import {Stack, StackProps, Fn } from "aws-cdk-lib";
+
+export interface AppRunnerStackProps extends StackProps {}
+
+export class AppRunnerStack extends Stack {
+    constructor(scope: Construct, id: string, props: AppRunnerStackProps) {
+        super(scope, id, props);
+
+        const resourceArn = Fn.importValue("exportValueA")
+    }
+}
+```
+
+### app
+
+```typescript
+const app = new cdk.App();
+
+const ecrRepoStack = new EcrRepositoryStack(app, "EcrRepoStack", {});
+const appRunnerStack = new AppRunnerStack(app, "AppRunnerStack", {});
+
+appRunnerStack.addDependency(ecrRepoStack);
+```
+
+* `addDependency()`で依存性を表現する。

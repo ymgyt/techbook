@@ -35,6 +35,18 @@ sudo mv ./kubectl-whoami /usr/local/bin/
 kubectl whoami
 ```
 
+## Output format
+
+### `go-template`
+
+```shell
+kubectl get secret secret-a -o go-template='{{.data.API_KEY | base64decode}}'
+```
+
+わかっている組み込み関数
+
+* `base64decode`
+
 ## Usage
 
 ### podに接続する(containerの中でcommandを実行する) 
