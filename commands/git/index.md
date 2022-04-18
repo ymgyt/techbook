@@ -34,12 +34,6 @@ git push origin --delete ${BRANCH_NAME}
 git fetch --prune 
 ```
 
-### Push to remote branch with a different name
-
-```console
-git push origin local-name:remote-name
-```
-
 ### Amend previous commit
 
 ```console
