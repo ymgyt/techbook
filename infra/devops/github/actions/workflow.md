@@ -80,6 +80,16 @@ jobs:
 * 依存するworkflowの成功を前提にしたい場合はifを書く
 * workflow file自体がdefault branch(main)にある必要があるので、feature branchだとうまく動作確認できないかも(理解が曖昧)
 
+### schedule実行する
+
+```yaml
+name: Scheduled Workflow
+on:
+  schedule:
+    - 5 16 * * *
+```
+
+* cron tab方式で指定する
 
 ## `jobs.<job_id>.runs-on`
 
