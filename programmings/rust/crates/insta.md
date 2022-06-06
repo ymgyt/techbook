@@ -5,7 +5,7 @@
   * つまりfunc_aの時点t1の出力結果がt1以降のfunc_aのtestのassert値となる
 
 * 自分でsnapshot testを行おうと思うとsnapshotの保存(serialize,永続化)と更新を管理する必要がある。instaはこれを提供
-
+* 各種`assert_`関数は結果のserialize方法を指定するものと思われるので本質的にやっていることは同じ
 
 ## Install
 
@@ -18,6 +18,11 @@ insta = "1.13.0"
 
 
 ## 使い方
+
+```shell
+cargo test
+cargo insta review
+```
 
 * instaが提供するassert関数にtest対象の出力結果を渡すと自動的にsnapshotと比較される
 * 新規追加する場合はtestは失敗する
