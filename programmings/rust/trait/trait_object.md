@@ -10,10 +10,28 @@
 
 ## Object Safety
 
-全てのtraitをtrait objectとして扱えるわけではなく、以下の条件を満たすtraitだけがtrait objectとして扱える
+* traitのmethodごとにobject-safeか判定される
+* traitのmethodに`Self: Sized`をつけると、そのmethodをtrait-safeにできるが、trait objectから呼び出せなくなる。
+  * なので、trait自体のobject-safeを維持しつつ、object-safeに違反してしまうようなmethodにこれをつける。
 
-* The return type is not `Self`
-* There are no generic type parameters
+https://github.com/rust-lang/rfcs/blob/master/text/0255-object-safety.md
+
+以下のいずれかを満たせばmethodはobject safe
+* require `Self : Sized`; or,
+* meet all of the following conditions:
+    * must not have any type parameters; and,
+    * must have a receiver that has type `Self` or which dereferences to the `Self` type;
+        - for now, this means `self`, `&self`, `&mut self`, or `self: Box<Self>`,
+          but eventually this should be extended to custom types like
+          `self: Rc<Self>` and so forth.
+    * must not use `Self` (in the future, where we allow arbitrary types
+      for the receiver, `Self` may only be used for the type of the
+      receiver and only where we allow `Sized?` types).
+
+traitがobject-safeになるためには
+
+* all of its methods are object-safe; and,
+* the trait does not require that Self : Sized
 
 ## Downcasting
 

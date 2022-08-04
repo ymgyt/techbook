@@ -9,6 +9,8 @@
 ## Code
 
 * Expand CodeBlock: `Cmd -` / `Cmd =`
+* Optimize imports: `Ctrl + Meta + O`
+  * Settings > Editor > Inspections > Rust > Lints > Unused Importの有効化が前提
 
 ## Navigate
 

@@ -35,6 +35,9 @@
 cargo clippy --all-targets --all-features -- -D warning
 ```
 
+* `--all-targets`でtestも対象になる
+* `-D warning`はwarning lint groupの違反をエラーにする。
+
 ## Install
 
 ```shell

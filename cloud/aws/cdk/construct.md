@@ -38,6 +38,7 @@ images.topic.addSubscription(new sns_sub.SqsSubscription(queue));
 ## Import
 
 * cdk以外で作成されたResourceをcdk内に取り込む
+* Stack作成時のpropsに`Environemnt`(Aws account, region)を渡しておく必要がある
 
 ```typescript
 // Construct a resource (bucket) just by its name (must be same account)
@@ -50,6 +51,12 @@ s3.Bucket.fromBucketArn(this, 'MyBucket', 'arn:aws:s3:::my-bucket-name');
 ec2.Vpc.fromVpcAttributes(this, 'MyVpc', {
   vpcId: 'vpc-1234567890abcde',
 });
+
+// Provide aws account for import
+const app = new cdk.App();
+new MyStack(app, 'MyStack', { env: 
+        { account: awsAccount, region: "ap-northeast-1" } 
+})
 ```
 
 ## Removal Policy

@@ -14,7 +14,7 @@
 * `src/main.rs`はpackageと同名のbinary crateを表す慣習がある(cargo)
 * `src/lib.rs`はpackageと同名のlib crateを表す慣習がある(cargo)
 
-## Features
+## Feature
 
 * Cargo.tomlでのdependency制御
 * `#[cfg()]`での参照によるincluding componentsの制御

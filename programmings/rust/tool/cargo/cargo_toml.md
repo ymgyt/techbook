@@ -83,3 +83,22 @@ default-run = "ops"
 
 * `exclude`でcargo publishされる際に除外するファイルを指定する
   * gitignore styleらしい
+
+## Patch
+
+依存crateを一時的にlocalに向けたい時
+
+### git依存のpatch
+
+依存先をgitで指定している場合のpatch。
+
+`Cargo.toml`
+```toml
+[dependencies]
+xxx = { tag = "0.0.64", git = "https://github.com/org/xxx.git" }
+
+[patch."https://github.com/org/xxx"]
+raiden = { path = "/Users/ymgyt/rs/xxx" }
+```
+
+これでlocalが実際に利用される。

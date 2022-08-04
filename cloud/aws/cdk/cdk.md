@@ -58,3 +58,7 @@ cdk destroy
 ```
 
 * CloudFormation Stackを削除する
+
+## Runtime context
+
+### `cdk.json`と`cdk.context.json`

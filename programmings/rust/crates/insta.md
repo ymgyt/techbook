@@ -30,6 +30,24 @@ cargo insta review
   * `.new`拡張子をもつ
 * snapshot候補をsnapshotに採用するために`cargo insta review`が必要
 
+## Assertion
+
+### `Vec`のorderを無視したい
+
+```rust
+    insta::assert_json_snapshot!(
+        response.items,
+        {
+            "[].tag_ids" => insta::sorted_redaction(),
+            "[].user_ids" => insta::sorted_redaction()
+        }
+    );
+```
+
+* assert_snapshotの第二引数に、無視したいfieldのpathを渡す。
+  * `Vec<T>`の場合は`T`にあてるために、`[]`を書いている
+* `insta::sorted_redaction()`を使うとsnapshotにする前にinsta側でsortしてくれる
+
 
 ## わかっていないこと
 
