@@ -33,3 +33,19 @@ vhost          = segment
 ## Environment Variable
 
 * https://www.rabbitmq.com/configure.html#supported-environment-variables
+
+## Queue
+
+* `Queue.Declare`時に`x-message-ttl`でmessageのTTLを指定できる
+  * millisecondのunix timestampを使う
+  * TTLをすぎるとDLXにいく
+
+* durableを指定するとrestartまたいでqueueが保持される
+  * message publish時のdelivery-modeでpersistを指定したmessageだけがrestartまたいで復元される
+
+## Publish
+
+* basic properties
+  * `delivery-mode`
+    * 1: non-persist
+    * 2: persist. queueに保持する前にdiskに書き出す

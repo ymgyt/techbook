@@ -62,3 +62,17 @@ cdk destroy
 ## Runtime context
 
 ### `cdk.json`と`cdk.context.json`
+
+
+## Deploy対象のAWS Account
+
+```typescript
+new MyDevStack(app, 'dev', { 
+  env: { 
+    account: process.env.CDK_DEFAULT_ACCOUNT, 
+    region: process.env.CDK_DEFAULT_REGION 
+}});
+```
+
+* 環境変数 `CDK_DEFAULT_{ACCOUNT,REGION}`を利用するとcdk synth時に`--profile`で指定したaccountを対象にできる
+* accountをcodeにhard codeするか実行時に解決できるようにしておくかはポリシー次第

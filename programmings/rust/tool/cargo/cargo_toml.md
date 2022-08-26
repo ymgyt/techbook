@@ -62,7 +62,7 @@ members = [
 
 ## Package section
 
-```yaml
+```toml
 [package]
 name = "clc"
 version = "0.1.1"
@@ -83,6 +83,20 @@ default-run = "ops"
 
 * `exclude`でcargo publishされる際に除外するファイルを指定する
   * gitignore styleらしい
+
+## Dhapendencies
+
+### crateのrename
+
+```toml
+alias = { version = "0.1", registry = "custom", package = "org" }
+```
+
+```rust
+use alias::module::X; // => resolved to org::module::X
+```
+
+* `org` crateをソースコード中では`alias`として利用できる。
 
 ## Patch
 
