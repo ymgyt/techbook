@@ -92,30 +92,11 @@ git reset --hard origin/master
 ```
 
 
-### Submodule
+### 途中からgitignoreに追加
 
-設定fileは`.gitmodules`
+gitで管理しているfileを途中からgitignoreしても反映されない。(引き続きgit管理される) 
 
-```console
-# 既に登録されているsubmoduleをfetchしてくる
-# submoduleを利用しているprojectで最初にうつ
-git submodule update [-i]
-
-# submoduleの変更を取り込む
-git submodule update --remote [--merge]
+```shell
+# 明示的に削除する必要がある。--cachedをつけているのでfilesystemからは削除されない。
+git rm --cached <file>
 ```
-
-#### submoduleの変更を取り込む
-
-```console
-# submoduleで管理しているdirにcd
-cd path/to/submodule_dir
-git pull origin master
-cd ..
-
-# modified: submodule_dir (new commits)
-git status
-git add path/to/submodule_dir
-git commit -m "update submodule"
-```
-

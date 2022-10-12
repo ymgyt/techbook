@@ -84,7 +84,7 @@ default-run = "ops"
 * `exclude`でcargo publishされる際に除外するファイルを指定する
   * gitignore styleらしい
 
-## Dhapendencies
+## Dependencies
 
 ### crateのrename
 

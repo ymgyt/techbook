@@ -42,3 +42,13 @@ docker volume prune
 ```
 
 * docker-composeで毎回volumeが作成されるらしい?
+
+## Build
+
+* build時にsshを利用する
+  * private repositoryをfetchする等sshする場合
+  * ssh-addでssh-agentに鍵が登録されている前提
+
+```shell
+docker image build --ssh default=${SSH_AUTH_SOCK}
+```
