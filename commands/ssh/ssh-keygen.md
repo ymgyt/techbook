@@ -3,7 +3,7 @@
 ## Create KeyPair
 
 ```shell
-ssh-keygen -t rsa -b 4096 -f path/key
+ssh-keygen -t rsa -b 4096 -f path/key -C ymgyt@xxx
 ```
 
 ## 公開鍵のfingerprintを表示

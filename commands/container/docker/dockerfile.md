@@ -1,5 +1,10 @@
 # Dockerfile
 
+## syntax
+
+fileの先頭に`syntax=docker/dockerfile:1`のように書く。  
+仕組みはわかっていないが何かが固定される。
+
 ## multi stage
 
 build用のimageと実行環境のimageを分離できる. 実行環境にはruntimeしか必要ない
@@ -163,6 +168,16 @@ USER yuta
 RUN ["whoami"] # => yuta
 ```
 
+## RUN
+
+### Enable host ssh
+
+```
+RUN --mount=type=ssh cargo build --release
+```
+
+* `docker image build --ssh default${SSH_AUTH_SOCK}`
+  * ssh-addしてある前提で、host側のsshをdocker image build時に利用できる
 
 ## EXPORSE
 

@@ -1,5 +1,8 @@
 # docker
 
+* Buildkitを有効にする
+  * `DOCKER_BUILDKIT=1 docker build .`
+
 ## Build and Push
 
 * docker imageを生成して、docker hubに公開する。
