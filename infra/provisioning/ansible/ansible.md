@@ -40,3 +40,7 @@ ansible-inventory --graph -i inventories/inventori.ini
 # service moduleのdocをみる
 ansible-doc service
 ```
+
+## Variables
+
+variables.mdを参照。

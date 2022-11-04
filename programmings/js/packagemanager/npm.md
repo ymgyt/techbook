@@ -6,6 +6,9 @@
 # 特定のversionをinstall
 npm install <package>@v10.1.2
 
+# localのpackageをinstall
+npm install ../path/lib/other
+
 # globalにinstall
 npm install -g <package>
 ```

@@ -11,7 +11,8 @@
 
 ## config
 
-`KUBECONFIG`環境変数で指定できる。もちろんflagでも指定できる。
+`KUBECONFIG`環境変数で指定できる。もちろんflag(`--kubeconfig`)でも指定できる。  
+`$HOME/.kube/config`がdefaultで検索されるのでそこに置いておくこともできる。
 
 ## Plugin
 
@@ -117,3 +118,47 @@ kubectl port-forward svc/service-xxx 8080:443
 # kubectl get all --all-namespace はすべてを表示しない
 kubectl api-resources
 ```
+
+### namespace一覧を取得する
+
+```shell
+kubectl get namespace
+```
+
+### 全てのresourceを確認する
+
+```shell
+kubectl get all
+```
+
+### resourceのyamlをみる
+
+```shell
+kubectl get svc my-service -o yaml
+```
+
+### dry-runでmanifestを生成する
+
+```shell
+kubectl create svc clusterip test --tcp=80:80 --dry-run=client -o yaml > my_svc.yaml
+```
+
+## `get`
+
+* `--show-labels`: labelを表示する
+
+## `logs`
+
+```shell
+# labelで絞り込む
+kubectl logs -l app=nginx
+```
+
+## `auth`
+
+```shell
+# authorizationの確認
+kubectl auth can-i create deployemtns --namespace dev
+```
+
+* 引数は<verb> <resource>

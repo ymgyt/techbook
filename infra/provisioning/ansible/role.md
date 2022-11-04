@@ -5,3 +5,13 @@
 
 ## Directory structure
 
+### tasks
+
+* `main.yaml`がentry point
+
+```yaml
+- name: Install kube tools
+  ansible.builtin.include_tasks: install_kube_tools.yaml
+```
+
+* `tasks`配下でさらにtasksごとにfileをきってincludeできる

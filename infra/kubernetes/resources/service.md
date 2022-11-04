@@ -7,6 +7,8 @@
 * Podは自身のIPアドレスを付与される
   * Podはephemeralなので利用側にベタ書きできない
 
+* 実装はkube-proxyがになっている
+
 ## ClusterIP
 
 ```yaml
@@ -49,7 +51,12 @@ spec:
       targetPort: 8001
 ```
 
-* AWS等のvendorのcontrollerが管理する?
+* LoadBalancerはk8s clusterの外の存在
+  * worker nodeのnode portにload balancingする
+  * Request -> LoadBalancer -> NodePort -> ClusterIp Svc -> Pod
+
+* LoadBalancerを管理する責務はCloudProviderにある
+  * たぶん,LoadBalancerを管理するcontroller(operator)が必要
 
 ## NodePort
 
@@ -65,6 +72,8 @@ spec:
     targetPort: 3000 # routing先のPodのport
     nodePort: 30008  # nodeにbindする外部に公開するport
 ```
+
+* worker nodeの`nodePort`へのアクセスがserviceへroutingされる
 
 ## Headless
 

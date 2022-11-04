@@ -30,7 +30,3 @@ sudo swapoff -a
 * portを設定する
   * https://kubernetes.io/docs/reference/ports-and-protocols/
   * Control Plane, Worker nodeごとにportの許可を制限する。(SecurityGroup等)
-
-10.0.0.44 master-a
-10.0.0.87 worker-a
-10.0.0.8  worker-b

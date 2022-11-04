@@ -25,3 +25,4 @@ spec:
 ```
 
 * containerの`ports[].name`を設定しておくとServiceのcontainerPortの指定に利用でき、Service側がcontainerのportを意識しなくてよいので好き
+
