@@ -41,7 +41,7 @@ jobs:
 ## Rust 
 
 ```yaml
-- uses: actions/cache@v2
+- uses: actions/cache@v3
   with:
     path: |
       ~/.cargo/bin/
@@ -50,5 +50,7 @@ jobs:
       ~/.cargo/git/db/
       target/
     key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+    restore-keys: |
+      ${{ runner.os }}-cargo-
 ```
 

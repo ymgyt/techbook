@@ -1,0 +1,16 @@
+# depandabot
+
+```yaml
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: monthly
+```

@@ -24,6 +24,7 @@
 ## Action
 
 * Show Context Actions: Meta+Enter エラー出ていたりする場合適切なアクション選べる。
+* Optimize Import: rustで不要なimport消したりできる
 
 ## Tool Window
 

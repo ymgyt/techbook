@@ -29,6 +29,19 @@ command = "rustup"
 args = ["target","add", "wasm32-unknown-unknown"]
 ```
 
+## 他のfileのimport(extend)
+
+```toml
+extend = [
+    { path = "dev/makefiles/format_makefile.toml" },
+    { path = "dev/makefiles/lint_makefile.toml" },
+    { path = "dev/makefiles/test_makefile.toml" },
+]
+```
+
+* `Makefile.toml`を複数fileに分割できる
+* importされたMakefileのcurrent dirはrootのfile
+
 ## Workspace
 
 * workspace top levelで`cargo make my-task`を実行すると各member dirで`my-task`を実行する動きになる
@@ -50,9 +63,21 @@ default_to_workspace = false
 
 * `default_to_workspace`: falseを設定しておくと、workspaceにMakefileを置いたときにtop levelで実行してくれる。
 
+## `tasks`
+
+```toml
+[tasks.lint]
+description = "Apply lint"
+toolchain = "nightly"
+command = "cargo"
+args = ["clippy", "--all-features", "--all-targets", "--", "--deny", "warnings"]
+```
+
+* `toolchain`でstable,nightlyを指定できる
+
 ### `install_crate`
 
-```yaml
+```toml
 [tasks.wasm]
 install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "--version", min_version = "0.8.1"}
 command = "wasm-pack"

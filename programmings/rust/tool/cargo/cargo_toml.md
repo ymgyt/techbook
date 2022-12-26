@@ -102,6 +102,16 @@ use alias::module::X; // => resolved to org::module::X
 
 依存crateを一時的にlocalに向けたい時
 
+### crates
+
+```toml
+[dependencies]
+uuid = "1.0"
+
+[patch.crates-io]
+uuid = { path = "../path/to/uuid" }
+```
+
 ### git依存のpatch
 
 依存先をgitで指定している場合のpatch。

@@ -6,9 +6,14 @@
 use clap::{Parser, Subcommand, Args};
 
 #[derive(Parser, Debug)]
-#[clap(version, propagate_version = true)]
+#[command(
+    version, 
+    propagate_version = true,
+    disable_help_subcommand = true,
+    about = "xxx",
+)]
 pub struct CloudOpsApp {
-    #[clap(subcommand)]
+    #[command(subcommand)]
     command: Command,
 }
 
@@ -19,23 +24,23 @@ enum Command {
 }
 
 #[derive(Args, Debug)]
-#[clap(arg_required_else_help = true)]
+#[command(arg_required_else_help = true)]
 pub struct S3Command {
-    #[clap(flatten)]
+    #[command(flatten)]
     pub aws: AwsOptions,
 
-    #[clap(subcommand)]
+    #[command(subcommand)]
     pub command: S3Subcommand,
 }
 
 #[derive(Subcommand, Debug)]
 pub enum S3Subcommand {
     /// S3 buckets operations.
-    #[clap(visible_alias = "bkt")]
+    #[arg(visible_alias = "bkt")]
     Bucket(bucket::BucketCommand),
 
     /// Put file onto s3 bucket.
-    #[clap(next_help_heading = "PUT_OPTIONS")]
+    #[arg(next_help_heading = "PUT_OPTIONS")]
     Put {
         /// Src file path to put.
         #[clap(long, value_name = "FILE_PATH")]
@@ -51,6 +56,23 @@ pub enum S3Subcommand {
     },
 }
 
+#[derive(Args)]
+pub struct TracingOptions {
+    /// Enable color(ansi) logging.
+    /// --ansi=false のように書ける
+    #[arg(
+        long,
+        default_value_t = true,
+        action = clap::ArgAction::Set,
+        visible_alias = "color",
+    )]
+    pub ansi: bool,
+
+    /// Show tracing callsite file and line number.
+    #[arg(long, default_value_t = false)]
+    pub source_code: bool,
+}
+
 impl CloudOpsApp {
     pub fn parse() -> Self {
         clap::Parser::parse()
@@ -64,6 +86,8 @@ impl CloudOpsApp {
 * `flatten`: そこにべた書きしたかのように展開される
 * `next_help_heading`: helpでgroupingされる
 * `value_name`: helpで引数名のplace holderに利用される
+* `action = clap::ArgAction::{Set, SetTrue}`
+  * boolの使い方を制御できる。`SetTrue`にすると`--flag`だけで有効にできる
 
 ## Features
 

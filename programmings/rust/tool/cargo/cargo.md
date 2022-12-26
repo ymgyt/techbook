@@ -13,11 +13,17 @@ runner = 'hf2 elf'
 rustflags = [
     "-C", "lin-arg=-Tlink.x",
 ]
+
+[alias]
+m = "make"
 ```
 
 こうかくと`cargo build`が`cargo build --target thumbv7em-none-eabihf`となる。  
 runnerを指定すると、`cargo run`実行時に、runnerをよびだしてくれる。  
 `hf2 elf target/thumbv7em-none-eabihf/debug/app`がよばれる。
+
+* `[alias]`でcargo 以降のサブコマンドのaliasを設定できる
+  * `cargo m`とすると`cargo make`になる
 
 ## install
 
@@ -103,3 +109,4 @@ cargo publish --package member
   * localではpathが利用される
   * cargo publish時にはversionが利用される
   * 従って、依存先が先にcrates.ioにpublishされていなければならない
+

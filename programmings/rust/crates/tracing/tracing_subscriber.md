@@ -17,3 +17,29 @@ fn init_logger(verbose: u8) -> Result<()> {
         .map_err(|e| anyhow!(e))
 }
 ```
+
+```rust
+use xxx::{cli, env::LOG_DIRECTIVE};
+use tracing_subscriber::util::SubscriberInitExt;
+
+// Configure tracing_subscriber.
+fn init_tracing(opts: &cli::TracingOptions) {
+    // Set default logging directive if not specified.
+    if std::env::var(LOG_DIRECTIVE).is_err() {
+        std::env::set_var(LOG_DIRECTIVE, "lawgueops=debug,info");
+    }
+
+    use tracing_subscriber::{filter, fmt, layer::SubscriberExt, Registry};
+    Registry::default()
+        .with(
+            fmt::Layer::new()
+                .with_ansi(opts.ansi)
+                .with_timer(fmt::time::UtcTime::rfc_3339())
+                .with_file(opts.source_code)
+                .with_line_number(opts.source_code)
+                .with_target(true),
+        )
+        .with(filter::EnvFilter::from_env(LOG_DIRECTIVE))
+        .init();
+}
+```

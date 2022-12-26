@@ -164,3 +164,17 @@ macro_rules! clone_from_copy {
 clone_from_copy![bool, f32, f64, u8, i8, /* ... */];
 ```
 
+### define environment variable key
+
+```rust
+macro_rules! def_env {
+        ( $key:expr ) => {
+            concat!("APP_", $key)
+        };
+    }
+
+/// Specify application logging directive.
+/// like "LOG=app=debug,info".
+pub static LOG_DIRECTIVE: &str = def_env!("LOG");
+
+```
