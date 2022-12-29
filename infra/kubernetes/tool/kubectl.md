@@ -162,3 +162,16 @@ kubectl auth can-i create deployemtns --namespace dev
 ```
 
 * 引数は<verb> <resource>
+
+## `port-forward`
+
+```shell
+kubectl port-forward service/xxx <host_port>:<target_port>
+```
+
+* kubectlを実行しているhostからservice/deployment/podへport-forwardする
+    * 外部に公開していないservice/podにhostからアクセスできるようになる
+
+* `host_port`はhost側でbindするport
+  * このportにcurl等でアクセスできる
+* `target_port`はforward対象が公開しているport
