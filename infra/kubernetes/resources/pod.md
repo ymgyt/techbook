@@ -81,3 +81,50 @@ spec:
 * `matchExpressions.key`
   * `operator`に使えるのは`In`, `NotIn`, `Exists`, `DoesNotExist`, `Gt` and `Lt`
 
+
+
+## Volume
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: my-app
+spec:
+  volumes:
+  - name: logs # nameとPodのvolumeとcontainerのvolumeを対応させる
+    persistentVolumeClaim:
+      claimName: my-pvc
+  containers:
+    - image: xxx
+      name: xxx
+      volumeMounts:
+      - mountPath: /var/logs  
+        name: logs
+```
+
+1. `spec.volumes`で利用するvolumeのtypeとnameを指定する
+2. `spec.containers.volumeMounts`でcontainerがmountするvolumeの名前とpathを指定する
+
+## Recipe
+
+### Debug
+
+debug様のpodのmanifest
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-ceph-block
+spec:
+  containers:
+  - image: busybox:latest
+    name: busybox
+    imagePullPolicy: Never
+    command: ["/bin/sh", "-c", "--"]
+    args: ["while true; do sleep 60; done;"]
+```
+
+* sleepを`while`で回すよりいい方法があるかも。
+  * この方法だとpod delete時のレスポンスが遅い?
