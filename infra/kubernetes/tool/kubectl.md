@@ -175,3 +175,19 @@ kubectl port-forward service/xxx <host_port>:<target_port>
 * `host_port`はhost側でbindするport
   * このportにcurl等でアクセスできる
 * `target_port`はforward対象が公開しているport
+
+## `drain`
+
+```shell
+# start drain
+kubectl drain <node name>
+
+# end maintenance
+kubectl uncordon <node name>
+```
+
+* node上のpodを退避して、当該nodeをscheduling対象外にする
+  * nodeのmaintenance時に利用するのがusecase
+
+* `uncordon`でnodeを再びschedule対象にする
+  * `cordon`は刑事事件とかでよくみる黄色いテープをはって封鎖する的な意味
