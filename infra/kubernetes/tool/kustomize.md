@@ -82,6 +82,13 @@ secretGenerator:
   options:
     disableNameSuffixHash: true
 
+# Image
+# Podのspec.containers.imageを書き換える
+# image: busybox:1.2.3 => image: alpine:3.6に書き変わる
+images:
+- name: busybox
+  newName: alpine
+  newTag: 3.6
 
 
 # 古いdocだとpatchesになっているところはこれを使う

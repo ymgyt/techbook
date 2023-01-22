@@ -13,25 +13,11 @@ cargo install --path helix-term
 
 `~/.config/helix/config.toml`
 
-## Usage
 
-### Registers
+## Debug
 
-`"a` とすると`a`Registerを選択する
-```shell
-# yank current selection to register a
-"ay
-
-# paste the text in register o
-"op
-
-# m registerにstoreしつつdelete
-"md
-
-# h registerにstoreしつつchange
-"hc
-```
-
-
-
+* defaultでは`$HOME/.cache/helix/helix.log`に出力される  
+  * 正確には`etcetera`の`base_strategy()`で決まる
+* `hx -v` でINFOをloggingできる。`-vv`でWARN
+* code上では`log::info!()`を使う
 

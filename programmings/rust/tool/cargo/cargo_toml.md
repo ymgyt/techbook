@@ -40,6 +40,33 @@ optional = true
 ```
 
 * `[features]`で定義してそれぞれの依存先を指定する
+* `optional = true`を指定したdependencyはdefaultでfeatureとして扱われる
+
+### optional dependencyをfeatureとして扱われることを避ける
+
+```toml
+[dependencies]
+ravif = { version = "0.6.3", optional = true }
+rgb = { version = "0.8.25", optional = true }
+
+[features]
+avif = ["dep:ravif", "dep:rgb"]
+```
+
+* `dep:xxx`のようにprefix`dep`をつけると暗黙的にfeatureにならなくなる
+  * この場合、`ravif`と`rgb`はfeatureにならない
+
+### featureに応じてdependencyのfeatureを有効にする
+
+```toml
+[features]
+serde = ["libx/serde"]
+```
+
+* `crate/feature`のように書くとdependencyのfeatureを有効にできる
+
+
+
 
 ## workspace
 

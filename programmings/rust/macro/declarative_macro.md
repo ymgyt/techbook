@@ -12,6 +12,9 @@
 * `:expr` expression
 * `:ty` 型名
 * `:tt` token tree. なんでもマッチする。
+  * `{ ... }`のようにカッコでくくった場合にマッチする
+* `:literal`
+  * `-1`, `"hello"`, `true`のようなliteralにマッチする
 
 ## 繰り返し表現
 
@@ -108,6 +111,43 @@ macroの中のfooのassignは外に影響をあたえない!
 
 * 衛生的
   * 明示的に渡された変数以外には影響を与えない
+
+### macro呼び出し側にmacro側で定義した変数を参照させたい
+
+```rust
+macro_rules! setup {
+    ( $scanner:ident ) => {
+        let _stdin = std::io::stdin();
+        let mut $scanner = cio::Scanner::from(&stdin);
+    };
+}
+
+setup!(s);
+
+s.foo();
+```
+
+* macro側は`$xxx:ident`で呼び出し側から変数名を`ident`でもらう必要がある
+  * 呼び出し側はmacro側で使う変数を渡す
+
+## Debug
+
+macroのdebugの仕方。
+
+1. nightlyを使う
+2. `#![feature(trace_macros)]`を有効にする
+3. `trace_macros!(true)`で有効にする
+
+```rust
+#![feature(trace_macros)]
+fn main() {
+    trace_macros!(true);
+    println!("hello");
+    trace_macros!(false);
+}
+```
+
+`cargo +nightly run`
 
 ## Recipe
 
