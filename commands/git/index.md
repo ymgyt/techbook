@@ -100,3 +100,12 @@ gitで管理しているfileを途中からgitignoreしても反映されない�
 # 明示的に削除する必要がある。--cachedをつけているのでfilesystemからは削除されない。
 git rm --cached <file>
 ```
+
+### forkしたrepoにupstreamの変更を取り入れる
+
+```sh
+git remote att upstream https://github.com/ymgyt/upstream-x
+git fetch upstream
+git checkout main
+git merge upstream/main
+```
