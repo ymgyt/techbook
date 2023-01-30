@@ -43,6 +43,7 @@ Host xxx-aaa
   HostName 192.168.10.20
   Port 22
   ProxyJump bastion
+  LocalForward 10080 localhost:80
 
 HOST *
   User ferris
@@ -54,3 +55,5 @@ HOST *
 * 各entryは一致すると適用される。当該設定がなければ適応される。
   * なので下にwildcardを書いておくとdefault設定になる
 * `ProxyJump`でbastionを経由できる
+* `LocalForward`を指定するとssh接続がされている間,local:10080と接続先の80が接続されている状態になる
+  * 接続先で127.0.0.1でbindしているhttp serverにlocalからcurlできたりできる
