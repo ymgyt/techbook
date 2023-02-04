@@ -30,3 +30,37 @@
 * What performance and operational alerts should be configured?
  
  
+## Vaultとは
+
+secretの具体例
+
+* AuthN(authentication)
+* AuthZ(authorization)
+* username
+* database credential
+* api token
+* TLS Certification
+
+Secret sprawlが問題。  
+具体的にはplain textにあったり、source codeにあったり, ansibleのようなprovisioning toolに定義してあったりする。  
+これらに具体的に誰がアクセスしたかを知らない。  
+periodic rotationできていない。 
+Vaultはまずこれらsecretをcentralizingする + encryptする
+さらにaccess controlを提供する
+Audit trailも提供する
+
+つまり最初の提供価値は散逸したcredentialを1箇所にまとめて暗号化した上で、access controlとauditのlayerで保護する点にある
+
+
+次の課題。
+applicationはsecretを保持するのが苦手。loggingしたりexceptionに吐いてしまうかも。
+つまりapplicationはtrustedでない。
+そこでdynamic secret。
+* applicationにはephemeralなcredentialを渡す。
+* clientごとにunique。これによってrevokeする際に全systemが一時的にダウンすることを避けられる 
+
+Vaultはplaggableになっている。具体的には
+* Auth plugin
+* Audit plugin
+* Storage abckend
+* Secret backend

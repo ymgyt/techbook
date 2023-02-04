@@ -51,3 +51,34 @@ spec:
 ### PVCがPodに使われているか確かめる方法
 
 * `kubectl describe pvc my-pvc`して、`Used By`をみる
+
+
+## Local
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-local-pv
+spec:
+  capacity:
+    storage: 20Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: my-local-storage-class
+  local:
+    path: /var/opt/monitoring/elasticsearch
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - xxx
+```
+
+* `storageClassName`にはno-provisionerなstorage-classを指定する想定
+* `local.path`: node上の当該pathが利用される
