@@ -1,0 +1,37 @@
+@startuml
+
+' ============= Generate time substitution =============
+' footer指定
+'__FOOTER
+' theme指定
+'__THEME
+' ======================================================
+
+hide empty members
+title Title
+skinparam linetype polyline
+
+package "EnvA" {
+    folder "AppT1" {
+        [ServerA] - AFluentd
+        [RDS]
+    }
+
+    folder "AppT2" {
+        [ServerB] - BFluentd
+    }
+}
+
+package "EnvB" {
+    [Kinesis]
+    [GatewayService]
+    [Service]
+}
+
+AFluentd -> [Kinesis]
+BFluentd -> [Kinesis]
+
+[RDS] -- [GatewayService]
+[GatewayService] -- [Service]
+
+@enduml
