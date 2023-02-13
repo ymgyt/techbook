@@ -8,3 +8,9 @@
 ## Percent
 
 * `width: 50%`
+
+## Pixel
+
+* `px`
+
+boxのmargin,paddingではremよりpx使うのはあり

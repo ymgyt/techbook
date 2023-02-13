@@ -2,10 +2,24 @@
 
 ## Inheritance
 
-propertyによっては親の値が子に継承される
+* propertyによっては親の値が子に継承される
+  * color, font, line-height, text-*等のtypography relatedがinherited
 
 * children: 直下の子
 * descendant: 子のsubtree
+
+[List of css properties that are inherited](https://www.sitepoint.com/css-inheritance-introduction/#list-css-properties-inherit)
+
+### Forcing inheritance
+
+```css
+a { 
+  color: inherit;
+}
+```
+
+color propertyはinheritだが、anchorにはbrowserのdefault styleが適用されるのでinheritされた値を上書きしてしまう。  
+そこで`inherit`を明示的に指定すると親のcolorを使える
 
 ## Cascade
 
@@ -37,3 +51,30 @@ propertyによっては親の値が子に継承される
 * `max-width: n`は`[0, n]`を指定できる
 * `@media (condition)`のconditionに書けるのはmedia feature
   * max-widthはたまたまcss propertyと同じだっただけ
+
+
+## Box Model
+
+* `box-sizing: content-box`の場合
+  * `width: 100%`の指定はcontentにのみ適用されるので、そこにpaddingとboarderが加算される。(親をはみ出す)
+* `box-sizing: border-box`にすると`width: 100%`の指定がcontent + padding + boarderに対して適用される
+
+```css
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+```
+
+* `*::before`のようなpseudo-elementは`*`指定できないので必要
+
+### Logical properties
+
+* `margin-block-start` (`margin-top`)
+* `margin-block-end` (`margin-bottom`)
+* `margin-inline-start` (`margin-left`)
+* `margin-inline-end` (`margin-right`)
+
+margin,paddingも同様。  blockは上から下、inlineは左から右は特定のwrite modelを前提にしている
+
