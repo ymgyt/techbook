@@ -1,5 +1,16 @@
 # Pod
 
+## ServiceAccount
+
+```yaml
+spec:
+  serviceAccountName: fleet-server
+  automountServiceAccountToken: true
+```
+
+* `automountServiceAccountToken`については調査が必要。
+
+
 ## Env
 
 ```yaml

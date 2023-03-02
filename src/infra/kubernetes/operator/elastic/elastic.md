@@ -241,3 +241,9 @@ spec:
 * `spec.kibanaRef`はどのkibanaで管理されるかを決めるのでagent,fleet-serverともに必要
 * agentはfleet-serverから設定をもらうので、`spec.fleetServerRef`が必要
 * fleet-serverはどのelasticsearchから設定をもらうかを知る必要があるので、`spec.elasticsearchRefs`が必要
+
+
+## 参考
+
+* https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-air-gapped.html
+  * internet accessできない場合にeckを動かすには

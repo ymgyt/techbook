@@ -18,6 +18,9 @@ ansible-playbook <host_group> -i inventory.ini <play-book>.yaml
 
 # DryRun
 ansible-playbook --check <host_group> -i inventory.ini <play-book>.yaml
+
+# 適用対象のhostを制限
+ansible-playbook -i inventory.ini <play-book>.yaml --limit target-host-a
 ```
 
 * `--check`
