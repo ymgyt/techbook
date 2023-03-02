@@ -9,3 +9,21 @@ flowchart TB
   B -->|diff| D[gen svg]
   D --> E[commit and push]
 ```
+
+subgraphを使うことで、scopeを表現できる。  
+subgraphはnestさせることもできる
+
+```mermaid
+flowchart TB
+   subgraph Namespace/xxx
+     subgraph Pod
+       Application --telemetry/grpc--> OpentelemetryCollector
+     end
+   end
+
+   subgraph Namespace/monitoring
+     OpentelemetryCollector --telemetry/grpc--> ElasticAgent/Apm
+   end
+```
+
+
