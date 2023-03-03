@@ -103,19 +103,30 @@ metadata:
   name: my-app
 spec:
   volumes:
-  - name: logs # nameとPodのvolumeとcontainerのvolumeを対応させる
+  - name: logs 
     persistentVolumeClaim:
       claimName: my-pvc
+  - name: hostfs
+    hostPath:
+      path: /
+      type: Directory
+
   containers:
     - image: xxx
       name: xxx
       volumeMounts:
       - mountPath: /var/logs  
         name: logs
+      - mountPath: /host-root
+        name: hostfs
+        mountPropagation: HostToContainer # これ要調査
+        readOnly: true
 ```
 
 1. `spec.volumes`で利用するvolumeのtypeとnameを指定する
 2. `spec.containers.volumeMounts`でcontainerがmountするvolumeの名前とpathを指定する
+  * `spec.containers.volumeMounts.readOnly`で読み込み専用にできる
+
 
 ## Recipe
 
