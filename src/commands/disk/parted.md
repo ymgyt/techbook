@@ -5,7 +5,7 @@ partition editor。
 ## Disk情報の取得
 
 ```shell
-# parted -l
+parted -l
 Model: VMware Virtual disk (scsi)
 Disk /dev/sda: 107GB
 Sector size (logical/physical): 512B/512B

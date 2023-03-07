@@ -6,10 +6,15 @@
 
 ```shell
 ansible <group> -m command -a uptime -i inventories/inventory.ini
+
+# callback plugingの指定
+ANSIBLE_STDOUT_CALLBACK=default ansible <group> -i inventory.ini -m command -a 'docker image ls'
 ```
 
 * command moduleで`-a`で渡すcommandを実行できる
   * `<group>`はinventory内のgroup
+* `ANSIBLE_STDOUT_CALLBACK`で出力方法を指定できる。
+  * [pluginのlist](https://docs.ansible.com/ansible/2.6/plugins/callback.html#plugin-list)
 
 ### Playbookの実行
 

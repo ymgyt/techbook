@@ -91,10 +91,11 @@ images:
   newTag: 3.6
 
 
-# 古いdocだとpatchesになっているところはこれを使う
+# deprecated
 patchesStrategicMerge:
 - replica_count.yaml
 
+# derepcated
 patchesJson6902:
 - target:
     version: v1
@@ -107,13 +108,47 @@ patchesJson6902:
     - op: replace
       path: /some/existing/path
       value: "new value"    
+
+# patchesはstragtegicMergeとjson6902両対応
+patches:
+- target:
+    group: elasticsearch.k8s.elastic.co
+    version: v1
+    kind: Elasticsearch
+    name: monitoring
+  patch: |-
+    - op: add
+      path: /spec/nodeSets/0/volumeClaimTemplates/0/spec/storageClassName
+      value: xxx
+
+# fileに分けることもできる
+- path: patch.yaml
+  target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: deploy.*
+    labelSelector: "env=dev"
+    annotationSelector: "zone=west"
+- patch: |-
+    - op: replace
+      path: /some/existing/path
+      value: new value    
+  target:
+    kind: MyKind
+    labelSelector: "env=dev"
 ```
 
-* patchesJson6902
+* patches
+  * 操作対象の指定は`target`で指定する
+    * group, version, kind, name, namespace, labelSelector and annotationSelectorで指定する
+  * 変更対象のfieldは`patch.path`で指定する
+    * 入れる要素はindexを書く
   * labelを対象にする際に`app.kubernetes.io/name`のようにlabel自体に`/`が含まれている場合
     * `path: /xxx/app.kubernetes.io~1name`のように`~1`を利用する
-    * http://jsonpatch.com/#json-pointer
 
 ## References
 
 - [Transformの解説が丁寧](https://atmarkit.itmedia.co.jp/ait/articles/2101/21/news004.html)
+
+- [patches](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/patches/)
