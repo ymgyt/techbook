@@ -14,6 +14,13 @@ Intel記法。(destが第一引数)
 
 - `add rax, rbx`: rax = rax + rbx
 
+- `int`: system call
+- `sysenter`: system call
+- `syscall`: system call
+- `iret`: return system call
+- `sysexit`: return system call
+- `sysret`: return system call
+
 ## Arm
 
 ### v8
@@ -28,6 +35,11 @@ Intel記法。(destが第一引数)
 
 - `add x5, x6, x7`: x5 = x6 + x7
 
+- `svc`: system call
+- `hvc`: system call
+- `smc`: system call
+- `eret`: return system call
+
 
 ## RISC-V
 
@@ -40,3 +52,7 @@ Intel記法。(destが第一引数)
 - `mv x5, x6`: x6 regからx5 regにcopy
 
 - `add x5, x6, x7`: x5 = x6 + x7
+
+- `ecall`: systemcall
+- `sret`: return system call
+- `mret`: return systemc call

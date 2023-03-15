@@ -163,3 +163,9 @@ spec:
 
 * sleepを`while`で回すよりいい方法があるかも。
   * この方法だとpod delete時のレスポンスが遅い?
+
+
+## Log
+
+* `/var/log/pods` 配下に実体のfileがある
+* kubeletがcontainer runtimeにどこにlog fileを出力すべきかを伝えている
