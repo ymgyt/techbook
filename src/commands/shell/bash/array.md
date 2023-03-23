@@ -30,7 +30,7 @@ echo "${ary[@]}" # => "aaa" "bbb" "ccc"
 echo "${ary[*]}" # => "aaa bbb ccc"
 
 # 値の存在するindexの取得
-echo ${!ary[@]}
+echo ${!ary[@]} # => 1 2 3
 ```
 
 
@@ -46,4 +46,21 @@ echo ${ary[@]}
 ary=(xxx yyy "${ary[@]}")
 echo ${ary[@]}
 ```
+
+# Associative array
+
+いわゆる連想配列。
+
+```shell
+declare -A ary=(
+  [key_1]=value_1
+  [key_2]=value_2
+)
+
+for key in ${!ary[@]}; do 
+  local value=${ary[${key}]}
+done;
+```
+
+* `${!ary[@]}`でindex(=key)を参照できる
 
