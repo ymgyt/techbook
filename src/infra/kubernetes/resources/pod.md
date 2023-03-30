@@ -140,6 +140,16 @@ spec:
 2. `spec.containers.volumeMounts`でcontainerがmountするvolumeの名前とpathを指定する
   * `spec.containers.volumeMounts.readOnly`で読み込み専用にできる
 
+## Security Context
+
+```yaml
+spec:
+  securityContext:
+    runAsUser: 0
+```
+
+* `spec.securityContext.runAsUser`でuser idを指定できる。0ならrootになる。
+
 
 ## Recipe
 
