@@ -13,3 +13,9 @@ SSO Instanceに紐づく
 ## アクセス権限セット
 
 Policyを複数割り当てる存在。
+
+## CLI
+
+```sh
+aws configure sso
+```

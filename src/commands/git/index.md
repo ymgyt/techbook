@@ -109,3 +109,13 @@ git fetch upstream
 git checkout main
 git merge upstream/main
 ```
+
+### PRをcheckout
+
+```sh
+git fetch origin pull/<ID>/head:<local-branch-name>
+git checkout <local-branch-name>
+
+# update
+git pull origin pull<ID>/head:<local-branch-name>
+```

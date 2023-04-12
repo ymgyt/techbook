@@ -59,3 +59,46 @@ metadata:
     app.kubernetes.io/managed-by: helm
     app.kubernetes.io/created-by: controller-manager
 ```
+
+
+## Deletion
+
+### Finalizer
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xxx
+  finalizers:
+  - kubernetes
+```
+
+* resourceの`metadata.finalizers`に定義される
+* 当該resourceが削除される前に必要なoperationが定義される
+  * `finalizers`が空になると削除が完了する
+* 具体例
+  * Podで利用中のPVには`kubernetes.io/pv-protection`が付与され利用中に削除されることを防止する
+* finalizerをもつobjectをdelete(kubectl delete)すると
+  * `metadata.delectionTimestamp`が付与される
+* `finalizers` listを空にするのはcontrollerの役目。
+
+
+### Patch
+
+```sh
+kubectl patch configmap/mymap \
+    --type json \
+    --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]
+```
+
+finalizerを削除する具体例
+
+
+## Owner References
+
+https://kubernetes.io/blog/2021/05/14/using-finalizers-to-control-deletion/#owner-references
+
+Resource間で、参照/被参照の関係を定義できる。  
+親のresourceをdeleteした際は子もdeleteされるが、この挙動をcascadeという。  
+cascadeの挙動は制御できる

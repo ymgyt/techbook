@@ -27,7 +27,21 @@ NAME="target"
 awk -v name=${NAME} '{if($2==name) {print $0}'
 ```
 
+## Condition
+
+`awk {$1 ~ /earth/ && $1 !~ /_test/ || NR == 1} {print $0}`
+
+1列目に(`earth`が含まれかつ`_test`が含まれない) OR 先頭なら表示
+
 ## recipe
+
+### kubectlでErrのpodを抽出
+
+```
+kubectl get pods | awk '{if($3 ~ /^Err/ ) {print $0}}'
+```
+
+* `if($3 ~ /^Err/)`で3 列目の値のprefixが`Err`にmatchしたら `{print $0 }`を実行する
 
 ### psの足し込み
 
