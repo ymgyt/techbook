@@ -1,5 +1,59 @@
 # Pod
 
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: xxx
+spec:
+  containers:
+  - name: xxx
+    image: xxx
+    imagePullPolicy: IfNotPresent
+    command: []
+    args: []
+    ports:
+    - containerPort: 80
+      name: http
+    env:
+      name: ENV_KEY
+      value: ENV_VAR
+    readinessProbe:
+      httpGet:
+        path: /
+        port: http
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    livenessProbe:
+      httpGet:
+        path: /
+        port: http
+    resources:
+      requests:
+        cpu: 0.1
+        memory: "64Mi" 
+      limits:
+        cpu: 1
+        memory: "512Mi"
+        
+```
+
+* `containers.imagePullPolicy`はtagが`latest`だと`Always`になる仕様なので注意
+* `containers.command`はshellで実行されない
+  * 指定されなければimageのENTRYPOINTが使われる
+  * `$(VAR_NAME)`はcontainerの環境変数で展開される
+* `containers.port`
+  * nameはhttps://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt に準拠
+* `containers.readinessProbe`
+  * failするとserviceから除外される
+
+* probe
+  * `livenessProbe`は失敗するとpodが再起動される
+  * `readinessProbe`は失敗するとserviceからはずされる
+
+
 ## ServiceAccount
 
 ```yaml
