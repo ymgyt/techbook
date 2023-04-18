@@ -30,6 +30,8 @@ cd prometheus-2.40.5.darwin-arm64
 
 defaultでは`localhost:9090`に立ち上がる。
 
+https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file
+
 ## `prometheus.yml`
 
 ```yaml
@@ -39,6 +41,10 @@ global:
 scrape_configs:
   # label job=prometheus のようになる
   - job_name: "prometheus"
+    scrape_interval: 60s
+    scrape_timeout: 5s
+    metrics_path: "/metrics"
+    scheme: http
     static_configs:
       - targets: ["localhost:9090"]
 ```

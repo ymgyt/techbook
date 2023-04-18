@@ -78,3 +78,24 @@ receivers:
 * includeで指定したfileを監視対象にする
 * fileの1行はentryとして扱われ、`operators`で順番に処理される
   * 内部的にstanzaを利用している
+
+
+### Prometheus
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: "0.0.0.0:4317"
+  prometheus:
+    config:
+      scrape_configs:
+      - job_name: graphql
+        scrape_interval: 60s
+        scrape_timeout: 5s
+        metrics_path: "/metrics"
+        scheme: http
+        static_configs:
+        - targets: ["0.0.0.0:9090"]
+```
