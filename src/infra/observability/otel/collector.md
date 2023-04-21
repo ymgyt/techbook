@@ -99,3 +99,52 @@ receivers:
         static_configs:
         - targets: ["0.0.0.0:9090"]
 ```
+
+## Processor
+
+```yaml
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_percentage: 75
+    spike_limit_percentage: 15
+  batch:
+    send_batch_size: 10000
+    timeout: 10s
+  resourcedetection:
+    # Reads resource information from the OTEL_RESOURCE_ATTRIBUTES environment variable.
+    detectors: ["env"]
+    timeout: 2s
+```
+
+## Exporter
+
+```yaml
+    exporters:
+      # https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/loggingexporter/README.md
+      logging:
+        # detailed | normal | basic
+        verbosity: basic
+        sampling_initial: 2
+        sampling_thereafter: 500
+
+      otlp/elastic:
+        endpoint: "apm.monitoring:8200"
+        tls:
+          insecure: true
+              
+    service:
+      pipelines:
+        metrics:
+          receivers: [hostmetrics, kubeletstats]
+          processors: [memory_limiter, resourcedetection, batch]
+          exporters: [otlp/elastic]
+        logs:
+          receivers: [filelog]
+          processors: [memory_limiter, resourcedetection, batch]
+          exporters: [otlp/elastic]
+
+
+```
+
+

@@ -149,3 +149,19 @@ spec:
 * `spec`に定義できる内容はsrcを参照する
   * [opentelemetrycollector_types.go](https://github.com/open-telemetry/opentelemetry-operator/blob/v0.67.0/apis/v1alpha1/opentelemetrycollector_types.go)に定義してある。
   * versionに注意
+
+
+## Sidecar inject
+
+injectする側のPodのannotationに記載する
+
+```yaml
+metadata:
+  annotations:
+    # opentelemetry-collector sidecar injection
+    sidecar.opentelemetry.io/inject: otel-collector-lawgue  
+```
+
+* `sidecar.opentelemetry.io/inject`で指定する
+  * `true`とすると、同一namespaceのcollectorが利用される
+  * collectorのnameを書くと、同一namespceのcollectorのmedata.nameから探してきてくれる
