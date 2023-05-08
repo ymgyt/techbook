@@ -65,3 +65,8 @@ samplingする決定がなされた場合、後続のserviceにsamplerがいて�
 
 #### Tail sampling
 
+* Pro
+  * Always sampling traces that contain an error
+  * Sampling traces based on overall latency
+  * Sampling traces based on the presence or value of specific attributes on one or more spans in a trace; for example, sampling more traces originating from a newly deployed service
+  * Applying different sampling rates to traces based on certain criteria

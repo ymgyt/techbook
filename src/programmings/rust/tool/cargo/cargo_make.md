@@ -29,6 +29,23 @@ command = "rustup"
 args = ["target","add", "wasm32-unknown-unknown"]
 ```
 
+## Variables
+
+環境変数で定義する
+
+```toml
+[env]
+GRAPHQL_ENDPOINT = "http://localhost:8000/graphql"
+GRAPHQL_SCHEMA_PATH = "rust/client/schema.json"
+
+[tasks.xxx]
+script = '''
+echo "${GRAPHQL_ENDPOINT}"
+'''
+```
+
+実行時に渡す場合は`cargo make --env KEY=VALUE task`
+
 ## 他のfileのimport(extend)
 
 ```toml
