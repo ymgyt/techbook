@@ -117,5 +117,5 @@ git fetch origin pull/<ID>/head:<local-branch-name>
 git checkout <local-branch-name>
 
 # update
-git pull origin pull<ID>/head:<local-branch-name>
+git pull origin pull/<ID>/head:<local-branch-name>
 ```

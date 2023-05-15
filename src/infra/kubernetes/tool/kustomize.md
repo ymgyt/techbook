@@ -147,6 +147,43 @@ patches:
   * labelを対象にする際に`app.kubernetes.io/name`のようにlabel自体に`/`が含まれている場合
     * `path: /xxx/app.kubernetes.io~1name`のように`~1`を利用する
 
+## CR拡張
+
+Custom resourceへのpathやtransformerを適用させるには
+
+### images
+
+Custom resourceにcontainer imageの指定がありそれをkustomizationのimagesで書き換えたいとする。  
+なにもせずに、imagesを書いてもkustomizeは変換してくれない  
+
+CRが`MyKind`でimageのpathが`spec.runLatest.container.image`とする。  
+
+1. kustomizationに渡す設定fileを作成する
+  * この情報でkustomizeが`MyKind`CRの指定のpathにimageがあることを認識できる
+
+```
+mkdir $DEMO_HOME/kustomizeconfig
+cat > $DEMO_HOME/kustomizeconfig/mykind.yaml << EOF
+
+images:
+- path: spec/runLatest/container/image
+  kind: MyKind
+EOF
+```
+
+2. kustomizationから`configurations`で参照する
+  * images transformerで指定する
+
+```yaml
+
+images:
+- name: xxx
+  newName: new
+
+configurations:
+- kustomizeconfig/mykind.yaml
+```
+
 ## References
 
 - [Transformの解説が丁寧](https://atmarkit.itmedia.co.jp/ait/articles/2101/21/news004.html)

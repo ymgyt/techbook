@@ -66,4 +66,31 @@ remoteからlocalにfileをもってきたい場合はこれ
 
 * remoteの`src` fileをlocalの`dest`にもってくる
 
+## `template`
+
+```yaml
+- name: Put chrony conf
+  ansible.builtin.template:
+    src: xxx/chrony.conf.tmpl
+    dest: /etc/chrony.conf
+    owner: root
+    mode: '0644'
+  vars:
+    servers:
+      - server: ntp.example.com
+        iburst: true
+```
+
+templateの内容
+
+```
+{% for item in servers %}
+server {{ item.server }} {% if item.iburst %}iburst {% endif %}
+{% endfor %}
+```
+
+* `src`は相対or絶対
+  * 絶対はplaybook実行時のworkdir?
+* templateはjinjaが利用される
+
 
