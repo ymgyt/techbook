@@ -11,7 +11,6 @@ command -v docker > /dev/null || { echo "dockerをインストールしてくだ
 ### check
 
 ```shell
-```shell
 # check arg count
 if [ "$#" -ne 1 ]; then
   echo "arg(s) required"
