@@ -136,3 +136,16 @@ run_task = [
 
 * `dependencies`は実行前に起動される
 * `run_task`は実行後の起動される
+
+### init
+
+`init`というtaskは特別扱いされ、すべてのtask実行前に実行される.
+
+```toml
+[config]
+init_task = "_init"
+
+[tasks._init]
+```
+
+とすると名前を変えられる
