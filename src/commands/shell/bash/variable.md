@@ -1,5 +1,16 @@
 # Bash Variables
 
+## `$_`
+
+直前のcommandのlast argumentが展開される。  
+argumentがなければ直前のcommnad.
+
+```shell
+mkdir xxx && cd $_
+```
+
+`cd xxx`に展開される。ほとんどオシャレ用。
+
 ## Positional Parameter
 
 * -`$#`: 引数(positional parameter)の数

@@ -1,11 +1,5 @@
 # Vault
 
-## Namespace api lock
-
-* namespace単位でlock/unlockというstatusがある
-* lockされると`sys/health`等の一部を除いて利用できなくなる
-* 部分的に利用を制限したいユースケースで利用できる
-
 ## Memo
 
 * Cluster
@@ -34,6 +28,8 @@
 * What storage backend will Vault use to store its data?
 * What secrets engines will be initially consumed?
 * What performance and operational alerts should be configured?
+
+
  
  
 ## Vaultとは
