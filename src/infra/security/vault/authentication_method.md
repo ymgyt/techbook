@@ -7,3 +7,5 @@ auth methodもnamespaced。
 ## AppRole
 
 RoleIdとSecretIdはuserにおけるusernameとpasswordの関係にある
+
+## Github

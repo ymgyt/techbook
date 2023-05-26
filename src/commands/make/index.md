@@ -10,6 +10,15 @@ target: dependency
     recipe
 ```
 
+### Change dir
+
+```makefile
+foo:
+  cd xxx; pwd
+```
+
+* `cd dir;`を付与する
+
 ## 実行の流れ
 
 * ruleに対して、dependencyをtargetにしているruleがあれば実行する。  
@@ -55,6 +64,24 @@ targetが実在しないファイルであることを表す。
 ```makefile
 .PHONY: all
 all: $(TARGET)
+```
+
+## Shellscriptの参照
+
+shellで別fileに変数を定義してそれをmakefileから参照できる
+
+```makefile
+include ../scripts/lib/config.sh
+
+foo:
+  echo $(KEY_1)
+```
+
+参照されるshell
+
+```sh
+KEY_1=VALUE_1
+
 ```
 
 ## 参考

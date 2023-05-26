@@ -59,6 +59,35 @@ mapを出力することもできる。  `for`を囲む記号でresult typeを�
 # }
 ```
 
+## Import
+
+```sh
+# module側で宣言されているresource
+terraform import module.xxx.vault_audit.stdout yyy
+```
+
+* importしたいresourceがmodule側で宣言されている場合は先頭にmoduleつけて参照する
+
+## Input
+
+参照するresource側の定義
+
+```hcl
+provider "vault" {
+  address               = var.vault_endpoint
+}
+
+variable "vault_endpoint" {
+  type        = string
+  description = "vault endpoint for terraform provisioning"
+}
+```
+
+### tf command引数で渡す
+
+`terraform plan -var=vault_endpoint=xxx`のように`-var=KEY=VALUE`で渡せる
+
+
 ## Resource
 
 ### Meta Arguments
@@ -77,6 +106,30 @@ resource "azurerm_resource_group" "rg" {
   location = each.value
 }
 ```
+
+## Versionの指定
+
+
+```hcl
+terraform {
+  required_version = ">= 1.4.6"
+
+  required_providers {
+    vault = {
+      version = ">= 3.15.2"  
+    }
+  }
+}
+```
+
+
+* `main.tf`に書く
+* `terraform version`で現在のprovider含めたversionがわかる
+* version constraintsの書き方はdoc参照
+  * https://developer.hashicorp.com/terraform/tutorials/configuration-language/versions#terraform-version-constraints
+  * `>= 1.2.3`は1.2.3よりgrater
+  * `~>` はpatchのみあげられる
+
 
 ### Operation Timeout
 
