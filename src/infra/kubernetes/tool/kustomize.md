@@ -184,6 +184,30 @@ configurations:
 - kustomizeconfig/mykind.yaml
 ```
 
+## Secret
+
+localのfileから`Secret` resourceを作成できる
+
+```yaml
+secretGenerator:
+- name: my-secret
+  namespace: xxx
+  envs: [secret.env]
+```
+
+同一directoryに`secret.env`を作成する
+
+```
+key_1=value_1
+key_2=value_2
+```
+
+* `namespace`でsecret単位のnamespaceを指定できる
+  * Secretと参照するPodは同一namespaceにある前提
+* 生成されるsecretは`my-secret-<hash>`のようにhash値が付与されるが、参照側は`my-secret`で参照できる
+  * 参照がうまく解決されない場合はnametransformerが必要
+
+
 ## References
 
 - [Transformの解説が丁寧](https://atmarkit.itmedia.co.jp/ait/articles/2101/21/news004.html)

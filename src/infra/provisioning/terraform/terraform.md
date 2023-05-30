@@ -61,6 +61,9 @@ mapを出力することもできる。  `for`を囲む記号でresult typeを�
 
 ## Import
 
+宣言されているresourceのstateを更新する処理。  
+したがって、import前に対応する`resource "xxx" "yyy"`が必要。
+
 ```sh
 # module側で宣言されているresource
 terraform import module.xxx.vault_audit.stdout yyy
@@ -79,9 +82,12 @@ provider "vault" {
 
 variable "vault_endpoint" {
   type        = string
+  sensitive = false
   description = "vault endpoint for terraform provisioning"
 }
 ```
+
+* `sensitive`で表示されるか制御できる
 
 ### tf command引数で渡す
 
