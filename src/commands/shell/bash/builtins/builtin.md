@@ -10,3 +10,11 @@ bashのbuildin
 type type
 type is a shell builtin
 ```
+
+## command
+
+```sh
+command time xxx
+```
+
+* shellのfunctionを無視してbuiltinか`PATH`からのbinaryのみを実行する

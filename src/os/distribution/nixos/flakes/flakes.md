@@ -40,3 +40,10 @@ experimental-features = nix-command flakes
 nix flake init
 git add flake.nix
 ```
+
+## `flake.nix`
+
+```nix
+
+
+```
