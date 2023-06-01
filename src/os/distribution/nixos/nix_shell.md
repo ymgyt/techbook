@@ -2,6 +2,8 @@
 
 * `nix-shell [-p|--package]`でshellを起動できる
 
+nix-shellの後継が`nix shell`
+
 ## Usage
 
 ```sh
