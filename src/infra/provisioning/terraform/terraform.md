@@ -93,6 +93,17 @@ variable "vault_endpoint" {
 
 `terraform plan -var=vault_endpoint=xxx`のように`-var=KEY=VALUE`で渡せる
 
+### moduleに引数を渡す
+
+```hcl
+module "child_module" {
+  source = "../../my-module"
+  vault_endpoint = "http://localhost:1234"
+}
+```
+
+* moduleに渡す際はargumentのように渡せる
+
 
 ## Resource
 
@@ -151,6 +162,20 @@ resource "aws_db_instance" "example" {
   }
 }
 ```
+
+## State
+
+### Remote state
+
+```hcl
+terraform {
+  backend "xxx" {
+    property = "xxx"
+  }
+}
+```
+
+通常は`main.tf`の`backend` blockに定義する
 
 ## 参考
 

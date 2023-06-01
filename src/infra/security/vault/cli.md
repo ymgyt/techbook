@@ -17,7 +17,12 @@ vault -h
 
 ## Usage
 
-* `VAULT_ADDR`にcluster urlが入っている前提
+
+通信するAPI endpointを指定するには以下の方法がある。
+
+* 環境変数 `VAULT_ADDR`
+* `-address` flag
+
 
 ```sh
 # Check status
@@ -94,6 +99,74 @@ vault kv get -mount=secret aaa/bbb
 * 暗黙的に`data`が入るのでややこしい
   * policy側はこのdataにawareである必要がある
 * kv v2が`secret`にmountされている前提
+
+### Put
+
+#### Find and stdin
+
+Valueはfileやstdinから渡すこともできる。  
+Fileを指定する場合はfile pathの先頭に`@`を付与する。
+
+```sh
+vault kv put secret/test key=@/tmp/data.json
+```
+
+Stdinから渡す場合は`-`を指定。  
+
+```sh
+echo "secret123" | vault kv put secret/test key=-
+```
+
+
+#### Cas
+
+`vault kv put`は既存のkeyの有無に関わらず新しいkey valueをセットします。また現在のversionが特定のversionの場合に限って新しいsecretをセットしたい場合があります。  
+そのようなユースケースでは`-cas` flagを利用できます。場面に応じて以下の値をセットしてください。  
+
+* `-cas=-1`: default値、書き込みは必ず成功する
+* `-cas=0`: secretが存在しない場合のみ、書き込みが成功する
+* `-cas=n(n >= 1)`: 現在のsecretが指定されたversionと一致する場合のみ書き込みが成功する 
+
+```sh
+vault kv put -cas=0 secret/test initial-secret=123
+```
+
+### Delete
+
+Vaultはsoft deleteをサポートしています。
+
+#### Soft delete
+
+```sh
+vault kv delete secret/test
+
+versionを指定するには、`-versions` flagを利用します。
+
+```sh
+vault kv delete -versions=3 secret/test
+```
+
+`vault kv delete`を実行すると、当該versionをdelete状態とし、`deletion_time` timestampを付与します。
+
+deleteを取り消すには`undelete`コマンドを実行します。  
+
+```sh
+vault kv undelete -versions=3 secret/test
+```
+
+#### Permanently delete
+
+Storage上からsecretを削除するには`destroy`コマンドを実行します。  
+
+```sh
+vault kv destroy -versions=3 secret/test
+
+
+Secretの全てのversionを削除するには以下のコマンドを実行します。  
+
+```sh
+vault kv metadata delete secret/test
+```
 
 
 ## Policy
