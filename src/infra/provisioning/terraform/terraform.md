@@ -165,17 +165,28 @@ resource "aws_db_instance" "example" {
 
 ## State
 
-### Remote state
+### S3
 
 ```hcl
 terraform {
-  backend "xxx" {
-    property = "xxx"
+  backend "s3" {
+    bucket  = "terraform-state"
+    key     = "path/to/terrafrom.tfstate"
+    region  = "ap-northeast-1"
+    profile = "my-profile"
   }
 }
 ```
 
 通常は`main.tf`の`backend` blockに定義する
+
+### Migrate local to remote
+
+まずlocal stateから初めて、remote stateへ切り替える方法
+
+backend block書いてから、`terraform init -migrate-state`を実行する。  
+terraformがlocalからremoteへの移行を察してくれる。
+移行後は`terrafrom.tfstate`は削除できる
 
 ## 参考
 
