@@ -84,12 +84,6 @@ set -o errexit
 
 シェバンは`env`をかませるとかしたほうがいいかもしれない。
 
-### redirect
-
-```shell
-# stdout/stderrを無視する
-ping xxx > /dev/null 2>&1
-```
 
 ### Output as file
 
@@ -99,20 +93,3 @@ ping xxx > /dev/null 2>&1
 diff <(cat A.txt) <(cat B.txt)
 ```
 
-### parse args
-
-```shell
-function parse_args() {
-  while [[ "$#" -gt 0 ]]; do
-    case $1 in
-      git-push) GIT_PUSH="YES" ;;
-      *) echo "unexpected arg: $1"; exit 1 ;;
-    esac
-    shift
-  done
-}
-
-parse_args ${@+"$@"}
-```
-
-* shellの引数を処理する

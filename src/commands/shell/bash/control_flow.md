@@ -62,6 +62,8 @@ case "$var" in
 esac
 ```
 
+* `-?*)`をみたが意味を知りたい
+
 ## while
 
 whileのあとのcommandが0を返すと処理に入る
