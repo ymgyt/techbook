@@ -20,3 +20,11 @@ ps | where cpu > 20
 ```
 echo $nu.env
 ```
+
+## Redirect
+
+```sh
+echo 'Hello' out> out.text
+```
+
+* `>out` で出力先を指定する
