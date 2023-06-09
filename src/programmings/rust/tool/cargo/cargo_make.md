@@ -4,7 +4,8 @@
 * `[task.xxx]`でtaskを定義する
   * `cargo make xxx`で実行できる
 * `cargo make --list-all-steps` 定義されているtaskを出力する
-  * 自分で定義したtaskだけを表示する方法は模索中。
+  * `cargo make --list-category-steps "My Category"`でcategoryを指定
+
 
 
 ## `Makefile.toml`
@@ -76,9 +77,14 @@ workspace = false
 [config]
 # https://github.com/sagiegurari/cargo-make#disabling-workspace-support
 default_to_workspace = false
+skip_core_tasks = true
+skip_git_env_info = true
+skip_rust_env_info = true
+skip_crate_env_info = true
 ```
 
 * `default_to_workspace`: falseを設定しておくと、workspaceにMakefileを置いたときにtop levelで実行してくれる。
+* `skip_*`: Rust project以外でもろもろskipできる
 
 ## `tasks`
 
@@ -149,3 +155,44 @@ init_task = "_init"
 ```
 
 とすると名前を変えられる
+
+### subcommand
+
+`cargo make server run`のようにsubcommand likeにしたい場合。
+
+```yaml
+[tasks.top]
+private = false
+extend = "_subcmd_1"
+env = { "SUBCMD" = "top"}
+
+[tasks.top_sub]
+private = false
+extend = "_subcmd_2"
+env = { SUBCMD = "top_sub"}
+
+[tasks.top_sub_verb]
+command = "echo"
+args = [ "hello" ]
+
+[tasks._subcmd_1]
+private = true
+script = '''
+#!@duckscript
+
+cm_run_task ${SUBCMD}_${1}
+'''
+
+[tasks._subcmd_2]
+private = true
+script = '''
+#!@duckscript
+
+cm_run_task ${SUBCMD}_${2}
+'''
+```
+
+* `extend`はextendされる側のpropertyを引き継ぎつつoverrideする
+* `cargo make top sub verb`
+ * `top` -> `top_sub` -> `top_sub_verb`
+

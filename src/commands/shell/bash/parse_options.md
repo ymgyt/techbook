@@ -24,6 +24,11 @@ done
 
 ```
 
+## Memo
+
+`getops`,`getopt`それぞれ問題を抱えている
+
+
 ## 参考
 
 https://qiita.com/ko1nksm/items/7d37852b9fc581b1266e

@@ -12,6 +12,14 @@ nix shell github:edolstra/dwarffs --command dwarffs --version
 nix shell github:edolstra/dwarffs/cd7955af31698c571c30b7a0f78e59fd624d0229 ...
 ```
 
+## search
+
+packageの検索
+
+```sh
+nix search nixpkgs rustup --exclude gui
+```
+
 ## registry
 
 ```sh
