@@ -41,3 +41,11 @@ stringの中で変数参照するやつ
 ```
 echo $nu.env
 ```
+
+## Redirect
+
+```sh
+echo 'Hello' out> out.text
+```
+
+* `>out` で出力先を指定する

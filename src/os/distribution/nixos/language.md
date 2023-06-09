@@ -197,6 +197,20 @@ in f 1
 pathのnix fileを評価して返す。  
 directoryの場合は`default.nix`を探す
 
+```nix
+imports = [
+  a.nix
+  b.nix
+];
+```
+
+ここで  
+`a.nix`が`foo.list = [1 2 3]`
+`b.nix`が`foo.list = [4 5 6]`  
+を返した場合、importsは`foo.list = [1 2 3 4 5 6]`のように同じattributeをmergeしてくれる
+
+
+
 
 ## `pkgs.lib`
 

@@ -33,6 +33,16 @@ experimental-features = nix-command flakes
 }
 ```
 
+## `flake.nix`
+
+```nix
+
+
+```
+
+* inputsはdependenciesを宣言する
+  * pullされbuildされてoutputの関数の引数に渡される
+
 
 ## Project usage
 
