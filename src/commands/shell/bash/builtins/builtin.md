@@ -6,9 +6,12 @@ bashのbuildin
 
 ```sh
 command time xxx
+
+command -v hello
 ```
 
 * shellのfunctionを無視してbuiltinか`PATH`からのbinaryのみを実行する
+* `-v` optionをつけるとwhichと同じように実行path表示してくれる
 
 ## type
 
