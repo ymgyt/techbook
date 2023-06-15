@@ -66,8 +66,6 @@ serde = ["libx/serde"]
 * `crate/feature`のように書くとdependencyのfeatureを有効にできる
 
 
-
-
 ## workspace
 
 ```toml
@@ -77,7 +75,22 @@ members = [
     "xxx",
     "yyy",
 ]
+
+[workspace.dependencies]
+tracing = "1.0"
 ```
+
+```toml
+# member/xxx/Cargo.toml
+[dependencies]
+tracing = { workspace = true, features = ["hoge"] }
+
+[build-dependencies]
+baz.workspace = true
+```
+
+* `[workspace.dependencies]`にworkspace共通の依存を宣言できる
+  * member側は`workspace = true`を指定する
 
 ## Specifying dependencies version
 
