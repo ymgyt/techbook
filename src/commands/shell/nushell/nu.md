@@ -1,9 +1,5 @@
 # Nushell
 
-## Install
-
-cloneしてきて、cargo build
-
 ## Alias
 
 

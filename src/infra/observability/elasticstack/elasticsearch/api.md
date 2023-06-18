@@ -36,6 +36,12 @@
 GET /_cat/indices[?format=json]
 ```
 
+### Indexの削除
+
+```text
+DELETE /target-index
+```
+
 ## Document
 
 ### Create

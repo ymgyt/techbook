@@ -8,6 +8,9 @@ ssh -o IdentitiesOnly=yes
 
 # 利用するssh configを指定
 ssh -F path/to/config 
+
+# portforward等のために接続だけしてコマンドを実行しない
+ssh -N me@host
 ```
 
 ## Test Connection
@@ -44,6 +47,7 @@ Host xxx-aaa
   Port 22
   ProxyJump bastion
   LocalForward 10080 localhost:80
+  LocalForward 10090 private.domain:8080
 
 HOST *
   User ferris
@@ -57,3 +61,6 @@ HOST *
 * `ProxyJump`でbastionを経由できる
 * `LocalForward`を指定するとssh接続がされている間,local:10080と接続先の80が接続されている状態になる
   * 接続先で127.0.0.1でbindしているhttp serverにlocalからcurlできたりできる
+  * 第二引数はsshされたserverからみた先なので注意
+  * 第二引数にssh先のserverからしかアクセスできないprivateなserverを指定するケースもある
+  * 複数書ける

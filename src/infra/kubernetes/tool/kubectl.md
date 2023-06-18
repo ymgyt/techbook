@@ -192,9 +192,12 @@ kubectl uncordon <node name>
 * `uncordon`でnodeを再びschedule対象にする
   * `cordon`は刑事事件とかでよくみる黄色いテープをはって封鎖する的な意味
 
-  ## `rollout`
+## `rollout`
 
-  ```shell
-  pod/deploymentを再起動する
-  kubectl rollout restart deployment/xxx
-  ```
+```shell
+# pod/deploymentを再起動する
+kubectl rollout restart deployment/xxx
+
+# statefulsetのpodを再起動する
+kubectl rollout restart statefulset foo
+```
