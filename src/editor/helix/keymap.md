@@ -128,3 +128,8 @@ https://docs.helix-editor.com/keymap.html
 
 * Ctrl-c
 
+## Set
+
+一時的に設定を変えたいとき 
+
+* `:set whitespace.render all`: whitespace等を特別な文字で描画する
