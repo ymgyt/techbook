@@ -1,5 +1,6 @@
 # PodPriorityClass
 
+PriorityClassを高く設定しておくことで、priorityの低いpodをnodeから退避させて配置してくる。
 https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/priority-class-v1/
 
 ## Mental model

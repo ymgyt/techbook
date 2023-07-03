@@ -204,6 +204,18 @@ spec:
 
 * `spec.securityContext.runAsUser`でuser idを指定できる。0ならrootになる。
 
+## Disruptions
+
+なんらかのPodの機能を停止させる要因の抽象化。  
+VoluntaryとInvoluntary disruptionsに分類できる。  
+
+* Voluntary disruptions
+  * delete pod/deployment
+  * draining node
+
+* Involuntary disruptions
+  * hardware failure
+  * node pressure eviction
 
 ## Recipe
 
