@@ -41,4 +41,3 @@ Heapとも。
 rustでは`std::collections::BinaryHeap`  
 実装では配列を使って表現でき、木はあくまで論理上のデータ構造。
 
-
