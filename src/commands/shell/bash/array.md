@@ -45,6 +45,8 @@ echo ${ary[@]}
 
 ary=(xxx yyy "${ary[@]}")
 echo ${ary[@]}
+
+ary+=(xxx)
 ```
 
 # Associative array
@@ -56,6 +58,9 @@ declare -A ary=(
   [key_1]=value_1
   [key_2]=value_2
 )
+
+# Insert
+ary[key_3]="value_3"
 
 for key in ${!ary[@]}; do 
   local value=${ary[${key}]}
