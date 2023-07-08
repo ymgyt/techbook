@@ -54,6 +54,9 @@ HOST *
   IdentityFile path/to/key/file
   ForwardAgent yes
   StrictHostKeyChecking no
+  ServerAliveInterval 60
+  ConnectTimeout 10
+
 ```
 
 * 各entryは一致すると適用される。当該設定がなければ適応される。
@@ -64,3 +67,5 @@ HOST *
   * 第二引数はsshされたserverからみた先なので注意
   * 第二引数にssh先のserverからしかアクセスできないprivateなserverを指定するケースもある
   * 複数書ける
+* `ServerAliveInterval`: clientがserver(sshd)にnull packetを送るinterval。結果的にconnectionが接続されたままになる。
+* `ConnectTimeout`: 接続時のtimeout。(seconds)

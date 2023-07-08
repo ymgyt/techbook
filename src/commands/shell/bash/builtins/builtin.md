@@ -47,3 +47,48 @@ echo ${input}
 read -sn1 -p "Press any key to exit"
 echo "Exit"
 ```
+
+
+## set
+
+```shell
+# positional parameterのset
+set -- 1 2 3
+```
+
+* `set -o errexit`のようにoption指定もできるので、`--`を渡して明示的にpositionalであることを示す
+
+## shift
+
+```shell
+# positional parameterを一つ破棄する
+shift
+
+# 破棄する数を指定する
+shift 2
+
+# 全てを破棄する
+shift $#
+```
+
+## trap
+
+signal handlingを設定できる
+
+```sh
+
+trap '
+    echo "Handle signal"
+    exit 1
+' SIGINT
+```
+
+* `trap '<commands>' <signals>`: signalの指定方法はkill -lと同じ。
+
+### 疑似signal
+
+OSのsignalとは別にbashの仕組みとして、trapに指定できるsignal
+
+* `EXIT`: script終了時
+* `ERR`: コマンドの終了ステータスが0以外
+* `DEBUG`: コマンドが実行された 

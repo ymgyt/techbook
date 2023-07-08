@@ -41,3 +41,17 @@ ping hello > /dev/null 2>&1
 ```
 
 この場合、なにも出力されなくなる
+
+## Command List
+
+* 単純コマンド
+  * `ls -l`のような実行コマンドと引数のこと
+* 複合コマンド
+  * if,case,for,while, sub shell, group command, shell functionのこと
+  * 複合コマンド一つでcommandとして扱われるので、whileにredirectするみたいな発想になる
+
+* command
+  * 単純コマンドと複合コマンドのこと
+* pipeline
+  * command | command
+  * 終了ステータスはpipelineの最後のcommand f

@@ -40,3 +40,15 @@ fn test() {
     v.resize(1024,0);
 }
 ```
+
+## Uniqueにする
+
+```rust
+fn test() {
+  let mut buf = vec![1,2,1];
+  buf.sort_unstable();
+  buf.dedup();
+}
+```
+
+* sortとdedupの合せ技でuniqueにできる

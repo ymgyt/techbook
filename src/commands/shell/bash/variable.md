@@ -3,7 +3,9 @@
 ## Substitution
 
 * `${VAR:? environment variable VAR required}`: ない場合にエラーだせる
-* `${VAR-default}`: `VAR`がない場合に`default`を返せる
+* `${VAR:-default}`: `VAR`がない場合に`default`を返せる
+* `${VAR:=defalt}`: `VAR`が未設定or空の場合に`default`を設定する(変数にsetする)
+* `${VAR:+var}`: `VAR`が未定義or空でない場合は`var`を返す。
 
 ## `$_`
 
