@@ -41,3 +41,32 @@ Heapとも。
 rustでは`std::collections::BinaryHeap`  
 実装では配列を使って表現でき、木はあくまで論理上のデータ構造。
 
+```rust
+#[derive(PartialEq, Eq)]
+struct Move {
+    to: usize,
+    cost: usize,
+}
+
+impl Ord for Move {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.cost.cmp(&other.cost)
+    }
+}
+
+impl PartialOrd for Move {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cost.cmp(&other.cost))
+    }
+}
+
+fn main() {
+  let mut queue = std::collections::BinaryHeap::new();
+
+  queue.push(std::cmp::Reverse(Move { to: 1, cost: 0}));
+}
+```
+
+* `Ord`を実装すればstructでも要素にできる
+* Defaultでは最大値が`pop()`で返るので、`Reverse`でwrapして最小値にできる
+
