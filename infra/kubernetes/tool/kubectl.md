@@ -201,3 +201,14 @@ kubectl rollout restart deployment/xxx
 # statefulsetのpodを再起動する
 kubectl rollout restart statefulset foo
 ```
+
+## `diff`
+
+適用するmanifestと現在の状態とのdiffをとれる。  
+このmanifestを適用すると何が変わるかを知りたい時に便利。
+
+```shell
+kubectl diff -f deployment.yaml
+
+kustoize build path/to/overlay | kubectl diff -f -
+```

@@ -41,7 +41,14 @@ echo $nu.env
 ## Redirect
 
 ```sh
-echo 'Hello' out> out.text
+# Stdout
+echo "Hello" out> out.text
+
+# Stderr
+echo "Warn" err> err.text
+
+# Both
+echo "Hello" out+err > log.log
 ```
 
 * `>out` で出力先を指定する
