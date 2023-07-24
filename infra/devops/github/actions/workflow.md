@@ -9,6 +9,9 @@ on: [push]
 # 全てのjobから参照できる
 env:
   ENV_KEY: ENV_VALUE
+
+permissions:
+  contents: write
   
 jobs:
   check-bats-version:
@@ -27,10 +30,9 @@ jobs:
     * workflowのtriggerを決める
 * `jobs`
     * defaultでは各jobは並列に実行される
-* `runs-on`
-    * jobをどのosで実行するか決める。virtual machineの指定。
-* `uses`
-    * actionの実行keyword
+* `permissions`
+  * 実行されるjobに権限を付与する
+
 
 ## `on`
 
@@ -90,6 +92,19 @@ on:
 ```
 
 * cron tab方式で指定する
+
+## `permissions`
+
+* Jobごとに`GITHUB_TOKEN`が生成されている。  
+* Jobの中でGithub APIを呼ぶ場合は対応する権限の付与が必要になる
+  * `contents: write`: Releaseの作成に必要だった
+
+```yaml
+permissions:
+  # Releaseの作成に必要
+  contents: write
+
+```
 
 ## `jobs.<job_id>.runs-on`
 
