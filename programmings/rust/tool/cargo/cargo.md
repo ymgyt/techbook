@@ -81,7 +81,7 @@ file ./target/x86_64-unknown-linux-musl/debug/binname
 * defaultでは`dev`,`release`,`test`,`bench`がある。
 * `Cargo.toml`で指定できる
 
-```toml```
+```toml
 [profile.dev]
 opt-level = 1
 overflow-checks = false
@@ -109,4 +109,11 @@ cargo publish --package member
   * localではpathが利用される
   * cargo publish時にはversionが利用される
   * 従って、依存先が先にcrates.ioにpublishされていなければならない
+
+## Environment variables
+
+cargoが用意してくれる環境変数
+
+* `OUT_DIR` cargo build時の出力先
+  * tonic等のprotobuf -> rust code生成で参照されていたりする
 
