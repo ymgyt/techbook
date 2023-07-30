@@ -35,6 +35,14 @@ PUT _template/my_template
   * `order`が低い順に適用され、`order`が高い設定で上書きされる
   * `index_patterns: "*"`とするとdefault設定が定義できる感じ
 
+## data stream
+
+* aliasのようにclientからstreamにdataを書き込むと対応するindexに書き込まれる
+* aliasと違うのは、time serise data(append only, no update)に適している
+* rolloutという書き込まれるindexを置き換える概念がある
+  * sizeや時間で指定できる
+  * rolloutすると、別のphaseに移行する
+
 ## `docker-compose`
 
 ```yaml
