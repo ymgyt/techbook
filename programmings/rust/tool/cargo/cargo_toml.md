@@ -138,6 +138,24 @@ use alias::module::X; // => resolved to org::module::X
 
 * `org` crateをソースコード中では`alias`として利用できる。
 
+
+### git
+
+crates.ioではなくgithub等を参照する
+
+```toml
+[dependencies]
+foo = { git = "https://github.com/ymgyt/foo.git", branch = "main", version = "1.0" }
+
+# Workspace member
+foo-member = { git ="https://github.com/ymgyt/foo.git", branch = "main", version = "1.0" }
+```
+
+* workspace memberのcrateでも指定するのは、gitのrepositoryでよい
+  * `git = "https://github.com/ymgyt/foo/foo-member"`のようにしなくて良い(しても解決されない)
+  * cargoが勝手に探してくれると思われる
+
+
 ## Patch
 
 依存crateを一時的にlocalに向けたい時
