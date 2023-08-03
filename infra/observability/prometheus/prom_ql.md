@@ -15,4 +15,19 @@ xxx{job="yyy"}
 
 # 落ちているjobをみつける
 up == 0
+
+# 全てのtime seriesを返す
+foo_total
+
+# labelで絞る
+foo_total{key=value}            # equal
+foo_total{key!=value}           # not equal
+foo_total{key=~"value.+"}       # regex match
+foo_total{key!~"value.+"}       # regex not match
+
+foo_total{key_1=value1, key_2=value_2} # and
+foo_total{key=~"v_1|v_2"}              # orはregexで表現できる
+
+# 複数のmetricsを取得
+{__name__=~"(foo|bar)_total"}
 ```

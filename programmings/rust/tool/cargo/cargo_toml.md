@@ -155,6 +155,16 @@ foo-member = { git ="https://github.com/ymgyt/foo.git", branch = "main", version
   * `git = "https://github.com/ymgyt/foo/foo-member"`のようにしなくて良い(しても解決されない)
   * cargoが勝手に探してくれると思われる
 
+### conditional dependency
+
+```toml
+[target.'cfg(not(target_os = "windows"))'.dev-dependencies]
+# Does not supported in windows
+pprof = "1.0"
+```
+
+* `target.cfg().dependencies`でdependencyの条件を表現できる
+
 
 ## Patch
 
