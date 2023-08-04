@@ -124,6 +124,16 @@ resource "azurerm_resource_group" "rg" {
 }
 ```
 
+### Data source
+
+Terrafromの外の世界から情報を取得して、terraformで利用できるようにする手段。  
+readしか実装していない。
+
+#### importとの違い
+
+* dataはdestroyしても削除されない
+* terraformの外でimportしたresourceを変更すると、apply時にhclの状態に戻そうとする
+
 ## Versionの指定
 
 

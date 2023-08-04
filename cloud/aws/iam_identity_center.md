@@ -18,4 +18,10 @@ Policyを複数割り当てる存在。
 
 ```sh
 aws configure sso
+SSO session name (Recommended): ymgyt-sso
+SSO start URL [None]: https://foo.awsapps.com/start#/
+SSO region [None]: ap-northeast-1
+SSO registration scopes [sso:account:access]:
 ```
+
+これを実施すると`~/.aws/config`に指定したprofileが追加される
