@@ -10,15 +10,53 @@
 ```hcl
 module "vault_dev" {
   source = "../../modules/vault"
+
+  input_1 = "xxx"
+  input_2 = 100
 }
 ```
 
 * `main.tf`等でmodule resourceで参照する
 
+## Moduleの定義
 
-## Output
+1. module用のdirectoryを作成する
+2. `main.tf`, `variables.tf`, `outputs.tf`を作成する
 
-module利用側が参照できる値。
+### Providerの定義
+
+moduleで利用するproviderを定義する
+
+```hcl
+terraform {
+  required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "~> 5.25"
+    }
+  }
+}
+```
+
+例えば、moduleでgithub resourceを作成する場合
+
+### Moduleのinput
+
+`variables.tf`に以下のようにmoduleに必要なinputを定義する
+
+```hcl
+variable "name" {
+  type        = string
+  description = "name"
+  nullable    = false
+}
+```
+
+
+## Moduleのoutput
+
+moduleの中で作成したresourceは利用側から見えない。
+みせたい値はあらかじめmodule側がoutputとして明示的に定義しておく必要がある。
 
 module側
 
@@ -27,9 +65,6 @@ output "my_output" {
   value = resource.xxx.yyy.id
 }
 ```
-
-* `output`を定義する
-* 定義するfileは`output.tf`が一般的
 
 参照側
 
