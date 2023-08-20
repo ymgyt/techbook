@@ -1,5 +1,11 @@
 # Nushell
 
+## Install
+
+```sh
+cargo install nu
+```
+
 ## Alias
 
 
