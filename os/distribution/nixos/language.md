@@ -152,6 +152,9 @@ string
 ## Filesystem path
 
 * `./.`はnix file directory
+  * `/`の後にspaceがないとfile pathと判断される
+  * `6/3`はfile path, `6/ 3`はdivで2になる
+  * `./.`はspaceが続かないのでfile pathとして評価される
 * `<nixpkgs>`
   * `/nix/var/nix/profiles/per-user/root/channels/nixpkgs`
 

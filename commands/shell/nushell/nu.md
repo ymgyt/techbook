@@ -38,6 +38,17 @@ stringの中で変数参照するやつ
 echo $nu.env
 ```
 
+## Command substitution
+
+```sh
+nix-store --query (which sqlite3 | get path)
+# こうもかける
+nix-store -q ((which sqlite3).path)
+```
+
+* `()`の評価結果を利用できる
+  * 構造化データをstringにする処理忘れがち
+
 ## Redirect
 
 ```sh
