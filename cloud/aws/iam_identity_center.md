@@ -25,3 +25,24 @@ SSO registration scopes [sso:account:access]:
 ```
 
 これを実施すると`~/.aws/config`に指定したprofileが追加される
+
+以下のようにprofileとssoの情報を記載する
+
+```text
+[profile my-profile]
+sso_session = foo-sso
+sso_account_id = <TARGET_AWS_ACCOUNT_ID>
+sso_role_name = <ROLE_TO_ASSUME>
+region = ap-northeast-1
+
+[sso-session foo-sso]
+sso_start_url = https://foo.awsapps.com/start#/
+sso_region = ap-northeast-1
+sso_registration_scopes = sso:account:access
+```
+
+
+利用前にloginする
+```
+aws sso login --profile my-profile
+`

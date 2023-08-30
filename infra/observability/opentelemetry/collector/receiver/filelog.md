@@ -25,7 +25,7 @@ receivers:
       attr_test: attr_test_v1
     resource:
       resource_test: resource_test_v1
-    operators: {}
+    operators: []
 ```
 
 * `include`: 監視対象のfile
@@ -71,3 +71,68 @@ operatorのchainを設定して、log pipelineを作るのがfilelogの思想。
 実装としてはstanzaが使われており[doc](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/stanza/docs)がある。
 
 * [kubernetesのexample](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.69.0/examples/kubernetes/otel-collector-config.yml)
+
+containerdのlog fileを処理する例。
+log fileは`/var/log/pods/*/*/*.log`に出力される想定。
+containerdは以下のようなlog format
+`# 2023-08-23T01:39:01.052002389Z stdout F {"key": "value" }`
+
+```yaml
+operators:
+
+- type: router
+  id: get_format
+  routes:
+  #Zでcontainerdと判定する
+  - output: parser-containerd
+    expr: 'body matches "^[^ Z]+Z"'
+
+# (?P<xxx>)でregex matchさせるとattributes.xxxに格納される
+- type: regex_parser
+  id: parser-containerd
+  regex: '^(?P<time>[^ ^Z]+Z) (?P<stream>stdout|stderr) (?P<logtag>[^ ]*) ?(?P<log>.*)$'
+  output: extract_metadata_from_filepath
+  # timestampはtoplevelなので、特別にparseする
+  timestamp:
+    parse_from: attributes.time
+    layout: '%Y-%m-%dT%H:%M:%S.%LZ'
+
+# filepathから情報を抽出する
+- type: regex_parser
+  id: extract_metadata_from_filepath
+  regex: '^.*\/(?P<namespace>[^_]+)_(?P<pod_name>[^_]+)_(?P<uid>[a-f0-9\-]{36})\/(?P<container_name>[^\._]+)\/(?P<restart_count>\d+)\.log$'
+  parse_from: attributes["log.file.path"]
+
+# Semantic conventions 対応
+- type: move
+  from: attributes.container_name
+  to: resource["k8s.container.name"]
+- type: move
+  from: attributes.restart_count
+  to: resource["k8s.container.restart_count"]
+- type: move
+  from: attributes.namespace
+  to: resource["k8s.namespace.name"]
+- type: move
+  from: attributes.pod_name
+  to: resource["k8s.pod.name"]
+- type: move
+  from: attributes.uid
+  to: resource["k8s.pod.uid"]
+- type: move
+  from: attributes.stream
+  to: resource["log.iostream"]
+
+# Bodyとattributesに情報が重複しているので上書きする
+- type: move
+  from: attributes.log
+  to: body
+
+# parser-containerdでparseしているのでattributeからは除外する
+- type: remove
+  field: attributes.time
+
+# 使わないので取り除く
+- type: remove
+  field: attributes.logtag
+```
