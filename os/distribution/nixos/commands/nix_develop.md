@@ -1,6 +1,5 @@
 # nix develop
 
-
 ## Memo
 
 `nix develop "github:DeterminatesSystems/zero-to-nix#exaple"`

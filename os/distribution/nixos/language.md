@@ -53,6 +53,19 @@ attrset.a.b.c
 # evaluated to { a = { b = { c = 1; }; }; }
 ```
 
+### `//`
+
+```nix
+a = { x = "x"; y = "y"; }
+b = { x = "X"; z = "Z"; }
+
+a // b
+# => { x = "X"; y = "y"; z = "Z"; }
+```
+
+* `//`はattribute setをmergeする
+  * keyがconflictしたら右側が優先される
+
 ### Recursive
 
 ```nix
@@ -103,7 +116,7 @@ with a; [ x y z ]
 ## `inherit ...`
 
 ```nix
-et
+let
   x = 1;
   y = 2;
 in

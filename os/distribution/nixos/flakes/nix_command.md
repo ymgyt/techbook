@@ -62,14 +62,3 @@ nix flake show github:edlstra/dwarffs
 
 `nix flake update`するとlocalの`flack.lock`を最新にしてくれる
 
-## profile
-
-```sh
-nix profile instal github:helix-editor/helix/23.05
-```
-
-localに何かをinstallする際はこれ
-
-## store
-
-`nix store gc`

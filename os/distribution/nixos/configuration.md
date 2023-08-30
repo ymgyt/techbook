@@ -4,6 +4,8 @@
 
 data sourceはnix-channelに頼っているのでreproducibilityがflakesに比べて落ちる
 
+* `nixos-help`でmanualみれる
+
 `sudo nixos-rebuild switch`
 
 ### Options

@@ -57,3 +57,10 @@ git add flake.nix
 
 
 ```
+
+## Classic Nix commandとの対応
+
+* `nix-env`: `nix profile`
+* `nix-shell`: `nix develop`, `nix shell`, `nix run`に分割
+* `nix-build`: `nix build`
+* `nix-collect-garbage`: `nix store gc --debug`
