@@ -6,3 +6,4 @@
 * management event, data eventが対象
 * AWS以外とも統合できるらしい
 * [Presto](https://prestodb.io/docs/current/functions.html)のQuery使える
+

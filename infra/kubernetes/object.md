@@ -82,6 +82,7 @@ metadata:
 * finalizerをもつobjectをdelete(kubectl delete)すると
   * `metadata.delectionTimestamp`が付与される
 * `finalizers` listを空にするのはcontrollerの役目。
+* [公式doc](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#finalizers)
 
 
 ### Patch
