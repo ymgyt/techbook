@@ -20,6 +20,7 @@ rustup show
 
 # nightlyのinstall
 rustup install nightly
+rustup toolchain install nightly
 
 
 # 最新版にupdate

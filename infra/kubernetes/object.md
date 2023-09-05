@@ -60,6 +60,12 @@ metadata:
     app.kubernetes.io/created-by: controller-manager
 ```
 
+## Owners and Dependents
+
+ReplicaSetとPodのようにResource間の関係性を表現する仕組み。
+
+* 子(Dependent)は`metadata.ownerReferences`に親をもつ
+  * Kubernetes側で自動で、`ownerReferences.blockOwnerDeletion: true`が子側にsetされ、親の削除を防止する
 
 ## Deletion
 
