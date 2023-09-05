@@ -15,6 +15,11 @@ use clap::{Parser, Subcommand, Args};
 pub struct CloudOpsApp {
     #[command(subcommand)]
     command: Command,
+
+    /// GlobalはOption<T>である必要がある
+    /// ただし、default値を指定することもできる
+    #[clap(long, global = true, default_value_t = "foo".into())]
+    global_a: String,
 }
 
 #[derive(Subcommand, Debug)]
@@ -60,7 +65,7 @@ pub enum S3Subcommand {
 pub struct TracingOptions {
     /// Enable color(ansi) logging.
     /// --ansi=false のように書ける
-    #[arg(
+    #[clap(
         long,
         default_value_t = true,
         action = clap::ArgAction::Set,
@@ -71,6 +76,14 @@ pub struct TracingOptions {
     /// Show tracing callsite file and line number.
     #[arg(long, default_value_t = false)]
     pub source_code: bool,
+
+    /// Parserを指定することもできる
+    #[clap(value_parser = parse_region, long)]
+    pub region: aws::Region
+}
+
+fn parse_region(region: &str) -> Result<Region, Infallible> {
+    Ok(Region::new(region.to_owned()))
 }
 
 impl CloudOpsApp {
@@ -93,3 +106,24 @@ impl CloudOpsApp {
 
 * `env`: `#[clap(env = XXX)]`に必要
 * `wrap_help`: terminalの長さを考慮してhelp表示してくれる。基本有効で良い?
+
+## Enum
+
+```rust
+#[derive(Copy, Clone, PartialEq, Eq, Debug, clap::ValueEnum)]
+enum Format {
+    Csv,
+    Text,
+    Debug,
+}
+
+#[derive(clap::Args, Debug)]
+pub struct QueryCommand {
+    /// Output format
+    #[clap(value_enum, long, default_value_t = Format::Debug)]
+    format: Format,
+}
+```
+
+1. `enum`に`clap::ValueEnum`をderiveする
+1. structのfieldに`[clap(value_enum)]を付与する
