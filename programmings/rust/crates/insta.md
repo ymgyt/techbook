@@ -29,8 +29,32 @@ cargo insta review
 * 新規追加かsnapshotと出力結果が異なる場合、snapshot候補のfileが生成される
   * `.new`拡張子をもつ
 * snapshot候補をsnapshotに採用するために`cargo insta review`が必要
+* `cargo insta test --unreferenced=delete`でつかわれていないsnapshotを削除
+  * `auto`だとCIでは失敗、localでは削除にしてくれる
 
 ## Assertion
+
+### Settings
+
+```rust
+insta::with_settings!({sort_maps => true}, {
+    // run snapshot test here
+    insta::assert_debug_snapshot!("foo");
+});
+```
+
+* `set_sort_maps(true)`と`sort_maps => true`は同じらしい
+* redactionも設定できるらしいが調べきれていない
+
+以下のコードと同じ
+
+```rust
+let mut settings = Settings::clone_current();
+settings.set_sort_maps(true);
+settings.bind(|| {
+    // run snapshot test here
+});
+```
 
 ### `Vec`のorderを無視したい
 
