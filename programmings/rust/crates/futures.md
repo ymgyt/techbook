@@ -1,5 +1,49 @@
 # futures
 
+## Re-export
+
+```rust
+pub use futures_core::future::Future;
+pub use futures_core::future::TryFuture;
+pub use futures_util::future::FutureExt;
+pub use futures_util::future::TryFutureExt;
+pub use futures_core::stream::Stream;
+pub use futures_core::stream::TryStream;
+pub use futures_util::stream::StreamExt;
+pub use futures_util::stream::TryStreamExt;
+pub use futures_sink::Sink;
+pub use futures_util::sink::SinkExt;
+pub use futures_io::AsyncBufRead;
+pub use futures_io::AsyncRead;
+pub use futures_io::AsyncSeek;
+pub use futures_io::AsyncWrite;
+pub use futures_util::AsyncBufReadExt;
+pub use futures_util::AsyncReadExt;
+pub use futures_util::AsyncSeekExt;
+pub use futures_util::AsyncWriteExt;
+```
+
+## `FuturesExt`
+
+* `left_future()`
+  * `futures::Either`でwrapしてくれる
+  * if等の分岐で違うfutureを実行したい場合に使える
+
+```rust
+use futures::future::FutureExt;
+
+let x = 6;
+let future = if x < 10 {
+    async { true }.left_future()
+} else {
+    async { false }.right_future()
+};
+
+assert_eq!(future.await, true);
+```
+
+* `futures`がいくつかの`futurees_`をre-exportしている
+
 ## Stream
 
 pinどめ
@@ -19,11 +63,12 @@ async fn foo<S>(s: S)
 
 * `Stream::next()`を行うにはpinどめする必要がある。
   * pin projectとstd pinどちらがよいかわかっていない
+* 困ったら`Stream::boxed()`でheapにpin止めできる
 
 
-  ### `unfold()`
+### `unfold()`
 
-  状態を更新しながら、Itemを返したい
+状態を更新しながら、Itemを返したい
 
 ```rust
 use futures::stream::{self, StreamExt};
@@ -43,5 +88,18 @@ assert_eq!(result, vec![0, 2, 4]);
 ```
 
 * 処理の中で、stateの更新とItemとして返す値を計算する
+  * 関数としてはstateもreturnするが、次のpollで引数でもらえる
 * Noneを返すとStreamは終了
 * futuresの世界をstreamの世界にしたい場合に便利
+
+### `StreamExt`
+
+* `inspect`: streamのitemを途中でみたくなったら使える
+  * `Iterator::inspect()`のstream版
+  * TryStreamに`inspect_ok()`等の亜種がある
+
+* `take_until()`: 引数にsignal handlingやshutdownのfutureを渡せる
+  * stopping futureを評価してから、元streamがpollされるのか、順番わかっていないので調べたい。
+
+* `fuse()`: 通常、`Stream::poll_next()`が`None`を返したら、次に`poll_next()`を読んではいけない。  
+  * `None`を返しても繰り返し呼べる`Stream`はfusedと呼ばれ、このmethodでそのsemanticsを表現できる
