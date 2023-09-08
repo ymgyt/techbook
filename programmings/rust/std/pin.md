@@ -40,3 +40,9 @@ let mut x = &mut x;
   * implementing type can be removed safely from a `Pin`
   * self referenceを含んでいない型はmoveしても安全なので、`Pin`の保証が必要ない
 
+
+## Projection
+
+* `Pin<&mut Self>`から`Pin<&mut Field>`をえること
+  * `Future`をfieldにもちwrapしている場合、poll時に必要になる
+* Dropの実装等、はまりどころがあるので`pin_project`を利用する

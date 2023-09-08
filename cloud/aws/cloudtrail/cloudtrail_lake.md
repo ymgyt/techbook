@@ -8,6 +8,17 @@
 * [Presto](https://prestodb.io/docs/current/functions.html)のQuery使える
 * Trailとは別なので、Datastore独立で有効にできる
 
+## 料金
+
+* 取り込みとstorageに料金が発生する
+  * dataは非圧縮が算定対象?
+  * 非圧縮のサイズはS3のlog sizeを10倍する
+* Queryはscanされたdataに基づく
+  * `eventTime`を指定するようにする
+  * EventSelectorで除外する
+    * KMSの`Encrypt`, `Decrypt`等
+
+
 ## 参考
 
 * EventStore
