@@ -94,10 +94,10 @@ resource "github_team_repository" "developer_example" {
 }
 ```
 
-* `permission`: teamに付与するrepositoryへの権限
-  * `read`: Recommended for non-code contributors who want to view or discuss your project
-  * `triage`: Recommended for contributors who need to proactively manage issues, discussions, and pull requests without write access
-  * `write`: Recommended for contributors who actively push to your project
-  * `maintain`: Recommended for project managers who need to manage the repository without access to sensitive or destructive actions
-  * `admin`: Recommended for people who need full access to the project, including sensitive and destructive actions like managing security or deleting a repository
+* `permission`: teamに付与するrepositoryへの権限(はgithub側の対応と思われるやつ)
+  * `read(pull)`: Recommended for non-code contributors who want to view or discuss your project
+  * `triage(triage)`: Recommended for contributors who need to proactively manage issues, discussions, and pull requests without write access
+  * `write(push)`: Recommended for contributors who actively push to your project
+  * `maintain(maintain)`: Recommended for project managers who need to manage the repository without access to sensitive or destructive actions
+  * `admin(admin)`: Recommended for people who need full access to the project, including sensitive and destructive actions like managing security or deleting a repository
   * [より詳細な権限テーブル](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/repository-roles-for-an-organization#permissions-for-each-role)
