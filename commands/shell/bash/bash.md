@@ -55,3 +55,33 @@ ping hello > /dev/null 2>&1
 * pipeline
   * command | command
   * 終了ステータスはpipelineの最後のcommand f
+
+## 終了ステータス(exit code)
+
+### localの罠
+
+```sh
+function foo() {
+  local bar=$(exit 1)
+  local exit_status=$?
+  echo ${exit_status}
+}
+
+foo # => 0
+```
+
+should
+
+```sh
+function foo() {
+  local bar=""
+  bar=$(exit 1)
+  local exit_status=$?
+  echo ${exit_status}
+}
+
+foo # 1
+```
+
+* `local foo=$(cmd)`とするとcmdの終了ステータスに関わりなく、`$?`は0になる
+  * `local`が内部的にはcmdで成功扱いされる模様

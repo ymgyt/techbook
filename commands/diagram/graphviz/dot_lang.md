@@ -130,3 +130,4 @@ labelが`<>`でencoloseされるとhtml likeになる
 
 * [FLow char tutorial](https://sketchviz.com/flowcharts-in-graphviz)
 * [Qiitaの網羅的な記事](https://qiita.com/rubytomato@github/items/51779135bc4b77c8c20d)
+* [これも研究したい](https://docs.deistercloud.com/content/Axional%20development%20libraries.20/Server%20side%20javascript.50/AX%20Library.10/graph/Grahviz%20examples.2.xml?embedded=true)
