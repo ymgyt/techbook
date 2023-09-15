@@ -31,10 +31,10 @@ enum Command {
 #[derive(Args, Debug)]
 #[command(arg_required_else_help = true)]
 pub struct S3Command {
-    #[command(flatten)]
+    #[clap(flatten, next_help_heading = "AWS Options")]
     pub aws: AwsOptions,
 
-    #[command(subcommand)]
+    #[clap(subcommand)]
     pub command: S3Subcommand,
 }
 
@@ -80,6 +80,10 @@ pub struct TracingOptions {
     /// Parserを指定することもできる
     #[clap(value_parser = parse_region, long)]
     pub region: aws::Region
+
+    /// 30sec, 2hようなformatでDurationを指定
+    #[clap(long, value_parser = parse_duration::parse)]
+    pub duration: std::time::Duration,
 }
 
 fn parse_region(region: &str) -> Result<Region, Infallible> {

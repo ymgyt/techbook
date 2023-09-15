@@ -6,7 +6,7 @@
 
 if [ "$i" -eq 3 ]; then
   echo "3"
-elif [ "$i" -eq 5]; then
+elif [ "$i" -eq 5 ]; then
   echo "5"
 else
   echo "else"

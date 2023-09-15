@@ -84,6 +84,12 @@ defaultのeventually-consistentの場合、1RCUで8KBまでのitemを扱える�
 `expression-attribute-names`で`{"#pr": "ProductReviews"}`のように置換後の値をかける。  
 重複を排除したり、予約後との衝突を回避するために利用できる。
 
+### Conditional expressions
+
+* `PutItem`,`UpdateItem`, `DeleteItem`, `BatchWriteItem`等のapiのparameterに含めるもの。
+* 既存があればなにもしないといった、atomicな操作(確認+実行)が可能になる
+
+
 
 ## 参考
 

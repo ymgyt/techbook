@@ -39,3 +39,28 @@ fn init_tracing(opts: &cli::TracingOptions) {
         ).init();
 }
 ```
+
+`filter::Targets`の使い方
+
+* top levelにcomposeするとglobal filterになる
+* layerに`with_filter()`でcomposeするとper-layer-filterになる
+
+```rust
+fn init_tracing() {
+    use tracing_subscriber::{filter::Targets, fmt, prelude::*, Registry};
+
+    let filter: Targets = std::env::var("RUST_LOG")
+        .as_deref()
+        .unwrap_or("info")
+        .parse::<Targets>()
+        .unwrap()
+        // Disable aws sso profile warning
+        // like profile `sso-session ymgyt-sso` ignored because `sso-session ymgyt-sso` was not a valid identifier
+        .with_target("aws_config::profile::parser::normalize", Level::ERROR);
+
+    Registry::default()
+        .with(fmt::layer().pretty())
+        .with(filter)
+        .init();
+}
+```
