@@ -52,3 +52,5 @@ spec:
 ## Validation
 
 * OpenAPI v3 schemasの仕様にしたがってvalidationを付与できる
+
+* [わかりやすい](https://kubernetes.io/blog/2022/09/23/crd-validation-rules-beta/)

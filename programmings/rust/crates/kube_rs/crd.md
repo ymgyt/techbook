@@ -6,10 +6,11 @@
 use serde::{Deserialize, Serialize};
 use kube::CustomResource;
 use schemars::JsonSchema;
+use garde::Validate;
 
 /// See docs for possible properties
 /// https://docs.rs/kube/latest/kube/derive.CustomResource.html#optional-kube-attributes
-#[derive(CustomResource, Debug, PartialEq, Clone, Serialize, Deserialize, JsonSchema)]
+#[derive(CustomResource, Debug, PartialEq, Clone, Serialize, Deserialize, JsonSchema,Validate)]
 #[kube(
     // Required properties
     group = "fraim.co.jp",
@@ -22,6 +23,7 @@ use schemars::JsonSchema;
     namespaced,
 )]
 pub struct HelloSpec {
+    #[garde(range(max=100))]
     pub replicas: u32,
 }
 ```
@@ -63,3 +65,22 @@ impl ::kube::core::crd::v1::CustomResourceExt for Hello {}
     * `Hello::new(name: &str, spec: HelloSpec) -> Self`
     * `impl kube::core::Resource`
     * `impl kube::core::crd::v1::CustomResouceExt`
+
+* gardeのderiveで生える`Validate()`はkube-rs側で呼んでくれるわけではない?
+
+## Validation
+
+2種類の方法がある。  
+* 生成されるCRDのSchemaにvalidationを埋め込む(Server side)
+* deriveした`Spec`に`Validate()` methodを生やす(Client side)
+
+### Server side
+
+さらにSchemasがみているvalidate attributeを使うか、
+custom schemaで、x-kubernetesを自分で書くかにわかれる
+
+
+### Client side
+
+なにかkube-rs側がgardeと連携しているわけでない(要確認)  
+codeに`Validate()`を呼び出す処理を書かないと誰もvalidateしてくれない。

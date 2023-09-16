@@ -2,6 +2,12 @@
 
 kube-rsのruntime controller関連。
 
+## Reconciliation
+
+* reconciliationが発生した理由は意図的に`reconcile()`のsignatureに含まれていない
+  * これは特定のevnet(理由)を含めてもそれが確実にoperatorに届く保証がないから
+  * 結果的にすべての確認処理を行う必要がありこれが、idempotencyにつながる
+
 ## Subresource
 
 * controllerは関連するresourceの変更でreconcileをtriggerしたい場合は指定する必要がある

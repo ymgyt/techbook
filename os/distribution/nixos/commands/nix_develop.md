@@ -20,4 +20,6 @@ curl is /nix/store/y2905a3wsvbfla9p5g6j0bfyas8q0598-curl-7.86.0-bin/bin/curl
 ```
 nix develop "github:DeterminateSystems/zero-to-nix#example" --command git help
 nix develop "github:DeterminateSystems/zero-to-nix#example" --command curl https://example.com
+
+nix develop -c $SHELL
 ```
