@@ -4,8 +4,12 @@
 
 * `${VAR:? environment variable VAR required}`: ない場合にエラーだせる
 * `${VAR:-default}`: `VAR`がない場合に`default`を返せる
+  * `${VAR-default}`: VARがunset限定でdefaultを返す
 * `${VAR:=defalt}`: `VAR`が未設定or空の場合に`default`を設定する(変数にsetする)
 * `${VAR:+var}`: `VAR`が未定義or空でない場合は`var`を返す。
+
+* `:x` `:`がある場合はunsetと空文字(null, `""`)両対応, `:`がない場合はunset限定。
+  * 基本的には`:`をつけておけばよいが人の書いた処理だと`:`ないこともあるので読める必要はある
 
 ## `$_`
 

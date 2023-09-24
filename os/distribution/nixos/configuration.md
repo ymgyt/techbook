@@ -139,6 +139,27 @@ data sourceはnix-channelに頼っているのでreproducibilityがflakesに比�
 }
 ```
 
+## systemd
+
+```nix
+{ pkgs, telemetryd, ... }: 
+  let
+    telemetrydStore = telemetryd.packages."${pkgs.system}".telemetryd;
+  in
+{
+  systemd.services.telemetryd = {
+    enable = true;
+    wantedBy = [ "multi-user.target" ];
+    description = "Telemetryd server";
+    serviceConfig = {
+      ExecStart = "${telemetrydStore}/bin/telemetryd";
+    };
+  };
+}
+```
+
+* `telemetryd`はsystemdで管理したいpackage
+
 ### Flake
 
 `nix.settings.experimental-features = [ "nix-command" "flakes" ];`  

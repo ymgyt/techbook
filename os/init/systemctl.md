@@ -4,10 +4,21 @@
 
 ```shell
 systemctl list-units [--full] [--all]
+
+systemctl list-units --type service --state dead
 ```
 
 * `--full`: unitの正式名称を表示
 * `--all`: inactiveなunitも含める
+* `--type`: unit typeの指定(serviceとか)
+* `--state`: stateの指定
+  * `systemctl --state=help`で指定できるstateをみれる
+
+memoryではなくfileベースでみるには
+
+```sh
+systemctl list-unit-files
+```
 
 
 ## Unitのstatusを確認する
