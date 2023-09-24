@@ -32,15 +32,27 @@ data sourceはnix-channelに頼っているのでreproducibilityがflakesに比�
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking = {
+    # Host名を指定
+    hostName = "rpi4-01";
+
+    # 固定でIPを割り振りたい場合
+    interfaces.end0.ipv4.addresses = [{
+      address = "192.168.10.150";
+      prefixLength = 24;
+    }];
+    # DHCPに頼らない場合指定できる
+    defaultGateway = "192.168.100.1";
+    nameservers = [ "8.8.8.8" ];
+
+    wireless.enable = false;
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
@@ -109,15 +121,23 @@ data sourceはnix-channelに頼っているのでreproducibilityがflakesに比�
     pulse.enable = true;
   };
 
+  # SSH daemonを有効化
+  services.openssh.enable = true;
+
   users.users.ymgyt = {
     isNormalUser = true;
     description = "ymgyt";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
-    #  thunderbird
+    ];
+    # sshのauthorizedKeysを設置してくれる
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAAAAAAAA...XXXXXXXXXX"
     ];
   };
+  # sudoにpassを要求しない
+  security.sudo.wheelNeedsPassword = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -164,3 +184,52 @@ data sourceはnix-channelに頼っているのでreproducibilityがflakesに比�
 
 `nix.settings.experimental-features = [ "nix-command" "flakes" ];`  
 flakesを有効にすると`/etc/nixos/flake.nix`が優先される
+
+```nix
+{
+  description = "Deployment for my home server cluster";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = { self, nixpkgs, flake-utils, }:
+    let
+      spec = {
+        user = "ymgyt";
+        defaultGateway = "192.168.10.1";
+        nameservers = [ "8.8.8.8" ];
+      };
+    in {
+      nixosConfigurations = {
+        rpi4-01 = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = spec;
+          modules = [ ./hosts/rpi4-01.nix ];
+        };
+        rpi4-02 = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = spec;
+          modules = [ ./hosts/rpi4-02.nix ];
+        };
+      };
+
+    } // flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = import nixpkgs { inherit system; };
+      in {
+        devShells.default = pkgs.mkShell { buildInputs = [ pkgs.deploy-rs pkgs.nixfmt ]; };
+      });
+}
+```
+
+* `nixpkgs.lib.nixosSystem`
+  * `specialArgs`でmoduleに情報を渡せる
+
+```nix
+{ defaultGateway, nameservers, ... }: {
+# ...
+}
+```
+
+module側では`specialArgs`の必要なkeyを書いておくといい感じに渡してくれる。
