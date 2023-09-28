@@ -84,6 +84,10 @@ pub struct TracingOptions {
     /// 30sec, 2hようなformatでDurationを指定
     #[clap(long, value_parser = parse_duration::parse)]
     pub duration: std::time::Duration,
+
+    /// RFC3339形式のflag
+    #[clap(long, value_parser = chrono::DateTime::<chrono::FixedOffset>::parse_from_rfc3339,value_name = "TIMESTAMP")]
+    start: DateTime<FixedOffset>,
 }
 
 fn parse_region(region: &str) -> Result<Region, Infallible> {

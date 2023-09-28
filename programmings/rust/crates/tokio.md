@@ -73,6 +73,38 @@ async fn example() {
 
 * `Result<T, Elapsed>`にwrapされる
 
+### `JoinSet`
+
+同時に実行するfutureの数を制限したい場合に利用できる。
+
+```
+use tokio::time::{sleep, Duration};
+use tokio::task::JoinSet;
+
+#[tokio::main]
+async fn main() {
+    let max_concurrent = 2;
+    let ids: Vec<u64> = (1..=10).into_iter().collect();
+    let mut join_set = JoinSet::new();
+    
+    for id in ids {
+        while join_set.len() >= max_concurrent {
+            join_set.join_next().await.unwrap().unwrap();
+        }
+        join_set.spawn(my_bg_task(id));
+    }   
+  
+    while let Some(output) = join_set.join_next().await {
+        output.unwrap();
+    }
+}
+
+async fn my_bg_task(id: u64) {
+    todo!()
+}
+```
+* `JoinSet::spawn()`すると内部的に`tokio::task::spawn()`される
+
 ### test
 
 ```rust
