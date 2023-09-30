@@ -8,6 +8,7 @@ https://nixos.org/download.html#nix-install-macos
 
 `nix-shell -p nix-info --run "nix-info -m"`
 
-## 世代管理(Generation)
+## `nix.conf`
 
-* `/nix/var/nix/profiles/per-user/<user>`にinstall毎にsym linkが生成される
+* `/etc/nix/nix.conf`
+* `$HOME/.config/nix/nix.conf`

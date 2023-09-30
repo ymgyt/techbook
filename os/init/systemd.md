@@ -64,6 +64,14 @@ ConditionPathExists=!/etc/ssh/sshd_not_to_be_run
 
 * `ConditionPathExists`: pathの存在で制御できる
 
+## Target
+
+他のsystemdのunitをまとめるためのunit。  
+`systemctl list-units -t target`で一覧をみれる。
+
+* `multi-user.target`: the operation system is fully operational, without a graphical inteface.
+* `graphical.target`: the operation system is fully operational, with a graphcial inteface.
+
 
 ## 参考
 

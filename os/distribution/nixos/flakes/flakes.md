@@ -39,3 +39,13 @@ experimental-features = nix-command flakes
 * `nix-shell`: `nix develop`, `nix shell`, `nix run`に分割
 * `nix-build`: `nix build`
 * `nix-collect-garbage`: `nix store gc --debug`
+
+## Inputにprivate git reositoryを利用する
+
+1. `nix.conf`にgithubのaccess tokenを記載する
+
+```
+ access-tokens = github.com=ghp_XXX
+```
+
+2. inputsに指定する `inputs.mysecrets.url = gihtub:ymgyt/mysecrets/main`
