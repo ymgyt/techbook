@@ -25,6 +25,9 @@ systemctl list-unit-files
 
 ```shell
 systemctl status sshd.service [--full]
+
+# 設定fileの表示
+systemctl cat opentelemetry-collector
 ```
 
 * `-l` | `--full`: outputを省略しない
@@ -49,6 +52,7 @@ systemctl enable kubelet
 ```
 
 * enableすると`/etc/systemd/system/multi-user.target.wants/kubelet.service` symlinkが作成される
+
 ## Show
 
 systemd自身やunitについての情報を表示する

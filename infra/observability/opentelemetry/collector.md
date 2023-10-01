@@ -147,4 +147,21 @@ processors:
 
 ```
 
+## Service
+
+```yaml
+receiver:
+  hostmetrics: {}
+processor:
+  resourcedetection/system: {}
+exporter:
+  logging: {}
+
+service:
+  pipelines:
+    metrics:
+      receivers: [hostmetrics]
+      processors: [resourcedetection/system]
+      exporters: [logging]
+```
 

@@ -1,6 +1,6 @@
 # journalctl
 
-## Usage
+* `man journalctl`
 
 ```shell
 # unitを指定(--unit)
@@ -17,13 +17,9 @@ journalctl _PID=1234
 journalctl -S '2023-01-29 14:30:00'
 journalctl --since "2018-08-30 14:10:10" --until "2018-09-02 12:05:50"
 
-# follow
-journalctl -f
-```
+# unitを指定してfollow
+journalctl -u opentelemetry-collector -f
 
-
-* unitの名前がわからない場合
-
-```shell
-journalctl -F _SYSTEMD_UNIT
+# diskの利用量
+journalctl --disk-usage
 ```
