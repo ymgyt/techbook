@@ -63,5 +63,8 @@ systemctl show kubelet
 
 # systemdの設定fileの検索pathを表示
 systemctl -p UnitPath show
+
+# serviceの設定を確認する
+systemctl cat telemetryd
 ```
 

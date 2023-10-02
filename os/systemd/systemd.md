@@ -31,6 +31,7 @@ pkg-config systemd --variable=systemdsystemconfdir
 * `man systemd.unit`: Unit sectionの説明
 * `man systemd.kill`: Processの終了関連
 * `man systemd.exec`
+* `man systed.service`
 
 ## Unit
 
