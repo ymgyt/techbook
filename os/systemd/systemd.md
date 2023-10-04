@@ -28,42 +28,10 @@ pkg-config systemd --variable=systemdsystemconfdir
 * `man systemd-system.conf`: systemdの設定file
 * `man systemd.unit`: unit file
 * `man systemd.directives`: 各directiveのmanへの参照がある
-* `man systemd.unit`: Unit sectionの説明
 * `man systemd.kill`: Processの終了関連
 * `man systemd.exec`
 * `man systed.service`
-
-## Unit
-
-systemdの操作単位。processの起動やfile systemのmount等のtaskを抽象化したもの。  
-格納場所は
-
-* `/lib/systemd/system/`
-* `/etc/systemd/system/`
-  * こちらのほうが同名fileの優先度が高い。基本はここらしい。
-
-### Unit Type
-
-* service: serviceの設定sysVの代替
-* target: startup
-* socket
-* mount/automount: mount pointに関する情報  
-* slice: cgroupの設定
-* timer: cronの代替
-
-## Directives
-
-### Unit
-
-```text
-[Unit]
-Description=Foo Service
-After=network.target remote-fs.target nss-lookup.target
-Documentation=https://docs.ymgyt.io
-ConditionPathExists=!/etc/ssh/sshd_not_to_be_run
-```
-
-* `ConditionPathExists`: pathの存在で制御できる
+* `man bootup`: 起動関連
 
 ## Target
 

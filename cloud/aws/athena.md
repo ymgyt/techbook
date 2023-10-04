@@ -14,6 +14,14 @@
     
 * partitionedしていないと、S3のGet requestでexceptionになるかも。
 * functionはpresto準拠
+
+## Database
+
+tableの集合
+
+```
+CREATE DATABASE mydatabase
+```
     
 
 ## SQL
@@ -145,8 +153,6 @@ DROP TABLE [IF EXISTS] table_name
 
 ### Partition projection
 
-よくわってない。必要ならこれ読む。  
-https://aws.amazon.com/blogs/big-data/speed-up-your-amazon-athena-queries-using-partition-projection/
 
 ### 具体例
 

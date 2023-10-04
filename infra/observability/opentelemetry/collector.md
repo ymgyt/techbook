@@ -165,3 +165,19 @@ service:
       exporters: [logging]
 ```
 
+## Environment variable substitution
+
+設定fileの中でcollector実行時の環境変数を参照する。 
+exporter等の設定にcredentialを参照したい場合にconfig.yamlに直接かかなくてよくなる。
+
+```yaml
+processors:
+  attributes/example:
+    actions:
+      - key: ${env:DB_KEY}
+        action: ${env:OPERATION}
+```
+
+* `${env:ENV_KEY}`で置換される。  
+  * nix等では`$`をescapeする必要があるので注意
+  * literalの`$`を表現するには`$$`を使う

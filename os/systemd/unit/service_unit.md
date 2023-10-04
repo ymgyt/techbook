@@ -47,22 +47,3 @@ RestartPreventExitStatus=255
 
 * `MAINPID`: systemdが用意してくれるprocessのPID
 
-## Install
-
-```text
-[Unit]
-# ...
-
-[Service]
-# ...
-
-[Install]
-Wants=a.target b.target
-WantedBy=multi-user.target
-Alias=sshd.service
-```
-
-* `Wants`: このserviceが依存するservice。起動していなければsystemdが起動する。起動に失敗したら無視する
-* `WantedBy`: なにかを実際にinstallするわけではなく、unitの有効無効の制御
-  *  `systemctl enable`した際に`/etc/systemd/system/multi-user.target.wants/`にsymlinkが作成されることに対応する
-* `Alias`: serviceのalias. sshとsshdがdistroで揺らぐ場合があったりするらしいのでこれで吸収できる

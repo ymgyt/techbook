@@ -68,3 +68,25 @@ systemctl -p UnitPath show
 systemctl cat telemetryd
 ```
 
+## Unitの依存を確認
+
+```shell
+systemctl list-dependencies multi-user.target
+
+# graphvizで可視化
+ systemd-analyze dot multi-user.target | dot -Tsvg out> /tmp/target.svg
+```
+
+## 停止
+
+```shell
+systemctl poweroff
+```
+
+## 再起動
+
+```shell
+systemctl reboot
+```
+
+
