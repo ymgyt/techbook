@@ -76,3 +76,9 @@ new MyDevStack(app, 'dev', {
 
 * 環境変数 `CDK_DEFAULT_{ACCOUNT,REGION}`を利用するとcdk synth時に`--profile`で指定したaccountを対象にできる
 * accountをcodeにhard codeするか実行時に解決できるようにしておくかはポリシー次第
+
+```sh
+cdk diff --profile foo
+```
+
+のようにcdk実行時にprofileを指定できる
