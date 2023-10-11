@@ -31,3 +31,17 @@ foo_total{key=~"v_1|v_2"}              # orはregexで表現できる
 # 複数のmetricsを取得
 {__name__=~"(foo|bar)_total"}
 ```
+
+## Aggregation
+
+
+```
+{ host, cpu, mode}があるとする
+
+sum without (cpu, mode) (system_cpu_utilization)
+は以下と同じ
+sum by (host) (system_cpu_utilization) 
+```
+
+* withoutは指定のfieldを無視して残ったkeyが同じtime seriesをaggregateす
+* byは指定のfieldが同じtime seriesをaggregateする

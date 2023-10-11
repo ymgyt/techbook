@@ -77,7 +77,7 @@ systemctl list-dependencies multi-user.target
  systemd-analyze dot multi-user.target | dot -Tsvg out> /tmp/target.svg
 ```
 
-## 停止
+## shutdown
 
 ```shell
 systemctl poweroff

@@ -25,6 +25,7 @@ Mem:           7.6G        1.4G        1.2G        135M        4.9G        5.8G
 Swap:            0B          0B          0B
 ```
 
+* used: kernelやapplicationに割当済
 * 空きメモリは`avaiable`をみる
   * `buff/cache`のうち解放可能な値+freeの値
 * `shared`はtmpfs

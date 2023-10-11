@@ -2,9 +2,12 @@
 
 cpuのmetrics取得toolでcpuの利用率を確認すると、userやsystem等のcategoryに分類される。これらのcategoryが何を意味するかについて
 
+`/proc/stat`が情報源。これらは相互に排他的らしい。
+
 ## system(sy)
 
-kernelが利用した時間。
+kernelが利用した時間。  
+device driverやkernel module。
 
 ## user(us)
 
@@ -34,3 +37,9 @@ swappだったり、I/Oの待ち時間のこと。
 
 
 ## steal(st)
+
+virtual machineのときに他のvmがcpuを使っている時間。
+
+## guest
+
+vmが使っている時間

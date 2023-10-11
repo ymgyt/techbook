@@ -23,15 +23,28 @@ nixos-rebuildするとageが復号化したのち指定のpathに配置してく
 `secrets.nix`を作成する。  
 
 ```
-let nixos_age = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIImldYRTvidAq85iAt3fgWRmhKlcGdE6RyTY3EYl6pJW age";
+let 
+  nixos_age = "ssh-ed25519 AAAAC3NzaAAAZDI1NTE5AAAAIImldYRTvidAq85iAt3fgWRmhKlcGdE6RyTY3EYAApJW age";
+  rpi4_01 = "ssh-ed25519 AAAAC3NzaC1lXXXXXXXXXXXXXXXXXXXXXXXX6UAO1ZRw/lvrUO6+CLtIUTPMsLUeey";
 
 in
 {
-  "foo.age".publicKeys = [ nixos_age ];
+  "foo.age".publicKeys = [ nixos_age rpi4_01 ];
 } 
 ```
 
 管理したいsecret `foo.age`を生成する
+
+* `xxx.age.publickKeys`に追加するkeyはこのsecretをdecryptできるkeypairのもの
+
+このsecretをnode rpi4_01に配布したい場合  
+
+```sh
+ssh-keyscan -t ed25519 192.168.10.10 
+```
+
+のようにして対象nodeの公開鍵を調べられる。  
+こうすることでkey pairをdeploy対象nodeに配布する必要がなくなる。
 
 ```
 nix run github:yaxitech/ragenix -- -e foo.age  
@@ -120,3 +133,12 @@ nix run github:yaxitech/ragenix -- -e foo.age
 
 1. `age.identityPaths`に指定した秘密鍵をdeploy対象serverに配置する
 2. deploy-rs等でdeployする。
+
+
+### Secretの更新
+
+公開鍵を追加したり、secretの内容を更新したい場合は
+
+```sh
+nix run github:yaxitech/ragenix -- --rekey -i ~/.ssh/foo
+```

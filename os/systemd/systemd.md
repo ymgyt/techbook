@@ -13,6 +13,8 @@ Linuxにおけるinit実装の一つ
   * systemd init processの設定file
   * `man systemd-system.conf`
 
+* `systemctl show --property=UnitPath`で現在の設定を確認できる。
+
 `pkg-config`を使って現在の設定を問い合わせることができる
 
 ```shell

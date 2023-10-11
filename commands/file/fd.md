@@ -14,6 +14,9 @@ fd -t d models
 
 # 完全一致
 fd -g models
+
+# ext検索
+fd --extension nix .
 ```
 
 * `fd <pattern> [<search_path>]`
