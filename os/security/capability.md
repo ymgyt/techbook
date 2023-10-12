@@ -39,3 +39,13 @@ CapAmb: 0000000000000000
 `getpcaps <PID>`
 
 ### Capability bounding set
+
+
+## File capability
+
+fileにもcapabilityを設定できる
+fileにもcapability setがある。
+
+* permitted
+* inheritable
+* effective: 0 or 1

@@ -36,6 +36,8 @@ ConditionPathExists=!/etc/ssh/sshd_not_to_be_run
 
 ### Install
 
+serviceをenable/disableした際の挙動の設定。
+
 ```text
 [Unit]
 # ...
@@ -60,3 +62,17 @@ Alias=sshd.service
 * `Also`: enableした際に同時に操作?するunit
 * `Alias`: serviceのalias. sshとsshdがdistroで揺らぐ場合があったりするらしいのでこれで吸収できる
 
+## Dependency
+
+* `foo.service.wants/` directory配下に作成されたsymlinkがあると暗黙的に`Wants=`に追加され
+  * `foo.service.requires/`も同様
+  * 元fileに変更を加えることなく、hookできる利点がある
+
+### Implicit dependency
+
+unitのtypeや設定に応じて暗黙的に`Requires=`や`After=`が追加される仕様がある。これのおかげで設定fileがsimpleになるらしい。
+
+
+## 設定の上書き
+
+* `foo.service.d` directoryがあり、`.conf`で終わるfileがあると`foo.service` の上書きとして参照される。順番は `man systemd.unit` 参照。

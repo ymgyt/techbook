@@ -1,5 +1,7 @@
 # cgroup
 
+`man 7 cgroups`
+
 ## 歴史
 
 * kernelの2.6.24ではじめて導入された。これがcgroup v1
@@ -23,3 +25,17 @@
   * 用はfile/directoryでcgroupを操作できるようにしてくれている
   * 内部的にはkernfsを使っている
   * `/sys/fs/cgroup`にmountされるのが慣習。systemdがそうしているから。
+
+
+自分でmountしようとするなら以下のようになるらしい
+
+```sh
+# /sys/fs/cgroupをtmpfsでマウント
+sudo mount -t tmpfs cgroup /sys/fs/cgroup 
+
+#cgroupマウント用のディレクトリー作成
+sudo mkdir /sys/fs/cgroup/cpu 
+
+# cgroupファイルシステムのマウント
+sudo mount -t cgroup -o cpu cgroup /sys/fs/cgroup/cpu 
+```
