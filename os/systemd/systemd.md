@@ -32,7 +32,7 @@ pkg-config systemd --variable=systemdsystemconfdir
 * `man systemd.directives`: 各directiveのmanへの参照がある
 * `man systemd.kill`: Processの終了関連
 * `man systemd.exec`
-* `man systed.service`
+* `man systemd.service`
 * `man bootup`: 起動関連
 
 ## Target
@@ -42,6 +42,10 @@ pkg-config systemd --variable=systemdsystemconfdir
 
 * `multi-user.target`: the operation system is fully operational, without a graphical inteface.
 * `graphical.target`: the operation system is fully operational, with a graphcial inteface.
+
+## Boot process
+
+systemdはboot時に`default.target`を起動する
 
 
 ## 参考

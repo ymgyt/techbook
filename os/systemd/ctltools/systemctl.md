@@ -72,16 +72,8 @@ systemctl cat telemetryd
 
 ```shell
 systemctl list-dependencies multi-user.target
-
-# graphvizで可視化
- systemd-analyze dot multi-user.target | dot -Tsvg out> /tmp/target.svg
 ```
 
-## Unitの探索directory
-
-```sh
-systemd-analyze unit-paths
-```
 
 ## shutdown
 
