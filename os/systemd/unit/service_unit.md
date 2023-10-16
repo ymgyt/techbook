@@ -46,6 +46,35 @@ RestartPreventExitStatus=255
 * `Restart`: いまいちわかってない
 * `RestartPreventEixtStatus`: restartさせない終了code
 
+### Install
+
+serviceをenable/disableした際の挙動の設定。  
+systemdではなく、systemctlが解釈するらしい。(man systemd.unitによると)
+
+```text
+[Unit]
+# ...
+
+[Service]
+# ...
+
+[Install]
+Wants=a.target b.target
+WantedBy=multi-user.target
+Alias=sshd.service
+```
+
+* `Requires`: 依存するservice。依存先が起動に失敗した場合はunitを起動しない。
+* `Wants`: このserviceが依存するservice。起動していなければsystemdが起動する。起動に失敗したら無視する
+  * 起動の順番はAfter,Beforeで指定する。指定がないとWantsと同時に起動される
+* `After`: このunitよりも先に起動するunit
+* `Before`: このunitよりも後に起動するunit
+
+* `WantedBy`: なにかを実際にinstallするわけではなく、unitの有効無効の制御
+  *  `systemctl enable`した際に`/etc/systemd/system/multi-user.target.wants/`にsymlinkが作成されることに対応する
+* `Also`: enableした際に同時に操作?するunit
+* `Alias`: serviceのalias. sshとsshdがdistroで揺らぐ場合があったりするらしいのでこれで吸収できる
+
 ### 環境変数
 
 * `MAINPID`: systemdが用意してくれるprocessのPID

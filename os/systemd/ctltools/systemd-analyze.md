@@ -11,4 +11,7 @@ systemd-analyze security opentelemetry-collector
 
 ## Unitの探索directory
 systemd-analyze unit-paths
+
+## capability一覧を表示
+systemd-analyze capability
 ```

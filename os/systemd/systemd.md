@@ -33,6 +33,7 @@ pkg-config systemd --variable=systemdsystemconfdir
 * `man systemd.kill`: Processの終了関連
 * `man systemd.exec`
 * `man systemd.service`
+* `man systemd.special`
 * `man bootup`: 起動関連
 
 ## Target
