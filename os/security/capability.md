@@ -49,3 +49,8 @@ fileにもcapability setがある。
 * permitted
 * inheritable
 * effective: 0 or 1
+
+## 参考
+
+* https://nojima.hatenablog.com/entry/2016/12/03/000000
+  * ambientの話がよかった

@@ -98,3 +98,25 @@ Tags.of(theBestStack).remove('StackType', {
   excludeResourceTypes: ['AWS::EC2::Subnet']
 });
 ```
+
+## L1を利用
+
+L2のmethodやpropertyでは設定できない項目があったりする。  
+その場合、L2からL1に変換を行い、直接CloudFormationの項目を設定できる
+
+```typescript
+// Get the CloudFormation resource
+const cfnBucket = bucket.node.defaultChild as s3.CfnBucket;
+
+// Change its properties
+cfnBucket.analyticsConfiguration = [
+  { 
+    id: 'Config',
+    // ...        
+  } 
+];
+```
+
+* `construct.node.defaultChild as CfnXXX`のように行える
+* `s3.Bucket.fromCfnBucket()`のようにL1 -> L2の流れもある
+* [escape hatch](https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cfn_layer.html)
