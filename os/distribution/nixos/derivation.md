@@ -13,6 +13,20 @@
 * `propagatedBuildInputs `- Dependencies that should exist in the runtime environment and also propagated to downstream runtime environments.
 * `nativeBuildInputs `- Dependencies that should only exist in the build environment.
 * `propagatedNativeBuildInputs`- Dependencies that should only exist in the build environment and also propagated to downstream build environments.
+* derivationがやってくれること
+  * builderの起動
+  * builderに依存を環境変数でみせてくれる
+
+```
+:l <nixpkgs>
+derivation { name = "simple", ... coreutils = coreutils; }
+```
+
+derivationのfieldはbuild処理からは環境変数としてみえる
+
+```
+export PATH="$coreutils/bin"
+```
 
 
 ## nix-build
