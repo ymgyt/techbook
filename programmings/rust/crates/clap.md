@@ -1,5 +1,11 @@
 # clap
 
+## featurues
+
+```toml
+clap = { features = ["std", "derive"] }
+```
+
 ## Example
 
 ```rust

@@ -1,5 +1,14 @@
 # tracing subscriber
 
+## features
+
+```toml
+[dependencies]
+tracing-subscriber = { version = "0.3.17", features = ["smallvec", "fmt", "ansi", "std", "env-filter", "time"], default-features = false }
+```
+
+* default-featuresはtracing-logの互換処理が入っているので切っている
+
 ## build subscriber
 
 ```rust
@@ -21,22 +30,25 @@ fn init_logger(verbose: u8) -> Result<()> {
 ```rust
 // Configure tracing_subscriber.
 fn init_tracing(opts: &cli::TracingOptions) {
-    use tracing_subscriber::{filter, fmt, layer::SubscriberExt, Registry, util::SubscriberInitExt as _};
+    use tracing_subscriber::{
+        filter::EnvFilter, fmt, layer::SubscriberExt, util::SubscriberInitExt as _, Registry,
+    };
 
     Registry::default()
         .with(
             fmt::Layer::new()
-                .with_ansi(opts.ansi)
+                .with_ansi(true)
                 .with_timer(fmt::time::UtcTime::rfc_3339())
-                .with_file(opts.source_code)
-                .with_line_number(opts.source_code)
+                .with_file(false)
+                .with_line_number(false)
                 .with_target(true),
         )
         .with(
             EnvFilter::try_from_default_env()
                 .or_else(|_| EnvFilter::try_new("info"))
                 .unwrap(),
-        ).init();
+        )
+        .init();
 }
 ```
 
