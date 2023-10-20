@@ -19,6 +19,51 @@
 
 ## Data Model
 
+概要
+
+```text
+ Metric
+//  +------------+
+//  |name        |
+//  |description |
+//  |unit        |     +------------------------------------+
+//  |data        |---> |Gauge, Sum, Histogram, Summary, ... |
+//  +------------+     +------------------------------------+
+//
+//    Data [One of Gauge, Sum, Histogram, Summary, ...]
+//  +-----------+
+//  |...        |  // Metadata about the Data.
+//  |points     |--+
+//  +-----------+  |
+//                 |      +---------------------------+
+//                 |      |DataPoint 1                |
+//                 v      |+------+------+   +------+ |
+//              +-----+   ||label |label |...|label | |
+//              |  1  |-->||value1|value2|...|valueN| |
+//              +-----+   |+------+------+   +------+ |
+//              |  .  |   |+-----+                    |
+//              |  .  |   ||value|                    |
+//              |  .  |   |+-----+                    |
+//              |  .  |   +---------------------------+
+//              |  .  |                   .
+//              |  .  |                   .
+//              |  .  |                   .
+//              |  .  |   +---------------------------+
+//              |  .  |   |DataPoint M                |
+//              +-----+   |+------+------+   +------+ |
+//              |  M  |-->||label |label |...|label | |
+//              +-----+   ||value1|value2|...|valueN| |
+//                        |+------+------+   +------+ |
+//                        |+-----+                    |
+//                        ||value|                    |
+//                        |+-----+                    |
+//                        +---------------------------+
+```
+https://github.com/open-telemetry/opentelemetry-proto/blob/c4dfbc51f3cd4089778555a2ac5d9bc093ed2956/opentelemetry/proto/metrics/v1/metrics.proto
+
+collector(otlp)上でのmetricsの表現。  
+Metricが data pointsを複数もっており、data pointに対してattributeが付与されているという関係がhot take
+
 ### Temporality
 
 [仕様](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/metrics/data-model.md#temporality)

@@ -3,10 +3,26 @@
 ## featurues
 
 ```toml
-clap = { features = ["std", "derive"] }
+clap = { features = [
+    "derive",        # derive生やすのに必要
+    "color",         # errorに色つける 
+    "help",          # helpのoutputを生成 
+    "usage",         # usageの生成
+    "error-context", # よくわからず
+    "suggestions",   # Did you meanをだす
+    "deprecated",    # clapのdeprecatedをだしてくれる?
+    "cargo",         # cargo関連の環境変数を読む
+    "env",           # 環境変数をparse時に読む
+    "unicode",       # emoji等のunicodeをsupport
+    "wrap_help",     # helpのtext wrapping処理
+    "string",        # わかってない
+    ]
+}
 ```
 
-## Example
+* `std`は使われていないらしい
+
+## Usage
 
 ```rust
 use clap::{Parser, Subcommand, Args};
@@ -16,6 +32,9 @@ use clap::{Parser, Subcommand, Args};
     version, 
     propagate_version = true,
     disable_help_subcommand = true,
+    help_expected = true,     // argにhelpを必須にする
+    infer_subcommands = true, // "f"に対して"foo"を推測する
+    bin_name = "foo",         // clapが認識するbin name
     about = "xxx",
 )]
 pub struct CloudOpsApp {
@@ -24,13 +43,14 @@ pub struct CloudOpsApp {
 
     /// GlobalはOption<T>である必要がある
     /// ただし、default値を指定することもできる
-    #[clap(long, global = true, default_value_t = "foo".into())]
+    #[arg(long, global = true, default_value_t = "foo".into())]
     global_a: String,
 }
 
 #[derive(Subcommand, Debug)]
 enum Command {
     /// S3 operations.
+    #[command(alias = "s3-alias")]
     S3(S3Command),
 }
 
@@ -71,7 +91,7 @@ pub enum S3Subcommand {
 pub struct TracingOptions {
     /// Enable color(ansi) logging.
     /// --ansi=false のように書ける
-    #[clap(
+    #[arg(
         long,
         default_value_t = true,
         action = clap::ArgAction::Set,
@@ -84,7 +104,7 @@ pub struct TracingOptions {
     pub source_code: bool,
 
     /// Parserを指定することもできる
-    #[clap(value_parser = parse_region, long)]
+    #[arg(value_parser = parse_region, long)]
     pub region: aws::Region
 
     /// 30sec, 2hようなformatでDurationを指定
@@ -92,7 +112,7 @@ pub struct TracingOptions {
     pub duration: std::time::Duration,
 
     /// RFC3339形式のflag
-    #[clap(long, value_parser = chrono::DateTime::<chrono::FixedOffset>::parse_from_rfc3339,value_name = "TIMESTAMP")]
+    #[arg(long, value_parser = chrono::DateTime::<chrono::FixedOffset>::parse_from_rfc3339,value_name = "TIMESTAMP")]
     start: DateTime<FixedOffset>,
 }
 
@@ -107,19 +127,16 @@ impl CloudOpsApp {
 }
 ```
 
-### `#[clap()] API`
-
-* `visible_alias`: helpにaliasとして表示されるalias
+### `#[command()]` API
 * `flatten`: そこにべた書きしたかのように展開される
 * `next_help_heading`: helpでgroupingされる
+
+### `#[arg()]` API
+
+* `visible_alias`: helpにaliasとして表示されるalias
 * `value_name`: helpで引数名のplace holderに利用される
 * `action = clap::ArgAction::{Set, SetTrue}`
   * boolの使い方を制御できる。`SetTrue`にすると`--flag`だけで有効にできる
-
-## Features
-
-* `env`: `#[clap(env = XXX)]`に必要
-* `wrap_help`: terminalの長さを考慮してhelp表示してくれる。基本有効で良い?
 
 ## Enum
 
@@ -134,10 +151,40 @@ enum Format {
 #[derive(clap::Args, Debug)]
 pub struct QueryCommand {
     /// Output format
-    #[clap(value_enum, long, default_value_t = Format::Debug)]
+    #[arg(value_enum, long, default_value_t = Format::Debug)]
     format: Format,
 }
 ```
 
 1. `enum`に`clap::ValueEnum`をderiveする
 1. structのfieldに`[clap(value_enum)]を付与する
+
+## ArgGroup
+
+複数のうちどれか一つという制約を表現できる
+
+```rust
+/// Export gauge data
+#[derive(Args, Debug)]
+struct ExportGaugeCommand {
+    #[command(flatten)]
+    value: NumberDataPointValue,
+}
+
+#[derive(Args, Debug)]
+#[group(required = true)]
+struct NumberDataPointValue {
+    /// Metrics data point f64 value
+    #[arg(long, value_name = "f64")]
+    value_as_double: Option<f64>,
+    // #[arg(long)]
+    /// Metrics data point i64 value
+    #[arg(long, value_name = "i64")]
+    value_as_int: Option<i64>,
+}
+```
+
+* `--value-as-double`か`--value-as-int`どちらかが必須になる
+* どちらがuserに入力されたかは自分で判断する必要がありそう
+  * なのでOptionにしておくのがよい?
+* conflictで他のargやargGroupと一緒に使えないという制約も表現できる
