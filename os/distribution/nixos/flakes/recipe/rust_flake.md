@@ -107,6 +107,17 @@
       in {
         packages.default = self.packages."${system}".telemetryd;
         packages.telemetryd = telemetryd;
+
+        apps.default = {
+          type = "app";
+          program = "${telemetryd}/bin/binname";
+        };
+        apps.opentelemetry-cli = {
+          type = "app";
+          program = "${telemetryd}/bin/binname";
+        };
+
+        devShells.default = pkgs.mkShell { buildInputs = [ pkgs.nixfmt ]; };
       });
 }
 ```
