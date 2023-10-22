@@ -16,6 +16,14 @@ terraform apply
 # dotlangの出力
 terraform dot
 
+# outputの出力
+terraform output
+
+# 指定もできる
+terraform output foo
+
+# 削除
+terraform destroy
 ```
 
 * `terraform dot`で依存関係をvisualizeできる
@@ -79,63 +87,6 @@ terraform import module.xxx.vault_audit.stdout yyy
 
 * importしたいresourceがmodule側で宣言されている場合は先頭にmoduleつけて参照する
 
-## Input
-
-参照するresource側の定義
-
-```hcl
-provider "vault" {
-  address               = var.vault_endpoint
-}
-
-variable "vault_endpoint" {
-  type        = string
-  sensitive = false
-  description = "vault endpoint for terraform provisioning"
-}
-```
-
-* `sensitive`で表示されるか制御できる
-
-### tf command引数で渡す
-
-`terraform plan -var=vault_endpoint=xxx`のように`-var=KEY=VALUE`で渡せる
-
-### moduleに引数を渡す
-
-```hcl
-module "child_module" {
-  source = "../../my-module"
-  vault_endpoint = "http://localhost:1234"
-}
-```
-
-* moduleに渡す際はargumentのように渡せる
-
-
-## Resource
-
-### Meta Arguments
-
-#### `for_each`
-
-`each`にiterateしている情報が入っている。
-
-```terraform
-resource "azurerm_resource_group" "rg" {
-  for_each = {
-    a_group = "eastus"
-    another_group = "westus2"
-  }
-  name     = each.key
-  location = each.value
-}
-```
-
-### Data source
-
-Terrafromの外の世界から情報を取得して、terraformで利用できるようにする手段。  
-readしか実装していない。
 
 #### importとの違い
 
