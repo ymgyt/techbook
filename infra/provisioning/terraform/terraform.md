@@ -2,17 +2,25 @@
 
 ## Usage
 
-### plan & apply
-
 基本はこれ。
 
-```console
+```sh
 terraform init
 
 terraform plan
 
 terraform apply
 ```
+
+```sh
+# dotlangの出力
+terraform dot
+
+```
+
+* `terraform dot`で依存関係をvisualizeできる
+
+
 
 
 ## Install
