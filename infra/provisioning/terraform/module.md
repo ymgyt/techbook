@@ -76,6 +76,45 @@ resource "xxx" "yyy" {
 
 * `module.<module_name>.<output_name>`で参照する
 
+## Module Locals
+
+rootを含むmoduleの中だけで利用できる変数
+
+```hcl
+locals {
+  port = 80
+  foo = "xxx"
+}
+
+resource "foo_bar" "baz" {
+  attr = local.foo
+}
+```
+
+* `locals` blockで定義する
+* 参照は`local.foo`
+
+## Moduleの相対path
+
+defaultではterraformは相対pathをcwdで解決する。  
+これはroot moduleでは直感通りだが、moduleだと意図に反する。  
+
+* `path.module` これでmoduleのdirを参照できる
+
+## Inline blockはつかわないほうがいい
+
+```hcl
+resource "aws_security_group" "alb" {
+  ingress {
+    # ...
+  }
+}
+```
+
+* resourceの中でさらにresourceを定義できる場合があるが、moduleでは利用しないほうがいい
+  * module利用側がinlineされたresourceを別で定義しているとterraformの仕様でerrorになるらしい
+  * 利用側で追加できない
+
 
 ## 参照
 
