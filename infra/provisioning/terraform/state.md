@@ -31,7 +31,28 @@ terraform {
 }
 ```
 
-通常は`main.tf`の`backend` blockに定義する
+通常は`main.tf`の`backend` blockに定義する。  
+
+### Backendの設定をfileに切り出す
+
+backendの設定はstateの数だけ重複してしまうのでfileに切り出せる。  
+
+`backend.hcl`
+```hcl
+bucket = "terraform-state"
+region = "ap-northeast-1"
+profile = "my-profile"
+```
+
+```hcl
+terraform {
+  backend "s3" {
+    key = "path/to/terraform.tfstate"
+  }
+}
+```
+
+`terraform init -backend-config=backend.hcl`
 
 ### Migrate local to remote
 
@@ -41,4 +62,75 @@ backend block書いてから、`terraform init -migrate-state`を実行する。
 terraformがlocalからremoteへの移行を察してくれる。
 移行後は`terrafrom.tfstate`は削除できる
 
-  
+
+## Stateの分離
+
+productionとstagingを同じterraform.tfstateで管理したくない。のでなんらかの方法でstateを分けたいという問題意識。
+
+### Workspace
+
+* worksapceごとに`env` directory配下に新しいterrafrom.tfstateが生成される
+  * stagingなら`path/env/staging/terraform.tfstate`
+
+
+```hcl
+resource "aws_instance" "foo" {
+  instance_type = terraform.workspace == "default" ? "tw.medium" : "t2.micro"
+}
+```
+
+* `terraform.workspace`で現在のworkspaceを判定できる
+* state fileは同じbackendに格納されるので、認可上の分離が弱い
+* codeをみているだけだと実際にいくつの環境があるのかわからない
+
+
+### Directory Layout
+
+分離したい環境ごとにdirectoryを分けるアプローチ。  
+当然、backendの設定もわかれることになる。
+
+```
+.
+├── production
+│  ├── services
+│  │  ├── dependencies.tf
+│  │  ├── main.tf
+│  │  ├── outputs.tf
+│  │  ├── providers.tf
+│  │  └── variables.tf
+│  ├── storage
+│  └── vpc
+└── staging
+   ├── services
+   ├── storage
+   └── vpc
+```
+
+### `terraform_remote_state`
+
+他のterraform state fileをdata sourceとして参照できる。
+
+1. 被参照側のprojectでoutputを定義する
+
+```hcl
+output "address" {
+  value = aws_db_instance.foo.address
+  description = "foo"
+}
+```
+
+2. 参照側で参照する
+
+```hcl
+data "terraform_remote_state" "db" {
+  backend = "s3"
+
+  config = {
+    bucket = "bucket"
+    key = "path/to/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
+}
+```
+
+* `data.terraform_remote_state.db.outputs.address`で参照できる

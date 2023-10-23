@@ -24,12 +24,29 @@ terraform output foo
 
 # 削除
 terraform destroy
+
+# REPL
+# 関数等をためせる
+terraform console
 ```
 
 * `terraform dot`で依存関係をvisualizeできる
 
+### Workspace
 
+```sh
+# 表示
+terraform workspace show
+terraform workspace list
 
+# 作成
+terraform workspace new staging
+
+# 変更
+terraform workspace select
+```
+
+workspaceについてはstateを参照
 
 ## Install
 
@@ -117,45 +134,6 @@ terraform {
   * `~>` はpatchのみあげられる
 
 
-### Operation Timeout
-
-Resourceの作成に時間がかかる場合がある。その際にtfのtimeoutを指定することができる。
-
-```terraform
-resource "aws_db_instance" "example" {
-  # ...
-
-  timeouts {
-    create = "60m"
-    delete = "2h"
-  }
-}
-```
-
-## State
-
-### S3
-
-```hcl
-terraform {
-  backend "s3" {
-    bucket  = "terraform-state"
-    key     = "path/to/terrafrom.tfstate"
-    region  = "ap-northeast-1"
-    profile = "my-profile"
-  }
-}
-```
-
-通常は`main.tf`の`backend` blockに定義する
-
-### Migrate local to remote
-
-まずlocal stateから初めて、remote stateへ切り替える方法
-
-backend block書いてから、`terraform init -migrate-state`を実行する。  
-terraformがlocalからremoteへの移行を察してくれる。
-移行後は`terrafrom.tfstate`は削除できる
 
 ## 参考
 
