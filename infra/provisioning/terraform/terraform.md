@@ -12,6 +12,9 @@ terraform plan
 terraform apply
 ```
 
+* plan
+  * state fileしかみないのでapplyしたらalready existsとか起きる
+
 ```sh
 # dotlangの出力
 terraform dot
@@ -31,6 +34,8 @@ terraform console
 ```
 
 * `terraform dot`で依存関係をvisualizeできる
+
+
 
 ### Workspace
 
@@ -97,6 +102,12 @@ mapを出力することもできる。  `for`を囲む記号でresult typeを�
 宣言されているresourceのstateを更新する処理。  
 したがって、import前に対応する`resource "xxx" "yyy"`が必要。
 
+hclの設定file, 実IDがあるstate, 実際のinfra。この3つが構成要素。importはhcl, 実際のinfraがある場合にstate fileを作成する処理といえる  
+
+第２引数のIDは実際のinfraを識別するためのID。  
+IDになにが必要かはresourceごとに違うので、documentをみる。
+
+
 ```sh
 # module側で宣言されているresource
 terraform import module.xxx.vault_audit.stdout yyy
@@ -104,11 +115,6 @@ terraform import module.xxx.vault_audit.stdout yyy
 
 * importしたいresourceがmodule側で宣言されている場合は先頭にmoduleつけて参照する
 
-
-#### importとの違い
-
-* dataはdestroyしても削除されない
-* terraformの外でimportしたresourceを変更すると、apply時にhclの状態に戻そうとする
 
 ## Versionの指定
 

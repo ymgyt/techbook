@@ -11,6 +11,11 @@
 module "vault_dev" {
   source = "../../modules/vault"
 
+  # 必要ならproviderを指定できる
+  providers = {
+    foo = foo.alias
+  }
+
   input_1 = "xxx"
   input_2 = 100
 }
