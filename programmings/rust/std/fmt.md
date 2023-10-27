@@ -18,3 +18,13 @@ fn example() {
     } 
 }
 ```
+
+### padding
+
+```rust
+let ans = 100;
+println!("{ans:0>10"});
+```
+
+* `: <padding_char> <align_spec> <width>`という指定
+  * 0埋め、 `>` contentは右詰め, `10`幅は10という指定になる
