@@ -46,3 +46,14 @@ access tokenのためには、grant codeが必要。
   * 302 Location: `https://client.ymgyt.io/callback?code=grantcode-xyz` 的な感じ。
   * Resource Owner(browser等)を経由するので、流出しやすい
   * 一度使ったら使えなくなる
+
+
+## Scope
+
+趣旨はResource Ownerがどこまで同意したかを表現すること。  
+同意の射程と考えることができる。
+
+## なぜ認可のOAuthが認証につかわれるのか
+
+ResourceとしてSNS Serviceのuserのprofile情報(`/me`とか)を利用すれば、userを識別する情報を取得できるから。  
+俗にOAuth認証とも。
