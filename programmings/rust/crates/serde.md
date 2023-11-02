@@ -41,3 +41,21 @@ pub struct AppDescriptor {
     slow_timeout: std::time::Duration,
 }
 ```
+
+## http_serde_ext
+
+型にSerialize等がderiveされたいない場合に変換処理を定義した外部のmodule(crate)を利用できる
+
+```rust
+use http::Uri;
+use serde::{Deserialize, Serialize};
+#[derive(Deserialize)]
+struct DeviceAuthorizationResponse {
+    #[serde(with = "http_serde_ext::uri")]
+    verification_uri: Uri,
+    #[serde(with = "http_serde_ext::uri::option")]
+    verification_uri_complete: Option<Uri>,
+}
+```
+
+* `http::Uri`にderiveがないので`http_serde_ext`を利用する
