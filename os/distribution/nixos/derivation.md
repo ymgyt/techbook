@@ -28,6 +28,18 @@ derivationのfieldはbuild処理からは環境変数としてみえる
 export PATH="$coreutils/bin"
 ```
 
+## Two stage build
+
+┌────────────┐                ┌────────────┐                ┌────────────┐
+│            │                │            │ nix-store      │            │
+│ Nix        │nix-instantiate │ Store      │  --realize     │ Store      │
+│ Expression ├───────────────►│ Derivation ├───────────────►│ Derivation │
+│            │                │            │                │ Output     │
+└────────────┘                └────────────┘                └────────────┘
+
+* nix expressionから直接buildされず、store derivationという中間結果を経由する
+* store delivationは要はなにをbuildで実行すべきかを表現している。
+
 
 ## nix-build
 
