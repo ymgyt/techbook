@@ -1,5 +1,11 @@
 # Lambda
 
+## Execution Role
+
+* lambda作成時に指定するIAM Role
+* lambda側で`sts::AssumeRole`が実行される
+  * 実行時に環境変数`AWS_SECRET_ACCESS_KEY`,`AWS_ACCESS_KEY{,_ID}`,`AWS_SESSION_TOKEN`がexecution roleのものに設定される
+
 ## EventSourceMapping
 
 EventSource(Kinesis/DynamoDB) -> λの処理を作成する際に登場するリソース。  

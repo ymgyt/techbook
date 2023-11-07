@@ -3,7 +3,34 @@
 ## Clientのconstruction
 
 * 各ServiceのClientは共通で`SdkConfig`から生成できる
-* Serviceごとに`Config`を定義しており、`Client::from_conf()`でも生成できる
+  * `SdkConfig`はservice共通の設定
+
+```rust
+let sdk_config = aws_config::load_from_env().await;
+let foo_client = aws_sdk_foo::Client::new(&sdk_config);
+```
+
+* Serviceごとに`Config`を定義しており、`SdkConfig`で設定できない事項はこれで対応する
+
+```rust
+let sdk_config = aws_config::load_from_env().await;
+let config = aws_sdk_foo::config::Builder::from(&sdk_config)
+    .some_service_specific_setting("value")
+    .build();
+let foo_client = aws_sdk_foo::Client::from_conf(&config)
+```
+
+## `SdkConfig`のconstruct
+
+```rust
+let sdk_config = aws_config::from_env()
+    .region(Region::new("ap-northeast-1"))
+    .load()
+    .await;
+```
+
+* `aws_config::from_env().override().load()`
+  * `aws_config::load_from_env()`がこれのhelper
 
 ### ServiceごとのConfig
 
