@@ -7,6 +7,14 @@
 
 * CPU cacheは物理アドレス変換後のものをkeyにする
 
+```rust
+let mut page_table = vec![0_usize; num_of_page];  
+
+let page_addr = page_table[vir_addr / 4096] + (vir_addr % 4096);
+```
+
+* 一番naiveな実装だと、virtual addressをpage sizeで割って、余りをたすことで物理addressに変換する
+
 
 ## メリット
 
@@ -19,3 +27,4 @@
 ## TLB
 
 CPU側に記載。
+
