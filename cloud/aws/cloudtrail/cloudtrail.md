@@ -67,3 +67,17 @@ aws cloudtrail validate-logs \
 
 
 ダイジェストには前のダイジェストへの参照が含まれておりこれによってダイジェスト自身を検証できる。
+
+## LogEvent
+
+trailのeventについて
+
+### useridentity
+
+* `principalId`: 呼び出しを行ったエンティティの一意の識別子 一時的セキュリティ認証情報で行われたリクエストの場合、この値には、AssumeRole、AssumeRoleWithWebIdentity、GetFederationToken API 呼び出しに渡されるセッション名が含まれます。
+
+* `arn`: roleの場合は、role名とsession
+
+* `sessionIssuer`
+  * `principalId`: 認証情報を取得するために使用されたエンティティの内部 ID。
+  * `arn`: 一時的セキュリティ認証情報を取得するために使用されたソース (アカウント、IAM ユーザー、ロール) のARN。
