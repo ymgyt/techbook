@@ -56,3 +56,14 @@ CPU間でcacheをやり取りするためのprotocol。  以下の動作を実�
 
 * 書き込み時に最新の値以外を消す、write-invalidate
 * 読み出しミス時に、メモリよりも先に他のCPU cacheから値を探す
+
+
+## 記憶階層
+
+| Component    | Latency      | Capacity     |
+| ---          | ---          | ---          |
+| CPU Register | 300 - 500 ps | 100 - 200 B  |
+| L1 Cache     | 1 ns         | 10-100 KB    |
+| L2 Cache     | 5-10 ns      | 8-32 MB      |
+| Memory       | 50-100 ns    | 8-64 GB      |
+| Disk         | 50-100 us    | 256 GB -2 TB | 

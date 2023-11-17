@@ -128,6 +128,8 @@ fn foo() -> impl Iterator<Item=String> {
 * 具体的な戻り値の型はcompilerが推測してくれる。
 * closureを返したり、具体型を隠蔽したりできる。
 * genericsが複雑で戻り値の型がわからない場合にも利用できる。
+* すくなくともtraitを実装した型が存在する(exist)点をとらえて、existential types
+* RPIT(Return Position Impl Trait)とも
 
 ## Blanket Implementation
 
