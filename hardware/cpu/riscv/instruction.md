@@ -41,6 +41,17 @@ bitの参照範囲を並び替えたいというモチベーション。
 
 ## 分岐命令
 
+* `jal rd, offset`
+  * Jump and Link。次の命令addr(pc+4)をrd regに書き込み、現在のpc + offsetの値をpcに書き込む
+    * 戻る場所を記録してjumpすることをjump and linkという
+  * offset(imm)には0bit目の情報がない。これは命令addrは必ず2byte境界にalignされているから、必ず0になる情報はencodeする必要がないため。
+  * `jal offset`のようにrdが省略されるとx1が想定される(疑似命令)
+
+* `jalr rd, offset(rs1)`
+  * Jump and Link Register
+  * rs1の値のoffsetを加えたaddrにjupmする。現在のpcからの相対ではない。現在のpc + 4の値をrd regに書き込む
+  * `jalr rs`のようにrdが省略されるとx1が想定される(疑似命令)
+ 
 
 ## ECALL
 
@@ -54,6 +65,27 @@ assemblerでは使えるが内部的には別の命令で実現されている�
   * `rs1`の内容を`rd`にcopyする
   * `addi rd, rs1, 0`のようにaddと0の加算で実現される
 
+* `ret`
+  * `jalr x0, 0(x1)`
+  * 関数から戻る際に利用。x1にはjal,jalrで呼び出し元の次のaddrが入っているので、そこにjumpする。
+  * 戻る際は呼び出し元のaddrの保持が不要なので、x0に書いている
+
+## Atomic
+
+### LoadReservedとStoreConditional
+
+２つの命令の合わせ技でread modify writeを安全に行う。
+
+* `lr.w rd, (rs1)`
+  * load reserved。rs1のメモリからrd registerに書き込む
+  * loadされたメモリ予約済の印をつける
+    * 各CPUが参照できる場所にrs1 addressにあるthreadからアクセスがあったことを記録する
+    * 既に別のthread(cpu?)の記録があった場合は上書きする
+
+* `sc.w rd, rs2, (rs1)`
+  * store conditional。rs2 registerの4byteをrs1 addressに書き込む。storeに成功したらrdに0を、失敗したら0以外を書く。
+  * load reserved命令で記録されたthreadと自身のthreadが一致するかを判定している
+
 
 ## 特権命令
 
@@ -66,3 +98,6 @@ assemblerでは使えるが内部的には別の命令で実現されている�
 
 *W*ait *F*or *I*nterrupt
 とくにやることがない時に使える
+
+### CSR
+

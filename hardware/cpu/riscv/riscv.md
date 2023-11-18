@@ -49,3 +49,10 @@
 * User Mode(U-Mode)
   * applicationの動作mode
 
+| Level | Encoding | Name       | Abbreviation |
+| ---   | ---      | ---        | ---          |
+| 0     | 00       | User       | U            |
+| 1     | 01       | Supervisor | S            |
+| 2     | 10       | Rserved    | -            |
+| 3     | 11       | Machine    | M            |
+
