@@ -1,5 +1,25 @@
 # EKS
 
+* versionについては[cluster upgrade](./cluster_upgrade.md)を参照
+
+## Architecture
+
+### Control plane
+
+* 最低2つのapi server
+  * 3つのetcd
+  * AZ間に分散
+
+### Worker nodes
+
+worker nodeの管理方法にも選択肢がある。
+混在させることもできる(たぶん)
+
+* AWS Fargate
+* Karnenter
+* Managed node group
+* Self managed nodes
+
 ## Authentication
 
 EKSにおける認証について。  
