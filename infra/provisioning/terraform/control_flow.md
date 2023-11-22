@@ -87,7 +87,7 @@ output "all_arns" {
 * resource定義の中で`each.key`,`each.value`が参照できる
 * for_eachで作成されたresourceはkeyがfor_eachのkeyで値が作成されたresourceのmapになる(countはarray)
 
-#### inline
+### inline
 
 ```hcl
 variable "custom_tags" {

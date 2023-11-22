@@ -1,8 +1,23 @@
 # EKS
 
 * versionについては[cluster upgrade](./cluster_upgrade.md)を参照
+* GA、betaのfeatureはsupportされる
+  * alphaはsupportされない
 
 ## Architecture
+
+### IAM
+
+EKS ClusterがAWS Resource(managed nodes)を操作するためにIAM Roleが必要。
+これは事前に`AmazonEKSClusterPolicy`かそれに大体するpolicyを付与したIAM Roleを作っておく
+
+### VPC
+
+* VPCを指定する必要がある
+* 最低2つのsubnetが必要
+  * 異なるAZ
+
+* [EKS VPC and subnet requirements](https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
 
 ### Control plane
 
@@ -25,7 +40,11 @@ worker nodeの管理方法にも選択肢がある。
 EKSにおける認証について。  
 まずEKS Cluster作成時に`aws-auth`というConfigMapが`kube-system` namespaceに作成される。
 
-Clusterを作成したIAM Userは自動で`service:masters` groupに追加される
+* Clusterを作成したIAM Entityは自動で`service:masters` groupに追加される
+  * このIAM Entityはどのconfigurationにも現れない
+  * AWS以外の仕組みで誰が作ったのかを管理しておく必要がある
+
+* [EKSの認証認可の仕組み](https://zenn.dev/take4s5i/articles/aws-eks-authentication)
 
 ### Authentication flow
 
@@ -35,6 +54,11 @@ Clusterを作成したIAM Userは自動で`service:masters` groupに追加され
 1. IAM Authenticatorはsts get-caller-identityを実行し、Api serverにIAM Principalの情報を返す
 1. ConfigMap `aws-auth`にてIAM Principalとrolebinding subject(group)のマッピングが行われる
 1. Kubernetes上のrolebindingによって認可が実施される
+
+### aws-auth
+
+`kube-system` namespaceに`aws-auth`というConfigMapが作成される。  
+aws-authがIAM Principalとkubernetesの権限の対応を管理する
 
 ## kube-apiserver Unauthorized
 

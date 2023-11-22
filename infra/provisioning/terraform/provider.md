@@ -51,6 +51,8 @@ resourceのregionを分けたいとき等に使える
 ```hcl
 provider "aws" {
   region = "us-east-2"
+  # 利用するprofile
+  profile = var.profile
 
   # Tags to apply to all AWS resources by default
   default_tags {

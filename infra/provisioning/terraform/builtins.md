@@ -30,3 +30,29 @@ erver_text = var.server_text
 ```
 
 * 相対pathはterraformのcwdなのでmodule awareにする
+
+
+## coalesce
+
+* 可変超引数で最初にnull,emptyでないものを返す
+
+```sh
+> coalesce("", "a")
+a
+```
+
+## try
+
+* 引数のexpressionを順番に評価して、errorでないものを返す
+  * 存在しない場合があるfieldを参照する際に有用
+
+```sh
+> local.foo
+{
+  "bar" = "baz"
+}
+> try(local.foo.bar, "fallback")
+baz
+> try(local.foo.boop, "fallback")
+fallback
+```
