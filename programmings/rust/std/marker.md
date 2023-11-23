@@ -15,3 +15,7 @@ struct SelfRef {
 ```
 
 これで`SelfRef`は`!Unpin`になる。
+
+## `Send`と`Sync`
+
+型`T`が別のthreadに安全に渡せるなら`Send`、`&T`が`Send`なら`T`は`Sync`。

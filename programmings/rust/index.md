@@ -1,9 +1,5 @@
 # Rust
 
-* [attribute](attributes/attribute.md)
-* [control_flow](control_flow.md)
-* [test](test.md)
-
 ## Rules
 
 Rust特有のruleについて。
@@ -41,9 +37,6 @@ runtime時にはメモリ割り当てをもたず、static analysisのためだ�
 `Copy`は`Clone`の実装が単なるメモリのbitをcopyするだけの特殊なケースといえる。
 
 
-## `Send`と`Sync`
-
-型`T`が別のthreadに安全に渡せるなら`Send`、`&T`が`Send`なら`T`は`Sync`。
 
 ## Atomic
 
