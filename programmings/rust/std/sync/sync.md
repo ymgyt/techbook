@@ -1,5 +1,7 @@
 # std::sync
 
+## Arc
+
 ## Mutex
 
 * lockしたthreadしかunlockできないようにlockの戻り値のGuardのdropにunlockが実装されている
