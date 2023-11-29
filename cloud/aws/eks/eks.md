@@ -9,7 +9,10 @@
 ### IAM
 
 EKS ClusterがAWS Resource(managed nodes)を操作するためにIAM Roleが必要。
-これは事前に`AmazonEKSClusterPolicy`かそれに大体するpolicyを付与したIAM Roleを作っておく
+これは事前に`AmazonEKSClusterPolicy`かそれに代替するpolicyを付与したIAM Roleを作っておく
+
+EKS Node(Worker node)に必要なIMA Policyは以下  
+[Amazon EKS node IAM role](https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html)
 
 ### VPC
 

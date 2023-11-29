@@ -120,6 +120,18 @@ resource "aws_security_group" "alb" {
   * module利用側がinlineされたresourceを別で定義しているとterraformの仕様でerrorになるらしい
   * 利用側で追加できない
 
+## Local value
+
+```hcl
+locals {
+  name = "foo"
+}
+
+resource "foo" "bar" {
+  name = local.name
+}
+```
+
 
 ## 参照
 
