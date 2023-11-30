@@ -7,6 +7,8 @@
 * String(文字列)はデータ型としてないので、自分でUTF8byte列をおいて表現する
 * I/Oは組み込み環境側で実施する
 
+## Memory
+
 ## Javascript
 
 * i64のデータ型をWASM -> JSに渡せない
