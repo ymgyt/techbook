@@ -2,6 +2,21 @@
 
 * Kubernetes Clusterのprovisioning, upgradingを行うための宣言的なAPIとtoolを提供するためのsub project
 
+## Components
+
+* Core Provider
+  * Cluster apiの本体
+* Infrastructure Provider
+  * workload cluster, vm, networkのprovisioningを行う
+  * 各vendorが提供
+* Bootstrap Provider
+  * clusterの証明書生成
+  * control plane, worker nodeの設定
+* Control Plane Provider
+  * control planeを作る
+    * etcd, api-server, scheduler, dns, controller-manager
+  * static pod, deployment, managed(eks)
+
 ## Memo
 
 * ClusterをCustomResourceとして表現する
@@ -11,11 +26,16 @@
 ## Custom Resource
 
 * `Cluster`
+  * Workload cluster
 * `Machine`
   * Clusterを構成するVMや物理Serverの抽象
 * `MachineSet`
   * 複数`Machine`を表現
+  * ReplicaSetにあたる
 * `MachineDeployment`
+  * Deploymentにあたる
+* `MachineHealthCheck`
+  * Machineの異常を定義
 
 ### Cluster
 

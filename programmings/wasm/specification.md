@@ -9,6 +9,10 @@
 
 ## Memory
 
+## Table
+
+dynamic shared library相当の機能を提供する仕組み
+
 ## Javascript
 
 * i64のデータ型をWASM -> JSに渡せない
