@@ -89,3 +89,12 @@ clusterawsadm bootstrap iam create-cloudformation-stack --config bootstrap-confi
 ```
 
 * `create-cloudformation-stack`で、既に存在する場合は更新処理になる
+
+## Cleanup
+
+1. workload clusterの削除
+  * `kubectl delete cluster <workload_cluster>`
+2. managment clusterの削除
+  * `terraform destroy`
+3. iam cloudformation 削除
+  * `clusterawsadm bootstrap iam delete-cloudformation-stack`
