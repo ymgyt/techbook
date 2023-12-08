@@ -39,30 +39,31 @@
 
 ### Cluster
 
-Kubernetes cluster
-
 ```yaml
-apiVersion: cluster.x-k8s.io/v1alpha2
+apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: my-first-cluster
+  name: clusterapi-workload-1
+  namespace: default
 spec:
   clusterNetwork:
     pods:
-      cidrBlocks: ["192.168.0.0/16"] # Pod ネットワークに割り当てられるネットワークレンジ
-  infrastructureRef: # Infrastructure Provider 固有のリソースへの参照
-  apiVersion: infrastructure.cluster.x-k8s.io/v1alpha2
-  kind: AWSCluster
-  name: my-first-cluster
----
-apiVersion: infrastructure.cluster.x-k8s.io/v1alpha2
-kind: AWSCluster
-metadata:
-name: my-first-cluster
-spec:
-  region: ap-northeast-1 # クラスタを構築するリージョン
-  sshKeyName: cluster-api-aws-default # SSH 接続に使うキーペア名
+      cidrBlocks:
+      - 192.168.0.0/16
+  controlPlaneRef:
+    apiVersion: controlplane.cluster.x-k8s.io/v1beta2
+    kind: AWSManagedControlPlane
+    name: clusterapi-workload-1-control-plane
+  infrastructureRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+    kind: AWSManagedCluster
+    name: clusterapi-workload-1
+
 ```
+
+* ClusterApiのschema. top levelのCRD
+* `controlPlaneRef` provider固有のcontrol planeの設定
+* `infrastructureRef` provider固有のinfrastrutureをprovisioningするresource
 
 ### Machine
 

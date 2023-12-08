@@ -39,3 +39,35 @@
     });
 }
 ```
+
+## Allow unfree
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
+  };
+
+  outputs =
+    { self
+    , nixpkgs
+    }:
+    flake-utils.lib.eachDefaultSystem (system:
+    let
+      pkgs = import nixpkgs { 
+        inherit system;
+        # terraform change licence to unfree
+        config.allowUnfree = true;
+      };
+    in
+    {
+      devShells.default = pkgs.mkShell {
+        packages = with pkgs; [
+          terraform
+        ]; 
+      };
+    };
+```
+
+* defaultではunfreeなpackageがあると失敗する
+* nixpkgs import時に指定する
