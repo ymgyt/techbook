@@ -7,5 +7,9 @@
 bitcoind getnewaddress
 
 # 公開鍵に対応する秘密鍵を表示させる
-bitcoind dumpprivkey <pub_key>
+bitcoind dumpprivkey $pub_key
+
+# testnetを利用
+bitcoind -chain=test
 ```
+
