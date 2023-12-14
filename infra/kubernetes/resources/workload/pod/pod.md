@@ -6,6 +6,8 @@ kind: Pod
 metadata:
   name: xxx
 spec:
+  serviceAccountName: foo
+  automountServiceAccountToken: true
   containers:
   - name: xxx
     image: xxx
@@ -40,7 +42,9 @@ spec:
         memory: "512Mi"
         
 ```
-
+* `serviceAccountName`: service accountの指定
+  * `serviceAccount`はdeprecate
+* `automountServiceAccountToken`: service accountのtokenをmountするかどうか。Service Accoutnを参照
 * `containers.imagePullPolicy`はtagが`latest`だと`Always`になる仕様なので注意
 * `containers.command`はshellで実行されない
   * 指定されなければimageのENTRYPOINTが使われる

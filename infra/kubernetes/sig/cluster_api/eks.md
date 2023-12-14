@@ -64,32 +64,6 @@ clusterctl generate cluster clusterapi-workload-1 --flavor eks-managedmachinepoo
 kubectl apply -f clusterapi-workload-1.yaml
 ```
 
-## clusterawsadm
-
-## bootstrap
-
-`bootstrap-config.yaml`
-
-```yaml
-apiVersion: bootstrap.aws.infrastructure.cluster.x-k8s.io/v1beta1
-kind: AWSIAMConfiguration
-spec:
-  eks:
-    iamRoleCreation: false # Set to true if you plan to use the EKSEnableIAM feature flag to enable automatic creation of IAM roles
-    managedMachinePool:
-      disable: false # Set to false to enable creation of the default node role for managed machine pools
-    fargate:
-      disable: false # Set to false to enable creation of the default role for the fargate profiles
-```
-
-### IAM CloudFormation Stackの更新
-
-```sh
-clusterawsadm bootstrap iam create-cloudformation-stack --config bootstrap-config.yaml
-```
-
-* `create-cloudformation-stack`で、既に存在する場合は更新処理になる
-
 ## Cleanup
 
 1. workload clusterの削除
@@ -98,3 +72,11 @@ clusterawsadm bootstrap iam create-cloudformation-stack --config bootstrap-confi
   * `terraform destroy`
 3. iam cloudformation 削除
   * `clusterawsadm bootstrap iam delete-cloudformation-stack`
+
+
+## Multi tenancy
+
+* workload clusterごとに異なるAWS Identityを利用できる機能
+
+* `Cluster` -> `AWSManagedControlPlane` -> `AWSIdentityReference`
+  * managed control planeをreconcilingする際に利用するaws identity

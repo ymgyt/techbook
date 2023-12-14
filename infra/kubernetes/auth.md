@@ -41,3 +41,9 @@ Api serverがrequestをhandleする際に設定された方法で認証する
   * Authenticateする
 2. Authorization
   * role,cluster-role,bindingを確認
+
+
+## Memo
+
+* cluster certificate authority(CA)でsignされているcertificateを提示できるrequest(user)が認証される
+  * usernameはsubjectのcommon name(CN)から取得される
