@@ -27,6 +27,10 @@ resource "xxx" "foo" {
     create_before_destroy = true
     prevent_destroy = true
 
+    ignore_changes = [
+      some_field_to_ignore,
+    ]
+
     precondition {
       condition     = data.aws_ec2_instance_type.instance.free_tier_eligible
       error_message = "${var.instance_type} is not part of the AWS Free Tier!"
@@ -44,6 +48,8 @@ resource "xxx" "foo" {
 * `prevent_destroy`
   * 削除されることを防ぐ。
   * 意図的に削除したい場合はまずfalseを設定する
+* `ignore_changes`
+  * terraform管理外で変更されてもterraformとしては無視する(planで差分が生じない)
 * `precondition`
   * 調べる
 * `postcondition`

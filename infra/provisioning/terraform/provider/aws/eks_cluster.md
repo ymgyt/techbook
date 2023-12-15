@@ -149,3 +149,22 @@ resource "aws_iam_role_policy_attachment" "eks_node_group" {
   role       = aws_iam_role.eks_node_group.name
 }
 ```
+
+## OIDC
+
+EKS ClusterのOIDC IdPとIAM側で信頼関係を結ぶ。　　
+このresourceにより、IAM RoleがOIDCのentityへのassumeを許可できるようになる
+
+```hcl
+# https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
+resource "aws_iam_openid_connect_provider" "oidc" {
+  url             = data.tls_certificate.eks_cluster.url
+  # これがaud
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = [data.tls_certificate.eks_cluster.certificates[0].sha1_fingerprint]
+}
+
+data "tls_certificate" "eks_cluster" {
+  url = aws_eks_cluster.handson.identity[0].oidc[0].issuer
+}
+```

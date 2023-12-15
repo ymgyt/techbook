@@ -50,29 +50,6 @@ kubectl get secret secret-a -o go-template='{{.data.API_KEY | base64decode}}'
 
 ## Usage
 
-### podに接続する(containerの中でcommandを実行する) 
-
-kubectl get pods等で事前に対象のpod, containerを把握しておく。  
-当然container imageにshellがあることが前提。
-
-```
-# shell
-kubectl exec <pod> --container <container> -n <namespace> --tty --stdin -- /bin/sh
-
-# 特定のcommandを実行
-kubectl exec <pod> --container <container> -n <namespace> --tty --stdin -- /path/app command --arg value
-```
-
-### podの一覧を表示する
-
-```shell
-# labelでfilterできる
-kubectl get pods -n <namespace> -l <label_name>=<label_value>
-
-# nameのみを表示する
-kubectl get pods -o 'go-template={{range .items}}{{printf "%s\n" .metadata.name}}{{end}}'
-```
-
 ### jobを実行する
 
 ```shell
@@ -85,57 +62,6 @@ kubectl create job <job_name> --from=cronjob/<cronjob_name> -n <namespace>
 kubectl delete job <job_name> -n <namespace>
 ```
 
-### yamlを適用する
-
-```shell
-kubectl apply -f path/to/object.yaml
-```
-
-### configを確認する
-
-```shell
-kubectl config view
-
-# 適用されているcontextを表示
-kubectl config current-context
-```
-
-### secretの中身をみる
-
-```shell
-kubectl get secret xxx-secret -o jsonpath="{.data.key1}" | base64 -d; 
-```
-
-### cluster IPで公開されているserviceにlocalから接続する
-
-```shell
-kubectl port-forward svc/service-xxx 8080:443
-```
-
-### APIに登録されている全てのresourceを確認する
-
-```shell
-# kubectl get all --all-namespace はすべてを表示しない
-kubectl api-resources
-```
-
-### namespace一覧を取得する
-
-```shell
-kubectl get namespace
-```
-
-### 全てのresourceを確認する
-
-```shell
-kubectl get all
-```
-
-### resourceのyamlをみる
-
-```shell
-kubectl get svc my-service -o yaml
-```
 
 ### dry-runでmanifestを生成する
 
