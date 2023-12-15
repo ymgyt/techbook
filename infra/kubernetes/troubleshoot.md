@@ -5,3 +5,5 @@
 * `kubectl get nodes`
 * `kubectl get componentstatus`
 * `kubectl get events`
+* `kubectl describe pod`してEventsを確認する
+  
