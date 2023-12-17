@@ -134,3 +134,13 @@ data "terraform_remote_state" "db" {
 ```
 
 * `data.terraform_remote_state.db.outputs.address`で参照できる
+
+## State操作
+
+```sh
+# 特定のresourceのstateを確認
+terraform state show foo_xxx.yyy
+
+# stateの一覧を確認
+terraform state list
+```

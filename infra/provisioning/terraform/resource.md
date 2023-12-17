@@ -1,22 +1,5 @@
 # Terraform Resource
 
-## Meta Arguments
-
-#### `for_each`
-
-`each`にiterateしている情報が入っている。
-
-```terraform
-resource "azurerm_resource_group" "rg" {
-  for_each = {
-    a_group = "eastus"
-    another_group = "westus2"
-  }
-  name     = each.key
-  location = each.value
-}
-```
-
 ## Lifecycle
 
 全resource共通で、依存関連の指定

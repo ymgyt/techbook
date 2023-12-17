@@ -27,3 +27,7 @@ kubeadm token create --print-join-command
 # workerをclusterにjoinさせる
 # master nodeのkubeadm token create --print-join-commandを実行する
 ```
+
+## PKI
+
+* `/etc/kubernetes/pki`

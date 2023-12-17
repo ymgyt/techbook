@@ -16,4 +16,7 @@ nix profile list
 
 # listで番号表示されるので
 nix profile upgrade 0
+
+# remove
+nix profile remove 0
 ```

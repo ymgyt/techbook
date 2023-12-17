@@ -57,9 +57,15 @@ openssl x509 -text -noout -in certificate.pem
 
 ## Certificate Sign Request
 
+拡張用の設定file(`csr.ext`)を作成する
+
+```text
+subjectAltName = DNS:*.ymgyt.io, DNS:ymgyt.io
+```
+
 ```shell
 # 生成
-openssl req -new -key ymgyt.key -subj "/CN=ymgyt" -out csr.pem
+openssl req -new -key ymgyt.key -subj "/CN=ymgyt" -extfile csr.ext -out csr.pem
 
 # 表示
 openssl req -text -noout -in csr.pem

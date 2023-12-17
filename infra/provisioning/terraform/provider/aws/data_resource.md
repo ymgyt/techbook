@@ -34,6 +34,8 @@ aws_caller_identity = {
 }
 ```
 
+resourceやsource codeにaccount id書かなくてよくなるのでpublic repoで便利かも
+
 ## arn
 
 ARNをparseしてくれる

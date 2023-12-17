@@ -43,7 +43,6 @@ terraform validate
 * `terraform dot`で依存関係をvisualizeできる
 
 
-
 ### Workspace
 
 ```sh
@@ -60,6 +59,12 @@ terraform workspace select
 
 workspaceについてはstateを参照
 
+## Log
+
+* `TF_LOG=debug terraform plan`
+  * TRACE,DEBUG,INFO,...
+  * `TF_LOG_PATH`でfile書き出しもできる
+
 ## Install
 
 sourceをcloneしてきて指定のversionをcheckoutしてinstallする。
@@ -71,57 +76,6 @@ git checkout <version>
 go install
 terraform version
 ```
-
-## Expressions
-
-### `for`
-
-
-`for <assign_var> in <iterator> : <expression>` という感じ。
-
-```terraform
-# listのiterate
-[for s in var.list : upeer(s)]
-        
-# enumerate        
-[for i, v in var.list : "${i} is ${v}"] 
-        
-# mapのiterate
-[for k, v in var.map : length(k) + length(v)]
-
-# filter
-[for s in var.list : upper(s) if s != ""]
-```
-
-mapを出力することもできる。  `for`を囲む記号でresult typeを制御する。
-
-```terraform
-{for s in var.list : s => upper(s)}
-
-# { 
-# foo = "FOO"
-# bar = "BAR"
-# }
-```
-
-## Import
-
-宣言されているresourceのstateを更新する処理。  
-したがって、import前に対応する`resource "xxx" "yyy"`が必要。
-
-hclの設定file, 実IDがあるstate, 実際のinfra。この3つが構成要素。importはhcl, 実際のinfraがある場合にstate fileを作成する処理といえる  
-
-第２引数のIDは実際のinfraを識別するためのID。  
-IDになにが必要かはresourceごとに違うので、documentをみる。
-
-
-```sh
-# module側で宣言されているresource
-terraform import module.xxx.vault_audit.stdout yyy
-```
-
-* importしたいresourceがmodule側で宣言されている場合は先頭にmoduleつけて参照する
-
 
 ## 参考
 

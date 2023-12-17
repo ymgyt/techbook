@@ -118,6 +118,14 @@ resource "aws_autoscaling_group" "example" {
 
 * inlineをiterateするには`dynamic`を使う
 
+## 三項演算子
+
+```hcl
+resource "foo" "bar" {
+  count = var.env == "prod" ? 1 : 0
+}
+```
+
 
 ## for expression
 
