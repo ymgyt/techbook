@@ -46,8 +46,9 @@ resource "xxx" "foo" {
 * `create_before_destroy`
   * 原則はdelete,createだが、他のresourceに参照されている等で消せない場合がある。指定するとcreateしてからdeleteされる
 * `prevent_destroy`
-  * 削除されることを防ぐ。
+  * 削除されることを防ぐ。全resourceに書ける
   * 意図的に削除したい場合はまずfalseを設定する
+  * resource定義全体を削除したあとにapplyしたら消せるので万能ではない
 * `ignore_changes`
   * terraform管理外で変更されてもterraformとしては無視する(planで差分が生じない)
 * `precondition`

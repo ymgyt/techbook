@@ -64,15 +64,3 @@ greet "yuta" --age 10
 * error
 
 
-## Recipe
-
-### each
-
-```nu
-> ls | each { |it|
-    cd $it.name
-    make
-}
-```
-
-* cdは`PWD`を変更するが、これはblockに閉じるので次のeachに影響しない

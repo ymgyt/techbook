@@ -31,6 +31,13 @@ terraform destroy
 # REPL
 # 関数等をためせる
 terraform console
+
+# formatの適用
+terraform fmt -recursive [-check]
+
+# validation
+# 再帰的でないので、directory単位で適用する必要がある
+terraform validate
 ```
 
 * `terraform dot`で依存関係をvisualizeできる
@@ -114,31 +121,6 @@ terraform import module.xxx.vault_audit.stdout yyy
 ```
 
 * importしたいresourceがmodule側で宣言されている場合は先頭にmoduleつけて参照する
-
-
-## Versionの指定
-
-
-```hcl
-terraform {
-  required_version = ">= 1.4.6"
-
-  required_providers {
-    vault = {
-      version = ">= 3.15.2"  
-    }
-  }
-}
-```
-
-
-* `main.tf`に書く
-* `terraform version`で現在のprovider含めたversionがわかる
-* version constraintsの書き方はdoc参照
-  * https://developer.hashicorp.com/terraform/tutorials/configuration-language/versions#terraform-version-constraints
-  * `>= 1.2.3`は1.2.3よりgrater
-  * `~>` はpatchのみあげられる
-
 
 
 ## 参考

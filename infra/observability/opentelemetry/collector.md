@@ -163,7 +163,28 @@ service:
       receivers: [hostmetrics]
       processors: [resourcedetection/system]
       exporters: [logging]
+
+  extensions: [memory_ballast]
+
+  telemetry:
+    logs:
+      level: INFO
+      development: false
+      encoding: console # | json
+      disable_caller: false
+      disable_stacktrace: false
+      output_paths: ["stderr"]
+      error_output_paths: ["stderr"]
+      initial_fields: [""]
+    metrics:
+      level: basic # none | basic | normal | detailed
+      address: 127.0.0.1:8888
 ```
+
+* `extensions`はtop levelのextensionのうち有効にするものを指定
+* `telemetry`はcollector自身の情報出力を制御
+  * defaultでは`http://127.0.0.1:8888/metrics`でlistenしている
+
 
 ## Environment variable substitution
 

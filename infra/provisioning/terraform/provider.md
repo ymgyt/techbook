@@ -2,7 +2,12 @@
 
 ```hcl
 terraform {
+  required_version = ">= 1.4.6"
+
   required_providers {
+    vault = {
+      version = ">= 3.15.2"  
+    }
     aws = {
       source  = "registry.terraform.io/hashicorp/aws"
       version = "~> 4.0"
@@ -11,7 +16,14 @@ terraform {
 }
 ```
 
-* terraformに必要なproviderの情報を渡すには`terraform.required_provider`を定義する
+
+* `main.tf`に書く
+* `terraform version`で現在のprovider含めたversionがわかる
+* version constraintsの書き方はdoc参照
+  * https://developer.hashicorp.com/terraform/tutorials/configuration-language/versions#terraform-version-constraints
+  * `>= 1.2.3`は1.2.3よりgrater
+  * `~>` はpatchのみあげられる
+
 * `source`は`host/organization/type`で定義する
   * hostが省略されると`registry.terraform.io`
   * organizationが省略されると`hashicorp`

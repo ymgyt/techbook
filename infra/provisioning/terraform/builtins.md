@@ -56,3 +56,22 @@ baz
 > try(local.foo.boop, "fallback")
 fallback
 ```
+
+## keys
+
+map,objectのkeyをlistで返す
+
+```hcl
+locals {
+  public_subnets = {
+    "ap-northeast-1a" = {
+      "cidr" = "10.0.1.0/24"
+    },
+    "ap-northeast-1c" = {
+      "cidr" = "10.0.2.0/24"
+    },
+  }
+
+  foo = keys(local.public_subnets)[0] # => "ap-northeast-1a"
+}
+```

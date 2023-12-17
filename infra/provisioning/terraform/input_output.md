@@ -87,6 +87,13 @@ output NAME {
   sensitive = true
   depends_on = xxx
 }
+
+# for_eachで作ったresourceをlistにする
+output "worker_instance_ids" {
+  value = [for x in aws_instance.worker : x.id]
+}
 ```
 
 * `depends_on`は通常必要ないが、依存関係を伝えなければいけない場合もあるらしい
+
+* `terraform output [-json|-raw] var`で出力できるので、taskrunnerと連携できる
