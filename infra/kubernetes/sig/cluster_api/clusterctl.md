@@ -3,7 +3,10 @@
 ## init
 
 ```sh
-clusterctl init --infrastructure aws
+clusterctl init \
+  --infrastructure aws \
+  --target-namespace capi-providers \
+  [-v 5]
 ```
 
 * kubectlが指してるclusterにcluste api関連のcomponentをinstallしてmanagement clusterにする
@@ -13,6 +16,10 @@ clusterctl init --infrastructure aws
   * 指定しない場合はdefault(`capi-system`)が利用される
   * 指定すると全てのcomponentに影響する
 * cluster api providerはcert-managerに依存している
+* `--validate`
+  * install後にvalidation処理を実施。defaultはtrue
+* `-v` logging verbosity
+  * sourceみる限り5でyaml levelを出力していた
 
 
 ## generate 

@@ -40,6 +40,7 @@ worker nodeの管理方法にも選択肢がある。
 
 ## Authentication
 
+
 EKSにおける認証について。  
 まずEKS Cluster作成時に`aws-auth`というConfigMapが`kube-system` namespaceに作成される。
 
@@ -48,6 +49,33 @@ EKSにおける認証について。
   * AWS以外の仕組みで誰が作ったのかを管理しておく必要がある
 
 * [EKSの認証認可の仕組み](https://zenn.dev/take4s5i/articles/aws-eks-authentication)
+
+### Authentication mode
+
+Clusterには以下のいずれかのauthentication modeの設定がある。
+
+* `aws-auth` ConfigMap (`CONFIG_MAP`)
+  * 今までの方法
+* ConfigMapとaccess entries(`API_AND_CONFIG_MAP`)
+  * ConfigMapとaccess entriesは独立している
+* Access entries only(`API`)
+
+
+* access entries(api)の利用にはkubernetesのversionとeksのplatform versionが影響する
+  * 確認するには`aws eks describe-cluster --name my-cluster --query 'cluster.{KubernetesVersion:": version, "PlatformVersion: platformVersion"}'`
+
+* 前提条件を満たすClusterの場合、Clusterを作成したIAM principalは自動的にaccess entriesに追加される
+
+* `API`を有効にすると、無効にはもどせない
+  * `aws eks update-cluster-config --name my-cluster --access-config authenticationMode=API_AND_CONFIG_MAP`
+
+* IAM PrincipalのARNとkubernetes上のgroupを紐付けられる
+  * kubernetes上のgroupへの権限付与はRoleBinding等でkubernetes側でおこなう前提
+
+* AWS側で、namespaceを指定するpolicyを定義して紐づけることもできる
+  * これはIAM Policyとは別でIAM EKS Policyというリソース
+
+* [公式Blog Handson](https://aws.amazon.com/blogs/containers/a-deep-dive-into-simplified-amazon-eks-access-management-controls/)
 
 ### Authentication flow
 
@@ -62,6 +90,9 @@ EKSにおける認証について。
 
 `kube-system` namespaceに`aws-auth`というConfigMapが作成される。  
 aws-authがIAM Principalとkubernetesの権限の対応を管理する
+
+* [設定例](https://repost.aws/knowledge-center/eks-configure-sso-user)
+* [EKS Best Practice](https://aws.github.io/aws-eks-best-practices/security/docs/iam/#create-the-cluster-with-a-dedicated-iam-role)
 
 ### OIDC ID Provider
 
@@ -90,3 +121,40 @@ Service accountとIAM Roleを紐づけることで、PodごとにAWS権限を制
   4.1 上記の設定された環境変数を考慮する
 5. Roleがassumeされ、そのcredentialを利用する
   
+
+## Log
+
+* Controll planeのlogは明示的に有効に設定する必要がある
+  * 設定はcomponentごとに制御する
+
+* Component
+  * `api` kube-apiserver
+  * `audit` kubernetesのaudit
+  * `authenticator` EKS固有
+    * STSの解決結果のlogのっていたりする
+  * `controllerManager`
+  * `scheduler`
+
+* Cloudwatch log groupは`/aws/eks/<custer-name>/cluster`になる
+  * logのretention daysはこの名前に設定する
+
+## Troubleshooting
+
+### kubectlが通らない
+
+```
+error: You must be logged in to the server (the server has asked for the client to provide credentials)  
+```
+
+Cloudwatch logs insightにて
+
+logGroup `/aws/eks/<cluster-name>/cluster`
+
+```
+fields @logstream, @timestamp, @message
+| sort @timestamp desc
+| filter @logStream like /authenticator/
+| limit 50
+```
+
+で認証の成功/失敗のlogがでるので確認する

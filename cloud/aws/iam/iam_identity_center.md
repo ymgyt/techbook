@@ -43,6 +43,11 @@ sso_registration_scopes = sso:account:access
 
 
 利用前にloginする
-```
+
+```sh
 aws sso login --profile my-profile
-`
+
+# session単位で更新する
+aws sso login --sso-session foo-sso
+```
+

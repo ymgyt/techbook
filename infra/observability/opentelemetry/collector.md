@@ -120,31 +120,29 @@ processors:
 ## Exporter
 
 ```yaml
-    exporters:
-      # https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/loggingexporter/README.md
-      logging:
-        # detailed | normal | basic
-        verbosity: basic
-        sampling_initial: 2
-        sampling_thereafter: 500
+exporters:
+  # https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/loggingexporter/README.md
+  logging:
+    # detailed | normal | basic
+    verbosity: basic
+    sampling_initial: 2
+    sampling_thereafter: 500
 
-      otlp/elastic:
-        endpoint: "apm.monitoring:8200"
-        tls:
-          insecure: true
-              
-    service:
-      pipelines:
-        metrics:
-          receivers: [hostmetrics, kubeletstats]
-          processors: [memory_limiter, resourcedetection, batch]
-          exporters: [otlp/elastic]
-        logs:
-          receivers: [filelog]
-          processors: [memory_limiter, resourcedetection, batch]
-          exporters: [otlp/elastic]
-
-
+  otlp/elastic:
+    endpoint: "apm.monitoring:8200"
+    tls:
+      insecure: true
+          
+service:
+  pipelines:
+    metrics:
+      receivers: [hostmetrics, kubeletstats]
+      processors: [memory_limiter, resourcedetection, batch]
+      exporters: [otlp/elastic]
+    logs:
+      receivers: [filelog]
+      processors: [memory_limiter, resourcedetection, batch]
+      exporters: [otlp/elastic]
 ```
 
 ## Service

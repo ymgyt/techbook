@@ -7,3 +7,7 @@
 * `kubectl get events`
 * `kubectl describe pod`してEventsを確認する
   
+
+## Resourceが足りていない状況
+
+* どう調査するか

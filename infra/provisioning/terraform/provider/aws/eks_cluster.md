@@ -43,11 +43,20 @@ resource "aws_eks_cluster" "handson" {
   }
   version = "1.28"
 
+  # https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/control-plane-logs.html
+  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+
   #  # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
   # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.
   depends_on = [
     aws_iam_role_policy_attachment.eks_cluster
   ]
+}
+
+# Cluster log management
+resource "aws_cloudwatch_log_group" "cluster" {
+  name              = "/aws/eks/${local.cluster_name}/cluster"
+  retention_in_days = 30
 }
 
 # IAM Role
