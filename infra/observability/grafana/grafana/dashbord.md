@@ -17,3 +17,10 @@ apiVersion: 1
 ## Visualization
 
 * [公式visualization doc](https://grafana.com/docs/grafana/latest/visualizations/)
+
+## Link
+
+* panel link
+  * URLに特殊な変数を利用でき、click時に置換できる
+    * 現在のtime rangeとかを渡せる
+* data link
