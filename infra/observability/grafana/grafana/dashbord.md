@@ -14,3 +14,6 @@ apiVersion: 1
     type: file
 ```
 
+## Visualization
+
+* [公式visualization doc](https://grafana.com/docs/grafana/latest/visualizations/)

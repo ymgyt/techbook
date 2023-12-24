@@ -8,6 +8,23 @@ grafana server \
   --config path/to/garafana.ini
 ```
 
+## User Management
+
+* 自分でdeployし、設定file変更していなければ、`admin/admin`のadmin userがいる
+
+* builtin role
+  * admin
+    * 全てできる
+  * editor
+    * dashboardの変更ができる
+    * data sourceの変更はできない
+  * viewer
+    * dashboardがみえる
+
+### Team
+
+userのgroupとしてteamがある
+
 ## Configuration
 
 * `$WORKING_DIR/conf/defaults.ini`がdefault
