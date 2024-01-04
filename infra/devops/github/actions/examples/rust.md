@@ -1,5 +1,29 @@
 # Rust Actions
 
+## Rust toolchainのintall
+
+```yaml
+jobs:
+  test:
+    name: cargo test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - run: cargo test --all-features
+```
+
+* `dtolnay/rust-toolchain`を使う
+  * `@stable`と書くと、引数の`toolchain`のdefault値がstableになっている
+
+## cache
+
+TODO: rust-cache
+
+## install tools
+
+TODO: taiki install-action
+
 ## use cargo make
 
 CIでもcargo makeをtask runnerとして利用する。

@@ -12,21 +12,21 @@ steps:
 * same repository
 * Docker Hubのdocker container
 
-## 出力parameter
+## output parameter
+
 
 ```yaml
 jobs:
-  release:
+  foo:
     steps:
-    - name: Version
-      run: echo "::set-output name=version::$(./scripts/print_version.sh)"
-      id: version
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      with:
-        name: ${{ steps.version.outputs.version }}
+    - name: Set color
+      id: color-selector
+      run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
+    - name: Get color
+      env:
+        SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
+      run: echo "The selected color is $SELECTED_COLOR"
 ```
 
-* stepは何らかの結果をexportできる
-* `echo "::set-output name={name}::{value}`がformat
-* `${{ steps.{step_id}}.output.{name}`で参照できる
+* `GITHUB_OUTPUT`に`key=value`のformatで書き込む
+* `steps.<id>.outputs.<key>`で参照できる

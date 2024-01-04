@@ -78,3 +78,23 @@ fn main() {
 * `Condvar::wait()`にguardが必要なのは、unlockしてからwaitするまでの間に通知がきた場合それを見逃してしまう可能性があるから
   * waitするまでguardを手放さなければ、通知側をまたせられる
 * wait_timeout()もある
+
+
+## OnceLock
+
+複数threadからアクセスできる(Sync)、一度だけ初期化したい型を提供する
+
+```rust
+use std::sync::OnceLock;
+
+fn instrumentation_scope() -> &'static InstrumentationScope {
+    static INSTRUMENT_SCOPE: OnceLock<InstrumentationScope> = OnceLock::new();
+
+    INSTRUMENT_SCOPE.get_or_init(|| InstrumentationScope {
+        name: env!("CARGO_PKG_NAME").to_owned(),
+        version: env!("CARGO_PKG_VERSION").to_owned(),
+        attributes: Vec::new(),
+        dropped_attributes_count: 0,
+    })
+}
+```

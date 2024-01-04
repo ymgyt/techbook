@@ -32,7 +32,7 @@ use clap::{Parser, Subcommand, Args};
     version, 
     propagate_version = true,
     disable_help_subcommand = true,
-    help_expected = true,     // argにhelpを必須にする
+    help_expected = true,     // argにhelpを必須にする(deny(missing_docs))のruntime版
     infer_subcommands = true, // "f"に対して"foo"を推測する
     bin_name = "foo",         // clapが認識するbin name
     about = "xxx",
