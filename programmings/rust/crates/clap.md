@@ -15,7 +15,7 @@ clap = { features = [
     "env",           # 環境変数をparse時に読む
     "unicode",       # emoji等のunicodeをsupport
     "wrap_help",     # helpのtext wrapping処理
-    "string",        # わかってない
+    "string",        # default_valueで動的なStringを使えるようになる
     ]
 }
 ```
