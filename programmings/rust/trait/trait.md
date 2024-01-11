@@ -140,3 +140,32 @@ traitが`&self`しかとらない場合、`&T`にそのtraitが実装されて�
 * `&T where T: Trait`
 * `&mut T where T: Trait`
 * `Box<T> where T: Trait`
+
+
+## RPITIT
+
+```rust
+trait Container {
+    fn items(&self) -> impl Iterator<Item = Widget>;
+}
+
+impl Container for MyContainer {
+    fn items(&self) -> impl Iterator<Item = Widget> {
+        self.items.iter().cloned()
+    }
+}
+```
+
+* traitのretunrに`impl Trait`を書けるようになった
+  * [公式Blog](https://blog.rust-lang.org/2023/12/21/async-fn-rpit-in-traits.html)
+
+* これによって`async fn`もかけるようになった
+  * `return impl Future`のsugarなので
+
+```rust
+trait HttpService {
+    async fn fetch(&self, url: Url) -> HtmlBody;
+//  ^^^^^^^^ desugars to:
+//  fn fetch(&self, url: Url) -> impl Future<Output = HtmlBody>;
+}
+```

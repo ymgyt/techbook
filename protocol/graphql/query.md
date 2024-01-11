@@ -30,6 +30,37 @@ query {
 }
 ```
 
+```
+query GetBooksAndAuthors {
+  books {
+    title
+  }
+
+  authors {
+    name
+  }
+}
+```
+
+```
+{
+  "data": {
+    "books": [
+      {
+        "title": "City of Glass"
+      },
+      ...
+    ],
+    "authors": [
+      {
+        "name": "Paul Auster"
+      },
+      ...
+    ]
+  }
+}
+```
+
 ## Variables
 
 sdl
@@ -68,7 +99,7 @@ query FetchProduct($id: ID!, $format: PriceFormat!) {
 
 ## Alias
 
-```
+```graphql
 query {
     abcProduct: product(id: "abc") {
         name
@@ -86,5 +117,29 @@ response
             "price": 10,
         } 
     }
+}
+```
+
+## Unionに対するquery
+
+* responseの型が`type Response = SubscribeFeedSuccess | SubscribeFeedError`のようにunionになっている場合、selectorをかき分ける
+* `__typename`はtoolが要求したから書いた
+
+```graphql
+mutation SubscribeFeed($input: SubscribeFeedInput!) {
+  subscribeFeed(input: $input) {
+    __typename
+    ... on SubscribeFeedSuccess {
+      url
+      status {
+        code
+      }
+    }
+    ... on SubscribeFeedError {
+      status {
+        code
+      }
+    }
+  }
 }
 ```

@@ -103,41 +103,6 @@ EKS Clusterを建てると裏側でOIDC ID Providerが設定される
 * eks用のconfig-mapにIAM Userを登録する必要がある
 https://aws.amazon.com/jp/premiumsupport/knowledge-center/eks-api-server-unauthorized-error/
 
-## IRSA
-
-IAM Role for Service Accounts  
-Service accountとIAM Roleを紐づけることで、PodごとにAWS権限を制御できる仕組み。
-
-概ね以下の流れ。
-
-1. `kubectl apply -f deployment.yaml`でPodが作成される
-2. apiserverのadmission controlが実行される
-  2.1 Mutating Admission webhookが実行される
-  2.2 [eks-pod-identity-webhook](https://github.com/aws/amazon-eks-pod-identity-webhook) が実行される
-3. Podの`spec.serviceAccountName`で指定されたservice accountのannotation(`eks.amazonaws.com/role-arn: ARN`)に基づいてPodのcredentialが設定される
-  3.1 環境変数 `AWS_ROLE_ARN`, `AWS_WEB_IDENTITY_TOKEN_FILE`が設定される
-  3.2 EKSのIdpが発行したjwtが発行される
-4. AWS SDKが`sts:AssumeRoleWithWebIdentity`を実行する
-  4.1 上記の設定された環境変数を考慮する
-5. Roleがassumeされ、そのcredentialを利用する
-  
-
-## Log
-
-* Controll planeのlogは明示的に有効に設定する必要がある
-  * 設定はcomponentごとに制御する
-
-* Component
-  * `api` kube-apiserver
-  * `audit` kubernetesのaudit
-  * `authenticator` EKS固有
-    * STSの解決結果のlogのっていたりする
-  * `controllerManager`
-  * `scheduler`
-
-* Cloudwatch log groupは`/aws/eks/<custer-name>/cluster`になる
-  * logのretention daysはこの名前に設定する
-
 ## Troubleshooting
 
 ### kubectlが通らない

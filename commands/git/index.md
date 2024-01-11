@@ -108,6 +108,7 @@ git remote att upstream https://github.com/ymgyt/upstream-x
 git fetch upstream
 git checkout main
 git merge upstream/main
+git push origin main
 ```
 
 ### PRをcheckout

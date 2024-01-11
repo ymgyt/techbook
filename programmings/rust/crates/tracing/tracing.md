@@ -24,3 +24,24 @@ info!(%url, content_type = ?res.headers().get("content-type"), "Got a response!"
 )]
 async fn foo(&self, input: Input) -> Result<(), Error> { /* ... */ }
 ```
+
+## span
+
+### 作成後にfieldの値をset
+
+```rust
+use tracing::{trace_span, field};
+
+// 作成時にわからない場合は、field::Emptyをsetしておく
+let span = trace_span!("my_span", parting = field::Empty);
+
+// あとでsetできる
+span.record("parting", "goodbye world!");
+
+// spanの参照がない場合は
+tracing::Span::current().record("parting", "foo");
+```
+
+* 作成時に宣言されていないfieldにはrecordできない
+  * `foo = field::Empty`をsetしておく
+* 何回でもrecordできる
