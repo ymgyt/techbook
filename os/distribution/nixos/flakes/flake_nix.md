@@ -66,6 +66,8 @@
 }
 ```
 
+* `pkgs.mkShell`の`package`と`buildInputs`派があり、どう違うのかわかっていない
+
 ### app
 
 ```nix

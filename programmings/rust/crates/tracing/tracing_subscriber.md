@@ -12,22 +12,6 @@ tracing-subscriber = { version = "0.3.17", features = ["smallvec", "fmt", "ansi"
 ## build subscriber
 
 ```rust
-fn init_logger(verbose: u8) -> Result<()> {
-    tracing_subscriber::FmtSubscriber::builder()
-        .with_target(true)
-        .with_timer(tracing_subscriber::fmt::time::ChronoLocal::rfc3339())
-        .with_env_filter(match verbose {
-            0 => "app=info",
-            1 => "app=debug,warp=debug,reqwest=debug",
-            2 => "app=trace,warp=trace,reqwest=debug",
-            _ => "trace",
-        })
-        .try_init()
-        .map_err(|e| anyhow!(e))
-}
-```
-
-```rust
 // Configure tracing_subscriber.
 fn init_tracing(opts: &cli::TracingOptions) {
     use tracing_subscriber::{
@@ -76,3 +60,29 @@ fn init_tracing() {
         .init();
 }
 ```
+
+### Envfilterをglobalにしない
+
+```rust
+fn init_tracing() {
+    use syndapi::serve::layer::audit;
+    use tracing_subscriber::{
+        filter::EnvFilter, fmt, layer::SubscriberExt, util::SubscriberInitExt as _, Registry,
+    };
+
+    Registry::default()
+        .with(
+            fmt::Layer::new()
+                .with_filter(
+                    EnvFilter::try_from_default_env()
+                        .or_else(|_| EnvFilter::try_new("info"))
+                        .unwrap(),
+                ),
+        )
+        .with(audit::layer())
+        .init();
+}
+```
+
+* `FmtLayer`に`with_filter()`でEnvFilterをつけるとひとつ下のAuditLayerは影響をうけない
+* Fmt,Env,Auditをそれぞれ`with()`でつなげると下にあってもEnvFilterの影響をうける(global)になるので注意

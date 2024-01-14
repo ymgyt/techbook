@@ -24,3 +24,18 @@
 
 
 
+## git-credential-cache
+
+builtinのcache機構?
+
+```sh
+# 古いtokenを忘れさせる 
+git credential-cache exit
+```
+
+`~/.config/git/config`
+
+```
+[credential]
+    helper = "cache --timeout=<seconds>"
+```
