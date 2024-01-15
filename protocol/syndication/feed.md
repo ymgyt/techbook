@@ -1,5 +1,7 @@
 # Feed
 
+* FeedとはA consistent machine-redable file
+
 ## 各種規格
 
 * RSS1.0
