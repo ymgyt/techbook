@@ -124,6 +124,10 @@ https://docs.helix-editor.com/keymap.html
 * ~: switch the case of selected letters
 * `: to lower(Shift to upper)
 
+## Completion
+
+* Ctrl-x: completionを実行
+
 ## Comment
 
 * Ctrl-c
@@ -133,3 +137,7 @@ https://docs.helix-editor.com/keymap.html
 一時的に設定を変えたいとき 
 
 * `:set whitespace.render all`: whitespace等を特別な文字で描画する
+
+
+aaa bbb            ccc
+aaaaa bb ccccc

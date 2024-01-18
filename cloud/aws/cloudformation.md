@@ -23,3 +23,8 @@ MyLambdaLogGroup:
     Properties:
       LogGroupName: /aws/lambda/mylambdalog
 ```
+
+## Output
+
+* exportNameはAccount/Regionのscopeでuniqueである必要がある。
+  * CFにexportNameを指定して値を取得するapiがあるのでそれの制約と思われる

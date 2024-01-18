@@ -93,6 +93,18 @@ on:
 
 * cron tab方式で指定する
 
+### workflow_dispatchで手動で実行
+
+```yaml
+on:
+  workflow_dispatch:
+```
+
+* API,Browser等からworkflow_dispatch eventを生成することができこれでtriggerできる
+* inputも指定できる
+* 設定するとUIにRun workflow buttonが現れる
+
+
 ## `permissions`
 
 * Jobごとに`GITHUB_TOKEN`が生成されている。  

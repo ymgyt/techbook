@@ -89,6 +89,23 @@
 * provisioningしたメモリと実際のCPUベースで課金される
 * request来なくてもメモリ分は課金されそう
 
+## Custom domain
+
+* Apprunner側でdomainがふりだされる(awsapprunner.comのsub comain)
+* Userのdomainを紐づけることができる(app.ymgyt.io)
+
+* Route53 Hosted zone `foo.ymgyt.io`に`apprun.foo.ymgyt.io`をapprunnerに紐づけたいとする
+  * Link domainをconsoleで選択する(Route53以外を選択してもOK)
+  * CNAME Recordの作成を指示されるので、Hosted zone `foo.ymgyt.io`に作成する
+  * `apprun.foo.ymgyt.io`をName, Alias=true, Record Type: A, 該当apprunnerを選択してrecordを作成する
+  * しばらくすると検証が完了する
+
+### Custom domainの紐付け
+
+1. CNAME recordを作る
+2. DNS target recordを作る
+
+
 ## ハマったところ
 
 * cdkで1stackの中でECR RepositoryとApp Runner Serviceを作ろうとしてエラーになった。

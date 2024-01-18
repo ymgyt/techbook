@@ -111,3 +111,35 @@
       });
 }
 ```
+
+## Source filter
+
+
+```nix
+{
+    inherit (pkgs) lib;
+    
+    src = lib.cleanSourceWith {
+      src = ./.; # The original, unfiltered source
+      filter = path: type:
+        (lib.hasSuffix "\.html" path) ||
+        (lib.hasSuffix "\.scss" path) ||
+        # Example of a folder for images, icons, etc
+        (lib.hasInfix "/assets/" path) ||
+        # Default filter from crane (allow .rs files)
+        (craneLib.filterCargoSources path type)
+      ;
+    };
+
+    # Common arguments can be set here to avoid repeating them later
+    commonArgs = {
+      inherit src;
+      # ...
+    };
+}
+```
+
+* `.rs`以外にも依存している場合にfilterを書ける
+  * `path: type: bool`の型
+  * `path`には`/nix/store/...`のfull pathが入る
+  * `type`にはfileやdirectoryが入る

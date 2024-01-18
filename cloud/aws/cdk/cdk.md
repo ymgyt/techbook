@@ -76,6 +76,7 @@ new MyDevStack(app, 'dev', {
 
 * 環境変数 `CDK_DEFAULT_{ACCOUNT,REGION}`を利用するとcdk synth時に`--profile`で指定したaccountを対象にできる
 * accountをcodeにhard codeするか実行時に解決できるようにしておくかはポリシー次第
+* `AWS_PROFILE`で指定があるとそこから対象環境を判定してくれる
 
 ```sh
 cdk diff --profile foo

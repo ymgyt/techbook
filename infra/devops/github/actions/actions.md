@@ -30,3 +30,5 @@ jobs:
 
 * `GITHUB_OUTPUT`に`key=value`のformatで書き込む
 * `steps.<id>.outputs.<key>`で参照できる
+
+

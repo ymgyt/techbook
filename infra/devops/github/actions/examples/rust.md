@@ -10,11 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: dtolnay/rust-toolchain@stable
+      components: "clippy,rustfmt"
     - run: cargo test --all-features
 ```
 
 * `dtolnay/rust-toolchain`を使う
   * `@stable`と書くと、引数の`toolchain`のdefault値がstableになっている
+  * `uses: dtolnay/rust-toolchain@1.75.0`のようにversionも指定できる
+    * ただしwithでtoolchainを指定すると意図通りに動かないらしい?
 
 ## cache
 
