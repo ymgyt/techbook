@@ -12,3 +12,11 @@ https://nixos.org/download.html#nix-install-macos
 
 * `/etc/nix/nix.conf`
 * `$HOME/.config/nix/nix.conf`
+
+```
+experimental-features = nix-command flakes repl-flake
+access-tokens = github.com=ghp_<REDACED>
+```
+
+* `experimenta-features`で有効にしたいfeatureを指定する
+* `access-tokens` private repo取得時に設定される

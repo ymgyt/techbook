@@ -1,5 +1,42 @@
 # flake.nix
 
+## `import nixpkgs`
+
+```nix
+{ inputs = {
+  nixpkgs.url = "github:NixOS/nixpkgs/23.11";
+  flake-utils.url = "github:numtide/flake-utils/v1.0.0";
+  };
+
+  outputs = { flake-utils, nixpkgs, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        config = { };
+
+        overlay = self: super: {
+          hello = super.hello.overrideAttrs (_: { doCheck = false; });
+        };
+
+        overlays = [ overlay ];
+        
+        pkgs = import nixpkgs { inherit system config overlays; };
+      in
+        { packages.default = pkgs.hello; }
+    );
+}
+```
+
+* なぜ`import nixpkgs`できるか
+  * `outPath` attributeをnixpkgsがもっているので、pathとして扱われる
+  * `pkgs = import nixpkgs.outPath { ... }`とも書ける
+* flakeのinputは`outPath`をもっている
+
+## `inputs`
+
+* inputsの結果はinput URL先のflakeのoutput
+* `nixpkgs`の場合は
+  * lib,checks,htmlDocs, legacyPackages, nixosModulesをもっている
+
 ## `outputs`
 
 ```nix

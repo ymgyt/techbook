@@ -14,4 +14,20 @@ nix run github:ymgyt/myapp --refresh
   * `pname`
   * `name`
 
+* If no flake output attribute is given, nix run tries the following flake output attributes:
+  * `apps.<system>.default`
+  * `packages.<system>.default`
+
+* If an attribute name is given, nix run tries the following flake output attributes:
+  * `apps.<system>.<name`
+  * `packages.<system>.<name`
+  * `legacyPackages.<system>.<name`
+
+
+```sh
+nix run
+nix run .#
+nix run .#default
+nix run .#apps.<system>.default
+```
   

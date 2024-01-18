@@ -1,30 +1,58 @@
 # NixOS Module
 
+* Nix languageとmoduleは関係ない
+  * `nixpkgs/lib/modules.nix`配下でそう実装されているだけ
+* 最終的に1つのattribute setにcompositeされる
+  * `config.system.build.toplevel` attributeをもつ
+    * これがNixOSをbuildするderivation
+    * `nixpkgs/nixos/modules/system/activation/top-level.nix`
+  * `lib.evanModules`が担っている
+
 ## Structure
 
-```
-{ config, pkgs, ... }:
+```nix
+{ config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ *paths of other modules*
-    ];
+  # Other modules to import
+  # 省略化
+  imports = [
+    #...
+  ];
 
+  # Options this module declares
+  # 省略化
   options = {
-    *option declarations*
+    #...
   };
 
+  # Options this module defines
+  # 省略化
   config = {
-    *option definitions*
-  };
+    #...
+  }
 }
 ```
 
-* `config` system全体のconfig
-* `pkgs` Nixpkgs
-* `config`と`pkgs`に依存しない場合は単なるsetの場合もある
+* 引数
+  * `config` system全体のconfig
+  * `pkgs` Nixpkgs
+  * 省略してattribute setを返すこともできる
 * `imports`はNixOS module専用の関数で引数に他のmoduleを期待している
 * `options`はmoduleのinterface
+* `config`
+
+```nix
+{ config = {
+  services.foo.enable = true;
+}}
+```
+
+```nix
+{ services.foo.enable = true; }
+```
+
+* **`config`を省略してtop levelに書いた場合、`config`の中に書いたことになる**
 
 
 ## Example
@@ -71,3 +99,5 @@ in {
   };
 }
 ```
+
+

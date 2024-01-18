@@ -1,6 +1,8 @@
 # Flake References
 
-flakeのlocationを指定する仕様
+* flakeのlocationを指定する仕様
+* `${URL}#${ATTRIBUTE_PATH}`
+  * `#`が特別に展開されるshellの場合はquoteする
 
 ## URL like syntax
 
@@ -11,7 +13,8 @@ flakeのlocationを指定する仕様
 | `nikpkgs` | `github:NixOS/nixpkgs/nikpkgs-unstable` |
 
 
-* `github:<owner>/<repo>[/<branch>]`
+* `github:<owner>/<repo>[/<reference>]`
+  * referenceはbranch,tag,revision
 * `nixpkgs#cowsay`の`#`後は、flakeのoutputを指定している
 
 [flake-registry.json](https://github.com/NixOS/flake-registry/blob/master/flake-registry.json)に定義されている。

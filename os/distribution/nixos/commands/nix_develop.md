@@ -1,5 +1,14 @@
 # nix develop
 
+* flake outputの`devShell`を展開する
+  * `.#devShells.<system>.default`
+  * `.#packages.<system>default`
+
+## nix developとnix shellの違い
+
+* nix shellは指定されたprogramをPATHにいれる
+* nix developは指定されたprogramのdevelopment dependenciesをPATHにいれる
+
 ## Memo
 
 `nix develop "github:DeterminatesSystems/zero-to-nix#exaple"`

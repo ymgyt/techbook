@@ -64,3 +64,31 @@ EOF
 
 # => $VAR
 ```
+
+## Process Substitution
+
+* commandの実行結果をfileのように扱える
+* commandがfileを引数にとる場合、いったんfileに書き出さずに済む
+
+```sh
+# 本来は diff a.txt b.txt
+ diff <(echo "AAA") <(echo "BBB")
+1c1
+< AAA
+---
+> BBB
+
+
+# 補完処理を生成して読み込む
+source <(kubectl completion bash)
+```
+
+## Here string
+
+```sh
+grep 'foo' <<< 'foo bar'
+```
+
+* 文字列をfileのようにみせられる
+
+
