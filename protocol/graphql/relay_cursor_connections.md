@@ -1,10 +1,24 @@
 # Relay Cursor Connections
 
-* Connection
+* `Vec<Resource>`に2段階のlayerを追加したもの
+  * `VecWrapper<ResourceWrapper>`
+* Connectionが1段階目のlayer
   * 複数resourceに対するmeta情報
     * next page, total count
 * Edge
   * resourceにcursor fieldを追加したいのでwrapした型
+
+```rust
+struct Connection<T> {
+  edges: Vec<Edge<T>>,
+  page_info: PageInfo,
+}
+
+struct Edge<T> {
+  node: T,
+  cursor: String
+}
+```
 
 ## Step by step
 
@@ -80,6 +94,24 @@ struct Edge<T> {
   }
 }
 ```
+
+## Edge
+
+```graphql
+type TeamMemberEdge {
+  cursor: String!
+  node: User!
+  role: TeamMemberRole!
+}
+```
+
+* github apiはedgeにteamとmemberの関係におけるroleを含めている
+  * 関係性をいれるのもあり
+
+
+## Connection
+
+* totalCountは必要ならいれる
 
 ## References
 

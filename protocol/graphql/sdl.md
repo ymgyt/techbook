@@ -2,7 +2,7 @@
 
 ## Example
 
-```
+```graphql
 type Shop {
     name: String!
     # Where the shop is located, null if online only. location: Location
@@ -19,13 +19,8 @@ type Product {
 }
 
 type Query {
-    shop(id: ID): Shop!
-}
-```
-
-```
- type Query {
-  shop(owner: String!, name: String!, location: Location): Shop!
+    # Defaultを指定できる
+    shop(id: ID, sort: SortOrder = DESC): Shop!
 }
 ```
 
@@ -50,3 +45,100 @@ GraphQL definitionのtypeは以下のいずれかに分類できる
 ### Input
 
 * fieldにscalar,enum, other inputしか使えない
+
+### Enums
+
+```graphql
+enum ShopType {
+    APPAREL
+    FOOD
+}
+```
+
+### Interface
+
+```graphql
+# interfaceを定義
+interace Discountable {
+    priceWithDiscounts: Price!
+}
+
+# 具体型に実装
+type Product implements Discountable {
+    name: String!
+    priceWithDiscounts: Price!
+}
+
+type GiftCard implements Discountable {
+    code: String!
+    priceWithDiscounts: Price!
+}
+
+# interfaceを返せる
+type Cart {
+    disbountedItems: [Discountable!]!
+}
+```
+
+```graphql
+query {
+    cart {
+        discountedItems {
+            priceWithDiscounts
+            ... on Product {
+                name
+            }
+            ... on GiftCard {
+                code
+            }
+        }
+    }
+}
+```
+
+* interfaceにないfieldはfragment spreadsで具体型を指定する必要がある
+
+
+### Union
+
+```graphql
+union CartItem = Product | GiftCard
+
+type Cart {
+    items: [CartItem]
+}
+```
+
+```graphql
+query {
+    cart {
+        items {
+            ... on Product {
+                name
+            }
+            ... on GiftCard {
+                code
+            }
+        }
+    }
+}
+```
+
+## Fragments
+
+```graphql
+query {
+    products(first: 100) {
+        ...ProductFragment
+    }
+}
+
+fragment ProductFragment on Product {
+    name
+    price
+    variants
+}
+```
+
+* graphqlでは型を取得ができず、かならずfield levelまで指定することが求められる
+  * これの再利用の単位

@@ -2,13 +2,20 @@
 
 ## Example
 
+
 ```
-query { 
-    me {
-        name
-    } 
+query GetBooksAndAuthors {
+  books {
+    title
+  }
+
+  authors {
+    name
+  }
 }
 ```
+
+* `query`と`Operation name(GEtBooksAndAuthors)は省略できる
 
 ```
 query { 
@@ -27,37 +34,6 @@ query {
 {
   shop(id: 1) {
     name 
-}
-```
-
-```
-query GetBooksAndAuthors {
-  books {
-    title
-  }
-
-  authors {
-    name
-  }
-}
-```
-
-```
-{
-  "data": {
-    "books": [
-      {
-        "title": "City of Glass"
-      },
-      ...
-    ],
-    "authors": [
-      {
-        "name": "Paul Auster"
-      },
-      ...
-    ]
-  }
 }
 ```
 
@@ -85,6 +61,7 @@ query FetchProduct($id: ID!, $format: PriceFormat!) {
     }
 }
 
+# variable
 {
     "id": "abc",
     "format": {
@@ -94,7 +71,7 @@ query FetchProduct($id: ID!, $format: PriceFormat!) {
 }
 ```
 
-* `FetchProduct`はqueryの名前。(schemaにはない?)
+* `FetchProduct`はqueryの名前。
 * この例だとnameがどこから出てきたのか不明
 
 ## Alias

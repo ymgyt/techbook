@@ -1,5 +1,9 @@
 # Mutation
 
+* Side effectが許される
+* top levelのfieldはserialに実行される
+  * queryはparallel
+
 ```graphql
 input MessageInput {
   content: String
