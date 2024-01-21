@@ -158,3 +158,18 @@ appが複数ある場合
 ```
 
 * `apps.default`だと`nix run .#`で実行できる
+
+## nixConfig
+
+```nix
+{ 
+  outputs = {};
+  nixConfig = {
+    extra-substituers = ["https://foo.cachix.org"];
+    extra-trusted-public-keys = ["foo.cachix.org-1:xxxx"];
+  }
+}
+```
+
+* project(flake)で利用する追加のsubstituersを指定できる
+  * `extra-`をつけると既存に追加してくれる
