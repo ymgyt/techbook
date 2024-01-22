@@ -28,5 +28,13 @@ schemaとqueryがある前提
   generate \
   --schema-path path/to/schema.json \
   --output-directory src/generated \
+  --custom-scalars-module "crate::client::scalar" \
   path/to/query.gql
 ```
+
+* `--custom-slars-module`でcustom scalarを定義するmoduleを指定する
+
+```rust
+type MyScalar = crate::client::scalar::MyScalar
+```
+というcodeが生成されるので結果的に解決される
