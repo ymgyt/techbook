@@ -80,3 +80,18 @@ kubectl apply -f clusterapi-workload-1.yaml
 
 * `Cluster` -> `AWSManagedControlPlane` -> `AWSIdentityReference`
   * managed control planeをreconcilingする際に利用するaws identity
+
+```yaml
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: AWSCluster
+metadata:
+  name: "test"
+  namespace: "test"
+spec:
+  region: "eu-west-1"
+  identityRef:
+    kind: <IdentityType>
+    name: <IdentityName>
+```
+
+* `AWSCluster.spec.identityRef`でcontrollerにreconcilingする際にどのidentityを使うかを指示する
