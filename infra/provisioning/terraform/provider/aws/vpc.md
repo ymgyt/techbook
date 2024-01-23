@@ -1,13 +1,13 @@
 # VPC
 
-## Public Subnet
+## Public/Private Subnet
 
 ```hcl
 locals {
   vpc_name = "foo"
 }
 
-resource "aws_vpc" "foo" {
+resource "aws_vpc" "main" {
   cidr_block           = "10.0.0.0/16"
   instance_tenancy     = "default"
   enable_dns_support   = true
@@ -30,12 +30,24 @@ locals {
       "cidr" = "10.0.3.0/24"
     },
   }
+
+  private_subnets = {
+    "ap-northeast-1a" = {
+      "cidr" = "10.0.10.0/24"
+    },
+    "ap-northeast-1c" = {
+      "cidr" = "10.0.20.0/24"
+    },
+    "ap-northeast-1d" = {
+      "cidr" = "10.0.30.0/24"
+    },
+  }
 }
 
 resource "aws_subnet" "public" {
   for_each = local.public_subnets
 
-  vpc_id            = aws_vpc.foo.id
+  vpc_id            = aws_vpc.main.id
   availability_zone = each.key
   cidr_block        = each.value.cidr
 
@@ -44,19 +56,31 @@ resource "aws_subnet" "public" {
   }
 }
 
-resource "aws_internet_gateway" "foo" {
-  vpc_id = aws_vpc.foo.id
+resource "aws_subnet" "private" {
+  for_each = local.private_subnets
+
+  vpc_id            = aws_vpc.main.id
+  availability_zone = each.key
+  cidr_block        = each.value.cidr
+
+  tags = {
+    Name = format("${local.vpc_name}-private-${each.key}")
+  }
+}
+
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
   tags = {
     Name = local.vpc_name
   }
 }
 
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.foo.id
+  vpc_id = aws_vpc.main.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.foo.id
+    gateway_id = aws_internet_gateway.main.id
   }
 
   tags = {

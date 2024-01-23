@@ -11,3 +11,7 @@
 ## Resourceが足りていない状況
 
 * どう調査するか
+
+## Field is immutable
+
+当該resourceを一度削除したのち再作成するしかない

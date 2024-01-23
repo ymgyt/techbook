@@ -95,3 +95,118 @@ spec:
 ```
 
 * `AWSCluster.spec.identityRef`でcontrollerにreconcilingする際にどのidentityを使うかを指示する
+
+
+1. management用の`clusterawsadm` 設定fileを用意する
+
+```yaml
+apiVersion: bootstrap.aws.infrastructure.cluster.x-k8s.io/v1beta1
+kind: AWSIAMConfiguration
+spec:
+  region: ap-northeast-1
+  allowAssumeRole: true
+  clusterAPIControllers:
+    disable: false
+    extraStatements:
+    - Action: ["sts:AssumeRole"]
+      Effect: "Allow"
+      Resource: ["arn:aws:iam::<workload>:role/controllers.cluster-api-provider-aws.sigs.k8s.io"]
+    trustStatements:
+    - Action: ["sts:AssumeRoleWithWebIdentity"]
+      Effect: "Allow"
+      Principal:
+        Federated: ["arn:aws:iam::<management>:oidc-provider/oidc.eks.ap-northeast-1.amazonaws.com/id/<oidc-provider-id>"]
+      Condition:
+        "ForAnyValue:StringEquals":
+          "oidc.eks.ap-northeast-1.amazonaws.com/id/<oidc-provider-id>:sub":
+            - system:serviceaccount:capi-providers:capa-controller-manager
+            - system:serviceaccount:capa-eks-control-plane-system:capa-eks-control-plane-controller-manager
+  eks:
+    defaultControlPlaneRole:
+      disable: false
+    disable: false
+    fargate:
+      disable: false
+    iamRoleCreation: true
+    kmsAliasPrefix: cluster-api-provider-aws-*
+    managedMachinePool:
+      disable: false
+```
+
+* `<oidc-provider-id>`はEKSのOpenID Connect provider URLから確認できる
+* この設定によってIAM Role `controllers.cluster-api-provider-aws.sigs.k8s.io`にpolicyが追加される
+  * これはcapaがassumeするrole
+
+2. management accountにIAM用のCF Stackを作成する
+
+`clusterawsadm bootstrap iam create-cloudformation-stack --config bootstrap-manager-account.yaml`
+
+* 事前に`AWS_`系の環境変数にmanagement account用の権限を設定しておく
+
+3. management clusterにcluterapi operatorsをinstallする
+
+```sh
+export AWS_B64ENCODED_CREDENTIALS=$(clusterawsadm bootstrap credentials encode-as-profile)
+export EKS=true
+export EXP_MACHINE_POOL=true
+export AWS_CONTROLLER_IAM_ROLE=arn:aws:iam::${AWS_MANAGER_ACCOUNT_ID}:role/controllers.cluster-api-provider-aws.sigs.k8s.io
+clusterctl init --kubeconfig manager.kubeconfig --infrastructure aws --target-namespace capi-providers
+```
+
+* 設定するfeatureの環境変数は必要に応じて設定する
+
+
+4. workload clusterを操作できるIAM Roleを作成する
+
+```yaml
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: AWSClusterRoleIdentity
+metadata:
+  name: workload-role
+spec:
+  allowedNamespaces: {} 
+  roleARN: arn:aws:iam::<workload>:role/controllers.cluster-api-provider-aws.sigs.k8s.io
+  sourceIdentityRef:
+    kind: AWSClusterControllerIdentity
+    name: default
+```
+
+`kubectl apply -f workload-role-identity.yaml`
+
+* `roleARN`に対応するroleはclusterawsadmで作成する
+
+```yaml
+apiVersion: bootstrap.aws.infrastructure.cluster.x-k8s.io/v1beta1
+kind: AWSIAMConfiguration
+spec:
+  region: ap-northeast-1
+  eks:
+    iamRoleCreation: false
+    managedMachinePool:
+      disable: false
+    fargate:
+      disable: false
+  clusterAPIControllers:
+    disabled: false
+    extraStatements:
+      # kubectl delete -f lawgue-dev-1-28.yaml 時にこの権限がなくてエラーとなっていたので付与した
+    - Action: ["ec2:DescribeVpcEndpoints"]
+      Effect: "Allow"
+      Resource: ["*"]
+    trustStatements:
+    - Action:
+      - "sts:AssumeRole"
+      Effect: "Allow"
+      Principal:
+        AWS:
+        - "arn:aws:iam::<management>:role/controllers.cluster-api-provider-aws.sigs.k8s.io"
+```
+
+次はworkload用aws accountの環境変数をセットして
+
+`clusterawsadm bootstrap iam create-cloudformation-stack --config bootstrap-managed-account.yaml`
+
+
+5. workload cluster用のkubeconfigを作成
+
+`aws eks update-kubeconfig`でkubeconfigを生成する

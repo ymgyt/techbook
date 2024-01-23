@@ -86,14 +86,6 @@ Clusterには以下のいずれかのauthentication modeの設定がある。
 1. ConfigMap `aws-auth`にてIAM Principalとrolebinding subject(group)のマッピングが行われる
 1. Kubernetes上のrolebindingによって認可が実施される
 
-### aws-auth
-
-`kube-system` namespaceに`aws-auth`というConfigMapが作成される。  
-aws-authがIAM Principalとkubernetesの権限の対応を管理する
-
-* [設定例](https://repost.aws/knowledge-center/eks-configure-sso-user)
-* [EKS Best Practice](https://aws.github.io/aws-eks-best-practices/security/docs/iam/#create-the-cluster-with-a-dedicated-iam-role)
-
 ### OIDC ID Provider
 
 EKS Clusterを建てると裏側でOIDC ID Providerが設定される
