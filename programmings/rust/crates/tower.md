@@ -1,30 +1,60 @@
 # tower
 
-## tower_http
+## ServiceBuilder
 
 ```rust
+use axum::{
+    error_handling::HandleErrorLayer,
+    http::{header::AUTHORIZATION, StatusCode},
+    middleware,
+    routing::{get, post},
+    BoxError, Extension, Router,
+};
+use tokio::net::TcpListener;
+use tower::{limit::ConcurrencyLimitLayer, timeout::TimeoutLayer, ServiceBuilder};
 use tower_http::{
     cors::CorsLayer, limit::RequestBodyLimitLayer, sensitive_headers::SetSensitiveHeadersLayer,
-    timeout::TimeoutLayer,
 };
 
-async fn serve() {
-  let service = Router::new()
-      .route("/graphql", post(gql::handler::graphql))
-      .layer(
-          // applied top to bottom
-          tower::ServiceBuilder::new()
-              .layer(SetSensitiveHeadersLayer::new(std::iter::once(
-                  AUTHORIZATION,
-              )))
-              .layer(RequestBodyLimitLayer::new(2048))
-              .layer(trace::layer())
-              .layer(TimeoutLayer::new(Duration::from_secs(15)))
-              .layer(CorsLayer::new()),
-      )
+/// Start api server
+pub async fn serve() -> anyhow::Result<()> {
+
+    let service = Router::new()
+        .layer(
+            ServiceBuilder::new()
+                .layer(SetSensitiveHeadersLayer::new(std::iter::once(
+                    AUTHORIZATION,
+                )))
+                .layer(trace::layer())
+                .layer(HandleErrorLayer::new(handle_middleware_error))
+                .layer(TimeoutLayer::new(Duration::from_secs(20)))
+                .layer(ConcurrencyLimitLayer::new(100))
+                .layer(RequestBodyLimitLayer::new(2048))
+                .layer(CorsLayer::new()),
+        )
+
+    axum::serve(listener, service).await?;
+    Ok(())
 }
 
+async fn handle_middleware_error(err: BoxError) -> (StatusCode, String) {
+    if err.is::<tower::timeout::error::Elapsed>() {
+        (
+            StatusCode::REQUEST_TIMEOUT,
+            "Request took too long".to_string(),
+        )
+    } else {
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            format!("Unhandled internal error: {err}"),
+        )
+    }
+}
 ```
+
+* towerのmiddlewareはerrorを返すが、axumのmiddlewareはerrorを返さない(Infallible)であることを期待されている
+* HandleErrorLayerでerrorをstatus codeに変換する処理をいれるとtowerのmiddlewareを使える
+* tower_httpはerrorではなくresponseを返しているので特になにもしなくても組み込める
 
 ### TraceLayer
 
