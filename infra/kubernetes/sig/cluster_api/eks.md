@@ -189,7 +189,6 @@ spec:
   clusterAPIControllers:
     disabled: false
     extraStatements:
-      # kubectl delete -f lawgue-dev-1-28.yaml 時にこの権限がなくてエラーとなっていたので付与した
     - Action: ["ec2:DescribeVpcEndpoints"]
       Effect: "Allow"
       Resource: ["*"]
@@ -210,3 +209,7 @@ spec:
 5. workload cluster用のkubeconfigを作成
 
 `aws eks update-kubeconfig`でkubeconfigを生成する
+
+## 参考
+
+*[CRD](https://cluster-api-aws.sigs.k8s.io/crd/)

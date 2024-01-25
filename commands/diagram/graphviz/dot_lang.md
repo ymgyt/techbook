@@ -1,8 +1,126 @@
 # Dot Language
 
-* graphの種類
-  * `graph`: 無向グラフ
-  * `digraph`: 有向グラフ
+全体の概要
+
+```dot
+// digraph(有向) | graph(無向) 
+digraph {
+  // graph 全体の設定
+  graph [
+    // key=value,
+  ];
+
+  // node共通の設定
+  node [
+    // key=value,
+  ];
+
+  // edge共通の設定
+  edge [
+    // key=value,
+  ];
+
+  // node_aの定義
+  node_a [
+    // key=value
+  ];
+
+  // node_b,node_cの定義
+  node_b,node_c [
+    // key=value
+  ];
+
+  // node_aとnode_bのedgeの定義
+  node_a -> node_b [
+    // key=value,
+  ];
+
+  // group cluster_aを定義
+  // cluster_ は特別な意味をもつ
+  subgraph cluster_a [
+    
+  ]
+}
+```
+
+## Graph定義
+
+```dot
+digraph {
+  graph [
+    layout=dot,
+    rankdir=TB,
+		label="UML Class diagram demo"
+		labelloc="t" // t(top) | b(bottom)
+    labeljust="c" // l(left) | c(center) | r(right)
+		fontname="Helvetica,Arial,sans-serif"
+    compound=true; // 矢印をClusterで止める
+    newrank=true
+  ];
+}
+```
+
+* `layout`: 配置のengine
+  * `dot`(default)
+  * `fdp`
+  * `osage`
+  * [engine一覧](https://graphviz.org/docs/layouts/)
+* `rankdir`: graphのlayoutの方向
+  * `TB`: top to bottom, `BT`もある
+  * `LR`: left to right
+* `newrank`: trueにするとsubgraphの中のnodeのrankも指定できた
+
+## Node定義
+
+```dot
+digraph {
+
+    MyNode [
+        label="foo"
+    ];
+```
+
+## Edge定義
+
+```dot
+digraph {
+    A   ->  B [
+      label="label"
+      lhead=cluster_b_group
+    ];
+}
+```
+
+* `lhead`でsubgraph clusterを指定すると矢印がsubgroupで止まる
+
+## Cluster定義
+
+```dot
+digraph {
+    subgraph cluster_aws_prod {
+        label="AWS Prod Account"
+
+        A;
+    }
+}
+```
+
+* groupを定義できる
+* `cluster_` prefixが意味をもつらしい
+
+## Rank
+
+```dot
+digraph {
+  A;B
+
+  { rank=same; A; B; }
+}
+```
+
+* `rank`でnodeのrankを指定できる
+  * same,min,maxが指定できる
+    * minを指定すると一番下、左にできたり
 
 ## Example
 
@@ -10,14 +128,6 @@
 
 ```dot
 digraph {
-  // graphのlabel
-  graph [
-  		label="UML Class diagram demo"
-  		labelloc="t" // t(top) | b(bottom)
-  		fontname="Helvetica,Arial,sans-serif"
-      // 矢印をClusterで止める
-      compound=true;
-  ]
 
   // Defaultの指定
   node [ shape=square ];
@@ -63,7 +173,7 @@ digraph {
   }
 
   // 矢印をclusterのboundaryで止める
-  node1 -> node2 [ltail="cluste_bar", lhead=cluster_foo];
+  node1 -> node2 [ltail="cluster_bar", lhead=cluster_foo];
   // とも書ける
   A -> {B, C, D}
   // 矢印の向き
@@ -79,14 +189,6 @@ digraph {
 }
 ```
 
-* `layout`: 配置のengine
-  * `dot`(default)
-  * `fdp`
-  * `osage`
-  * [engine一覧](https://graphviz.org/docs/layouts/)
-* `rankdir`: graphのlayoutの方向
-  * `TB`: top to bottom, `BT`もある
-  * `LR`: left to right
 * `label`: nodeの表示を変えられる
 * `color`: 表示の色を指定する
   * graph, node, edgeに指定できる
@@ -125,6 +227,24 @@ digraph {
 ## HTML like label
 
 labelが`<>`でencoloseされるとhtml likeになる
+
+## Colorscheme
+
+```dot
+digraph G {
+  node [style=filled, colorscheme=rdpu3];
+  GrandpaA -> Papa;
+  GrandmaA -> Papa;
+  GrandpaB -> Mama;
+  GrandmaB -> Mama;
+  Papa -> You;
+  Mama -> You;
+  You [style=filled, fillcolor=1];
+  Papa [style=filled, fillcolor=2];
+  Mama [style=filled, fillcolor=2];
+```
+
+試せてない
 
 ## 参考
 

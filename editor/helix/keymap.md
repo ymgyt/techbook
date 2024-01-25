@@ -108,6 +108,7 @@ https://docs.helix-editor.com/keymap.html
 ## Registers
 
 * "<ch>: yankやpasteのregisterを指定する
+  * `"a`
 
 ## Macro
 
@@ -139,5 +140,10 @@ https://docs.helix-editor.com/keymap.html
 * `:set whitespace.render all`: whitespace等を特別な文字で描画する
 
 
-aaa bbb            ccc
-aaaaa bb ccccc
+## Find(search) and replace
+
+1. Press `%s`
+2. Type search word
+3. Press Enter
+4. Press `c` and type replace word
+5. Press `Esc,`
