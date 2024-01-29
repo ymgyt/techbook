@@ -49,6 +49,15 @@ fn bewitched() {}
 fn bewitched() {}
 ```
 
+## `cfg!` macro
+
+* macroもある
+
+## `cfg_if` crate
+
+* third partyではある
+
 ## 参考
 
 * [Rustでプラットフォーム依存の処理を書く](https://ryochack.hatenablog.com/entry/2018/10/14/112957)
+

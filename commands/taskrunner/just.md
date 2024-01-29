@@ -37,4 +37,9 @@ default:
 
 foo:
   echo {{name}}
+
+silent:
+  @echo {{name}}
 ```
+
+* `@`を先頭につけるとcommand自体の出力を抑えられる
