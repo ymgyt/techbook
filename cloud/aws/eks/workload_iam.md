@@ -19,6 +19,11 @@ Service accountとIAM Roleを紐づけることで、PodごとにAWS権限を制
 4. AWS SDKが`sts:AssumeRoleWithWebIdentity`を実行する
   4.1 上記の設定された環境変数を考慮する
 5. Roleがassumeされ、そのcredentialを利用する
+
+### IRSAの設定
+
+前提 EKS ClusterのOIDC ProviderとIAM OIDC Providerが連携されている。
+
   
 ## EKS Pod Identity
 

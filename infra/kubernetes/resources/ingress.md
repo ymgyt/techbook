@@ -1,6 +1,6 @@
 # Ingress
 
-* 外からのaccessを処理するobject
+* 外からServiceへのaccessを処理するobject
   * load balancing, TLS termination
 * ingress controllerの存在が前提
   * ingressだけ作っても意味がない
