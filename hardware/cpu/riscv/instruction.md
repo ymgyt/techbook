@@ -38,7 +38,7 @@ bitの参照範囲を並び替えたいというモチベーション。
 ## メモリ関連
 
 * `sw rs2 offset(rs1)`
-  * Store Word。reg rs2の値をrs1+offsetのメモリに書く
+  * Store Word。register rs2の値をrs1+offsetのメモリに書く
 
 * `lw rd, offset(rs1)`
   * Load Word。rs1+offsetのメモリの値をrd regに書き込む

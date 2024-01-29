@@ -30,6 +30,8 @@ fn init_tracing(opts: &cli::TracingOptions) {
         .with(
             EnvFilter::try_from_default_env()
                 .or_else(|_| EnvFilter::try_new("info"))
+                // 明示的に指定することもできる
+                .add_directive("mycrate::foo=info".parse().unwrap())
                 .unwrap(),
         )
         .init();
@@ -86,3 +88,11 @@ fn init_tracing() {
 
 * `FmtLayer`に`with_filter()`でEnvFilterをつけるとひとつ下のAuditLayerは影響をうけない
 * Fmt,Env,Auditをそれぞれ`with()`でつなげると下にあってもEnvFilterの影響をうける(global)になるので注意
+
+
+## EnvFilter
+
+### directive
+
+* `warn,mycrate::foo=info`: `mycrate::foo`だけinfo,他はwarn
+* `my_crate[span_a]=trace`: my_crateのspan `span_a`のspanとeventをtrace以上なら有効にする
