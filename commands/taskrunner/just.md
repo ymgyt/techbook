@@ -40,6 +40,31 @@ foo:
 
 silent:
   @echo {{name}}
+
+# Use parameter
+[confirm]
+deploy env stack region=region:
+  ENV={{env}} command --stack {{stack}} --region {{region}}
 ```
 
 * `@`を先頭につけるとcommand自体の出力を抑えられる
+
+
+### Attribute
+
+```just
+[private]
+helper:
+  echo "helpler"
+
+[confirm("Do operation?")]
+operation:
+```
+
+* `[private]`
+  * `just --list`に表示されない
+  * `_helper`としても同じ
+
+* `[confirm]`
+  * task実行時にy/n入力の機械をくれる
+  * `--yes`でskipできる

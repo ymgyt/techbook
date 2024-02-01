@@ -29,3 +29,10 @@ npm install -g <package>
 
 Dockerfile内で`{yarn,npm} install`うつ場合はbuild contextに`.npmrc`を含めるように注意。  
 多分yarnも`.npmrc`を参照してくれているっぽい。
+
+
+## Dependency
+
+* private git repositoryを依存に加える
+  * `npm install git@github.com:ymgyt/foo.git`
+  * たぶん、`.npmrc`に認証情報がいる

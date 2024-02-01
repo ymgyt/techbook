@@ -145,7 +145,7 @@ patches:
   * 変更対象のfieldは`patch.path`で指定する
     * 入れる要素はindexを書く
   * labelを対象にする際に`app.kubernetes.io/name`のようにlabel自体に`/`が含まれている場合
-    * `path: /xxx/app.kubernetes.io~1name`のように`~1`を利用する
+    * `path: /xxx/app.kubernetes.io~1name` のように `~1`を利用する
 
 ## CR拡張
 

@@ -68,7 +68,11 @@ const title = book?.title ?? "default title";
 * Rust同様のleft handに型かいて、assignできる
 ```typescript
 const { name, no, genre }: Wild = safari();
+
+// 別名をつける
+const { name: fooName, no, genre }: Wild = safari();
 ```
+
 
 ## object loop
 

@@ -24,6 +24,52 @@ Service accountとIAM Roleを紐づけることで、PodごとにAWS権限を制
 
 前提 EKS ClusterのOIDC ProviderとIAM OIDC Providerが連携されている。
 
+1. Service accountがassumeするroleを定義する
+2. Service accountのannotationでassumeするroleのARNを指定する
+
+#### IRSA用のRoleの作成
+
+* policyは必要な操作に応じてきまる
+* 大事なのはtrust policy
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::${account_id}:oidc-provider/${oidc_provider}"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "${oidc_provider}:aud": "sts.amazonaws.com",
+          "${oidc_provider}:sub": "system:serviceaccount:$namespace:$service_account"
+        }
+      }
+    }
+  ]
+}
+```
+
+* `oidc_provider`はEKSのOIDC ProviderのID
+* `Conditions`のsubでassumeできるnamespaceとservice accountを指定できる
+
+#### Service accountとIAM Roleの紐付け
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: foo
+  namespace: bar
+  annotations:
+    eks.amazonaws.com/role-arn: "ROLE ARN"
+```
+
+* `metadata.annotations.eks.amazonaws.com/role-arn`で指定する
+
   
 ## EKS Pod Identity
 
