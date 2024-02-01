@@ -32,6 +32,12 @@ readme = "README.md"
 
 [workspace.dependencies]
 tracing = "1.0"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+xxx = "deny"
 ```
 
 ```toml
@@ -43,6 +49,9 @@ edition.workspace = true
 
 [dependencies]
 tracing = { workspace = true, features = ["hoge"] }
+
+[lints]
+workspace = true
 
 [build-dependencies]
 baz.workspace = true
@@ -63,3 +72,23 @@ baz.workspace = true
     * `^1.2.3`の場合は`2.0.0`にならない限りどのversion upもうけいれる
 
 
+## Lint
+
+```toml
+[workspace.lints.clippy]
+
+# cargo
+cargo_common_metadata   = "warn"
+multiple_crate_versions = "allow"
+negative_feature_names  = "warn"
+redundant_feature_names = "warn"
+wildcard_dependencies   = "warn"
+
+# pedantic
+pedantic = "warn"
+
+missing_errors_doc      = "allow"
+missing_panics_doc      = "allow"
+module_name_repetitions = "allow"
+must_use_candidate      = "allow"
+```
