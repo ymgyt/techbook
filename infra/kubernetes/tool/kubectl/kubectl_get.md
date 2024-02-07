@@ -4,7 +4,9 @@
   * `wide` PodのnodeとIDも表示
   * `yaml` yaml形式manifestを取得できる
 
-* `-l name=value` labelでqueryをうつ
+* `-L`,`--label-columns`: 表示するlabelを指定する
+* `--show-labels=true`: 全てのlabelを表示する
+* `-l`, `--selector`: labelに基づいてquery
 
 
 ## Usage

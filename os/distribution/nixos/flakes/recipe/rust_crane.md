@@ -27,7 +27,6 @@
         pkgs = import nixpkgs { inherit system overlays; };
         rustToolchain = fenix.packages.${system}.fromToolchainFile {
           file = ./rust-toolchain.toml;
-          # sha256 = pkgs.lib.fakeSha256;
           sha256 = "sha256-SXRtAuO4IqNOQq+nLbrsDFbVk+3aVA8NNpSZsKlVH/8=";
         };
 
@@ -42,7 +41,7 @@
           pname = "syndicationd-workspace";
           version = "0.1";
 
-          builtInputs = [ ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [ ];
+          buildInputs = [ ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [ pkgs.libconv pkgs.darwin.apple_sdk.frameworks.Security ];
         };
 
         cargoArtifacts = craneLib.buildDepsOnly commonArgs;

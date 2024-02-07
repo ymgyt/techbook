@@ -17,3 +17,15 @@
 # List<String> -> String
 ["a","b"] | str join "," # => "a,b"
 ```
+
+## each
+
+```nu
+aws foo
+| from json
+| get output.bar
+| each {|x| let v = (aws describe -v=$x 
+  | from json
+  | get hoge
+  ); printf "%s15s : %s\n" $x $v}
+```

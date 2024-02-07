@@ -117,3 +117,8 @@ cargoが用意してくれる環境変数
 * `OUT_DIR` cargo build時の出力先
   * tonic等のprotobuf -> rust code生成で参照されていたりする
 
+
+## build
+
+* `cargo build --timings`
+  * compileに関する情報をhtml等で出力してくれる

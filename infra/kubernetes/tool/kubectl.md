@@ -69,9 +69,6 @@ kubectl delete job <job_name> -n <namespace>
 kubectl create svc clusterip test --tcp=80:80 --dry-run=client -o yaml > my_svc.yaml
 ```
 
-## `get`
-
-* `--show-labels`: labelを表示する
 
 ## `logs`
 
@@ -118,15 +115,6 @@ kubectl uncordon <node name>
 * `uncordon`でnodeを再びschedule対象にする
   * `cordon`は刑事事件とかでよくみる黄色いテープをはって封鎖する的な意味
 
-## `rollout`
-
-```shell
-# pod/deploymentを再起動する
-kubectl rollout restart deployment/xxx
-
-# statefulsetのpodを再起動する
-kubectl rollout restart statefulset foo
-```
 
 ## `diff`
 

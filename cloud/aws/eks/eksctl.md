@@ -21,3 +21,10 @@ eksctl crete cluster -f cluster.yaml
 ```shell
 eksctl delete cluster -f cluster.yaml
 ```
+
+## Managed node group
+
+```shell
+# AMIの更新
+eksctl upgrade nodegroup --name ng-name --cluster mycluster --region ap-northeast-1 --profile me
+```
