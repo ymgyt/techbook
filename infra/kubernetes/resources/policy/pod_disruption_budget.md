@@ -4,6 +4,7 @@ https://kubernetes.io/docs/reference/kubernetes-api/policy-resources/pod-disrupt
 
 * `kubectl drain`でPodをevictする際に維持されなければいけないpod数を指定できる
   * この要求をみたせないと`kubectl drain`がblockする
+* voluntary disruptionsにおいて考慮される
 * `Deployment`のupdate strategyとは別の話で影響しない?
 
 
