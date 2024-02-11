@@ -45,9 +45,15 @@ silent:
 [confirm]
 deploy env stack region=region:
   ENV={{env}} command --stack {{stack}} --region {{region}}
+
+# variadic parameters
+run *flags:
+  cargo run -- {{flags}}
 ```
 
 * `@`を先頭につけるとcommand自体の出力を抑えられる
+* parameterに`*`をつけるとzero or moreの可変長にできる
+  * 与えられなければ空のstring
 
 
 ### Attribute

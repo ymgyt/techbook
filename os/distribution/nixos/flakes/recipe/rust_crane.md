@@ -80,6 +80,23 @@
 
           fmt = craneLib.cargoFmt commonArgs;
         };
+
+        ci_packages = with pkgs; [
+          just
+          nushell # just set nu as shell
+        ];
+
+        dev_packages = with pkgs;
+          [
+            cargo-nextest
+            graphql-client
+            nixfmt
+            # Failed to run proc-macro server from path /nix/store/z1vlkv6nccjd523iwp5p6pdkr2abm9jq-rust-1.76.0/libexec/rust-analyzer-proc-macro-srv,
+            # rust-analyzer
+            opentelemetry-collector-contrib
+            git-cliff
+          ] ++ ci_packages ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [ ];
+
       in {
         inherit checks;
 
@@ -92,21 +109,18 @@
         };
 
         devShells.default = craneLib.devShell {
-          packages = with pkgs; [
-            # cargo and rustc provided by default
-            just
-            cargo-nextest
-            graphql-client
-            nixfmt
-            rust-analyzer
-            nushell
-          ];
+          packages = dev_packages;
 
           shellHook = ''
             # Use nushell as default shell
             exec nu
           '';
         };
+      nixConfig = {
+        extra-substituters = [ "https://syndicationd.cachix.org" ];
+        extra-trusted-public-keys = [
+          "syndicationd.cachix.org-1:qeH9C3xDqR831xEuDcfhGEUslMMjGroPPMOwiZfyiJQ="
+        ];
       });
 }
 ```

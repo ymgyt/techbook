@@ -29,13 +29,3 @@ const concated = [...arr3, ...arr4];
 ```
 * `[...ident]`でarrayのcopyを作れる
 
-## loop
-
-### for-of
-
-```typescript
-const arr = ["a", "b", "c"];
-for (const value of arr) {
-  console.log(value);
-}
-```

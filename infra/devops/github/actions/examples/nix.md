@@ -1,0 +1,21 @@
+# Nix github action
+
+```yaml
+name: CI
+on:
+  pull_request:
+  push:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v25
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: cachix/cachix-action@v14
+      with:
+        name: foo
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+    - run: nix develop .#ci --accept-flake-config --command just check
+```
