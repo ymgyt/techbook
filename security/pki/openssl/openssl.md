@@ -52,6 +52,7 @@ openssl x509 -text -noout -in certificate.pem
 * `-subj` subject(主体者)を指定する
   * issuerもこの値になる
 * `-days` 有効期間を指定する。defaultは30日
+* SANはどうやって指定する..?
 
 
 

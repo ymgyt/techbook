@@ -46,4 +46,20 @@ spec:
 * `matchExpressions.key`
   * `operator`に使えるのは`In`, `NotIn`, `Exists`, `DoesNotExist`, `Gt` and `Lt`
 
+## nodeSelector
 
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: foo
+  nodeSelector:
+    disktype: ssd
+```
+
+* Nodeを指定するシンプルな方式
+* nodeに付与されたlabelを指定する
+  * `disktype=ssd`のnodeにのみschedulingされる
