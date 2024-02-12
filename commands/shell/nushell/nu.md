@@ -69,3 +69,18 @@ echo "Hello" out+err > log.log
 ```
 
 * `>out` で出力先を指定する
+
+## Pipeline
+
+```nu
+> [1 2 3] | $in.1 * $in.2
+6
+```
+
+* `$in`は自動で定義されてpipelineのinputを評価できる
+
+
+## Operator
+
+* `=~` 正規表現でmatch
+  * `"foo-bar" =~ "-bar$"` => true

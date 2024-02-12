@@ -13,6 +13,17 @@ cargo install --path helix-term
 
 `~/.config/helix/config.toml`
 
+### Key remap
+
+```toml
+[keys.normal]
+"'" = ":buffer-close" # Close buffer with single quote
+
+# z -> j とおした場合を表現できる
+[keys.normal.z]
+j = "half_page_down" # Not using scroll down(just one line)
+```
+
 
 ## Debug
 
