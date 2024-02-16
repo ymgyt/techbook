@@ -1,47 +1,28 @@
 # EKS Cluster
 
-## VPS
-
-```hcl
-data "aws_availability_zones" "available" {
-  # exclude local zones
-  filter {
-    name   = "opt-in-status"
-    values = ["opt-in-not-required"]
-  }
-}
-
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "5.0.0"
-
-  name = "clusterapi-handson"
-  cidr = "10.0.0.0/16"
-  azs  = slice(data.aws_availability_zones.available.names, 0, 3)
-
-  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets  = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
-
-  enable_nat_gateway = true
-  single_nat_gateway = true
-  # Required in eks vpc requirements
-  enable_dns_hostnames = true
-}
-```
-
 ## Cluster
 
 ```hcl
-resource "aws_eks_cluster" "handson" {
+
+locals {
+  cluster_name         = "management"
+  kubernetes_version = "1.28"
+  # 事前にvps/subnetが作ってある前提
+  public_subnet_ids = [
+    for subnet in aws_subnet.public : subnet.id
+  ]
+}
+
+resource "aws_eks_cluster" "main" {
   name     = local.cluster_name
   role_arn = aws_iam_role.eks_cluster.arn
   vpc_config {
     endpoint_private_access = false
     endpoint_public_access  = true
     public_access_cidrs     = ["0.0.0.0/0"]
-    subnet_ids              = slice(module.vpc.private_subnets, 0, 3)
+    subnet_ids              = local.public_subnet_ids
   }
-  version = "1.28"
+  version = local.kubernetes_version
 
   # https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/control-plane-logs.html
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
@@ -59,11 +40,6 @@ resource "aws_cloudwatch_log_group" "cluster" {
   retention_in_days = 30
 }
 
-# IAM Role
-locals {
-  aws_dns = data.aws_partition.current.dns_suffix
-}
-
 # Assume policy for eks cluster
 data "aws_iam_policy_document" "eks_assume_role_policy" {
   statement {
@@ -72,7 +48,7 @@ data "aws_iam_policy_document" "eks_assume_role_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["eks.${data.aws_partition.current.dns_suffix}"]
+      identifiers = ["eks.${local.aws_dns}"]
     }
   }
 }
@@ -89,8 +65,6 @@ resource "aws_iam_role_policy_attachment" "eks_cluster" {
   policy_arn = each.value
   role       = aws_iam_role.eks_cluster.name
 }
-
-data "aws_partition" "current" {}
 ```
 
 ## Worker node
@@ -175,5 +149,40 @@ resource "aws_iam_openid_connect_provider" "oidc" {
 
 data "tls_certificate" "eks_cluster" {
   url = aws_eks_cluster.handson.identity[0].oidc[0].issuer
+}
+```
+
+## Fargate profile
+
+```hcl
+resource "aws_eks_fargate_profile" "default" {
+  cluster_name           = local.cluster_name
+  fargate_profile_name   = "default"
+  pod_execution_role_arn = aws_iam_role.pod_execution.arn
+  subnet_ids             = local.private_subnet_ids
+
+  selector {
+    namespace = "target"
+  }
+}
+
+resource "aws_iam_role" "pod_execution" {
+  name = "${local.cluster_name}-pod-execution-role"
+
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "eks-fargate-pods.amazonaws.com"
+      }
+    }]
+    Version = "2012-10-17"
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "pod_execution" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
+  role       = aws_iam_role.pod_execution.name
 }
 ```

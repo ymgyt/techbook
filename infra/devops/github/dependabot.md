@@ -5,9 +5,16 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
+    # directoryは"/"である必要があるらしい
     directory: /
     schedule:
-      interval: monthly
+      interval: monthly # weekly
+      day: "monday"
+      time: "11:00"
+      timezone: "Asia/Tokyo"
+    reviewers:
+      - "me"
+      - "@ymgyt/bar"
 
   - package-ecosystem: cargo
     directory: /

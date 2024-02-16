@@ -104,7 +104,7 @@ git rm --cached <file>
 ### forkしたrepoにupstreamの変更を取り入れる
 
 ```sh
-git remote att upstream https://github.com/ymgyt/upstream-x
+git remote add upstream https://github.com/ymgyt/upstream-x
 git fetch upstream
 git checkout main
 git merge upstream/main
