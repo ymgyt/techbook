@@ -4,6 +4,7 @@
 
 * pathは`.cargo/audit.toml`
 * https://docs.rs/crate/cargo-audit/0.10.0/source/audit.toml.example
+* advisory-dbという別のgit repositoryが必要で暗黙的に? git cloneしている
 
 ```toml
 # Example `~/.cargo/audit.toml` file
