@@ -44,6 +44,7 @@ line-2
 ```
 
 * 改行は`\`
+* code blockはmarkdownと同じ(書くと壊れるので書けない..)
 
 ## 設定
 
@@ -57,3 +58,10 @@ line-2
 ## File分割
 
 * `#include path/to/note.typ`: そのfileのcontentを展開できる
+
+### Text
+
+```typst
+// hogehogeをgray outで表示
+#text(fill: gray.lighten(50%), [hogehoge])
+```

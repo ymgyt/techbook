@@ -35,3 +35,11 @@
 
 </feed>
 ```
+
+### Entry
+
+* `title`:     required. 人間が読めるtitle
+* `id`:        required. 永久に一意な識別子
+* `updated`:   required. 重要な最終更新日
+* `summary`:   recommend. 要約
+* `published`: optional. 公開日

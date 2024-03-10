@@ -4,6 +4,8 @@ Karpenterが作成するnodeのconstraintを指定する
 
 * taintを設定できる
   * karpenter上で起動したくないPodで利用できる 
+  * NodePoolのtaintがPodでtoleratedされていなければそのPodはそのNodePoolを使わない
+    * taintがNodePoolとPodの対応の機構になりそう?
 * startup taintも設定できる
   * 起動時に一時的に付与されるtaint
 
@@ -15,6 +17,41 @@ Karpenterが作成するnodeのconstraintを指定する
 * NodePoolを相互排他的(mutally exclusive)に作るのが推奨
   * Podが複数のNodePoolにmatchしないようにする
   * 複数のNodePoolにmatchしたらkarpenterはweightを考慮する
+
+
+## `spec.template.spec.requirements`
+
+```yaml
+spec:
+  template:
+    spec:
+      requirements:
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+        - key: kubernetes.io/os
+          operator: In
+          values: ["linux"]
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["on-demand"]
+        - key: karpenter.k8s.aws/instance-category
+          operator: In
+          values: ["c", "m", "r"]
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values: ["2"]
+```
+
+* `karpenter.sh/capacity-type`: EC2の購入optionの指定
+  * `spot`
+    * EC2 Fleet's Apiを利用
+      * instance typeとzoneごとに45秒apiの結果をcacheする 
+  * `on-demand`
+
+### Capacity Type
+
+* EC2の購入optionの指定
 
 
 

@@ -30,3 +30,33 @@ resource "aws_iam_role_policy_attachment" "eks_cluster" {
 
 * dataでpolicy(statement)を定義する
 * `aws_iam_role_policy_attachment`で紐付ける
+
+
+## inlineでdataを参照
+
+```hcl
+resource "aws_iam_role" "pod_execution" {
+  name = "foo"
+
+  # ...
+
+  inline_policy {
+    name   = "cloudwatchlogs"
+    policy = data.aws_iam_policy_document.cloudwatch_log.json
+  }
+}
+
+data "aws_iam_policy_document" "cloudwatch_log" {
+  statement {
+    sid = "AllowCloudwatchLogsWrite"
+    actions = [
+      "logs:CreateLogStream",
+      "logs:CreateLogGroup",
+      "logs:DescribeLogStreams",
+      "logs:PutLogEvents",
+      "logs:PutRetentionPolicy",
+    ]
+    resources = ["*"]
+  }
+}
+```

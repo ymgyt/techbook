@@ -120,3 +120,9 @@ git checkout <local-branch-name>
 # update
 git pull origin pull/<ID>/head:<local-branch-name>
 ```
+
+## Ref
+
+* commitを参照するためのindirect way
+  * user friendly alias for a commit hash
+  * `.git/refs/`配下にある

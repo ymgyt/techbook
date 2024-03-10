@@ -175,6 +175,21 @@ jobs:
           node-version: ${{ matrix.node }}
 ```
 
+## `jobs.<job_id>.if`
+
+* jobの実行に条件を付与できる
+
+```yaml
+jobs:
+  create-api-release:
+    runs-on: ubuntu-latest
+    if: ${{ startsWith(github.ref, 'refs/tags/synd-api') }}
+```
+
+* `{{ }}`はつけておけばよさそう
+* `if: ${{ startsWith(github.ref, 'refs/tags/synd-api')}}`
+  * tagの先頭にmatchした場合だけjobを実行
+
 
 ## Workflow command
 

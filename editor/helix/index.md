@@ -70,3 +70,10 @@ tomlの設定はいい感じにmergeされるので、name = "rust"だけ書い�
 `npm i -g vscode-langservers-extracted`  
 
 https://www.npmjs.com/package/vscode-langservers-extracted
+
+
+## Command
+
+### 一時的にauto formatを無効にしたい
+
+`:set auto-format false`してから`:write`したのち`:set auto-format true`

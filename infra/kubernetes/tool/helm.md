@@ -65,3 +65,30 @@ helm template \
   --values ./helm-values.yaml \
   vault /tmp/charts/vault
 ```
+
+
+### Karpenterのkustomize化
+
+Public ECRからchartを取得
+
+```sh
+helm pull  --version "v0.34.1"  oci://public.ecr.aws/karpenter/karpenter
+tar -xzf karpenter-v0.34.1.tgz
+mv karpenter karpenter_repo
+```
+
+```nu
+let cluster = "karpenter-handson"
+let queue = "QueueNameFoo"
+
+(helm template karpenter ./karpenter_repo  
+  --output-dir /tmp/karpenter  
+  --namespace kube-system 
+  --create-namespace  
+  --set "settings.clusterName=$cluster" 
+  --set "settings.interruptionQueue=$queue" 
+  --set controller.resources.requests.cpu=1 
+  --set controller.resources.requests.memory=1Gi 
+  --set controller.resources.limits.cpu=1 
+  --set controller.resources.limits.memory=1Gi) 
+```
