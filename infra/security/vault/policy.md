@@ -63,7 +63,9 @@ Userのgithub username配下のpathに権限付与したいみたいなusecase�
 
 ### KV v2
 
-mount先が`secret`という前提。
+* mount先が`secret`という前提。
+* `vault kv get secret/app/foo`とした場合、policyのpathには`secret/data/app/foo`と書く必要がある
+  * secret get時の`Secret Path`に書いてある
 
 #### Read only
 
