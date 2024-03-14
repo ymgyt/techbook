@@ -32,6 +32,7 @@ identityに関わらない付加的な情報はannotation。
 * `instance`は同一namespaceに異なるwebsite用に複数のnginxがあるようなケースで識別子として用いる
 
 * `kubernetes.io/hostname` kubeletがnodeに付与する。topology spread constraintsでも参照される
+* `node.kubernetes.io/instance-type`: `m3.medium`等。cloud provider用のinstance typeの指定
 
 
 ## 参考

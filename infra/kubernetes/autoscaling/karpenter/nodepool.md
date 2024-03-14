@@ -49,9 +49,40 @@ spec:
       * instance typeとzoneごとに45秒apiの結果をcacheする 
   * `on-demand`
 
-### Capacity Type
 
-* EC2の購入optionの指定
+## `spec.template.spec.taints`
+
+```yaml
+spec:
+  template:
+      taints:
+      - key: nvidia.com/gpu
+        value: "true"
+        effect: NoSchedule
+```
+
+
+
+
+## `spec.disruptin`
+
+TODO
+
+## `spec.limit`
+
+* NodePoolが管理するresourceの最大量
+* Karpenter supports limits of any resource type reported by your cloudprovider. 
+
+```yaml
+spec:
+  limits:
+    cpu: 1000
+    memory: 1000Gi
+    nvidia.com/gpu: 2
+```
+
+## `spec.weight`
+
 
 
 

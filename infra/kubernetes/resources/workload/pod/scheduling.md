@@ -78,7 +78,7 @@ spec:
 spec:
   topologySpreadConstraints:
   - maxSkew: 1
-    topologyKey: zone
+    topologyKey: topology.kubernetes.io/zone
     whenUnsatisfiable: DoNotSchedule
     labelSelector:
       matchLabels:
@@ -107,14 +107,6 @@ spec:
 ### 参考
 
 * [KubbernetesのTopologyとは?](https://zenn.dev/nekoshita/articles/599080c3d0f13e)
-
-
-## Taint
-
-* Nodeにkey:value:effectの形で指定する
-* Pod側で、taintに対応するtolerationsを書かないとtaintが付与されたnodeにshedulingされない
-* usecase
-  * production taintを付与して、production用workloadしたshcedulingされないようにする
 
 ### 参考
 
