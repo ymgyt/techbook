@@ -28,6 +28,15 @@ EKS Node(Worker node)に必要なIMA Policyは以下
   * 3つのetcd
   * AZ間に分散
 
+* Control planeはUserのaws accountとは別のVPCにいる
+  * したがって、worker nodeからcontrol planeへのアクセスはinternetを経由する(default)
+    * この場合、worker nodeがpublic subnetにいる場合はnodeにpublic ipが付与されている必要がある
+    * worker nodeがprivate subnetにいる場合はNATが必要
+  * Private endpointという機能がありこれを有効にするとinternetを経由せずにworker nodeはcontrol planeと通信できる
+    * publicとprivate両方有効もあるし、private onlyもある
+
+[De-mystrifying cluster networking for EKS](https://aws.amazon.com/blogs/containers/de-mystifying-cluster-networking-for-amazon-eks-worker-nodes/)
+
 ### Worker nodes
 
 worker nodeの管理方法にも選択肢がある。
