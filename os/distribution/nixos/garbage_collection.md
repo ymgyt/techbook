@@ -13,6 +13,6 @@ sudo nix-collect-garbage --delete-older-than 14d
 
 flake版
 ```sh
-nix profile wipi-history
+nix profile wipe-history
 nix store gc
 ```
