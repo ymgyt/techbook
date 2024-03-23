@@ -18,6 +18,12 @@ kubectlによるresource管理にtemplateとDSLを持ち込まないことを意
 
 ```shell
 kustomize build ~/someApp | kubectl apply -f -
+
+# currentより外を参照したい場合
+kustomize build . -load-restrictor LoadRestrictionsNone
+
+# helm generatorを使う(外部の`helm`呼び出しを許可)
+kustomize build . --enable-helm
 ```
 
 ### 環境ごとの差分を`overlays`で表現する

@@ -85,6 +85,22 @@ spec:
 
 
 
+## Topology Spread Constraint
+
+https://karpenter.sh/v0.35/concepts/scheduling/#topology-spread
+
+> The three supported topologyKey values that Karpenter supports are:
+  * topology.kubernetes.io/zone
+  * kubernetes.io/hostname
+  * karpenter.sh/capacity-type
+
+karpenterは上記3つのTSCしか考慮しない
+
+## Saving Plan / Rserved instanceの利用
+
+https://karpenter.sh/v0.35/concepts/scheduling/#savings-plans-and-reserved-instances
+
+NodePoolを2つ定義して、片方のweightを設定しつつ、savings plan分のlimitsを設定することで先にそれを利用してくれる
 
 ## Manifest
 

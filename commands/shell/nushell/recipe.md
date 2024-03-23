@@ -29,3 +29,9 @@ aws foo
   | get hoge
   ); printf "%s15s : %s\n" $x $v}
 ```
+
+## Kill process
+
+```nu
+ps  | where name =~ "synd" | get pid | first | kill $in
+```

@@ -68,41 +68,6 @@ spec:
 * nodeに付与されたlabelを指定する
   * `disktype=ssd`のnodeにのみschedulingされる
 
-## TopologySpreadConstraint
-
-* Podを論理的なgroup(region,ラック,...)に分散させたい課題に対処する
-* 前提として、nodeはlabelによってgroupingされている
-  * 各nodeにregion=A等がふってある
-
-```yaml
-spec:
-  topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: topology.kubernetes.io/zone
-    whenUnsatisfiable: DoNotSchedule
-    labelSelector:
-      matchLabels:
-        app: foo
-```
-
-* `maxSkew` `whenUnsatisfiable`の値によって解釈がかわる
-  * `whenUnsatisfiable=DoNotSchedule`
-    * domainに配置されているPodの最小値との差分がmaxSkewをこえないようになる(結果的にいい感じに分散される)
-  * `whenUnsatisfiable=ScheduleAnyway`
-    * 参考値になる
-
-* `topologyKey` nodeのlabelのkey
-  * このlabelの値が同じnodeは同じgroupと考えられる
-
-* `whenUnsatisfiable` spread constraintをみたせない場合のpolicy
-  * `DoNotSchedule` scheduleしない
-  * `ScheduleAnyway` topologyを考慮するけど、scheduleしちゃう 
-
-* `labelSelector` constraintの対象になるpodを指定するlabel
-
-* `minDomains` domainの最小数。
-  * 意図的にscheduleさせずに、cluster autoscalerを起動させるために使え
-  * `whenUnsatisfiable=DoNotSchedule`が前提
 
 ### 参考
 

@@ -13,18 +13,6 @@
   * instance sizeごとにNGが必要
 
 
-## Scheduling
-
-### Topology Spread
-
-The three supported topologyKey values that Karpenter supports are:
-
-* `topology.kubernetes.io/zone`
-* `kubernetes.io/hostname`
-* `karpenter.sh/capacity-type`
-
-
-
 ## Disruption
 
 Nodeの停止方法
