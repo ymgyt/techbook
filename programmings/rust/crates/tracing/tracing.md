@@ -45,3 +45,13 @@ tracing::Span::current().record("parting", "foo");
 * 作成時に宣言されていないfieldにはrecordできない
   * `foo = field::Empty`をsetしておく
 * 何回でもrecordできる
+
+### 親spanを指定しない
+
+```rust
+info_span!(parent: Span::none())
+// Noneを渡しても良い
+info_span!(parent: None)
+```
+
+* `Span::none()`をparentに指定すると、暗黙的なtree構造を変えられる

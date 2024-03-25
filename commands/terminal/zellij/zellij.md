@@ -1,5 +1,10 @@
 # Zellij
 
+## Keymap
+
+* 緑のframeを消す: Ctrl + <p> + <z>
+  * configのpane_frames: falseに対応
+
 ## Layout
 
 Panelの分割を指定して新しいtabを開ける

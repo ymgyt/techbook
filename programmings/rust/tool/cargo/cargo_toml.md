@@ -24,7 +24,7 @@ path = "src/yyy/bin/yyy.rs"
 
 ## features
 
-```yaml
+```toml
 [package]
 name = "foo"
 ...
@@ -39,7 +39,20 @@ features = ["derive", "parsing", "printing"]
 optional = true
 ```
 
+```toml
+[dependencies]
+opentelemetry-stdout               = { version = "0.3.0", optional = true, default-features = false, features = ["metrics"] }
+
+[features]
+opentelemetry-stdout = ["dep:opentelemetry-stdout", "dep:serde_json"]
+
+feature-x = ["synd-o11y/deps-feature"]
+```
+
 * `[features]`で定義してそれぞれの依存先を指定する
+  * `dep:crate`と書くと、そのfeatureで有効にする依存を明示的に指定できる
+  * `<crate>/<crate-feature>`と書くと当該featureが有効な場合だけ、依存先のfeatureを有効にできる
+    * 例の場合、`feature-x`を有効にすると、`synd-o11y`crateの`deps-feature`が有効になる
 * `optional = true`を指定したdependencyはdefaultでfeatureとして扱われる
 
 ### optional dependencyをfeatureとして扱われることを避ける

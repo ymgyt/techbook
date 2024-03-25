@@ -10,3 +10,6 @@
   * `enduser.id`: usernameやclient_id
   * `enduser.role`: admin等のrole
   * `enduser.scope`: OAuthのscope(`write:foo`)
+
+* Deployment
+  * `deployment.environment`: prod, staging等のdeployment tier
