@@ -23,3 +23,23 @@ defaultの"slow"は[50μs](https://docs.rs/tokio-metrics/latest/tokio_metrics/st
 * block apiを呼んでいないか
 * `println!`等のsynchronousが関連していないか
 * CPU boundな処理を行っていないか
+
+
+### Pollされるまでに時間がかかっている
+
+* `mean_first_poll_delay`: taskがinstrumentされてから最初にpollされるまでの時間
+* `mean_scheduled_duration`: awaitしたtaskがwakeされてから再びpollされるまでの時間
+  * ここが長い場合はqueueにいる時間が長い
+* `long_delay_ratio`:  閾値を超えて('long')、queueにいる割合
+* `mean_long_delay_duration`: 閾値を超えてqueueにいるtaskの平均delay
+
+#### なぜPollされるまでに時間がかかっている
+
+* tokioのinjection queueにscheduledされた
+* 他のtaskがyieldingせずにthreadを占有している
+  * 他のtaskのpollのmetricsを確認する
+
+
+### I/O(external events)で遅い
+
+* `mean_idle_duration`: taskがI/Oの完了をまっているidleの状態の期間

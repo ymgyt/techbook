@@ -31,6 +31,8 @@ test -d $DIR
 ```sh
 # A AND (B OR C)
 [[ -f $file1 && ( -d $dir1 || -d $dir2 ) ]]
+
+if ! [[ -d $dir ]]
 ```
 
 # `if`
