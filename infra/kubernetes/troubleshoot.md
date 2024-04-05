@@ -15,3 +15,8 @@
 ## Field is immutable
 
 当該resourceを一度削除したのち再作成するしかない
+
+よくあるimmutable fields
+* Deployment
+  * label selector
+* Job

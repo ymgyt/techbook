@@ -18,6 +18,10 @@ apiVersion: 1
 
 * [公式visualization doc](https://grafana.com/docs/grafana/latest/visualizations/)
 
+## Design
+
+* **Every dashboard should have a goal or purpose**
+
 ## Link
 
 * panel link

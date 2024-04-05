@@ -102,6 +102,8 @@ vault kv get -mount=secret aaa/bbb
 
 ### Put
 
+Putはsecretを全て置き換える
+
 #### Find and stdin
 
 Valueはfileやstdinから渡すこともできる。  
@@ -129,6 +131,13 @@ echo "secret123" | vault kv put secret/test key=-
 
 ```sh
 vault kv put -cas=0 secret/test initial-secret=123
+```
+
+### Patch
+
+partial updateにはpatchを利用する
+```sh
+vault kv patch secret/lawgue/sre/dev/test key-2=value-2
 ```
 
 ### Delete
