@@ -31,3 +31,13 @@ ippy --all --all-features
 ```
 
 * `/nix/store/<hash>lopenssl-3.X.Y-dev/lib/pkgconfig`を`PKG_CONFIG_PATH`に指定するとなんとかなる
+
+
+## llvmのtools(objdump)をinstallしたい
+
+```sh
+ nix profile install nixpkgs#llvmPackages_18.bintools
+
+# これが実質llvm-objdump
+objdump
+```
