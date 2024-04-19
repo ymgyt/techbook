@@ -1,32 +1,13 @@
 # Git
 
+* `git help <command>` でhelpを参照できる
+  * `git help switch`
+
 ## Usecase
-
-### Initial commit
-
-```
-$ git init # creates repository
-$ git commit --allow-empty -m'Initial empty commit' # creates empty commit`
-```
-
-* `--allow-empty` を指定すると空のcommitが作れる
-
-### Cherry-pick
-
-他branchの特定のcommitだけ取り組みたいときに利用する。  
-mergeすると全てのcommitを取り込んでしまうで、取り込みたくないcommitがあるときに使い分ける。
-
-```console
-# COMMIT_IDには取り込みたいcommitのIDを指定する。
-git cherry-pick ${COMMIT_ID}
-
-# commitはしたくない。
-git cherry-pick --no-commit ${COMMIT_ID}
-```
 
 ### Delete remote branch
 
-```console
+```sh
 git push origin --delete ${BRANCH_NAME}
 
 # reomoteの削除をlocalに反映。
@@ -36,20 +17,13 @@ git fetch --prune
 
 ### Amend previous commit
 
-```console
-# 直前のcommit messageを修正する。
-git commit --amend
-
-# 直前のcommitに追加でaddする。
-# addしたい変更はstagingされている想定。
-git commit --amend --no-edit
-```
+[./git commit](/commands/git/commands/git_commit.md)を参照
 
 ### Handle Conflicts
 
 feature branchをcheckoutしている状態で、masterをmergeしているケース
 
-```console
+```shell
 # featureの内容が反映される
 git checkout conflicted_file.rs --ours
 

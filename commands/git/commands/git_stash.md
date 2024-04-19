@@ -2,7 +2,7 @@
 
 ## Usage
 
-```console
+```shell
 # untrackedなfileもstaskする
 git stash [-u|--include-untracked]
 

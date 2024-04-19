@@ -1,6 +1,6 @@
-# rebase
+# git rebase
 
-```console
+```shell
 # ３つのcommitを変更対象にする
 git rebase -i HEAD~3
 ```
