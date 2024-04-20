@@ -1,0 +1,2 @@
+watch:
+    nix run nixpkgs#typst -- watch math.typ
