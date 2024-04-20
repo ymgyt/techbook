@@ -1,9 +1,15 @@
-# Submodule
+# git submodule
 
 * submoduleのdirectoryをまとめて一つのcommitとして管理している
   * submodule配下のfileを通常のgitのようにひとつひとつ管理しない
 
 * submoduleの状態(commit)はbranchをまたいで共有されるので、checkoutしても追従されるわけではないのでdiffになりがち
+
+## gitlink
+
+* tree objectから他のrepositoryのcommit objectを参照するlink
+* 実際にfileが存在していなくてもgitはきにしない
+  * むしろ無視することで部分checkoutを実現したい
 
 ## `.gitmodules`
 
