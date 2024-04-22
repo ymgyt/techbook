@@ -77,3 +77,7 @@ https://www.npmjs.com/package/vscode-langservers-extracted
 ### 一時的にauto formatを無効にしたい
 
 `:set auto-format false`してから`:write`したのち`:set auto-format true`
+
+### 一時的にgitignoreされたfileをfile pickerで検索したい
+
+`:set file-picker.git-ignore false`

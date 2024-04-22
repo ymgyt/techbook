@@ -61,6 +61,11 @@ spec:
   * `livenessProbe`は失敗するとpodが再起動される
   * `readinessProbe`は失敗するとserviceからはずされる
 
+* `resources`
+  * `limits`だけを指定した場合、その値が`requests`として利用される。
+  * `requests` schedulingの際に参照される
+  * `limits` 超過した場合、kubeletによってOOMとして終了させられる
+
 
 ## Env
 
