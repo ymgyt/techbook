@@ -87,11 +87,14 @@ digraph {
     A   ->  B [
       label="label"
       lhead=cluster_b_group
+      arrowhead=crow
     ];
 }
 ```
 
 * `lhead`でsubgraph clusterを指定すると矢印がsubgroupで止まる
+* `arrowhead`: 矢印の先頭の形の指定
+  * `crow` 複数っぽい感じ
 
 ## Cluster定義
 

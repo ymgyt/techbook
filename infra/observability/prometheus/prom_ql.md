@@ -45,3 +45,15 @@ sum by (host) (system_cpu_utilization)
 
 * withoutは指定のfieldを無視して残ったkeyが同じtime seriesをaggregateす
 * byは指定のfieldが同じtime seriesをaggregateする
+
+## Range function
+
+* `rate()`: 期間の最後の値から期間の最初の値を引いて、時間で割った値。出力値はValue/1sとなる
+* `increase()`: rateの出力に時間幅を掛けた値。2/1秒がrateで[5m]で使ったら、5分間の出力値となる
+
+## Etc
+
+grafanaやpromqlで使える特殊な変数
+
+* `$__interval` 二つのdata pointの間隔。scrapeする間隔の設定によるがqueryには埋め込みたくない場合に便利
+  * 例えば、`increase(foo[$__interval])` とすると前回のdatapointからの差分をだせる

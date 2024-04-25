@@ -214,6 +214,21 @@ key_2=value_2
   * 参照がうまく解決されない場合はnametransformerが必要
 
 
+## configMapGenerator
+
+### overlayで既存のconfigMapにdataを追加する
+
+```yaml
+configMapGenerator:
+  - name: grafana-dashboards-app
+    behavior: merge
+    files: 
+      - grafana/dashboards/rabbitmq.json
+```
+
+* `behaivior`
+  `merge`:  既存の`grafana-dashboards-app` configmapに`rabbitmq.json`のdataを追加できる
+
 ## References
 
 - [Transformの解説が丁寧](https://atmarkit.itmedia.co.jp/ait/articles/2101/21/news004.html)
