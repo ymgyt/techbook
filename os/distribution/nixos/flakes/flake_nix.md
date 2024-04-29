@@ -94,6 +94,9 @@
         nushell
       ];
 
+      # derivationのbuild inputsを追加
+      inputsFrom = [];
+
       shellHook = ''
         echo "node `${pkgs.nodejs}/bin/node --version`"
         exec nu

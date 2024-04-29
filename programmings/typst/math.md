@@ -15,6 +15,9 @@ cos (theta)
 
 # 絶対値
 abs(a)
+
+# 分数
+frac(a,b)
 ```
 
 ## Symbol

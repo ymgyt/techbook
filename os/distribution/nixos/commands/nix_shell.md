@@ -16,6 +16,10 @@ nix shell github:edolstra/dwarffs --command dwarffs --version
 nix shell github:edolstra/dwarffs/cd7955af31698c571c30b7a0f78e59fd624d0229 ...
 ```
 
+### nix developとの違い
+
+derivation関連には関与せずに指定されたpackageの`bin`を`PATH`に追加するだけ
+
 
 ## Usage
 
