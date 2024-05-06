@@ -105,6 +105,22 @@ default-run = "ops"
 
 ## Dependencies
 
+### semver
+
+```toml
+# 同じ
+# 0でないleft mostがかわらない限り上げれる
+# 2.0以外はOK
+foo = "1.2.3"  
+foo = "^1.2.3"
+
+# 固定
+foo = "=1.2.3"
+
+# patchだけあげれる
+foo = "~1.2.3"
+```
+
 ### crateのrename
 
 ```toml

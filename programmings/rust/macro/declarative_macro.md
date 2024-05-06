@@ -216,5 +216,16 @@ macro_rules! def_env {
 /// Specify application logging directive.
 /// like "LOG=app=debug,info".
 pub static LOG_DIRECTIVE: &str = def_env!("LOG");
+```
 
+### Counting
+
+```rust
+macro_rules! replace_expr {
+    ($_t:tt $sub:expr) => {$sub};
+}
+
+macro_rules! count_tts {
+    ($($tts:tt)*) => {<[()]>::len(&[$(replace_expr!($tts ())),*])};
+}
 ```

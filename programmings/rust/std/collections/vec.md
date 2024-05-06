@@ -52,3 +52,12 @@ fn test() {
 ```
 
 * sortとdedupの合せ技でuniqueにできる
+
+## Sliceにする
+
+```rust
+let v = vec![1,2,3];
+let s = &v[1..2];
+```
+
+内部的には`v[ ]`がindexing expressionになって、`*v.index(Range)`になるらしいがよくわかってない

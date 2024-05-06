@@ -22,6 +22,7 @@ fn main() {
 ```
 
 * function pointerとclosureは別の型だが、条件を満たすとconvertされる
+* impl `Copy`
 
 ## static変数
 

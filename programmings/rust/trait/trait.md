@@ -2,42 +2,6 @@
 
 * `Self`はそのtraitを実装している型のalias
 
-## `T: 'static`
-
-Tはownedか`&'static`なfieldだけをもつことを要求。  
-threadまたぐ際に要求されがち。threadまたぐと、元threadのcallstackの存在を仮定できなくなるから。
-
-## `T: 'a`
-
-`T: 'a` is saying is that any references in T must outlive 'a.
-
-## `Borrow<T>`と`AsRef<T>`
-
-```rust
-pub trait Borrow<Borrowed> 
-where
-    Borrowed: ?Sized, 
-{
-    pub fn borrow(&self) -> &Borrowedⓘ;
-}
-```
-
-```rust
-pub trait AsRef<T> 
-where
-    T: ?Sized, 
-{
-    pub fn as_ref(&self) -> &Tⓘ;
-}
-```
-
-共通点は両者とも`T`への参照を提供をできる。 
-
-
-`Borrow<T>`のほうが`AsRef<T>`より制約が強い。  
-例えば、`impl Borrow<T> for K`の場合、`T`と`K`は`Eq`は`Hash`で整合性があるようにしなければならない。  
-具体的には、`x == y` => `x.borrow() == y.borrow()`, `x != y` => `x.borrow() != y.borrow()`を守る。
-
 ## `Deref`
 
 * Rustは継承という概念をもっていないが、`Deref`を使って、同様の機能を実現している。  
@@ -169,3 +133,25 @@ trait HttpService {
 //  fn fetch(&self, url: Url) -> impl Future<Output = HtmlBody>;
 }
 ```
+
+## Sealed
+
+traitをpublicにしつつ、downstreamにimplさせたくない
+
+```rust
+pub trait MyTrait: private::Sealed {
+    fn foo();
+}
+
+impl MyTrait for usize {
+    fn foo() { /* ... */ }
+}
+
+mod private {
+    pub trait Sealed {}
+
+    impl Sealed for usize {}
+}
+```
+
+* `MyTrait`をimplしたくても、`private` modがみえないので、implできない

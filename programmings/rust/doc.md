@@ -1,5 +1,24 @@
 # Document
 
+* `#![warn(rustdoc::broken_intra_doc_links)`
+
+```rust
+struct Foo
+
+/// # Header
+/// [`Foo`]
+fn foo() { }
+```
+
+* scopeにはいっていると[`Foo`]でそのまま参照できる
+
+## `//!`
+
+* `///`は直下のitemにcommentを付与する
+* `//!`はそのcommentを含んでいるitemにcommentを付与する
+  * `lib.rs`の先頭に書くとcrateにcommentできる
+
+
 ## Code example
 
 
