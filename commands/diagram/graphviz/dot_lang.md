@@ -37,9 +37,9 @@ digraph {
 
   // group cluster_aを定義
   // cluster_ は特別な意味をもつ
-  subgraph cluster_a [
+  subgraph cluster_a {
     
-  ]
+  }
 }
 ```
 
@@ -50,9 +50,9 @@ digraph {
   graph [
     layout=dot,
     rankdir=TB,
-		label="UML Class diagram demo"
-		labelloc="t" // t(top) | b(bottom)
-    labeljust="c" // l(left) | c(center) | r(right)
+		label="UML Class diagram demo",
+		labelloc="t", // t(top) | b(bottom)
+    labeljust="c", // l(left) | c(center) | r(right)
 		fontname="Helvetica,Arial,sans-serif"
     compound=true; // 矢印をClusterで止める
     newrank=true
@@ -77,8 +77,12 @@ digraph {
 
     MyNode [
         label="foo"
+        shape="box"
     ];
 ```
+
+* `shape`: nodeの形
+  * `box`, `ellipse`(default)
 
 ## Edge定義
 
@@ -88,6 +92,9 @@ digraph {
       label="label"
       lhead=cluster_b_group
       arrowhead=crow
+      style="solid"
+      dir="forward"
+      headport="w"
     ];
 }
 ```
@@ -95,6 +102,27 @@ digraph {
 * `lhead`でsubgraph clusterを指定すると矢印がsubgroupで止まる
 * `arrowhead`: 矢印の先頭の形の指定
   * `crow` 複数っぽい感じ
+  * `none` なにもない
+* `style`: edgeの線の種類
+  * `solid`,`dashed`, `dotted`, `bold`
+* `dir`: 矢印の向き
+　* `forward`(default)
+  * `back` A -> Bと書いて、BからAに矢印をひける
+  * `both` 両方
+  * `none` 引かない
+* `headport`: 矢印を対象nodeのどこにつけるか
+* `tailport`: 矢印を元のnodeのどこにつけるか
+
+```
++---+---+---+
+|nw | n | ne|
++---+---+---+
+| w |   | e |
++---+---+---+
+|sw | s | se|
++---+---+---+
+  
+```
 
 ## Cluster定義
 
