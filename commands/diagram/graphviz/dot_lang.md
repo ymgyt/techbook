@@ -56,6 +56,7 @@ digraph {
 		fontname="Helvetica,Arial,sans-serif"
     compound=true; // 矢印をClusterで止める
     newrank=true
+    dpi=600
   ];
 }
 ```
@@ -69,6 +70,7 @@ digraph {
   * `TB`: top to bottom, `BT`もある
   * `LR`: left to right
 * `newrank`: trueにするとsubgraphの中のnodeのrankも指定できた
+* `dpi`: 解像度. pngだと影響する
 
 ## Node定義
 
