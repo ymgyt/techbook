@@ -4,6 +4,8 @@
 
 ## Example
 
+### Enum
+
 ```rust
 use thiserror::Error;
 
@@ -41,3 +43,17 @@ pub enum CacheError {
 
 *`#[error(transparent)]`を指定すると`source()`と`Display`の実装がdelegateされる
   * なので、`#[error("msg")]`のように指定しなくて良い
+
+
+### struct
+
+```rust
+#[error("`{call}` failed")]
+pub struct SyscallError {
+    /// The name of the syscall which failed.
+    pub call: &'static str,
+    /// The [`io::Error`] returned by the syscall.
+    #[source]
+    pub io_error: io::Error,
+}
+```
