@@ -45,7 +45,7 @@ $
   (x+frac(b,2a)) &>= 0 "のとき" abs((x+frac(b,2a))) = x+frac(b,2a) & "(絶対値なので場合分けする)" \
   x + frac(b,2a) &= frac(sqrt(b^2-4 a c), 2a) \ 
   x &= - frac(b,2a) + frac(sqrt(b^2-4 a c), 2a) \ 
-  x &= frac(-b + sqrt(-b^2+4 a c), 2a) & "(1)" \ 
+  x &= frac(-b + sqrt(b^2-4 a c), 2a) & "(1)" \ 
 $
 $
   (x+frac(b,2a)) &< 0 "のとき" abs((x+frac(b,2a))) = -(x+frac(b,2a)) &"(絶対値が負の場合)" \
