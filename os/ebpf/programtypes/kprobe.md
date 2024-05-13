@@ -4,6 +4,12 @@
 * このあたりで情報をみれる
   * `/sys/kernel/debug/tracing/events/[uk]probe/{probename,id}`
   * `/sys/kernel/debug/tracing/kprobe_events`
+* kernelの`CONFIG_KPROBES=y`が必要
+
+* handler
+  * pre-handler routine
+  * post-handler routine
+  * fault-handler routine
 
 
 ## jprobe
