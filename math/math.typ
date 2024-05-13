@@ -4,6 +4,8 @@
 
 #include "number/number.typ"
 
+#include "function/function.typ"
+
 = 行列
 
 #include "matrix/linear_transformation.typ"

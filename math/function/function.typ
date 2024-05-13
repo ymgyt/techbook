@@ -23,3 +23,41 @@ $
 したがって、2次関数$y = a x^2 + b x + c$の頂点は\
 $(- frac(b,2a), frac(-b^2 + 4 a c, 4a))$となる。 \
 なお、3次関数以上はどうするかというと、微分する。
+
+=== 解の公式
+
+$
+ a x^2 + b x + c &= 0  wide &"(ただし "a != 0")" \
+ a (x^2 + frac(b,a) x) + c &= 0 wide &"(aでくくる)"\
+ a ((x + frac(b,2a))^2 - frac(b^2, 4a^2)) + c &= 0 \
+ a (x + frac(b,2thin a))^2 - frac(b^2,4a) + c &= 0 wide &"(aを分配)" \
+ a (x + frac(b,2a))^2 + frac(-b^2+4 a c, 4a) &= 0 \
+ a (x + frac(b,2a))^2 &= - frac(-b^2+4 a c, 4a)  \
+   (x + frac(b,2a))^2 &= - frac(-b^2+4 a c, 4a^2)  \
+   (x + frac(b,2a))^2 &= frac(b^2-4 a c, 4a^2)  \
+   sqrt((x + frac(b,2a))^2) &= sqrt(frac(b^2-4 a c, 4a^2)) wide &"(両辺のrootをとる)" \
+   sqrt((x + frac(b,2a))^2) &= frac(sqrt(b^2-4 a c), sqrt(4a^2)) wide & (sqrt(frac(a,b)) = frac(sqrt(a),sqrt(b))) \
+   sqrt((x + frac(b,2a))^2) &= frac(sqrt(b^2-4 a c), 2a) \
+
+  sqrt(A^2) &= abs(A) "より" \
+  abs((x + frac(b,2a))) &= frac(sqrt(b^2-4 a c), 2a) \
+
+  (x+frac(b,2a)) &>= 0 "のとき" abs((x+frac(b,2a))) = x+frac(b,2a) & "(絶対値なので場合分けする)" \
+  x + frac(b,2a) &= frac(sqrt(b^2-4 a c), 2a) \ 
+  x &= - frac(b,2a) + frac(sqrt(b^2-4 a c), 2a) \ 
+  x &= frac(-b + sqrt(-b^2+4 a c), 2a) & "(1)" \ 
+$
+$
+  (x+frac(b,2a)) &< 0 "のとき" abs((x+frac(b,2a))) = -(x+frac(b,2a)) &"(絶対値が負の場合)" \
+  -(x + frac(b,2a)) &= frac(sqrt(b^2-4 a c), 2a) \ 
+  x + frac(b,2a) &= - frac(sqrt(b^2-4 a c), 2a) \ 
+  x  &= -frac(b,2a) - frac(sqrt(b^2-4 a c), 2a) \ 
+  x &= frac(-b -sqrt(b^2-4 a c), 2a) & "(2)" \ 
+  "(1),(2)より " x &= frac(-b +sqrt(b^2-4 a c), 2a) or 
+  x = frac(-b -sqrt(b^2-4 a c), 2a) 
+$
+
+$
+    <=> x &= frac(-b plus.minus sqrt(b^2-4 a c), 2a)
+$
+
