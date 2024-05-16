@@ -18,6 +18,12 @@ abs(a)
 
 # 分数
 frac(a,b)
+
+# 数式にcomment
+a + b "(コメント)"
+
+# 空白をいれる
+wide
 ```
 
 ## Symbol
@@ -25,6 +31,7 @@ frac(a,b)
 * `brace.{l,r}`: 波括弧
 * `theta`
 * `<=>`: 合同
+* `plus.minus`: プラスマイナス
 
 
 ## Alignment

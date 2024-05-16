@@ -1,12 +1,47 @@
 # Aya
 
-## Memo
+## 環境構築
 
-環境構築
+```nix
+{
+  description = "Aya configuration";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = import nixpkgs { inherit system; };
+      in {
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [ bpf-linker cargo-generate bpftool ];
+          shellHook = "\n            exec nu\n          ";
+        };
+      });
+}
+```
 
 ```sh
-cargo install bpf-linker
+# Install aya-tool
+# aya-toolはnixにない
+cargo install --git https://github.com/aya-rs/aya -- aya-tool
 
-# cargo install cargo-generate
 cargo generate https://github.com/aya-rs/aya-template
+```
+
+## Workflow
+
+1. `cargo xtask build-ebpf`
+  * bpf codeのcompile
+2. `RUST_LOG=info cargo xtask run`
+  * userspaceのbinの実行
+
+### bindings(vmlinux)
+
+```sh
+# sock sock_commonの型を生成
+# CONFIG_DEBUG_INFO_BTF=y が前提
+ ~/.cargo/bin/aya-tool generate sock sock_common out> kprobeho-ebpf/src/vmlinux.rs
 ```
