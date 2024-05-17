@@ -29,7 +29,7 @@ The latest linux-next version of the Linux kernel is:         next-20240510
 
 ## configを確認したい
 
-`zcat /prod/config.gz`
+`zcat /proc/config.gz`
 
 
 ## Memo
