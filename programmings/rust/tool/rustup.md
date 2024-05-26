@@ -11,6 +11,31 @@
   * `default`
   * `complete` がある
 
+### Components
+
+* rustc
+* cargo
+* rustfmt
+* rust-std
+* rust-docs
+* rust-analyzer
+* clippy
+* miri
+* rust-src
+* rust-mingw
+* llvm-tools
+* rustc-dev
+
+### Profile
+
+componentsのgorupのこと
+* minimal
+  * rustc,rust-std,cargo
+* default
+  * minimal + rust-docs,rustfmt,clippy
+* complete
+  * 全部入り。基本つかわない
+
 ## Usage
 
 ```
