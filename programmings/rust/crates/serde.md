@@ -42,6 +42,27 @@ pub struct AppDescriptor {
 }
 ```
 
+### enum
+
+```rust
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase", rename_all_fields = "camelCase")]
+pub( enum Policy {
+    ChannelBase {
+        allowed_channels: Vec<SlackChannelId>,
+    },
+    UserBase {
+        allowed_users: Vec<SlackUserId>,
+    },
+    UserRoleBase {
+        allowed_roles: Vec<Role>,
+    },
+    NoAuthorization,
+}
+```
+
+* `rename_all`と`rename_all_fields`を指定しないとすべてに適用されない
+
 ## http_serde_ext
 
 型にSerialize等がderiveされたいない場合に変換処理を定義した外部のmodule(crate)を利用できる
@@ -59,3 +80,4 @@ struct DeviceAuthorizationResponse {
 ```
 
 * `http::Uri`にderiveがないので`http_serde_ext`を利用する
+

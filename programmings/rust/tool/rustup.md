@@ -38,7 +38,7 @@ componentsのgorupのこと
 
 ## Usage
 
-```
+```sh
 # toolchaingの確認
 rustup show
 
@@ -67,6 +67,9 @@ rustup override set 1.15.1
 
 # target tripleを確認する
 rustup show
+
+# toolchainの削除
+rustup toolchain remove 1.70.0-<target>
 ```
 
 ## toolchainの指定
