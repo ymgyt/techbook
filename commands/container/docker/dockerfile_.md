@@ -179,6 +179,25 @@ RUN --mount=type=ssh cargo build --release
 * `docker image build --ssh default${SSH_AUTH_SOCK}`
   * ssh-addしてある前提で、host側のsshをdocker image build時に利用できる
 
+### Install packages by apt-get
+
+```dockerfile
+RUN apt-get update && apt-get install -y \
+    nginx \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+* `apt-get update`と`apt-get install`は同一RUNに書く
+
+```dockerfile
+FROM ubuntu:22.04
+RUN apt-get update
+RUN apt-get install -y curl # nginx最初はなくてあとで追加
+```
+
+わけた書いた場合installするpackageを追加しても、`apt-get update`の結果はcacheされており、古いpackageが利用される場合があるから(cacheされたapt-get updateの結果も参照されないらしい)
+
 ## EXPORSE
 
 Dockerに実行中のcontainerがlistenしているportを知らせる.

@@ -11,16 +11,22 @@
 
 ```toml
 [dev-dependencies]
-insta = "1.13.0"
+insta = { version = "1.13.0", features = ["yaml"] }
+
+[profile.dev.package]
+insta.opt-level = 3
 ```
 
 `cargo install cargo-insta`
 
+* devでもopt-levelをあげると良いとdocにあった 
+* yaml featuresを使うと`assert_yaml_snapshot!`
 
 ## 使い方
 
 ```shell
 cargo test
+# or cargo insta test
 cargo insta review
 ```
 
@@ -31,6 +37,12 @@ cargo insta review
 * snapshot候補をsnapshotに採用するために`cargo insta review`が必要
 * `cargo insta test --unreferenced=delete`でつかわれていないsnapshotを削除
   * `auto`だとCIでは失敗、localでは削除にしてくれる
+  * `reject`,`warn`もある
+  * `cargo test`と`cargo insta test`の違いは1 functionの中に複数snapshotがある場合にまとめてくれる
+
+* `export CI=true`を設定すると振る舞いが変わる
+  * nixでどう設定すべきか
+  * review用のnew snapshotが作られなくなる
 
 ## Assertion
 
@@ -56,6 +68,53 @@ settings.bind(|| {
 });
 ```
 
+### Inline
+
+snapshotをsrc codeに保持できる
+
+```rust
+fn split_words(s: &str) -> Vec<&str> {
+    s.split_whitespace().collect()
+}
+
+#[test]
+fn test_split_words() {
+    let words = split_words("hello from the other side");
+    insta::assert_yaml_snapshot!(words, @"");
+}
+```
+
+* 実行すると `@""` 以降にsnapshotが保存される
+
+### snapshot name and debug expression
+
+```rust
+#[test]
+fn test_something() {
+    assert_snapshot!("first_snapshot", "first value", "debug_review_context");
+    assert_snapshot!("second_snapshot", "second value");
+}
+```
+
+* 第1引数にsnapshotの名前を渡せる
+* 第3引数に渡したdebug expressionをreviewで表示できる
+
+
+### Add Context to review  UI
+
+素の状態だとcargo insta reviewのreviewでacceptしていいかsrcと相談する必要がある。以下のようにすると、review UIに情報を追加できる
+
+```rust
+insta::with_settings!({
+    info => &ctx, // structを渡せる
+    description => "snapshot description here"
+    omit_expression => true // わかってない
+}, {
+    insta::assert_snapshot!(template.render(ctx));
+});
+```
+
+
 ### `Vec`のorderを無視したい
 
 ```rust
@@ -72,9 +131,5 @@ settings.bind(|| {
   * `Vec<T>`の場合は`T`にあてるために、`[]`を書いている
 * `insta::sorted_redaction()`を使うとsnapshotにする前にinsta側でsortしてくれる
 
-
-## わかっていないこと
-
-* `cargo test`と`cargo insta test`
 
 

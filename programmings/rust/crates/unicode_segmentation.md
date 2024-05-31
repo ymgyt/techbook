@@ -28,3 +28,22 @@ use unicode_segmentation::UnicodeSegmentation;
 
 "Hello世界".graphem(true).count();
 ```
+
+## N文字以下にtrucateする
+
+```rust
+use unicode_segmentation::UnicodeSegmentation;
+
+match s.grapheme_indices(true).map(|(i, _)| i).nth(take) {
+    Some(n) => {
+        s.truncate(n);
+        s
+    }
+    None => s,
+}
+```
+
+* `grapheme_indices()`でgraphemのbyte境界をiterateできる
+  * 戻り値をtruncateに使って安全
+
+* `char_indices()`でchar版の同じことができる
