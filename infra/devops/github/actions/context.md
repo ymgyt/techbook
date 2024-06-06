@@ -9,3 +9,8 @@
   * `${{ env.REPOSITORY }}`
   * `${{ secret.API_KEY }}`
 
+
+## github
+
+* `github.ref_name`: branchやtagの名前
+  * `/refs/tags`のようなprefixがない値

@@ -84,3 +84,37 @@ echo "Hello" out+err > log.log
 
 * `=~` 正規表現でmatch
   * `"foo-bar" =~ "-bar$"` => true
+
+
+## Escape new line
+
+```sh
+foo \
+  --arg1 \
+  --arg2 
+```
+
+は
+
+```nu
+(
+  foo
+    --arg1
+    --arg2
+)
+```
+
+* `( )`で囲む
+
+## Script
+
+
+```nu
+def main [] {
+ 
+} 
+```
+* `nu script.nu`で実行する
+* scriptに`main`が定義されていると実行される(特別扱い)
+  * mainがない場合は明示的な呼び出しのcodeが必要。bashと同じ
+

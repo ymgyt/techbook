@@ -20,3 +20,8 @@ Nushellがsupportするdata型
 | Blocks	   | `if true { print "hello!" }`, `loop { print "press ctrl-c to exit" }` |
 | Null	     | `null`                                                                |
 
+
+
+## Null
+
+* `$null_value | into string`で空文字にできる

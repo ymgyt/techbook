@@ -98,3 +98,21 @@ fn instrumentation_scope() -> &'static InstrumentationScope {
     })
 }
 ```
+
+## Once
+
+```rust
+use std::sync::Once;
+
+pub fn init_tracing() {
+    static INIT_SUBSCRIBER: Once = Once::new();
+
+    INIT_SUBSCRIBER.call_once(|| {
+        let show_code_location = false;
+        tracing_subscriber::fmt()
+            .init();
+    })
+}
+```
+
+* `Once::call_once`で一度だけ処理を実行できる
