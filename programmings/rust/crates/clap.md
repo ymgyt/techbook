@@ -113,7 +113,14 @@ pub struct TracingOptions {
 
     /// RFC3339形式のflag
     #[arg(long, value_parser = chrono::DateTime::<chrono::FixedOffset>::parse_from_rfc3339,value_name = "TIMESTAMP")]
-    start: DateTime<FixedOffset>,
+
+    /// PathBuf型にするにはstrings featureが必要
+    /// OsStringを経由する
+     #[arg(
+        long,
+        default_value = config::cache::dir().to_path_buf().into_os_string(),
+    )]
+    cache_dir: PathBuf,   start: DateTime<FixedOffset>,
 }
 
 fn parse_region(region: &str) -> Result<Region, Infallible> {
