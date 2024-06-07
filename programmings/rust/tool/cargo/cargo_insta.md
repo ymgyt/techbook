@@ -132,4 +132,23 @@ insta::with_settings!({
 * `insta::sorted_redaction()`を使うとsnapshotにする前にinsta側でsortしてくれる
 
 
+### Redaction
+
+* uuidやtimestamp等の一部のdataを無視(置換)できる
+* feature `redactions`が必要
+
+```rust
+insta::with_settings!({
+    description => " log 1 record",
+}, {
+    insta::assert_yaml_snapshot!("layer_test_log_1_record", record, {
+        ".observedTimeUnixNano" => "[OBSERVED_TIME_UNIX_NANO]",
+        ".attributes[0].value" => "[SOURCE_CODE_LOCATION]",
+    });
+});
+```
+
+* 第三引数の`{ ... }`に書く
+* `selector => "replaced value"`を書く
+  * selectorはserialize後のpathであてる
 
