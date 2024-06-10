@@ -36,6 +36,7 @@ use clap::{Parser, Subcommand, Args};
     infer_subcommands = true, // "f"に対して"foo"を推測する
     bin_name = "foo",         // clapが認識するbin name
     about = "xxx",
+    subcommand_required = false, // subcommandの指定を必須にする
 )]
 pub struct CloudOpsApp {
     #[command(subcommand)]

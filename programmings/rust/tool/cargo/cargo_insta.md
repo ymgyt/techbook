@@ -144,6 +144,7 @@ insta::with_settings!({
     insta::assert_yaml_snapshot!("layer_test_log_1_record", record, {
         ".observedTimeUnixNano" => "[OBSERVED_TIME_UNIX_NANO]",
         ".attributes[0].value" => "[SOURCE_CODE_LOCATION]",
+        ".**.nested.unixTimestamp" => "[UNIX_TIMESTAMP]"
     });
 });
 ```
@@ -151,4 +152,5 @@ insta::with_settings!({
 * 第三引数の`{ ... }`に書く
 * `selector => "replaced value"`を書く
   * selectorはserialize後のpathであてる
+  * `.**.`でnestした一部のpathにマッチさせられる(配列もみてくれる)
 
