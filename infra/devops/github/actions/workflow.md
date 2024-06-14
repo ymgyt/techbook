@@ -39,6 +39,7 @@ jobs:
 ```yaml
 on:
   push:
+    branches: [main]
     paths-ignore:
       - 'docs/**'
 ```
@@ -58,6 +59,7 @@ on:
 * eventには`types`で指定できるactivitiy typeが存在する
 * 省略時はすべてのtypeが指定されてことになる
   * ただし、pull_requestだけは省略時のdefault typesが存在する
+* OSSのようにforkしたrepoからPRを作成する場合にはpush eventは発火しないのでpull_request triggerが必要になる
 
 
 ### tagのpushをtriggerにする
