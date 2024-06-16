@@ -65,6 +65,15 @@ helper:
 
 [confirm("Do operation?")]
 operation:
+
+[linux]
+check:
+  echo "Linux"
+
+[macos]
+check:
+  echo "mac"
+
 ```
 
 * `[private]`
@@ -74,3 +83,5 @@ operation:
 * `[confirm]`
   * task実行時にy/n入力の機械をくれる
   * `--yes`でskipできる
+
+* `[linux]`, `[maxos]`でplatformの切り分けができる
