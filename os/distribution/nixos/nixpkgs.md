@@ -11,3 +11,10 @@ https://search.nixos.org/packages
   * `nixos-unstable`: masterに追従している
 * `nixpkgs-*`: 非NixOS user向け
   * `nixpkgs-unstable`: masterに追従している
+
+
+## `pkgs.callPackage`
+
+`pkgs.callPackage import ./foo.nix { arg1 = "useThis" }`
+
+* foo.nixで宣言された関数の引数とpkgs自身のattribute setをmergeした上で、第二引数のattributeを優先してmergeしてくれる。
