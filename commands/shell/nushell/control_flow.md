@@ -1,6 +1,8 @@
 # Control flow
 
-## if null
+## if 
+
+### if null
 
 ```nu
 def main [filter?: string] {
@@ -13,3 +15,27 @@ def main [filter?: string] {
 ```
 
 * `$var == null`
+
+### if (expression)
+
+```nu
+if ($line | str starts-with 'typo> error: ' ) { }
+```
+
+* `if (expression)`
+
+### 空チェック
+
+```nu
+ if ($list | is-not-empty) {
+  let item = $list | first
+}
+```
+
+## errorを無視
+
+```nu
+do -i { somecommand } | lines
+```
+
+* pipeは`{ }`の外に書くらしい

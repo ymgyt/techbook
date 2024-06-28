@@ -9,6 +9,17 @@
 
 * 実装はkube-proxyがになっている
 
+## `spec.type`
+
+* `ClusterIP`
+  * defaultだとこれ。cluster内部でのみ有効なIPが割り当てられる
+* `NodePort`
+  * ClusterIPをnodeのportを通じて公開する
+* `LoadBalancer`
+  * ClusterIPを作成し、NodePortを設定したうえで、Serviceを公開するための負荷分散コンポーネントをclusterのinfra(AWSのALB等)に作成する
+
+ポイントはそれぞれ独立しているのではなく段階的に公開の程度があがっていくこと
+
 ## ClusterIP
 
 ```yaml
@@ -33,6 +44,7 @@ spec:
   * `targetPort`はPodのcontainerがlistenしているport
 * ServiceにはClusterIPが付与される
 * `metadata.name`がDNS名になる
+  * `<service-name>.<namespace>.svc.cluster.local`でcluster内からアクセスできる
 
 ## LoadBalancer
 
@@ -57,6 +69,8 @@ spec:
 
 * LoadBalancerを管理する責務はCloudProviderにある
   * たぶん,LoadBalancerを管理するcontroller(operator)が必要
+
+* 1 Serviceに1 LoadBalancerだと多すぎる場合は、Ingressを使う
 
 ## NodePort
 

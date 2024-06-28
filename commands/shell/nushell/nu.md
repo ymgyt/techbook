@@ -55,27 +55,6 @@ nix-store -q ((which sqlite3).path)
 * `()`の評価結果を利用できる
   * 構造化データをstringにする処理忘れがち
 
-## Redirect
-
-```sh
-# Stdout
-echo "Hello" out> out.text
-
-# Stderr
-echo "Warn" err> err.text
-
-# Both
-echo "Hello" out+err > log.log
-
-# Pipe
-foo e>| rg 'error'
-foo o+e>| rg 'error'
-```
-
-* `>out` で出力先を指定する
-* `e>`, `err>`でstderrをredirectする
-  * `o+e>`, `out+err>`で両方をredirectする
-
 ## Pipeline
 
 ```nu
