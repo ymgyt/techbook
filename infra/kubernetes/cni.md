@@ -1,5 +1,8 @@
 # Container Network Interface
 
+* PodのIP addressがcluster外部からアクセスできるかどうかはCNIの実装次第
+  * AWSではVPCのIPのCIDR範囲ならPodのIPを取得する
+
 
 ## K8s requirements for CNI Plugins
 

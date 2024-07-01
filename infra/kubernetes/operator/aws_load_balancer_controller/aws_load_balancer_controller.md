@@ -4,8 +4,9 @@
 
 ## 動作の概要
 
-1. Controllerはingress resourceをwatch
+1. Controllerはingress resource or Service resourceをwatch
   * requirementを満たすingressの場合、AWS Resourceを作成する
+  * AWS Resourceの設定はannotationsで行う
 
 2. ALBがAWS内にingressのために作成される
   * internet-facing or internalを選べる
@@ -24,7 +25,7 @@
 | Path    | Rule         |
 
 
-## Traffic
+## Traffick
 
 * 2つのtraffic modeがある
   * Instance mode
@@ -41,3 +42,7 @@
 
 * controllerはworker nodeで起動する
 * ALB等のAWS resourceを制御するためにIAM permissionが必要
+
+## 参考
+
+* [AWSブログ Kubernetes アプリケーションの公開 Part 2: AWS Load Balancer Controller](https://aws.amazon.com/jp/blogs/news/exposing-kubernetes-applications-part-2-aws-load-balancer-controller/)

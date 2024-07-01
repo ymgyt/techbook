@@ -70,6 +70,28 @@ metadata:
 
 * `metadata.annotations.eks.amazonaws.com/role-arn`で指定する
 
+### IRSA Trouble Shooting
+
+IRSAがうまくいかないときのチェックリスト
+
+* service accountのannotationsにIAM roleが指定されているか
+* podにtokenがmountされているか
+
+```yaml
+- mountPath: /var/run/secrets/eks.amazonaws.com/serviceaccount
+  name: aws-iam-token
+  readOnly: true
+```
+
+* podに環境変数が設定されているか
+
+```yaml
+- name: AWS_ROLE_ARN
+  value: arn:aws:iam::<redacted>:role/geeiq-test-k8s-aws-loadbalancer-controller
+- name: AWS_WEB_IDENTITY_TOKEN_FILE
+  value: /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+```
+
   
 ## EKS Pod Identity
 
