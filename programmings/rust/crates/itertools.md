@@ -37,6 +37,15 @@ itertools::assert_equal(fibonacci.by_ref().take(8),
 * foldはitertorを処理して最終的な値を生成する。unfoldは逆で、値(状態)からitertorを作る
 * closureの返り値は生成するiteratorのyield値, 状態は`&mut`で渡されるのでclosure内で更新して状態を進める前提
 
+## separatorを間に入れる
+
+```rust
+itertools::assert_equal(intersperse((0..3), 8), vec![0, 8, 1, 8, 2]);
+```
+
+* iteratorにseparatorとして特定の間を差し込みたいときにつかえる
+* joinの汎用版?
+
 ## References
 
 * [itertoolsの紹介](https://keens.github.io/blog/2019/12/06/itertoolsnoshoukai/)
