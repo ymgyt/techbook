@@ -40,3 +40,7 @@ external-dnsはDNS recordとexternal entry pointを同期させることでこ�
 * policyを`upsert-only`にするとDNS Recordは削除されなくなる
 * policyを`sync`にすると削除までされる
 * `txtOwnerId`とは...
+
+## domain filter
+
+* `--domain-filter=.example.org`を指定すると、`.example.org`で終わるzoneのみを対象にする
