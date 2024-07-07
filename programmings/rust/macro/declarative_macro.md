@@ -9,6 +9,7 @@
 
 * `:ident` 変数名
   * 呼び出し側の変数に影響をあたえるためにはこれでもらう必要がある。
+  * keywordにもmatchする(`fn foo`はident identでmatch)
 * `:expr` expression
 * `:ty` 型名
 * `:tt` token tree. なんでもマッチする。

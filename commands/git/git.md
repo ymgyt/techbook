@@ -46,7 +46,7 @@ git switch test
 
 ### Reset
 
-```console
+```shell
 # single fileのreset
 git checkout HEAD target.go
 
