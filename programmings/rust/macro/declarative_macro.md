@@ -133,6 +133,8 @@ s.foo();
 
 ## Debug
 
+### `trace_macros!`
+
 macroのdebugの仕方。
 
 1. nightlyを使う
@@ -149,6 +151,27 @@ fn main() {
 ```
 
 `cargo +nightly run`
+
+### `log_syntax!`
+
+```rust
+#![feature(log_syntax)]
+
+macro_rules! my_vec {
+    ($($x:expr),+) => {{
+      let mut v = Vec::new();
+      $(
+          log_syntax!("got ", $x);
+          v.push($x);
+      )+
+      v
+    }}
+}
+```
+
+* `cargo +nightly check`
+  * compile時に評価されるのがtrace_macrosとの違い
+
 
 ## Recipe
 
@@ -228,5 +251,52 @@ macro_rules! replace_expr {
 
 macro_rules! count_tts {
     ($($tts:tt)*) => {<[()]>::len(&[$(replace_expr!($tts ())),*])};
+}
+```
+
+### Compose
+
+```rust
+macro_rules! compose {
+    ($last:expr) => {
+        $last
+    };
+    ($head:expr, $($tail:expr),+) => {
+        $crate::macros::compose_two($head, compose!($($tail),+))
+    };
+}
+
+pub(crate) use compose;
+
+pub(crate) fn compose_two<T1, T2, T3, F, G>(f: F, g: G) -> impl Fn(T1) -> T3
+where
+    F: Fn(T1) -> T2,
+    G: Fn(T2) -> T3,
+{
+    move |x| g(f(x))
+}
+
+```
+
+```rust
+fn add_one(n: i32) -> i32 {
+    n + 1
+}
+
+fn stringify(n: i32) -> String {
+    n.to_string()
+}
+
+fn prefix_with<'a>(prefix: &'a str) -> impl Fn(String) -> String + 'a {
+    move |x| format!("{}{}", prefix, x)
+}
+
+mod macros;
+use macros::compose;
+
+fn main() {
+    let composed = compose!(add_one, stringify, prefix_with("Result: "));
+
+    println!("{}", composed(3));
 }
 ```

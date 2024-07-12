@@ -12,3 +12,12 @@ let result: Vec<u8> = inputs
 ```
 
 * イメージとしては、失敗しうる操作のiteratorで一つでも失敗か、成功した値のVecに変換できる
+
+
+## 特定のitemのindexが知りたい
+
+```rust
+if let Some(idx) = items.iter().position(|item| item.foo = "foo") {
+    items.swap_remove(idx);
+}
+```
