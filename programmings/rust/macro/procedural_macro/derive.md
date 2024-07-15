@@ -5,7 +5,7 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::DeriveInput;
 
-#[proc_macro_derive(Hello)]
+#[proc_macro_derive(Hello, attributes(rename,foo))]
 pub fn anything(item: TokenStream) -> TokenStream {
     let ast = match syn::parse::<DeriveInput>(item) {
         Ok(input) => input,
@@ -31,3 +31,5 @@ struct Example {}
 * `proc_macro_derive(DeriveName)` annotationを付与する
   * 関数名はなんでもよい
 * `syn::DeriveInput`にparseする
+* attributesは`attributes(field)`で指定する
+  * derive macro helper attributesと呼ばれているらしい

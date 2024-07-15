@@ -138,3 +138,14 @@ pub fn public(_attr: TokenStream, item: TokenStream) -> TokenStream {
     public_version.into()
 }
 ```
+
+## Attributes
+
+attributeの書き方として以下のような場合がある
+
+* `#[rename(foo)]`       (`Meta::List`)
+  * `#[rename("foo")]`もありえる
+* `#[rename]`            (`Meta::Path`)
+* `[rename(key=value)]`  (`Meta::NameValue`)
+
+Attributeのmetaのこれらに対応したenumが格納されている
