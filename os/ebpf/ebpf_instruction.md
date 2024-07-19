@@ -14,13 +14,27 @@ struct ebpf_insn {
 
 ## Register
 
-| Register | Description   |
-| ---      | ---           |
-| R0       | 戻り値        |
-| R1 - R5  | 引数          |
-| R6 - R9  | 汎用          |
-| R10      | Frame pointer |
+| Register | Description              | Save           |
+| ---      | ---                      |                |
+| R0       | 戻り値                   |                |
+| R1 - R5  | 引数                     |                |
+| R6 - R9  | 汎用                     | Callee saved   |
+| R10      | Frame pointer(read only) |                |
 
+* register幅は64bit
+* R0
+  * 関数呼び出し時のreturn value
+  * bpf programのexit value 
+* R1
+  * program起動時にinputへのmemory addressをもつ
+
+* R1-R5
+  * numberか、stackへのpointerしか保持できない 
+  * memory accessはまずstackへのloadを行う必要がある
+
+## Stack
+
+512 byte stack
 
 ## 外部関数呼び出し
 

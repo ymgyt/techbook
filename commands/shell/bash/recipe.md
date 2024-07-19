@@ -95,3 +95,33 @@ CWD=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
 diff <(cat A.txt) <(cat B.txt)
 ```
 
+
+### log helper
+
+```shell
+log() {
+    local level="$1"
+    shift
+    echo "$(date '+%Y-%m-%d %H:%M:%S') [$level] $*"
+}
+
+log INFO "info..."
+log DEBUG "debug..."
+log ERROR "error..."
+```
+
+### OSの判定
+
+```shell
+case "$(uname -s)" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+
+echo "Running on $machine"
+
+if [ "$machine" = "Linux" ]; then
+elif [ "$machine" = "Mac" ]; then
+fi
+```

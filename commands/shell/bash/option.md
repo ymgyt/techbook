@@ -15,3 +15,9 @@
 | `pipefail`  |       | pipelineの戻り値が終了statusが0でない最後のコマンドの値になる |
 | `xtrace`    | `-x`  | 変数展開をdebugする                           |
 | `noglob`    |  ?    | `echo Hello "${NAME} *"`のような場合に*をliteralに扱う |
+
+```bash
+set -o nounset
+set -o errexit
+set -o pipefail
+```
