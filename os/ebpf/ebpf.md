@@ -78,3 +78,10 @@ bpf関連のconfig
 
 BPFで生成したlinux kernelに関する型情報。  
 kernel headerへの依存をなくせる利点がある
+
+## BPF programのメモリアクセス
+
+* bpf programはregisterと自身のstackにしか基本的にはアクセスできない
+* BPF mapsにはhelper経由
+* kernelのmemoryには`bpf_prob_read()` helperでアクセスする
+  * page faultをいい感じにしてくれるらしい

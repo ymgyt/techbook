@@ -27,10 +27,6 @@ The latest longterm 4.19 version of the Linux kernel is:      4.19.313
 The latest linux-next version of the Linux kernel is:         next-20240510
 ```
 
-## configを確認したい
-
-`zcat /proc/config.gz`
-
 
 ## Memo
 
