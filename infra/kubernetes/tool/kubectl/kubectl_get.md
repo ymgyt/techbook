@@ -7,6 +7,7 @@
 * `-L`,`--label-columns`: 表示するlabelを指定する
 * `--show-labels=true`: 全てのlabelを表示する
 * `-l`, `--selector`: labelに基づいてquery
+* `--field-selector`
 
 
 ## Usage
@@ -20,5 +21,8 @@ kubectl get secret xxx-secret -o jsonpath="{.data.key1}" | base64 -d;
 
 # 全て(全てではない)
 kubectl get all
+
+# Pendingのpod一覧
+kubectl get pods --field-selector=status.phase=Pending
 ```
 

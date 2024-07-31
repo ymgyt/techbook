@@ -6,6 +6,10 @@
 * `kubectl get componentstatus`
 * `kubectl get events`
 * `kubectl describe pod`してEventsを確認する
+
+## 参考
+
+* [foxtech k8s troubleshooting](https://foxutech.com/category/kubernetes/k8s-troubleshooting/)
   
 
 ## Resourceが足りていない状況
@@ -20,3 +24,16 @@
 * Deployment
   * label selector
 * Job
+
+## Podがpendingでscheduleされない
+
+まずpending pod一覧を取得する
+
+```sh
+kubectl get pods --field-selector=status.phase=Pending -n kube-system
+```
+
+次にpendingなpodの詳細を確認する
+```sh
+
+```
