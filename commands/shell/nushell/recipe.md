@@ -30,6 +30,15 @@ aws foo
   ); printf "%s15s : %s\n" $x $v}
 ```
 
+## Filter
+
+```nu
+[] | filter {|user| $user.name | str starts-with 'foo' } | select id name
+
+# where版
+[] | where ($it.name | str starts-with 'foo') | select id name
+```
+
 ## Kill process
 
 ```nu
