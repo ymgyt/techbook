@@ -4,7 +4,7 @@
 
 ```sh
 # List recipes
-just --list
+just --list --list-submodules
 
 # More concise
 just --summary
@@ -85,3 +85,28 @@ check:
   * `--yes`でskipできる
 
 * `[linux]`, `[maxos]`でplatformの切り分けができる
+* `[no-cd]`
+  * defaultではjustfileが定義してあるdirにcdするがその挙動をやめる
+
+## Modules
+
+```just
+export var1 := 'key1'
+
+mod foo 'etc/just/run.just'
+```
+
+`etc/just/foo.just`
+
+```just
+bar:
+  echo "bar"
+  echo $var1
+```
+
+* `just foo bar` で実行できる
+  * `just foo::bar`
+
+* 変数の受け渡し
+  * import側がexportすると環境変数として被import側にみえる
+* `set shell`は受け継がれなかった
