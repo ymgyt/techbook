@@ -39,3 +39,16 @@ do -i { somecommand } | lines
 ```
 
 * pipeは`{ }`の外に書くらしい
+
+## loop
+
+### each
+
+
+```nu
+'[1, 2, 3, 4, 5]'
+| from json
+| each { |x| $x * 2 } # each { $in * 2}
+```
+
+* 暗黙的に`$in` にbindされるから、変数(`|x|`)を省略したければできる

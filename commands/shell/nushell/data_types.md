@@ -25,3 +25,9 @@ Nushellがsupportするdata型
 ## Null
 
 * `$null_value | into string`で空文字にできる
+
+## Datetime
+
+```nu
+"2022-02-02T14:30:00+05:00" | into datetime
+```
