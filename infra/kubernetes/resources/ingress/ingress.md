@@ -6,6 +6,9 @@
   * ingressだけ作っても意味がない
 * LoadBalancerと違い、k8s component
 * Ingress用にNodePort(LoadBalancer)は必要
+* Ingress resourceに対応するresource
+  * cluster外にcloud porividerがload balancerをたてる場合
+  * cluster内にroutingを行うPod(Serviceも?)をたてる場合
 
 ```yaml
 apiVersion: networking.k8s.io/v1

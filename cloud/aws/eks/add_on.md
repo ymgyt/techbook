@@ -5,7 +5,7 @@
   * 例: CoreDNS等
 
 * Default Addon
-  * defaultでinstallされているaddon
+  * defaultでinstallされているaddon(EKS self-managedとも呼ばれている)
   * APIやconsoleで確認できないが、kubectl上ではみれる
   * Amazon VPC CNI Plugin
   * CoreDNS
