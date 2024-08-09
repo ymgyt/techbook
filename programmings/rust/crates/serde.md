@@ -39,6 +39,9 @@ pub struct AppDescriptor {
     // が呼ばれる
     #[serde(with = "humantime_serde")]
     slow_timeout: std::time::Duration,
+
+    #[serde(deserialize_with = "de_func")]
+    foo_timeout: std::time::Duration,
 }
 ```
 
