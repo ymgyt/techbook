@@ -84,3 +84,31 @@ struct DeviceAuthorizationResponse {
 
 * `http::Uri`にderiveがないので`http_serde_ext`を利用する
 
+## Custom deserialization
+
+### Optional duration
+
+* `30s`をDurationにしたい
+
+```rust
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ApiEntry {
+    #[serde(default, deserialize_with = "config::parse_duration_opt")]
+    timeout: Option<Duration>,
+}
+
+pub(crate) fn parse_duration_opt<'de, D>(deserializer: D) -> Result<Option<Duration>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    match Option::<String>::deserialize(deserializer)? {
+        Some(duration) => match humantime::parse_duration(&duration) {
+            Ok(duration) => Ok(Some(duration)),
+            Err(err) => Err(serde::de::Error::custom(err)),
+        },
+        None => Ok(None),
+    }
+}
+```
+

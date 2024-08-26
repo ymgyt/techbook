@@ -108,7 +108,7 @@ fn test_something() {
 insta::with_settings!({
     info => &ctx, // structを渡せる
     description => "snapshot description here"
-    omit_expression => true // わかってない
+    omit_expression => true
 }, {
     insta::assert_snapshot!(template.render(ctx));
 });
