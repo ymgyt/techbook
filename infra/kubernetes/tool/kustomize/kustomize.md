@@ -234,3 +234,9 @@ configMapGenerator:
 - [Transformの解説が丁寧](https://atmarkit.itmedia.co.jp/ait/articles/2101/21/news004.html)
 
 - [patches](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/patches/)
+
+## References
+
+* [Kustomize Introduction](https://www.innoq.com/en/blog/2022/04/kustomize-introduction/)
+* [Kustomize Advanced Features](https://www.innoq.com/en/blog/2022/07/advanced-kustomize-features/) 
+* [Kustomize Enhancement with KRM Functions](https://www.innoq.com/en/blog/2022/07/advanced-kustomize-features/)

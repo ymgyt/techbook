@@ -81,3 +81,23 @@ git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD
 ```nu
 'INFO foo {"message": "log message"}' | parse "{level} {module} {log}" | describe
 table<level: string, module: string, log: string>```
+
+## collectorのstability集計
+
+
+```nu
+
+cd ~/rs/opentelemetry-collector-contrib/
+ ["receiver", "exporter", "processor" ] 
+| each {|component| cd $component; 
+  {component: $component, 
+  stability: (ls | each {|f| open $"($f.name)/metadata.yaml" | {type: $in.type, stability: ($in.status.stability | columns )} })}} 
+| each {|component| {
+  component: $component.component,
+  stability: (
+    $component.stability | each {|item| $item.stability | each {|st| { type: $item.type, stability: $st}}} | flatten
+  )
+}}
+| upsert stability {|row| $row.stability| group-by stability | items {|stage,x| {stage: $stage, count: ($x | length) }} | sort-by stage  }
+| table --index false --theme light --expand
+```
