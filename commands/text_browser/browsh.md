@@ -1,0 +1,3 @@
+ # browsh
+
+firefoxが前提?
