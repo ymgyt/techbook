@@ -4,6 +4,8 @@
 
 * 緑のframeを消す: Ctrl + <p> + <z>
   * configのpane_frames: falseに対応
+* Tabの並びを変える
+  * Alt + i/o
 
 ## Layout
 
