@@ -37,7 +37,7 @@ terraform {
 
 backendの設定はstateの数だけ重複してしまうのでfileに切り出せる。  
 
-`backend.hcl`
+`config.s3.tfbackend`
 ```hcl
 bucket = "terraform-state"
 region = "ap-northeast-1"
@@ -52,13 +52,16 @@ terraform {
 }
 ```
 
-`terraform init -backend-config=backend.hcl`
+`terraform init -backend-config=config.s3.tfbackend`
+
+* `terraform init -backend-config`で指定したfileのtop levelのkey valueがbackend blockの設定にmergeされる
+  * mergeされた値は`.terraform` directoryに保持される
 
 ### Migrate local to remote
 
 まずlocal stateから初めて、remote stateへ切り替える方法
 
-backend block書いてから、`terraform init -migrate-state`を実行する。  
+backend block書いてから、`terraform init -migrate-state [-backend-config=backend.tfbackend]`を実行する。  
 terraformがlocalからremoteへの移行を察してくれる。
 移行後は`terrafrom.tfstate`は削除できる
 

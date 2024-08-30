@@ -11,7 +11,8 @@
   outputs = { flake-utils, nixpkgs, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        config = { };
+        # terraform等のunfreeを入れたい場合はallowUnfree = true
+        config = { allowUnfree = false; };
 
         overlay = self: super: {
           hello = super.hello.overrideAttrs (_: { doCheck = false; });
@@ -161,6 +162,24 @@ appが複数ある場合
 ```
 
 * `apps.default`だと`nix run .#`で実行できる
+
+### formatter
+
+```nix
+{
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+      	pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        formatter = pkgs.nixfmt-rfc-style;
+      });
+}
+```
+
+* outputの`formatter`にformat用のpackageを指定すると`nix fmt`で利用される
+
 
 ## nixConfig
 

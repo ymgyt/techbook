@@ -42,6 +42,11 @@ stringの中で変数参照するやつ
 
 ```
 echo $nu.env
+
+$env.FOO = "foo"
+$env.FOO 
+
+hide-env FOO
 ```
 
 ## Command substitution

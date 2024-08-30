@@ -33,3 +33,37 @@ terraform import module.xxx.vault_audit.stdout yyy
 
 * importしたいresourceがmodule側で宣言されている場合は先頭にmoduleつけて参照する
 
+
+## import block
+
+1. `import` blockを定義する
+  * `id` importしたいresourceの識別子
+    * なにをidとするかはresourceによって異なるのでdocをみる
+  * `to` importしたstateが紐づく、resource
+
+```hcl
+import {
+  id = "o-5x9fse2mec"
+  to = aws_organizations_organization.ymgyt
+}
+```
+
+2 `to`で指定したresourceにあるべき設定を書く
+  * importは既存の設定からresource fileを更新してくれるわけではない(別のcommand)
+  * resourceに記述する内容はimportに頼らず定義するかgenerateする
+
+```hcl
+resource "aws_organizations_organization" "ymgyt" {
+  aws_service_access_principals = []
+  enabled_policy_types          = []
+  feature_set                   = "ALL"
+}
+```
+
+3 `terraform plan`でimport blockに対応するstateを更新する
+  * `terraform plan -generate-config-out=generated_resources.tf`
+  * ここでdiffがでるまでresourceを更新できれば、applyが安全になると思う
+
+4 `terraform apply`
+  * これでresource,stateと実際のinfraが一致する
+
