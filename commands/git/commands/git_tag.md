@@ -29,3 +29,12 @@ git tag --delete v0.1.0
 # push deletion to remote
 git push --delete origin v0.1.0
 ```
+
+### Retag
+
+```sh
+git tag --delete v0.1.2
+git push --delete origin v0.1.2
+git tag v0.1.2
+git push origin v0.1.2
+```
