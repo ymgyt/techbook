@@ -1,6 +1,7 @@
 # function
 
-Nu的にはcommandっぽい。
+* Nu的にはcommandっぽい。
+* scriptに`def main []` が定義されているとそれがentrypointになる
 
 nuの関数定義。
 
