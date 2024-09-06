@@ -9,22 +9,6 @@ cd helix
 cargo install --path helix-term
 ```
 
-## Config
-
-`~/.config/helix/config.toml`
-
-### Key remap
-
-```toml
-[keys.normal]
-"'" = ":buffer-close" # Close buffer with single quote
-
-# z -> j とおした場合を表現できる
-[keys.normal.z]
-j = "half_page_down" # Not using scroll down(just one line)
-```
-
-
 ## Debug
 
 * defaultでは`$HOME/.cache/helix/helix.log`に出力される  
@@ -71,13 +55,3 @@ tomlの設定はいい感じにmergeされるので、name = "rust"だけ書い�
 
 https://www.npmjs.com/package/vscode-langservers-extracted
 
-
-## Command
-
-### 一時的にauto formatを無効にしたい
-
-`:set auto-format false`してから`:write`したのち`:set auto-format true`
-
-### 一時的にgitignoreされたfileをfile pickerで検索したい
-
-`:set file-picker.git-ignore false`
