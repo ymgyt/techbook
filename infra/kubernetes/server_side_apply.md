@@ -24,6 +24,5 @@ SSAについて。
 
 ## 参考
 
-* [公式Blog](https://kubernetes.io/blog/2022/10/20/advanced-server-side-apply/)
 * [わかる metadata.managedFields](https://www.slideshare.net/slideshow/metadatamanagedfields-kubernetes-meetup-tokyo-48-251269647/251269647#2)
 * [Server Side Apply Is Great And You Should Be Using It](https://kubernetes.io/blog/2022/10/20/advanced-server-side-apply/)

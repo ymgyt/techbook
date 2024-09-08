@@ -68,6 +68,11 @@ https://docs.helix-editor.com/keymap.html
 * n/N: go to next/previous search match
   * '/'registerをさがしている
 * *: selectionを'/'registerに登録する"/yのshortcut
+
+## Global Search
+
+* space + S: 
+  * space + ' で遷移先からsearch画面に戻れる(open last picker)
  
 
 ## Multiple Cursor
