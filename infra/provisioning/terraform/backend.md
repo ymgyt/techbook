@@ -20,7 +20,28 @@ terraform {
 
 通常は`main.tf`の`backend` blockに定義する。  
 
-### Backendの設定をfileに切り出す
+## HCP Terraform
+
+```hcl
+
+terraform {
+  cloud {
+    organization = "ymgyt"
+
+    workspaces {
+      name = "grafana"
+    }
+  }
+}
+```
+
+* terraformのcloud上でstateを管理できる
+* project > workspaceというモデルだが、projectの指定は不要らしい
+* 認証
+  * local `terraform login`
+  * ci: `TF_TOKEN_app_terraform_io`にcloud上で発行したtokenを渡す
+
+## Backendの設定をfileに切り出す
 
 backendの設定はstateの数だけ重複してしまうのでfileに切り出せる。  
 

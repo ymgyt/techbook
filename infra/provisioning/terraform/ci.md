@@ -1,7 +1,5 @@
-# Terraform CI
+# CI
 
-CIの設定に関して
+## 参考
 
-* `terraform fmt --check`
-* `terraform validate`
-* `tflint`
+- [Future Tech Blog TerraformとGA](https://future-architect.github.io/articles/20230405a/)
