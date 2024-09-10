@@ -28,6 +28,11 @@ derivationのfieldはbuild処理からは環境変数としてみえる
 export PATH="$coreutils/bin"
 ```
 
+## derivation 関数
+
+* builtins.derivationを実行すると, store derivationが作成される
+  * 戻り値の`drvPath`
+
 ## Two stage build
 
 ┌────────────┐                ┌────────────┐                ┌────────────┐
