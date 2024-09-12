@@ -44,3 +44,8 @@ Network\r\n
 ```
 
 [参考](http://www.silex.jp/blog/wireless/2016/02/http.html)
+
+## `X-Forwarded-For`
+
+* [偽装対策](https://qiita.com/maru3ka9/items/151fe47a6391ab16ef7f)  
+* [X-Forwarded-For](https://www.m3tech.blog/entry/x-forwarded-for)

@@ -49,6 +49,16 @@ replacements:
 - path: another_file.yaml
 ```
 
+* `fieldPaths`
+  * `.`のescape
+    * `.`はfieldのseparatorだが、field名としてescapaeしたい場合も`[]`でくくる
+    * `metadata.annotations.[config.kubernetes.io/local-config]`
+
+```yaml
+metadata:
+  annotations:
+    config.kubernetes.io/local-config: true # ここをreplacementしたい
+```
 
 ## varsとの相違点
 
