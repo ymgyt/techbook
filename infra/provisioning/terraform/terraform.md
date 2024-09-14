@@ -77,6 +77,13 @@ go install
 terraform version
 ```
 
+## Check
+
+```sh
+terraform fmt -check
+terraform validate
+```
+
 ## 参考
 
 [Terraform職人2020](https://qiita.com/minamijoyo/items/3a7467f70d145ac03324#terraformlockhcl)

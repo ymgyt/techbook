@@ -42,6 +42,8 @@ resource "aws_instance" "foo" {
 }
 ```
 
+* 一種のglobal変数で、どう分岐させるかは書き方次第
+  * state fileの分離という支援をうけれる点が特別
 * `terraform.workspace`で現在のworkspaceを判定できる
 * state fileは同じbackendに格納されるので、認可上の分離が弱い
 * codeをみているだけだと実際にいくつの環境があるのかわからない

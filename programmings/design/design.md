@@ -30,3 +30,17 @@
 * 解消のアプローチ
   * 依存の中で相互作用しているものを捉えて、一つの依存にまとめる
   * 変化をdomain eventとして表現して処理を移譲する
+
+
+## SOLID原則
+
+* Single Responsibility Principles
+* Open/Closed Principle
+* Liskov Substitution Principle
+* Interface Segregation Principle
+* Dependency Inversion Principle
+
+## DRY (Don't Repeat Yourself)
+
+* すべての知識はシステム内において、単一、かつ明確な、そして信頼できる表現になっていなければならない
+  * 複数あると同期しないといけないから

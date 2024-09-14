@@ -97,3 +97,15 @@ output "worker_instance_ids" {
 * `depends_on`は通常必要ないが、依存関係を伝えなければいけない場合もあるらしい
 
 * `terraform output [-json|-raw] var`で出力できるので、taskrunnerと連携できる
+
+## Locals
+
+```hcl
+locals {
+  foo = "foo"
+}
+
+# local.fooで参照
+```
+
+* local変数を定義できる
