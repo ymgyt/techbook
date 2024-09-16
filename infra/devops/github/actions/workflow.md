@@ -142,13 +142,19 @@ on:
 ## `permissions`
 
 * Jobごとに`GITHUB_TOKEN`が生成されている。  
+* toplevelに定義するとworkflow全体に及ぶ
+  * jobごとに定義もできる
+  * stepごとにはできない
 * Jobの中でGithub APIを呼ぶ場合は対応する権限の付与が必要になる
   * `contents: write`: Releaseの作成に必要だった
 
 ```yaml
 permissions:
   # Releaseの作成に必要
+  # readはdefaultで付与されている
   contents: write
+  # JobからPRにコメントを投稿する際に必要
+  pull-requests: write
 
 ```
 

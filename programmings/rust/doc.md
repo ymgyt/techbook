@@ -2,15 +2,30 @@
 
 * `#![warn(rustdoc::broken_intra_doc_links)`
 
+## Link
+
 ```rust
 struct Foo
 
 /// # Header
 /// [`Foo`]
 fn foo() { }
+
+/// document comment [hoge][h]
+///
+/// [h]: Hoge
+fn bar() {}
+
+/// implementation of [positional parameters].
+///
+/// [positional parameters]: std::fmt#formatting-parameters
+struct MySpecialFormatter;
+
 ```
 
 * scopeにはいっていると[`Foo`]でそのまま参照できる
+* `[msg][id]` とlinkの実態を分けて書く方法もある
+* `Self`,`self`,`super`,`crate`も使える
 
 ## `//!`
 

@@ -86,4 +86,8 @@ terraform validate
 
 ## 参考
 
-[Terraform職人2020](https://qiita.com/minamijoyo/items/3a7467f70d145ac03324#terraformlockhcl)
+* [Terraform職人2020](https://qiita.com/minamijoyo/items/3a7467f70d145ac03324#terraformlockhcl)
+
+* [Future Tech Blogのterraform tag](https://future-architect.github.io/tags/Terraform/page/2/)
+  * 参考になる記事が多い
+

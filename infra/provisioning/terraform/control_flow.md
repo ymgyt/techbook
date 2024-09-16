@@ -37,6 +37,7 @@ module "users" {
 ```
 
 * countの数だけresourceが作成される
+* `${count.index}`で現在のindexを参照
 
 * 制約
   * inline blockでは参照できない仕様

@@ -1,5 +1,12 @@
 # Logs
 
+## 設計思想
+
+* TracesやMetricsと違い、logを出力する機構は既存のappにかならずある
+  * 新しいlog apiを提供してそれを呼んでもらうことはしない
+
+* Logs Bridge APIと既存のlogをうけとって、Logs Bridge APIを呼ぶ、Logs AppenderというSDK実装を提供する
+
 ## LogRecord
 
 * traceのeventとどういう関連があるのか..?
@@ -37,3 +44,7 @@
 | 13-16 | WARN  | warning         |
 | 17-20 | ERROR | error           |
 | 21-24 | FATAL | fatal           |
+
+## References
+
+* [Logs Data Model Spec](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
