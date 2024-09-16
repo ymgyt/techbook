@@ -15,3 +15,13 @@ resource "grafana_dashboard" "synd_api" {
 ```
 
 * `dashboards/app.json`のようにdashboards配下にdashboardからexportしたjsonを配置する
+
+## Design
+
+Dashboard作成における心構え
+
+## References
+
+* [Best practices](https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/)
+  * 公式のbp集
+* [A complete guide to all the different types](https://grafana.com/blog/2022/06/06/grafana-dashboards-a-complete-guide-to-all-the-different-types-you-can-build/?pg=webinar-getting-started-with-grafana-dashboard-design-amer&plcmt=related-content-1)
