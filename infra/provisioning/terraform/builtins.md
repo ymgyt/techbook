@@ -75,3 +75,8 @@ locals {
   foo = keys(local.public_subnets)[0] # => "ap-northeast-1a"
 }
 ```
+
+## References
+
+* [Terraform Functions and Expressions Explained](https://build5nines.com/terraform-functions-and-expressions-explained/?mkt_tok=ODQ1LVpMRi0xOTEAAAGVpBvNRfPKaPxmyZtKzvfZ7nkcbKwo8Brcwph0cfSOxsQUTsPgFjlluhMQxKhraSxc68A4YMKJp9jrkpeNI7GNOVUgKlCRvmloHcSZPnM45Sy3-1M)
+* [Using the Terraform ‘merge’ Function](https://build5nines.com/using-the-terraform-merge-function/)

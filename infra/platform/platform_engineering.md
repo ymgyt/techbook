@@ -15,3 +15,8 @@
 ## 自分の理解
 
 Infra, DB, Messaging, IAM, Security, Observability, Deploy Pipelineといった、Capabilitiesに対して、Template, Documentation, CLIというInterfaceを提供する取り組み
+
+## References
+
+* [プラットフォームエンジニアリングの推進における罠](プラットフォームエンジニアリングの推進における罠)
+* [プラットフォームエンジニアリングって何？〜基本から AWS での実現方法について](https://aws.amazon.com/jp/blogs/news/20240229-platform-engineering-event/)

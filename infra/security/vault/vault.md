@@ -66,3 +66,14 @@ Vaultはplaggableになっている。具体的には
 * Audit plugin
 * Storage abckend
 * Secret backend
+
+## References
+
+* [5 steps to set up Vault for widespread adoption at your org](https://www.hashicorp.com/blog/5-steps-to-set-up-vault-for-widespread-adoption-at-your-org)
+  * 組織のvaultの移行を促すには
+
+* [Rotated vs. dynamic secrets: Which should you use?](https://www.hashicorp.com/blog/rotated-vs-dynamic-secrets-which-should-you-use)
+
+* [Secret remediation best practices](https://www.hashicorp.com/blog/secret-remediation-best-practices)
+
+* [Configuring Vault as an identity provider](https://www.hashicorp.com/blog/configuring-vault-as-an-identity-provider)
