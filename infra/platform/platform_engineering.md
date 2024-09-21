@@ -14,7 +14,10 @@
 
 ## 自分の理解
 
-Infra, DB, Messaging, IAM, Security, Observability, Deploy Pipelineといった、Capabilitiesに対して、Template, Documentation, CLIというInterfaceを提供する取り組み
+* Infra, DB, Messaging, IAM, Security, Observability, Deploy Pipelineといった、Capabilitiesに対して、Template, Documentation, CLIというInterfaceを提供する取り組み
+* 認知的負荷の低減がkeywordっぽい
+  * 他チームへの依頼とかも内包
+* セルフサービス=他部署に依頼してない
 
 ## References
 

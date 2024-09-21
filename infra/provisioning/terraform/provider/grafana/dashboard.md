@@ -20,6 +20,9 @@ resource "grafana_dashboard" "synd_api" {
 
 Dashboard作成における心構え
 
+* Answer a question
+  * dashboardは質問(仮定)に答える
+
 ## References
 
 * [Best practices](https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/)
