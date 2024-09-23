@@ -19,7 +19,35 @@
   * 他チームへの依頼とかも内包
 * セルフサービス=他部署に依頼してない
 
-## References
 
-* [プラットフォームエンジニアリングの推進における罠](プラットフォームエンジニアリングの推進における罠)
-* [プラットフォームエンジニアリングって何？〜基本から AWS での実現方法について](https://aws.amazon.com/jp/blogs/news/20240229-platform-engineering-event/)
+## Developer Portal
+
+* interface
+* DPを通じて、IDPを操作するという関係
+
+## Internal Developer Platform
+
+* 開発者に抽象化を提示し、CI/CD,Observability,Infraを一貫性のあるdeveloper experienceとして使用可能な状態にまとめあげることがplatform engineerの役割
+  * チームの全員にDevOpsプラクティスの深い理解を要求しない
+  * 運用プロセスをモデル化して、それを実行するソフトウェアを構築する
+* IDPとも
+  * コードを本番環境に導入するために現在使用している手法が、それが何であれ、プラットフォーム
+    * 人だったり依頼チケットだったりもする
+* developerがself serviceで作業をすすめられる
+* Golden path, 適切なdefault値、policyが適用された
+  * CI/CD
+  * IaC
+  * GitOps
+
+
+## DevOpsとの関係
+
+* PEとは、DevOpsのプラクティスをコードにする試み
+* Developerに高い専門性を要求せずに、DevOpsを実践できるようにするもの
+
+## 自動化との関係
+
+* まさに自動化のことだが、完全なサービスライフサイクルのために設計
+* x軸に自動化の程度、y軸にscopeを設定した場合に
+　* small scopeで、fully automated -> over automated
+  * large scopeで、manual -> under automated
