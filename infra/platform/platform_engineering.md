@@ -18,6 +18,15 @@
 * 認知的負荷の低減がkeywordっぽい
   * 他チームへの依頼とかも内包
 * セルフサービス=他部署に依頼してない
+* Platformはproductで開発者はuser
+  * user first
+    * userのfeedbackをうけとる
+    * best practiceの準拠と既存のworkflowのrespectにtrade-offがあったりする
+  * workflowの安全化、高速化
+    * ガードレール
+  * 小さい改善をiterateする
+  * collaboration
+    * ペアプロして課題を理解したという事例も
 
 
 ## Developer Portal
