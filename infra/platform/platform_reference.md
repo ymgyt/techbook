@@ -20,6 +20,8 @@
 
 * [Platform Engineer Kaigi 2024のSession](https://www.cnia.io/pek2024/sessions/)
 * [Platform Engineer Meetup 10](https://platformengineering.connpass.com/event/329871/)
+* [Platform Engineering Youtube](https://www.youtube.com/@PlatformEngineering/playlists)
+
 
 ## 事例
 
