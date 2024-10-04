@@ -6,3 +6,8 @@
   * [`#[expect()]`が追加](https://blog.rust-lang.org/2024/09/05/Rust-1.81.0.html#expectlint)
   * [`fs::exists`](https://doc.rust-lang.org/stable/std/fs/fn.exists.html)
   * [`std::panic::PanicInfo`が`std::panic::PanicHookInfo`にrename](https://blog.rust-lang.org/2024/09/05/Rust-1.81.0.html#compatibility-notes)
+
+* 1.74.0
+  * Cargo.tomlにclippy(linter)を設定できるようになった
+    * https://rust-lang.github.io/rfcs/3389-manifest-lint.html
+
