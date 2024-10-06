@@ -14,6 +14,31 @@ cd prometheus-2.40.5.darwin-arm64
 
 * prometheusは自身のmetricsを`/metrics`でexportしている
 
+## job and instance
+
+* instance: scrapeできるendpoint
+  * single processに対応
+* job: 同じ目的をもったinstanceのcollection
+  * instanceはscalabilityのためにreplicatedされ複数ある
+  * scraping processで自動で生成される
+* job/instanceでmetricsをuniqueに識別できることが期待されている
+
+```
+- job: api-server
+  - instance 1: 1.2.3.4:5670
+  - instance 2: 1.2.3.4:5671
+  - instance 3: 5.6.7.8:5670
+  - instance 4: 5.6.7.8:5671
+```
+
+```yaml
+scrape_configs:
+  - job_name: 'api-servers'
+    static_configs:
+      - targets: ['localhost:8080', 'localhost:8081']
+
+```
+
 ## Metrics
 
 種別があるらしい

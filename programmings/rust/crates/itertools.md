@@ -46,6 +46,37 @@ itertools::assert_equal(intersperse((0..3), 8), vec![0, 8, 1, 8, 2]);
 * iteratorにseparatorとして特定の間を差し込みたいときにつかえる
 * joinの汎用版?
 
+## Permutation(順列)
+
+```rust
+
+use itertools::Itertools;
+
+let perms = (5..8).permutations(2);
+itertools::assert_equal(perms, vec![
+    vec![5, 6],
+    vec![5, 7],
+    vec![6, 5],
+    vec![6, 7],
+    vec![7, 5],
+    vec![7, 6],
+]);
+
+// nの順列
+let n = 6;
+let n_perm = (0..n).permutations(n);
+for p in n_perm {
+  println!("{p:?}");
+  // [0, 1, 2, 3, 4, 5]
+  // [0, 1, 2, 3, 5, 4]
+  // [0, 1, 2, 4, 3, 5]
+  // [0, 1, 2, 4, 5, 3]
+  // ...
+}
+```
+
+* 値のrangeと要素の数を指定する
+
 ## References
 
 * [itertoolsの紹介](https://keens.github.io/blog/2019/12/06/itertoolsnoshoukai/)

@@ -2,6 +2,12 @@
 
 仕様: https://github.com/open-telemetry/opentelemetry-specification/tree/main/specification
 
+## Metit
+
+* Vendor independence
+* Unified across signals
+* Instrumentation
+
 ## Resource
 
 telemetryが記録されたentityに関する情報を保持する。  

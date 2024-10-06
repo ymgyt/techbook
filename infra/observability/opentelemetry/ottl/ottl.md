@@ -10,7 +10,6 @@ OpenTelemetry Transform Language
 
 https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/ottl/ottlfuncs#ottl-functions
 
-
 ## Config
 
 ```text
