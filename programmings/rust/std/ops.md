@@ -38,3 +38,21 @@ pub fn range_decide<R: RangeBounds<usize>>(range: R, len: usize) -> (usize, usiz
 ```
 
 要はstart,endにどのような制約(inclusive,exclusive,指定なし)があるかをenumで返してくれる
+
+
+## `Index`
+
+* `container[0]`のような添字accessを定義できる
+
+```rust
+
+pub struct ShortestPaths(Vec<Vec<i64>>);
+
+impl Index<usize> for ShortestPaths {
+    type Output = [i64];
+
+    fn index(&self, index: usize) -> &Self::Output {
+        self.0[index].as_slice()
+    }
+}
+```
