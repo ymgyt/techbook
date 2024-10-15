@@ -15,3 +15,11 @@ https://rework.withgoogle.com/jp/guides/managers-care-professionally-personally-
 * チーム内で競うのではなく、協力する。
 * 個々のチームメンバーに心から関心をもつ。
 * 過度に思い入れることは避け、境界は明確にする。
+
+
+## Product manager
+
+* プラダクトマネージャーのしごとより
+  * 相手の仕事に心から興味をもつ
+  * しなやかなマインドセットをもつ
+    * 失敗を学習の機会と捉える
