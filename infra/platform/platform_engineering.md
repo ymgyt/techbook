@@ -28,6 +28,11 @@
   * collaboration
     * ペアプロして課題を理解したという事例も
 
+* OSSやCloudのabstraction layerを作る
+  * 組織全体のapplicationのglue codeを減らす
+
+* curated product approach
+  * なんでも使えるわけではないけど、選択肢を1つに限定するわけでもない
 
 ## Developer Portal
 

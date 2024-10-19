@@ -29,3 +29,13 @@
 * [レバテック](https://speakerdeck.com/leveragestech/ituplatform-engineeringwoshi-merubekika-rebatetukunokesusutadei-platform-engineering-kaigi-2024)
 * [プラットフォームエンジニアリングって何？〜基本から AWS での実現方法について](https://aws.amazon.com/jp/blogs/news/20240229-platform-engineering-event/)
 * [Class MethodのServerlessDays Tokyo 2024登壇](https://dev.classmethod.jp/articles/serverlessdays-tokyo-2024-wakatsuki-serverless-development-platform-engineering/)
+* [Spotifyが実現したPaved Pathと共通ツーリング](https://www.infoq.com/jp/news/2021/05/spotify-paved-paths/)
+
+## SRE/DevOps
+
+* [6 Reasons You Don't Need an SRE Team](https://log.andvari.net/6reasons.html)
+
+## Etc
+
+* [A software licecycle update](https://emauton.org/2016/03/22/a-software-lifecycle-update/)
+
