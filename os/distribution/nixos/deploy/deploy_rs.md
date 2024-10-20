@@ -1,5 +1,7 @@
 # deploy-rs
 
+* flakeが前提
+
 
 ## Example
 
@@ -98,3 +100,13 @@ deploy .#rpi4-01
 * `--skip-checks`でcheckを飛ばせる
   * systemが違ったりでうまくいかない場合に使える
 * `--interactive`で実行前に確認できる
+
+* `<flake>#<node>.<profile>`という指定でnodeやprofileを制御できる
+  * `deploy .`              : 全nodeのdeploy
+  * `deploy .#node1`        : node1のdeploy
+  * `deploy .#node1.system` : node1のsystem profileのdeploy
+
+
+## Memo
+
+deployの情報は`nix eval --json .#deploy` で取得している
