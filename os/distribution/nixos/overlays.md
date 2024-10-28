@@ -60,3 +60,9 @@ final: prev: {
   myBrowser = final.firefox;
 }
 ```
+
+## References
+
+* [NixCademy Overlays](https://nixcademy.com/posts/mastering-nixpkgs-overlays-techniques-and-best-practice/)
+* [NixOS: The DOs and DON'Ts of nixpkgs overlays](https://flyingcircus.io/news/detailsansicht/nixos-the-dos-and-donts-of-nixpkgs-overlays)
+* [Fixpoints, attribute sets and overlays](http://blog.tpleyer.de/posts/2020-01-29-Nix-overlay-evaluation-example.html)

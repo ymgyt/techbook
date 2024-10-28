@@ -37,5 +37,6 @@
 
 ## Etc
 
+* [Dunbar's number: Why we can only maintain 150 relationships](https://www.bbc.com/future/article/20191001-dunbars-number-why-we-can-only-maintain-150-relationships)
 * [A software licecycle update](https://emauton.org/2016/03/22/a-software-lifecycle-update/)
 

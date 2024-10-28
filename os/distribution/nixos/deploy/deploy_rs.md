@@ -110,3 +110,63 @@ deploy .#rpi4-01
 ## Memo
 
 deployの情報は`nix eval --json .#deploy` で取得している
+
+- main()
+- run()
+  - parse args
+  - init logger
+  - parse flake url
+    - ".#<node>.<profile>"の処理
+  - cli flagをdeploy::CmdOerridesにbind
+  - flakeのsupportの判定
+- check_deployment()
+  - nix flake checkの実行
+- get_deployment_data() -> deploy::data::Data
+  - `nix flake eval --json --apply`でflake.nixのdeployから対象のnode, profileを抽出
+  - serde_jsonでdeserialize
+- run_deploy()
+  - make_deploy_data()でsettingの適用階層を解決
+    - cliのoverride, node個別のssh設定等
+    - deploy::data::Dataは生のflakeに対応
+    - deploy::DeployDataは解決後の値
+  - for each part
+    - prompt_deployment() or print_deployment()
+  - for each part
+    - deploy::push::build_profile()
+      - if remote_build
+        - build_profile_remotely()
+          - `nix copy -s --to ssh-ng://${ssh_user}@${hostname} --derivation /nix/store/abc...xyz-activatable-nixos-system-host-xyz.drv^out`
+          - `nix build /nix/store/abc...xyz-activatable-nixos-system-host-xyz.drv^out --eval-store auto --store ssh-ng://${ssh_user}@${hostname}`
+      - else
+        - build_profile_locally()
+          - `nix build /nix/store/abc...xyz-activatable-nixos-system-host-xyz.drv^out --no-link`
+  - for each part
+    - deploy::push::push_profile()
+      - if not remote_build
+        - `nix copy --substitute-on-destination --no-check-sigs --to ssh://${ssh_user}@${hostname} /nix/store/abc...xyz-activatable-nixos-system-host-xyz`
+  - for each part
+    - deploy::deploy::deploy_profile()
+      - TODO: debug activate_command
+      - TODO: debug wait_command
+      - spawn activate
+      - spawn and wait wait command
+      - wait success
+      - confirm_profile()
+        - ssh rm ${canary}
+      - join activate command
+      - if error
+        - for each succeeded
+          - deploy::deploy::revoke()
+
+## types
+
+- DeployFlake: flake.nixのpath, node, profileを保持
+- DeployData: 設定の優先度を反映してEffectiveな値
+- DeployDefs: ssh user, sudo profile user等のuserに関する設定を保持
+
+## derivations
+
+- ${profile}/deploy-rs-activate
+- ${profile}/activate-rs
+  - deploy-rs bin activate
+    - deploy-rs.deploy-rs/bin/activate
