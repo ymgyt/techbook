@@ -96,3 +96,34 @@ BOOTFS=/mnt FIRMWARE_RELEASE_STATUS=stable rpi-eeprom-update -d -a
 ### 参考
 
 * [公式 Installing NixOS on a Raspberry Pi](https://nix.dev/tutorials/nixos/installing-nixos-on-a-raspberry-pi)
+
+
+## Setup Clean NixOS
+
+新しいLinux PCにNixOSを設定する手順
+
+0. NixOSのinstallが済んでいる前提
+1. mynixの設定
+
+* 今から設定するhostnameをfooとする
+* mynixにはfoo用のnixosConfigurationが設定されている
+  * ただしhardware-configuration.nixだけはまだ作成されていない
+
+```sh
+nix shell nixpkgs#git --extra-experimental-features 'flakes nix-command'
+git clone https://github.com/ymgyt/mynix.git
+cd mynix
+cp /etc/nixos/hardware-configuration.nix hosts/foo/
+git add .
+sudo nixos-rebuild switch --flake '.#foo' --show-trace
+```
+
+2. helixのinstall
+
+```sh
+nix profile install github:ymgyt/helix/explorer
+```
+
+## References
+
+
