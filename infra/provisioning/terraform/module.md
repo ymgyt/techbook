@@ -8,12 +8,23 @@
 利用側
 
 ```hcl
+provider "aws" {
+  region = "us-west-1"
+}
+
+provider "aws" {
+  alias  = "usw2"
+  region = "us-west-2"
+}
+
 module "vault_dev" {
   source = "../../modules/vault"
 
   # 必要ならproviderを指定できる
+  # 指定しない場合はdefault(unaliased)のaws providerが暗黙的に渡される
   providers = {
     foo = foo.alias
+    aws = aws.usw2
   }
 
   input_1 = "xxx"
@@ -30,7 +41,7 @@ module "vault_dev" {
 
 ### Providerの定義
 
-moduleで利用するproviderを定義する
+moduleが必要とするproviderのrequirementsを定義する
 
 ```hcl
 terraform {

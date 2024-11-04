@@ -2,6 +2,10 @@
 
 元、AWS SSO(Single Sine On)
 
+## 有効化
+
+consoleのenableを実行するしかない..?
+
 ## SSO Instance
 
 AWS Organizationのmanagement accountに対して1:1で紐づく概念。  
