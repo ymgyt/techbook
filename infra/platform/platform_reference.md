@@ -11,6 +11,9 @@
   * [5 more myths about platform engineering](https://cloud.google.com/blog/products/application-development/another-five-myths-about-platform-engineering)
     * part2もある
 
+* Documentation
+  * [明日から始める持続可能なドキュメンテーション戦略](https://speakerdeck.com/akitok_/sustainable-documentation-strategies-documentation-as-a-product)
+
 
 ## Tool
 
