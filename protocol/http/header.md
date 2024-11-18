@@ -19,6 +19,12 @@ headerがない場合はデフォルトの表現を返して良い。
 bodyのdata formatを知らせる。   
 serverが処理できないdata format(`application/xml`とか)が送られてきたら415 Unsupported Media Typeを返す。
 
+## `Header`
+
+* Requestがどのhostに向けたものかの意図の宣言。  
+* [RFC7230](https://datatracker.ietf.org/doc/html/rfc7230#section-5.4) で HTTP/1.1のリクエストには含めることが決まっている(MUST)。  
+  * 正確にはリクエストに含まれなければServerは400を返す(MUST)
+
 
 ## `Transfer-Encoding`
 
