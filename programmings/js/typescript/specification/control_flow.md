@@ -33,3 +33,15 @@ switch (env.identifier()) {
     break;
 }
 ```
+
+## undefined null check
+
+```typescript
+if (typeof foo !== "undefined") {
+	"ok"
+}
+
+if (foo !== undefined) {
+	"ok"
+}
+```

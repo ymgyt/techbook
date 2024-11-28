@@ -57,6 +57,7 @@ digraph {
     compound=true; // 矢印をClusterで止める
     newrank=true
     dpi=600
+    forcelabels=true
   ];
 }
 ```
@@ -71,6 +72,7 @@ digraph {
   * `LR`: left to right
 * `newrank`: trueにするとsubgraphの中のnodeのrankも指定できた
 * `dpi`: 解像度. pngだと影響する
+* `forcelabels`: `xlabel`の描画を強制する
 
 ## Node定義
 
@@ -80,11 +82,37 @@ digraph {
     MyNode [
         label="foo"
         shape="box"
+        URL="https://examle.ymgyt.io"
     ];
 ```
 
 * `shape`: nodeの形
   * `box`, `ellipse`(default)
+* `URL`: linkを生成 svgだと有効だった
+
+### Record
+
+* `shape=record` を指定すると recordを表現できる
+
+```dot
+digraph {
+  // 以下のようなstructを表現
+  // |   A     |
+  // | B1 | B2 |
+  // |   C
+  server [
+      label="<fa> A | {B1 | B2 } | C"
+      shape="record"
+  ]
+
+  server:fa -> foo
+}
+```
+
+* `|` でrecordのfieldを区切る
+* `{ ... }` でnestを表現できる
+* `<name> ....` でfield に名前をつけられる
+  * `foo:name -> bar` のようにedgeで参照できる
 
 ## Edge定義
 
@@ -107,6 +135,7 @@ digraph {
   * `none` なにもない
 * `style`: edgeの線の種類
   * `solid`,`dashed`, `dotted`, `bold`
+  * `invis` rankには影響するが非表示なedgeを表現できる
 * `dir`: 矢印の向き
 　* `forward`(default)
   * `back` A -> Bと書いて、BからAに矢印をひける

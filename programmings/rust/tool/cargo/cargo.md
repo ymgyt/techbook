@@ -97,3 +97,35 @@ cargoが用意してくれる環境変数
 
 * `cargo build --timings`
   * compileに関する情報をhtml等で出力してくれる
+
+## Troubleshoot
+
+### is not applicable to
+
+```sh
+cargo -V
+error: the 'cargo' binary, normally provided by the 'cargo' component, is not applicable to the '1.76.0-aarch64-apple-darwin' toolchain
+```
+
+一度削除する
+
+```sh
+rustup component remove cargo
+info: removing component 'cargo'
+warning: during uninstall component cargo was not found
+
+rustup component add cargo
+info: downloading component 'cargo'
+info: installing component 'cargo'
+```
+
+
+### can't find crate for `std` 
+
+```sh
+error[E0463]: can't find crate for `std`
+```
+
+```
+rustup component add rust-std 
+```

@@ -60,6 +60,9 @@ on:
 * 省略時はすべてのtypeが指定されてことになる
   * ただし、pull_requestだけは省略時のdefault typesが存在する
 * OSSのようにforkしたrepoからPRを作成する場合にはpush eventは発火しないのでpull_request triggerが必要になる
+* PRの中でworkflowを変更した場合、PRの変更されたworkflowが実行される
+  * この挙動を避けたい場合は`pull_request_target` をtriggerにする
+  * `pull_request_target` であれば、PRで実行されるworkflowはbase
 
 
 ### tagのpushをtriggerにする

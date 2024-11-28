@@ -2,6 +2,7 @@
 
 * key valueのpair
   * valueはoptional
+
 * user-definedとaws generated tagsがある
   * aws generated tags
     * `aws` prefixがつく。user-definedではこのprefixはつけられない
@@ -10,6 +11,23 @@
   * user-defined tags
     * `ymgyt:xyz`のようにnamespaceにしておくのがよい
 
+* 1 resourceに対して50個まで付与できる
+
+
+## Tag戦略
+
+一般的にはTagに以下の役割をもたせる
+
+* Resoruceの管理
+  * grouping化したり
+
+* Cost管理
+  * cost allocation tag
+
+* Operation Automation
+  * なんらかの運用時の処理対象
+
+* Access制御
 
 ## References
 
