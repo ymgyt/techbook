@@ -12,3 +12,15 @@
 
 1. GroupBy > Dimension に UsageType を指定
 2. Filter > Service > EC2 - Other を指定
+
+## UsageType
+
+各Serviceごとの課金単位の項目
+
+### EC2
+
+* {Region}-BoxUsage:{InstanceType}: InstanceTypeごとの ondemandの料金(実行時間)
+
+## References
+
+* [UsageTypeまとめ](https://qiita.com/kaibeam/items/476ab1bdb15662236aa7)

@@ -100,6 +100,10 @@ data "terraform_remote_state" "db" {
 
 * `data.terraform_remote_state.db.outputs.address`で参照できる
 
+## 他のRoot moduleのstateを参照する
+
+* `terraform_remote_state` data soruce を利用することで、他のroot moduleのoutputを参照できる
+
 ## State操作
 
 ```sh
