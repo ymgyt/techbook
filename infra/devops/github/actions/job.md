@@ -67,9 +67,15 @@ jobs:
   create-api-release:
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.ref, 'refs/tags/synd-api') }}
+
+  job2:
+    if: ${{ ! contains(github.event.pull_request.user.login, '[bot]') && ! contains(github.event.pull_request.user.login, 'internal-tools') && toJSON(github.event.pull_request.assignees) == '[]'}}
 ```
 
 * `{{ }}`はつけておけばよさそう
 * `if: ${{ startsWith(github.ref, 'refs/tags/synd-api')}}`
   * tagの先頭にmatchした場合だけjobを実行
-
+* `${{ COND && COND }}` で and を表現
+* builtins
+  * `contains(stack, needle)` : needleがstackのsubstringならtrue
+  * `contains(["aa,bb"], "aa")`: 第一引数がarrayのもサポート。その場合はelement単位の完全一致
