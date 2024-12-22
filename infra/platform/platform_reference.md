@@ -4,6 +4,8 @@
 
 * CNCF Whitepapter
   * [Platform Engineering Maturity Model](https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/)
+* [CodeZineのPlatform Engineering」入門連載](https://codezine.jp/article/corner/990)
+
 
 * Google
   * [プラットフォームエンジニアリングのキャリアを積むための基盤づくり](https://cloud.google.com/blog/ja/products/application-development/how-to-become-a-platform-engineer)

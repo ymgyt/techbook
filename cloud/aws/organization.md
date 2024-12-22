@@ -37,4 +37,24 @@
 * All features
   * AWS Organizationの全機能を有効
 
+
 ## Service Control Policy(SCP)
+
+
+## Delegated Administorator
+
+* AWS Service ごとに management accountに集約された情報の処理を member account に委譲できる機能
+  * management account で有効化した aws health organization view を member account から読めるようにする
+
+* 関連操作
+  * `aws organizations list-aws-service-access-for-organization`
+  * `aws organizations list-delegated-administrators`
+
+### 権限の委譲
+
+```sh
+aws organizations register-delegated-administrator --account-id <MEMBER_ACCOUNT> --service-principal <SERVICE>
+```
+
+具体的になにができるようになるから serviceごとに違う
+
