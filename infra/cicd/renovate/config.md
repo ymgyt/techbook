@@ -13,14 +13,20 @@
 }
 ```
 
+* `customManagers`: builtin 以外のmanager を指定できる。現状サポートされているのは、`regex` のみ
+  * `fileMatch`
+  * `matchStrings`
+
+## extend
+
 * `extend`: baseの設定として、preset を指定する
   * 最後にappend された設定が優先される
   * `github>org/repo` で 他のrepositoryの設定を指定できる
     * `github>ymgyt/reno` の場合は、`https://github.com/ymgyt/repo` repository の `default.json` が参照される
 
-* `customManagers`: builtin 以外のmanager を指定できる。現状サポートされているのは、`regex` のみ
-  * `fileMatch`
-  * `matchStrings`
+* `:semanticCommitTypeAll(chore)`
+  * conventional commit でchore の利用を強制
+    * 基本はchoreだが、production dependency (cargo の`dependencies`) だと fix を使うのが,`config:recommended` の挙動
 
 
 ## Regex
@@ -59,6 +65,23 @@ ENV YARN_VERSION=1.19.1
   ]
 }
 ```
+
+## Github 関連の設定
+
+https://docs.renovatebot.com/modules/platform/github/
+
+## Cache
+
+### Repository
+
+```json
+{
+  "repositoryCache": "enabled",
+  "repositoryCacheType": "s3://some-cache-bucket/dir1/dir2/"
+}
+```
+
+cache として s3を利用できる
 
 ## Reference
 

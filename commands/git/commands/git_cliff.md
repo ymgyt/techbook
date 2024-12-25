@@ -15,6 +15,16 @@
 
 * conventional commitを前提してgroupingしている
 
+## Usage
+
+```sh
+# patch の bump を仮定したchangelogの生成
+git cliff --bump patch --config cliff.toml --output CHANGELOG
+
+# 認識したcommit の debug
+git cliff --context
+```
+
 ## cliff.toml
 
 設定file
@@ -71,6 +81,7 @@ commit_preprocessors = [
 ]
 # regex for parsing and grouping commits
 # comment like <!-- 0 --> for force order 
+# 先勝ちなので、skipが効かない場合は先頭に書いておくとよい
 commit_parsers = [
   { message = "^feat", group = "<!-- 0 -->Features" },
   { message = "^fix", group = "<!-- 1 -->Bug Fixes" },
