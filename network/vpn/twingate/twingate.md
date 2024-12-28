@@ -34,3 +34,8 @@
   * inboundがblockされているfirewallでも、outboundのresponseは許可する(そうしないと通信できない)
   * ClientはConnectorのNATにpacketを送っている(outbound)ので、Connecotrからのpacketを受け取れる
   * ConnectorはClientのNATにpacketを送っているので、Clientからのpacketを受け取れる
+
+
+## References
+
+* [client Connection Flow](https://www.twingate.com/docs/client-connection-flow)
