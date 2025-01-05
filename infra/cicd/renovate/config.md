@@ -3,6 +3,7 @@
 ```json
 {
   "extends": ["config:recommended", "helpers:pinGitHubActionDigests"]
+  "rangeStrategy": "bump",
   "customManagers": [
     {
       "customeType": "regex",
@@ -16,6 +17,10 @@
 * `customManagers`: builtin 以外のmanager を指定できる。現状サポートされているのは、`regex` のみ
   * `fileMatch`
   * `matchStrings`
+
+* `rangeStrategy`: 新しいversionに対して既存のfile(Cargo.toml,Cargo.lockとか)をどう更新するか
+  * `bump`: 常に`Cargo.toml` も更新する
+    * depandabotはこの挙動?
 
 ## extend
 
