@@ -1,6 +1,10 @@
 # Workflow
 
-`.github/workflows` directory以下に作成するyamlがひとつのworkflowを表す。
+* `.github/workflows` directory以下に作成するyamlがひとつのworkflowを表す。
+* workflow の skip
+  * `[skip ci]`, `[ci skip]`, `[skip actions]`, `[actions skip]`
+  * `push`, `pull_request` の event trigger
+
 
 ```yaml
 name: learn-github-actions

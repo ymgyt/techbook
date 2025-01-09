@@ -65,3 +65,12 @@ greet "yuta" --age 10
 * error
 
 
+## main
+
+```nu
+
+def main [] {
+}
+```
+
+* scriptに `main` function を定義しておくと、`nu script.nu` で実行した際の entrypointになる

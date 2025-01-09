@@ -39,3 +39,20 @@ pnpm start ymgyt/test-repo [--dry-run = full]
 ## Source Code Memo
 
 * `lib/renovate.ts` がentry point
+
+### 実行時間
+
+renovate の独自概念として、split としてRepositoryの各処理を分割しており、それぞれの実行時間がわかる
+
+```text
+DEBUG: Repository timing splits (milliseconds) (repository=ymgyt/foo)
+"splits": {
+  "init": 1000, 
+  "extract": 2000, 
+  "lookup": 3000, 
+  "onboarding": 0, 
+  "update": 4000
+}
+```
+
+* `update`は PRを作成したり更新したり

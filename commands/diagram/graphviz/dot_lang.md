@@ -88,6 +88,7 @@ digraph {
 
 * `shape`: nodeの形
   * `box`, `ellipse`(default)
+  * `cylinder`: DBっぽいやつ
 * `URL`: linkを生成 svgだと有効だった
 
 ### Record

@@ -10,7 +10,9 @@ nix flake metadata
 nix flake show
 
 # Inputをupdate
+# --update-input は deprecated
 nix flake lock --update-input deploy-rs
+nix flake update deploy-rs
 ```
 
 ## check(test)
