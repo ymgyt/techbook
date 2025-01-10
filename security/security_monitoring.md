@@ -2,7 +2,8 @@
 
 ## Reference
 
-* [監視基盤を内製すべきか](https://zenn.dev/mizutani/articles/secmon-04-buy-or-build)
+* [実践セキュリティ監視基盤構築](https://zenn.dev/mizutani/books/secmon-platform)
+  * [監視基盤を内製すべきか](https://zenn.dev/mizutani/articles/secmon-04-buy-or-build)
 * [ログ検索の要件](https://techlife.cookpad.com/entry/2019/11/21/073000)
 
 ### 内製の実例
