@@ -1,5 +1,9 @@
 # Cost Explorer
 
+* 初期状態ではroot user以外はcost explorerにアクセスできない
+  * IAM policyが付与してあっても、permission deniedになってわかりづらい
+  * root userでconsole > account > IAM user and access to Billing information をactivateする必要がある
+
 ## データ保持期間
 
 * defaultだと14ヶ月
