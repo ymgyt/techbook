@@ -1,6 +1,6 @@
 # Renovate Configuration
 
-```json
+```json5
 {
   "extends": ["config:recommended", "helpers:pinGitHubActionDigests"]
   "rangeStrategy": "bump",
@@ -10,7 +10,16 @@
       "fileMatch": "^Dockerfile$",
       "matchStrings": "ENV FOO_VERSION=(?<currentValue>.*?)\\n"
     }
-  ]
+  ],
+  // PR の数の制限
+  // Open な renovateによるPRの最大値
+  "prConcurrentLimit": 0,
+  // 1時間あたりに作られるPRの最大値
+  "prHourlyLimit": 0,
+  // "schedule"
+
+  // PR をまとめるための設定 後述
+  "packageRules": [],
 }
 ```
 
@@ -44,6 +53,7 @@ captureが必須なのは
   * `packageName` が空の場合は `depName` が使われる
   * packageの名前が非常に長い場合があるので、そういう時は commit messageの表示を `depName` で指定して、実際のpacakgeを`packageName`で指定する
 * `datasource` : datasource の名前
+  * inlineで毎回、指示したくない場合は`datasourceTemplate` を使う
 
 ```Dockerfile
 # renovate: datasource=github-tags depName=node packageName=nodejs/node versioning=node
@@ -71,9 +81,42 @@ ENV YARN_VERSION=1.19.1
 }
 ```
 
+## PR をまとめる
+
+```json
+{
+  "packageRules": [
+    {
+      "groupName": "rust",
+      "matchManagers": ["xxx"],
+      "matchPackageNames": ["yyy"],
+    }
+  ]
+}
+```
+
+* `groupName`: ?
+* matchの条件を書いて、groupを決めていく
+
 ## Github 関連の設定
 
 https://docs.renovatebot.com/modules/platform/github/
+
+* renovateが変更するfileのみCODEOWNERから除外することで、CODEOWNERと両立させる方法もあり
+
+```gitignore
+src/ @me  
+# 後勝ちなので意図的に指定しない
+Cargo.* 
+```
+
+## preset
+
+extends できる設定集
+
+* `helpers:pinGitHubActionDigests`
+  * github action の依存をcommit hash に固定しつつ、コメントでversionを残す
+  * 
 
 ## Cache
 
@@ -91,3 +134,4 @@ cache として s3を利用できる
 ## Reference
 
 * [RenovateのRegex Managerに関する記事](https://gkzz.dev/posts/renovate-regex-manager/)
+* [Guide of GitHub Actions and Renovate](https://suzuki-shunsuke.github.io/guide-github-action-renovate)

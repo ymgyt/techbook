@@ -66,6 +66,8 @@ provider "aws" {
   # 利用するprofile
   profile = var.profile
 
+  allowed_account_ids = ["<target_account>"]
+
   # Tags to apply to all AWS resources by default
   default_tags {
     tags = {
@@ -77,3 +79,10 @@ provider "aws" {
 ```
 
 * `default_tags`で共通で付与したいtagを指定できる
+
+
+## Providerの更新(upgrade)
+
+* 現在のproviderのversionは `.terraform.lock.hcl` に書いてある
+* `terraform init -upgrade` 
+  * version constraintで互換性のある最新まであがる `~> 4.0` で現在が4.0.0の場合に最新(4.7.1等)まで上がる

@@ -51,6 +51,24 @@ on:
 * 変更したファイルがすべて、`paths-ignore`で指定したファイルにmatchしたらそのworkflowは実行されない。
 * PRのmergeはpushと判定される
 
+```yaml
+on:
+  push:
+    # (main branch AND match paths) OR (tags v*)
+    branches: [main]
+    paths:
+      - 'Cargo.*'
+      - rust-toolchain.toml
+      - 'src/**'
+    tags: ["v*"]
+```
+
+* `branches` と `paths` は AND
+* `tags` は OR
+* `branches`, `paths`, `tags` を指定すると
+  * `(branches AND paths) OR tags` になる...!
+
+
 ### pull requestをtriggerにする
 
 ```yaml

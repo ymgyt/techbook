@@ -51,15 +51,30 @@ resource "aws_ce_anomaly_subscription" "email" {
     address = local.subscription_email
   }
 
+  # https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html
   threshold_expression {
-    dimension {
-      key           = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
-      match_options = ["GREATER_THAN_OR_EQUAL"]
-      values        = ["20"]
+    # これで dimension OR dimension を表現している
+    or {
+      dimension {
+        key           = "ANOMALY_TOTAL_IMPACT_PERCENTAGE"
+        match_options = ["GREATER_THAN_OR_EQUAL"]
+        values        = ["30"]
+      }
+    }
+    or {
+      dimension {
+        key           = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
+        match_options = ["GREATER_THAN_OR_EQUAL"]
+        values        = ["100"]
+      }
     }
   }
 }
 ```
+
+* 変だけど、`or { dimension } or { dimension }` と書く
+  * `dimension or { dimension }` と書くとエラーになる
+  * `or { dimension dimension }` もエラー
 
 ### SNS
 

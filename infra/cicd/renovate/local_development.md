@@ -25,10 +25,15 @@ $env.LOG_LEVEL = "debug" # info | debug | trace
 
 $env.RENOVATE_CONFIG_FILE = config.js
 
-pnpm start ymgyt/test-repo [--dry-run = full]
+# renovateが更新対象にするbranch 検証でしたい場合に利用できる
+$env.RENOVATE_BASE_BRANCHES=feature/foo
+
+pnpm start ymgyt/test-repo [--dry-run = full] [--schedule=] [--use-base-bracnh-config merge]
 ```
 
 * `--dry-run` dry runで起動
+* `--schedule=` を指定することで、適用されるconfigのscheduleを無視して検証できる
+* `--use-base-branch-config merge` `RENOVATE_BASE_BRANCHES`を指定した場合にそのbranch のconfigをdefault branchとmergeする
 
 
 ## Otel
