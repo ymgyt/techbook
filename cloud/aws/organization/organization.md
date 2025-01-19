@@ -38,9 +38,6 @@
   * AWS Organizationの全機能を有効
 
 
-## Service Control Policy(SCP)
-
-
 ## Delegated Administorator
 
 * AWS Service ごとに management accountに集約された情報の処理を member account に委譲できる機能

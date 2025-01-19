@@ -19,3 +19,9 @@ https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_act
 ```
 
 * `*`をpartialで利用できる
+
+## Policy の評価
+
+このフローチャートが神
+
+https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/images/PolicyEvaluationVerticalRCP.png
