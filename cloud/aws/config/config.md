@@ -1,8 +1,12 @@
 # AWS Config
 
+## Aggregator
+
+* 複数のsource account のAWS Configを集約して、aggregate先にviewを作る機能
+
 ## Cost
 
-### `COnfigurationItemRecorded` が高い
+### `ConfigurationItemRecorded` が高い
 
 * Cost explorer > Service Config > Dimension Usage type 
 
@@ -11,6 +15,11 @@
 # delivery の設定を調べる
 aws configservice describe-delivery-channels
 ```
+
+### Athena
+
+* Configの変更履歴はS3に保管されるので、Athenaから調べられる
+* [AWS Configの請求内容を把握する方法を教えてください](https://repost.aws/ja/knowledge-center/retrieve-aws-config-items-per-month)
 
 ```
 CREATE EXTERNAL TABLE awsconfig (
@@ -30,7 +39,7 @@ CREATE EXTERNAL TABLE awsconfig (
          configurationStateMd5Hash : STRING,
          resourceCreationTime : STRING > >
 )
-ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe' LOCATION '';  
+ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe' LOCATION 's://<bucket>/AWSLogs/<account>/Config/<region>/';  
 ```
 
 ```
@@ -48,15 +57,3 @@ GROUP BY  result.configurationitemcapturetime
 ORDER BY  result.configurationitemcapturetime  
 ```
 
-```
-SELECT configurationItem.resourceType,
-         configurationItem.resourceId,
-         COUNT(configurationItem.resourceId) AS NumberOfChanges
-FROM default.awsconfig
-CROSS JOIN UNNEST(configurationitems) AS t(configurationItem)
-WHERE "$path" LIKE '%ConfigHistory%'
-        AND configurationItem.configurationItemCaptureTime >= '2024-12-01T%'
-        AND configurationItem.configurationItemCaptureTime <= '2024-12-07T%'
-GROUP BY  configurationItem.resourceType, configurationItem.resourceId
-ORDER BY  NumberOfChanges DESC  
-```

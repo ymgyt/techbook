@@ -81,7 +81,29 @@ ENV YARN_VERSION=1.19.1
 }
 ```
 
-## PR をまとめる
+## packageRules
+
+* 複数のruleを定義する
+  * ruleは上から適用され、複数matchしたらmergeされる
+  * 後に適用されたruleがoverrideする
+
+```json
+{
+  "packageRules": [
+    {
+        "description": "Schedule aws-sdk updates on Sunday nights (9 PM - 12 AM)",
+        "matchPackageNames": ["aws-sdk"],
+        "schedule": ["* 21-23 * * 0"]
+    }
+    {
+      "matchFileNames": ["examples/**"],
+      "extends": [":semanticCommitTypeAll(chore)"]
+    }
+  ]
+}
+```
+
+### PR をまとめる
 
 ```json
 {
@@ -95,7 +117,7 @@ ENV YARN_VERSION=1.19.1
 }
 ```
 
-* `groupName`: ?
+* `groupName` が同じpackageの更新は同じPRになる
 * matchの条件を書いて、groupを決めていく
 
 ## Github 関連の設定

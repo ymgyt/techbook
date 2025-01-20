@@ -143,7 +143,12 @@ resource "foo" "bar" {
 }
 ```
 
+## Module の repository管理
 
-## 参照
+
+
+## Reference
 
 https://developer.hashicorp.com/terraform/language/modules/develop/structure
+
+* [Terraform ModulesをMonorepoでversioningして管理](https://blog.studysapuri.jp/entry/2022/03/30/080000)

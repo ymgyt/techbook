@@ -55,3 +55,8 @@ aws organizations register-delegated-administrator --account-id <MEMBER_ACCOUNT>
 
 具体的になにができるようになるから serviceごとに違う
 
+
+## Reference
+
+* [AWS Organizationの各ポリシーと継承の整理](https://blog.serverworks.co.jp/aws-organizations-policies-and-inheritance#%E7%B5%84%E7%B9%94%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B)
+  * SCP, RCP だけが特殊なpolicyとわかる

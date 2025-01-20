@@ -45,6 +45,10 @@ pnpm start ymgyt/test-repo [--dry-run = full] [--schedule=] [--use-base-bracnh-c
 
 * `lib/renovate.ts` がentry point
 
+* Configの解決
+* PR の作成
+* PR の merge
+
 ### 実行時間
 
 renovate の独自概念として、split としてRepositoryの各処理を分割しており、それぞれの実行時間がわかる
