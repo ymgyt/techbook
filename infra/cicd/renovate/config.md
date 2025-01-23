@@ -87,13 +87,14 @@ ENV YARN_VERSION=1.19.1
   * ruleは上から適用され、複数matchしたらmergeされる
   * 後に適用されたruleがoverrideする
 
-```json
+```json5
 {
   "packageRules": [
     {
         "description": "Schedule aws-sdk updates on Sunday nights (9 PM - 12 AM)",
         "matchPackageNames": ["aws-sdk"],
-        "schedule": ["* 21-23 * * 0"]
+        "schedule": ["* 21-23 * * 0"],
+        "enabled": true, // 一時的にdisableにもできる
     }
     {
       "matchFileNames": ["examples/**"],
@@ -132,6 +133,13 @@ src/ @me
 Cargo.* 
 ```
 
+## PRのassigneesを指定する
+
+* `assignees: ["ymgyt"]`: assignees の指定
+* `assigneesFromCodeOwners: <bool>`: CODEOWNER からassigneeを決める
+* `assigneesSampleSize: <interger>`: assignees から sample size人 randomにassigneする 
+* `expandCodeOwnersGroups: <bool>`: CODEOWNER で指定されているgroup を memberに分解してassigneeする
+
 ## preset
 
 extends できる設定集
@@ -139,6 +147,89 @@ extends できる設定集
 * `helpers:pinGitHubActionDigests`
   * github action の依存をcommit hash に固定しつつ、コメントでversionを残す
   * 
+
+## rebaseの挙動
+
+* `rebaseWhen`: defaultは`auto`
+  * `auto`
+    * automergeかrepositoryの設定で、PRを up to dateが設定されていた場合は`behind-base-branch` が使われる
+    * それ以外は`conflicted`
+
+  * `never`: manuallyにrequestされない限りなにもしない
+  * `conflicted`: conflictした場合のみrebase
+  * `behind-base-branch`: base branchが更新されたらrebase
+
+## scheduling
+
+* `timezone: "Asia/Tokyo"`
+  * `:timezone(Asia/Tokyo)` presetでもサポートされている
+
+* `schedule`
+  * repository単位か、`packageRules` でpackageごとに設定する
+  * Granularityは1hour 分はサポートしていない
+  * cronとtextのsyntaxをサポート
+    * [`croner`](https://www.npmjs.com/package/croner)
+    * [`later`](https://github.com/breejs/later)
+      * https://breejs.github.io/later/parsers.html#text
+  * [preset](https://docs.renovatebot.com/presets-schedule/)
+
+* `automergeSchedule` でautomergeの時間を制限できるが、`platformAutomerge`と併用すると意図どおりにならない可能性があるので注意
+  * defaultは`[at any time]`
+
+```
+every weekend
+before 5:00am
+[after 10pm, before 5:00am]
+[after 10pm every weekday, before 5am every weekday]
+on friday and saturday 
+
+# daily before 4 AM
+["* 0-3 * * *"]
+
+# non-office hours
+["* 0-4,22-23 * * 1-5", "* * * * 0,6"]
+```
+
+* package rule で更新の多いpackage のみ日曜に更新する設定
+
+```json5
+{
+  "packageRules": [
+    {
+      "description": "Schedule aws-sdk updates on Sunday nights (9 PM - 12 AM)",
+      "matchPackageNames": ["aws-sdk"],
+      "schedule": ["* 21-23 * * 0"]
+    }
+  ]
+}
+```
+
+## label
+
+* `labels`: renovateがPRに付与するlabel
+
+```json5
+{
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchPackageNames": ["/foo/"],
+      "labels": ["linting"] // => ["linting"]
+    },
+    {
+      "matchPackageNames": ["/bar/"],
+      "addLabels": ["extra"] // => ["dependencies", "extra"]
+    }
+  ]
+}
+```
+
+* `keepUpdatedLabel`: 指定したlabelをPRに付与すると、renovateがrebaseしてbaseに追従してくれる
+  * `rebaseWhen`が `never`,`conflicted`の場合に特定のPRを最新にしたい場合に便利
+
+* `stopUpdatingLabel`
+  * defaultは`stop-updating`
+  * このlabelが付与されているとrenovateはPRを更新しない
 
 ## Cache
 

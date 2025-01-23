@@ -17,6 +17,9 @@ cargo install --path . --locked
 ```shell
 # xxxのversionをあげる
 cargo update --package xxx
+
+# packageのversionを指定する(downgradeもできる) 
+cargo update --precise 1.0.1 -p anyhow
 ```
 
 ## Use specific version

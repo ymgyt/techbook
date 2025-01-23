@@ -32,6 +32,11 @@ pnpm start ymgyt/test-repo [--dry-run = full] [--schedule=] [--use-base-bracnh-c
 ```
 
 * `--dry-run` dry runで起動
+  * `null`: 通常の起動
+  * `"extract"`: managerがparseするpackage fileの抽出のみ
+  * `"lookup"`: 新versionの検索まで
+  * `"full"`: branchとPRの変更以外を実施
+
 * `--schedule=` を指定することで、適用されるconfigのscheduleを無視して検証できる
 * `--use-base-branch-config merge` `RENOVATE_BASE_BRANCHES`を指定した場合にそのbranch のconfigをdefault branchとmergeする
 
@@ -48,6 +53,20 @@ pnpm start ymgyt/test-repo [--dry-run = full] [--schedule=] [--use-base-bracnh-c
 * Configの解決
 * PR の作成
 * PR の merge
+
+### Split
+
+* renovateの実装上の処理の単位
+
+1. init
+2. extract
+  * manager(cargo)がpackage file(Cargo.toml)からdep(anyhow)をextractする
+3. lookup
+  * extractしたdepのdatasourceから新しいversionがあるかを取得する
+4. onboarding
+  * Onboarding PRの作成
+5. update
+  * PRの作成,rebase,merge
 
 ### 実行時間
 

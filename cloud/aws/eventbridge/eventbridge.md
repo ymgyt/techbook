@@ -103,3 +103,16 @@ cron式/rate式で定義すると定期的にeventを発火できる
 * 受信したeventに基づいて料金が発生
   * AWSのeventは無料
   * customeは100万eventで1.00USD
+
+
+## Schema
+
+* 実際にプログラムに与えられる event jsonの調べ方
+
+```sh
+# schema の検索
+aws schemas  search-schemas --registry-name aws.events --keywords ScheduledJson
+
+# schema の内容確認
+aws schemas describe-schema --registry-name "aws.events" --schema-name "aws.events@ScheduledJson"
+```
