@@ -10,6 +10,7 @@
   * `GIT_CLIFF__<SECTION>__<FIELD>`という規約
 
 * workspaceで、crate-aのCHANGELOGを作りたい場合は`--include-path crates/foo/**`と書くとcommitをfilterできる
+  * 意図したversionがCHANGELOGに含まれていない場合は、そのtagのコミットが `--include-path` に含まれているか確認する
 
 * `git cliff --context`でrender前のteraのcontextを表示できる
 
