@@ -34,4 +34,20 @@ https://support.google.com/a/answer/4579696?hl=ja#zippy=%2C%E3%83%87%E3%83%BC%E3
 2. API > Googls Admin SDK API を有効化
 3. Service Account 作成
   * Key を生成して控えておく
-4. 
+4. domain wide delegationを行う 
+
+## Drive Activitiy
+
+```sh
+# 特定のユーザを指定
+GET https://admin.googleapis.com/admin/reports/v1/activity/users/me@example.com
+/applications/drive
+
+# drive idを指定
+GET https://admin.googleapis.com/admin/reports/v1/activity/users/all
+/applications/drive?filters=shared_drive_id==<id of shared drive>
+
+# event typeを指定
+GET https://admin.googleapis.com/admin/reports/v1/activity/users/all
+/applications/drive?eventName=create
+```

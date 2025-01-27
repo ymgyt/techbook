@@ -2,37 +2,34 @@
 
 ## Clientのconstruction
 
-* 各ServiceのClientは共通で`SdkConfig`から生成できる
-  * `SdkConfig`はservice共通の設定
+1. `SdkConfig` の生成
+  * regionやretry等の汎用的な設定
 
 ```rust
-let sdk_config = aws_config::load_from_env().await;
-let foo_client = aws_sdk_foo::Client::new(&sdk_config);
+use aws_config::{retry::RetryConfig, BehaviorVersion, SdkConfig};
+
+async fn load_sdk_config() -> SdkConfig {
+    aws_config::defaults(BehaviorVersion::v2024_03_28())
+        .region(REGION)
+        .retry_config(RetryConfig::standard().with_max_attempts(3))
+        .load()
+        .await
+}
 ```
 
-* Serviceごとに`Config`を定義しており、`SdkConfig`で設定できない事項はこれで対応する
+2. `Client` の生成
+  * `SdkConfig` で設定できないservice特有の設定はここで設定する
 
 ```rust
-let sdk_config = aws_config::load_from_env().await;
-let config = aws_sdk_foo::config::Builder::from(&sdk_config)
+let config = load_sdk_config().await;
+let config = aws_sdk_foo::config::Builder::from(&config)
     .some_service_specific_setting("value")
     .build();
-let foo_client = aws_sdk_foo::Client::from_conf(&config)
+
+let client = aws_foo_s3::Client::from_conf(config);
 ```
 
-## `SdkConfig`のconstruct
-
-```rust
-let sdk_config = aws_config::from_env()
-    .region(Region::new("ap-northeast-1"))
-    .load()
-    .await;
-```
-
-* `aws_config::from_env().override().load()`
-  * `aws_config::load_from_env()`がこれのhelper
-
-### ServiceごとのConfig
+### Credentialの設定
 
 * `Config::builder().credential_provider()`でcredentialの取得実装を渡せる
 * `ProvideCredentials`の実装は`aws_config`から取得できる

@@ -87,6 +87,68 @@ let result = stream.collect::<Vec<i32>>().await;
 assert_eq!(result, vec![0, 2, 4]);
 ```
 
+* paging する apiを`Stream`に変換する
+
+```rust
+impl ReportsApi for ReportsClient {
+    fn list_drive_activities(
+        &self,
+        input: ListDriveActivitiesInput,
+    ) -> impl Stream<Item = Result<Bytes, ReportsApiError>> {
+        enum Phase {
+            Requesting,
+            Completed,
+        }
+        struct State {
+            phase: Phase,
+            client: ReportsClient,
+            input: ListDriveActivitiesInput,
+        }
+
+        stream::unfold(
+            State {
+                phase: Phase::Requesting,
+                client: self.clone(),
+                input,
+            },
+            |mut state| async move {
+                match state.phase {
+                    Phase::Requesting => {
+                        let mut item = state.client.get_drive_activities(&state.input).await;
+
+                        // next page token を探すために json に decodeする
+                        let mut page_token = None;
+                        if let Ok(body) = item.as_ref() {
+                            match serde_json::from_slice::<serde_json::Value>(body.as_ref()) {
+                                Ok(value) => {
+                                    if let serde_json::Value::String(next_page_token) =
+                                        &value["nextPageToken"]
+                                    {
+                                        if !next_page_token.is_empty() {
+                                            page_token = Some(next_page_token.clone());
+                                        }
+                                    }
+                                }
+                                Err(decode_err) => {
+                                    item = Err(ReportsApiError::DecodeJson(decode_err));
+                                }
+                            }
+                        }
+                        match page_token {
+                            Some(page_token) => state.input.page_token = Some(page_token),
+                            None => state.phase = Phase::Completed,
+                        }
+
+                        Some((item, state))
+                    }
+                    Phase::Completed => None,
+                }
+            },
+        )
+    }
+}
+```
+
 * 処理の中で、stateの更新とItemとして返す値を計算する
   * 関数としてはstateもreturnするが、次のpollで引数でもらえる
 * Noneを返すとStreamは終了
