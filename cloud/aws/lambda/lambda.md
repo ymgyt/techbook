@@ -6,6 +6,14 @@
 * lambda側で`sts::AssumeRole`が実行される
   * 実行時に環境変数`AWS_SECRET_ACCESS_KEY`,`AWS_ACCESS_KEY{,_ID}`,`AWS_SESSION_TOKEN`がexecution roleのものに設定される
 
+## 呼び出し方式
+
+* 同期(Request/Response)
+* 非同期(Event)
+  * Lambda側のqueueにeventが格納されると呼び出し元(trigger)に成功を返す
+  * Lambda側で、2回のリトライ(都合3回の実行)が行われる
+    * 成功しないとDLQに入る
+
 ## EventSourceMapping
 
 EventSource(Kinesis/DynamoDB) -> λの処理を作成する際に登場するリソース。  

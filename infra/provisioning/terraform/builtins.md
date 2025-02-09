@@ -57,6 +57,8 @@ baz
 fallback
 ```
 
+## Collection関連
+
 ## keys
 
 map,objectのkeyをlistで返す
@@ -75,6 +77,20 @@ locals {
   foo = keys(local.public_subnets)[0] # => "ap-northeast-1a"
 }
 ```
+
+## concat (listの結合) 
+
+```sh
+> concat(["a", ""], ["b", "c"])
+[
+  "a",
+  "",
+  "b",
+  "c",
+]
+```
+
+* `distinct(concat())` で重複を排除できる
 
 ## References
 

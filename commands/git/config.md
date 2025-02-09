@@ -32,3 +32,7 @@
 [diff]
     colorMoved = default
 ```
+
+* `url.<base>.insteadOf xxx`
+  * gitのコマンドで`xxx`を`<base>`の値に書き換える
+  * protocolや認証情報を指定する際に利用できる

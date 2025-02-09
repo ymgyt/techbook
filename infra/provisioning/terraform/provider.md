@@ -1,5 +1,12 @@
 # Provider
 
+* resourceには1つのproviderが紐づく
+* providerはglobal
+* provider設定はroot moduleのみで行える
+* moduleにproviderを渡すには
+  * implicitly
+  * module block の`providers` argumentで明示的に渡す
+
 ```hcl
 terraform {
   required_version = ">= 1.4.6"

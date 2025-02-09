@@ -1,5 +1,67 @@
 # IAM
 
+作成の流れ
+
+1. `aws_iam_role`の作成
+
+```hcl
+resource "aws_iam_role" "foo" {
+  name = "role-name"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid    = "AssumeRole"
+        Action = ["sts:AssumeRole"]
+        Effect = "Allow"
+
+        Principal = {
+          Service = "<service>.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+```
+
+2. `aws_iam_policy`の作成
+
+```hcl
+resource "aws_iam_policy" "policy" {
+  name = "policy-name"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "cloudwatch:Get*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}
+```
+
+3. attachment
+  * `aws_iam_role_policy_attachments_exclusive`を利用すると定義されていないpolicyがはずされる
+  * `aws_iam_role_policy_attachment` もある
+
+```hcl
+resource "aws_iam_role_policy_attachments_exclusive" "chatbot" {
+  role_name = aws_iam_role.foo.name
+  policy_arns = [
+    aws_iam_policy.policy.arn
+  ]
+}
+```
+
+* `jsonencode`はそのままjsonになるので、Policyのjsonをrespectする
+* `data.aws_iam_policy_document`のほうはtfの変換がはいるので注意
+
+## data で policy documentを定義
+
 ```hcl
 # Assume policy for eks cluster
 data "aws_iam_policy_document" "eks_assume_role_policy" {
@@ -31,32 +93,3 @@ resource "aws_iam_role_policy_attachment" "eks_cluster" {
 * dataでpolicy(statement)を定義する
 * `aws_iam_role_policy_attachment`で紐付ける
 
-
-## inlineでdataを参照
-
-```hcl
-resource "aws_iam_role" "pod_execution" {
-  name = "foo"
-
-  # ...
-
-  inline_policy {
-    name   = "cloudwatchlogs"
-    policy = data.aws_iam_policy_document.cloudwatch_log.json
-  }
-}
-
-data "aws_iam_policy_document" "cloudwatch_log" {
-  statement {
-    sid = "AllowCloudwatchLogsWrite"
-    actions = [
-      "logs:CreateLogStream",
-      "logs:CreateLogGroup",
-      "logs:DescribeLogStreams",
-      "logs:PutLogEvents",
-      "logs:PutRetentionPolicy",
-    ]
-    resources = ["*"]
-  }
-}
-```

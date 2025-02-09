@@ -143,8 +143,38 @@ resource "foo" "bar" {
 }
 ```
 
-## Module の repository管理
+## Module の source
 
+* git
+  * `git clone` で取得するので、gitのcredentialの仕組みが利用される
+  * `?ref=<revision>` で指定できる
+  * `github.com`は`git::https://`に変換される
+
+```hcl
+module "consul" {
+  # default branchの参照
+  source = "git::https://example.com/vpc.git"
+
+  # tag指定
+  source = "git::https://example.com/vpc.git?ref=v1.2.0"
+
+  # sub directory
+  source = "git::https://example.com/mymod.git//modules/vpc?ref=v1.2.0"
+  source = "github.com/org/repo//modules/vpc?ref=v1.2.0"
+}
+```
+
+* [Module Sources](https://developer.hashicorp.com/terraform/language/modules/sources#github)
+
+## Development
+
+### ファイル構成
+
+* `main.tf`
+* `variables.tf`
+* `outputs.tf`
+* `versions.tf`
+  * providerの設定. eks moduleがやっていた
 
 
 ## Reference
