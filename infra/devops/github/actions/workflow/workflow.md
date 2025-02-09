@@ -1,13 +1,14 @@
 # Workflow
 
+
 * `.github/workflows` directory以下に作成するyamlがひとつのworkflowを表す。
 * workflow の skip
   * `[skip ci]`, `[ci skip]`, `[skip actions]`, `[actions skip]`
   * `push`, `pull_request` の event trigger
 
-
 ```yaml
 name: learn-github-actions
+run-name: expression ${{ github.foo }}
 on: [push]
 
 # 全てのjobから参照できる
@@ -16,6 +17,18 @@ env:
 
 permissions:
   contents: write
+
+# 全 jobのdefaultになる(job levelでも指定可)
+defaults:
+  run:
+    # bashを指定すると内部的には
+    # bash --noprofile --norc -eo pipefail {0} が実行される
+    shell: bash
+    working-directory: ./scripts
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
   
 jobs:
   check-bats-version:
@@ -96,91 +109,32 @@ on:
     - 'v*.*.*'
 ```
 
-### `workflow_run`
-
-```yaml
-name: deploy
-on:
-  workflow_run:
-    workflows:
-    - "lint"
-    - "test"
-    branches:
-    - main
-    types:
-    - completed
-
-jobs:
-  deploy:
-    runs-on: ubuntu-18.04
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    steps:
-    - uses: actions/checkout@v2
-```
-
-* 他のworkflowのあとにworkflowを実行したいことを表現できる
-* branchesの条件はよくわかっていない
-* 依存するworkflowの成功を前提にしたい場合はifを書く
-* workflow file自体がdefault branch(main)にある必要があるので、feature branchだとうまく動作確認できないかも(理解が曖昧)
-
-### schedule実行する
-
-```yaml
-name: Scheduled Workflow
-on:
-  schedule:
-    - 5 16 * * *
-```
-
-* cron tab方式で指定する
-
-### workflow_dispatchで手動で実行
-
-```yaml
-on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-        - info
-        - warning
-        - debug
-      tags:
-        description: 'Test scenario tags'
-        required: false
-        type: boolean
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true
-```
-
-* API,Browser等からworkflow_dispatch eventを生成することができこれでtriggerできる
-* inputも指定できる
-* 設定するとUIにRun workflow buttonが現れる
-
-
 ## `permissions`
 
 * Jobごとに`GITHUB_TOKEN`が生成されている。  
+  * `write`は`read`も含む
+  * 指定しないものには`none`がsetされる
 * toplevelに定義するとworkflow全体に及ぶ
   * jobごとに定義もできる
   * stepごとにはできない
 * Jobの中でGithub APIを呼ぶ場合は対応する権限の付与が必要になる
   * `contents: write`: Releaseの作成に必要だった
+* [一覧](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#permissions)
 
 ```yaml
 permissions:
   # Releaseの作成に必要
   # readはdefaultで付与されている
   contents: write
+
   # JobからPRにコメントを投稿する際に必要
   pull-requests: write
 
+  # OpenID Connect(OIDC) tokenのfetchにwriteが必要
+  id-token: write
+
+  # workflow-run関連?
+  actions: write
 ```
 
 
