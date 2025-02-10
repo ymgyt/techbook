@@ -41,6 +41,10 @@ foo:
 silent:
   @echo {{name}}
 
+# 可変長引数
+build *flags:
+    nix develop .#ebpf --command cargo task build-ebpf {{ flags }}
+
 # Use parameter
 [confirm]
 deploy env stack region=region:
