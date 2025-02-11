@@ -2,7 +2,6 @@
 
 ## `jobs.<job_id>.runs-on`
 
-
 * linux
     * `ubuntu-latest` or `ubuntu-20.04`
     * `ubuntu-18.04`
@@ -10,6 +9,7 @@
 ## `jobs.<job_id>.needs`
 
 * job間の依存関係を定義できる。
+  * string, `[string]` 両対応
 
 ```yaml
 jobs:
@@ -41,7 +41,7 @@ jobs:
 
 * defaultは360分らしいので基本的につねに設定する
 
-## `jobs.<job_id>.strategy.matric`
+## `jobs.<job_id>.strategy.matrix`
 
 環境やversionだけ変えてjobを実行させる
 
@@ -60,8 +60,6 @@ jobs:
 
 ## `jobs.<job_id>.if`
 
-* jobの実行に条件を付与できる
-
 ```yaml
 jobs:
   create-api-release:
@@ -72,9 +70,14 @@ jobs:
     if: ${{ ! contains(github.event.pull_request.user.login, '[bot]') && ! contains(github.event.pull_request.user.login, 'internal-tools') && toJSON(github.event.pull_request.assignees) == '[]'}}
 ```
 
-* `{{ }}`はつけておけばよさそう
+* jobの実行に条件を付与できる
+* 暗黙的に `${{ }}` 中で評価される仕様があるが、`!` はyamlに書けないので、明示的に`${{ }}`を書くのがよい
+  * `if: ${{ input.foo}} == 'true'` のように expression からでないように注意
+  * `if: ${{ input.foo == 'foo' }}` こう書く
+
 * `if: ${{ startsWith(github.ref, 'refs/tags/synd-api')}}`
   * tagの先頭にmatchした場合だけjobを実行
+
 * `${{ COND && COND }}` で and を表現
 * builtins
   * `contains(stack, needle)` : needleがstackのsubstringならtrue

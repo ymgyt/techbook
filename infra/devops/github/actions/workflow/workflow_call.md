@@ -49,7 +49,10 @@ jobs:
 jobs:
   call-workflow:
     uses: org/repo/.github/workflows/reusable-wf.yaml@main
-    permissions: {}
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
     with:
       config-path: "path"
     # secrets: inherit で全部渡すこともできる
@@ -66,6 +69,7 @@ jobs:
 
 * `jobs.<job_id>.permissions`
   * permissionsを指定しないと、default permissionが使われる
+  * callee側で必要なpermissionsはcaller側が渡すようにする
 
 
 ### matrix

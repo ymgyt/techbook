@@ -19,6 +19,7 @@ permissions:
   contents: write
 
 # 全 jobのdefaultになる(job levelでも指定可)
+# ${{ inputs.working_directory }} のような動的なcontextにはアクセスできない仕様
 defaults:
   run:
     # bashを指定すると内部的には

@@ -8,15 +8,25 @@ terraformのstate fileをどこに置くかの設定
 terraform {
   backend "s3" {
     bucket  = "terraform-state"
-    key     = "path/to/terrafrom.tfstate"
+    key     = "path/to/terraform.tfstate"
     region  = "ap-northeast-1"
     profile = "my-profile"
 
-    # lockする場合のdynamodb
+    # s3 lock
+    # [v1.10.0](https://github.com/hashicorp/terraform/releases?expanded=true&page=2&q=v1.10) で導入
+    use_lockfile = true
+
+    # lockする場合のdynamodb(deprecated)
     dynamodb_table = "dynamo_table_foo"
   }
 }
 ```
+
+* `s3.use_lockfile` の利用する場合
+  * `path/to/terraform.tfstate.lock[file]` に対する以下の権限が plan であっても必要
+    * `s3:PutObject`
+    * `s3:DeleteObject`
+
 
 通常は`main.tf`の`backend` blockに定義する。  
 

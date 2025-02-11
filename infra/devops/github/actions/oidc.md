@@ -85,3 +85,8 @@ resource "aws_iam_openid_connect_provider" "gha" {
 * `sub`
   * `repo:<org>/<repo>:ref:refs/heads/<branch>`
      * `repo:ymgyt/handson:ref:refs/heads/main`
+
+  * workflow(job)がenvironmentを参照している場合, `repo:<org>/<repo>:environment:<environment>`になる
+    * `repo:ymgyt/handson:environment:production`
+
+  * [参考](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#example-subject-claims)
