@@ -13,6 +13,7 @@
   * 意図したversionがCHANGELOGに含まれていない場合は、そのtagのコミットが `--include-path` に含まれているか確認する
 
 * `git cliff --context`でrender前のteraのcontextを表示できる
+* `GITHUB_TOKEN`を設定しておくと、private repoの commitsもみれる
 
 * conventional commitを前提してgroupingしている
 

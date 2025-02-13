@@ -13,6 +13,14 @@ variable "vault_endpoint" {
   description = "vault endpoint for terraform provisioning"
   default = "default"
 }
+
+variable "files" {
+  description = "desc"
+  type = object({
+    field_a = bool
+    field_b = optional(string, "fallback")
+  })
+}
 ```
 
 * `sensitive`で表示されるか制御できる

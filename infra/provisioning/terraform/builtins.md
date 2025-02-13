@@ -1,6 +1,8 @@
 # builtins
 
-## one
+## 複数 expression
+
+### one
 
 ```hcl
 output "neo_cloudwatch_policy_arn" {
@@ -16,6 +18,15 @@ output "neo_cloudwatch_policy_arn" {
   * 1 elementの場合はそれ
   * 2以上の場合はerror
 * 排他的な条件によりどれか一つだけが有効という意図を表現できる
+
+### try
+
+```sh
+try(local.foo.bar, "fallback")
+```
+
+* 複数expressionを評価して、最初にerrorではないものを利用する
+
 
 
 ## templatefile

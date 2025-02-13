@@ -17,7 +17,7 @@ terraform apply
 
 ```sh
 # dotlangの出力
-terraform dot
+terraform graph
 
 # outputの出力
 terraform output

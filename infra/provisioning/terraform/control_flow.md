@@ -87,6 +87,8 @@ output "all_arns" {
 * `for_each`に指定できるのはsetかmap
 * resource定義の中で`each.key`,`each.value`が参照できる
 * for_eachで作成されたresourceはkeyがfor_eachのkeyで値が作成されたresourceのmapになる(countはarray)
+  * `<resource>.<identifier>[key].<attribute>` で参照する
+    * `aws_instance.example[foo].id`
 
 ### inline
 
