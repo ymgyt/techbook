@@ -59,3 +59,23 @@ plugins = "/var/lib/grafana/plugins"
 provisioning = "/etc/grafana/provisioning"
 ```
 
+### database
+
+* [Doc](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#database)
+
+### Google OAuth authentication
+
+* [Doc](https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/configure-authentication/google/)
+
+## Docker image
+
+* [grafana](https://hub.docker.com/r/grafana/grafana)
+* [grafana-oss](https://hub.docker.com/r/grafana/grafana-oss)
+* [grafana-enterprise](https://hub.docker.com/r/grafana/grafana-enterprise)
+
+* 初期ユーザは `admin/admin`
+
+
+## Reference
+
+* [Hardware recommendations](https://lwn.net/SubscriberLink/1007907/a9db87fc233bceae/)
