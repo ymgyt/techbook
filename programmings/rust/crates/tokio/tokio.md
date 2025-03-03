@@ -53,31 +53,11 @@ async fn example() {
 }
 ```
 
-### timeout
-
-```rust
-use tokio::time::timeout;
-use tokio::sync::oneshot;
-
-use std::time::Duration;
-
-async fn example() {
-    let (tx, rx) = oneshot::channel();
-
-    // Wrap the future with a `Timeout` set to expire in 10 milliseconds.
-    if let Err(_) = timeout(Duration::from_millis(10), rx).await {
-        println!("did not receive value within 10 ms");
-    }
-}
-```
-
-* `Result<T, Elapsed>`にwrapされる
-
 ### `JoinSet`
 
 同時に実行するfutureの数を制限したい場合に利用できる。
 
-```
+```rust
 use tokio::time::{sleep, Duration};
 use tokio::task::JoinSet;
 

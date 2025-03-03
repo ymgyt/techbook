@@ -18,6 +18,7 @@ fn foo() -> impl Iterator<Item=String> {
 ## 2024 Edition
 
 * scopeにある`T`, `'a`をdefaultでcaptureする
+  * 2021 editionはdefualt でなにもcaptureしない
 * captureしたくない場合は`use`を使う
 
 ```rust

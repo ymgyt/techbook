@@ -22,6 +22,10 @@
   * Client からなんらかの方法で、connectorに渡される
     * connector は`nas.home.ini` をprivateのdnsで解決して、resourceにroutingする
 
+## Resource
+
+* Resourceは any network address になれる
+ * 同じnetworkにdeployされているconnectorから、resolvable and routable であることが要件
 
 ### Client と Connectorの接続
 
@@ -35,7 +39,20 @@
   * ClientはConnectorのNATにpacketを送っている(outbound)ので、Connecotrからのpacketを受け取れる
   * ConnectorはClientのNATにpacketを送っているので、Clientからのpacketを受け取れる
 
+## Role
+
+* Admin
+* DevOps
+  * 一部のresourceの作成
+* Support
+  * Read only
+* Access Reviewer
+  * わかってない
+* Member
+  * admin consoleへのアクセス権限なし
+
 
 ## References
 
 * [client Connection Flow](https://www.twingate.com/docs/client-connection-flow)
+* [Roleの権限表](https://www.twingate.com/docs/admins)

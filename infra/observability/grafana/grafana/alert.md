@@ -1,8 +1,9 @@
 # Alert 
 
-概要としては  
-Alertが発火すると、alertに紐づいているnotification policyが評価される。  
-Notification policyにはcontact point(通知先)が紐づいているので結果的にslackやmailの通知が飛ぶ。  
+* Grafanaは定期的にalert ruleに基づいてdatasourceにqueryを実行する
+  * condition を満たすとalert instanceがfireされる
+  * firingとresolvedなalert instance はnotification policyで評価されて、通知される
+  * notification policyにはcontact point(通知先)が紐づいている
 
 Alert -> Notification Policy -> Contact pointという関係
 
@@ -16,6 +17,7 @@ Alertが発火するruleを定義する。
 
 * 1つ以上のqueryとexpressionからなる
 * conditionがある
+* notification policy, contact pointをもつ
 * 評価のintervalとconditionが継続する期間を指定する
   * 10秒間隔で評価して、30秒継続したら発火
 
@@ -24,8 +26,8 @@ Alertが発火するruleを定義する。
   * Lastで最新の値を参照できる
 3. Thresholdで比較する
 
-Alertのstateは
-Normal, Pending, Alerting, No Data, Error
+* Alertのstate
+  * Normal, Pending, Alerting, No Data, Error
 
 
 ### Label
@@ -104,12 +106,12 @@ alert instance(ruleのlabelにmatchするtime seriesと思っている)
 
 ## Notification policy
 
+* alertのcontact pointへのroutingを担う
 * Root notification policy(default policy)があり、指定されていない場合はこれが適用される
   * 全てのpolicyはdefaultから木構造で作っていく
     * 大まかにlabelで通知先を分けつつ、criticalの場合は別の通知先といった制御を表現できる
     * Contact point,timing,mute timingは親から継承される
       * 子側で上書きできる
-* Contact pointをもつ
 * Alertとの関連をlabelで定義できる
   * team="ops"を設定しておくと、そのlabelをもつalertを当該、notification policyのcontact pointに流せる
   * `foo=~[a-zA-Z]+`ような正規表現も書ける
@@ -153,6 +155,7 @@ notificationが送られる頻度の制御。
 
 * Notification policy同様、labelを定義できる。labelにマッチしたalertの通知を止められる
   * 何時から何時まで、type=cpuのalertを止めるというようなことができる
+  * maintenanceのような一時的な通知の停止を表現
 
 ## Alertの止め方
 

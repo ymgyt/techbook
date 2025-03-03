@@ -25,48 +25,6 @@ grafana server \
 
 userのgroupとしてteamがある
 
-## Configuration
-
-* `$WORKING_DIR/conf/defaults.ini`がdefault
-* `$WORKING_DIR/conf/custom.ini`がoverride用?
-  * `--config`で指定できる
-* linux distroでは`/etc/grafa/grafana.ini`が`--config`で指定されているらしい
-
-* [Doc](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/)
-
-
-```init
-[analytics]
-enabled = true
-# 最新のgrafanaをgithubに確認する
-check_for_updates = true
-
-[log]
-# console | file | syslog
-mode = "console"
-# debug | info | warn | error | critical
-level = "info"
-
-# 各種dataのfile pathの指定
-[paths]
-# 実data
-data = "/var/lib/grafana/"
-# log
-# command lineでcfg:default.paths.logsで上書きできるらしい
-logs = "/var/log/grafana"
-# plugins
-plugins = "/var/lib/grafana/plugins"
-provisioning = "/etc/grafana/provisioning"
-```
-
-### database
-
-* [Doc](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#database)
-
-### Google OAuth authentication
-
-* [Doc](https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/configure-authentication/google/)
-
 ## Docker image
 
 * [grafana](https://hub.docker.com/r/grafana/grafana)
@@ -74,6 +32,51 @@ provisioning = "/etc/grafana/provisioning"
 * [grafana-enterprise](https://hub.docker.com/r/grafana/grafana-enterprise)
 
 * 初期ユーザは `admin/admin`
+
+## API
+
+### Health Check
+
+* `/api/health`
+  * 認証はない
+
+## Local development
+
+```yaml
+name: foo
+
+services:
+  grafana:
+    image: grafana/grafana-oss:11.5.1
+    container_name: grafana
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: grafana
+        target: /var/lib/grafana
+      - type: bind
+        source: ./grafana/grafana.ini
+        target: /etc/grafana/grafana.ini
+        read_only: true
+      - type: bind
+        source: ./grafana/provisioning
+        target: /etc/grafana/provisioning
+        read_only: true
+    environment:
+      # GF_PLUGINS_PREINSTALL 環境変数では <plugin-id> <version> のように version を指定できなかったので、GF_INSTALL_PLUGINS を利用する
+      GF_INSTALL_PLUGINS: "grafana-clock-panel 2.1.8, some-plugin 1.2.3"
+      GF_PATHS_DATA: /var/lib/grafana
+      GF_PATHS_CONFIG: /etc/grafana/grafana.ini
+      GF_PATHS_PROVISIONING: /etc/grafana/provisioning
+      GF_LOG_LEVEL: debug
+      GF_LOG_MODE: console
+      GF_AUTH_GOOGLE_CLIENT_ID: ${GF_AUTH_GOOGLE_CLIENT_ID}
+      GF_AUTH_GOOGLE_CLIENT_SECRET: ${GF_AUTH_GOOGLE_CLIENT_SECRET}
+    ports: ["3000:3000"]
+
+volumes:
+  grafana:
+```
 
 
 ## Reference

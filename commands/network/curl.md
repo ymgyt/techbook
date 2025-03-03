@@ -10,6 +10,7 @@
 * `-L`: redirectに従う
 * `o[O]`:  取得したresponseをファイルに書き出す。Oはサーバー側のファイル名を使う. -oは指定できる
 * `-i`: レスポンスの詳細情報
+* `-I`: Headerのみ表示
 * `-v`: verbose
 * `--request|-X`: methodの指定
 * `--dump-header`: レスポンスヘッダーをdumpする。出力先のファイルを引数にとるので、`--dump-header -`とするとstdoutにだせる。
