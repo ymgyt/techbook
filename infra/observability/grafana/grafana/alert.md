@@ -33,9 +33,20 @@ Alertが発火するruleを定義する。
 ### Label
 
 * Alert同士を区別するためのkey value
+  * alertの名前もalertname labelで表現
 * slilenceやnotification policyとの紐付けで使う
 * Annotationはadditional metadataを紐づける目的
 * matchに使えるoperatorは `=`, `!=`, `=~`, `!~` 
+
+### Annotations
+
+* labelと同様、key=value pairs
+* labelが識別を目的とするのに対して、annotationは情報の付加を目的にする
+  * summaryとdescription が標準の命名規則として推奨されている気配
+* CPU使用率が highです。(実際の使用率: 86%) のように、alertのquery,expressionの値を載せたい場合
+  * `{{index $values "B" }}` (`{{$values.B}}` と同じ) のように、`$values (expression Ref)`で値を参照できる
+    * ここでは Expression B に Reduce Last を想定
+  * labelは `{{ index $labels "instance"}}` のように `$labels` で参照できる
 
 ### Alert rule type
 
@@ -78,11 +89,11 @@ evaluation interval: 30sec, pending period: 90secの場合
 
 ### Alert rule state
 
-alert ruleは以下のいずれかの状態をとる
-
-* Normal: evaluation engineから返される全てのtime seriesがPendingでも、Firingでもない
-* Pending: time seriesに一つ以上のPendingがある
-* Firing: time seriesに一つ以上のFiringがある
+* alert instanceの最悪のケースから導かれる
+* alert ruleは以下のいずれかの状態をとる
+  * Normal: evaluation engineから返される全てのtime seriesがPendingでも、Firingでもない
+  * Pending: time series(alert instance)に一つ以上のPendingがある
+  * Firing: time series(alert instance)に一つ以上のFiringがある
 
 #### Alert rule health
 

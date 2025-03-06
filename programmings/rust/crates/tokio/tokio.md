@@ -2,14 +2,6 @@
 
 ## Recipe
 
-### sleep
-
-```rust
-async fn example() {
-    let interval = tokio::time::Duration::from_secs(1);
-    tokio::time::sleep(interval).await;
-}
-```
 
 ### setup runtime
 

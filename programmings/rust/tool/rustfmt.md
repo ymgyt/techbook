@@ -3,6 +3,9 @@
 ## `rustfmt.toml`
 
 ```toml
+# editionが指定できるようになった(2024から)
+style_edition = "2024"
+
 max_width = 130
 
 # useのまとめ方
