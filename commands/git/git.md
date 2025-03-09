@@ -95,6 +95,19 @@ git checkout <local-branch-name>
 git pull origin pull/<ID>/head:<local-branch-name>
 ```
 
+## Troubleshtto
+
+* `git pull`がrejectedされる
+
+```sh
+git pull
+! [rejected]        synd-term-v0.3.1 -> synd-term-v0.3.1  (would clobber existing tag)
+
+# tagを更新する
+git fetch --tags --force
+```
+
+
 ## Ref
 
 * commitを参照するためのindirect way

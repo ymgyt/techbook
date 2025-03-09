@@ -1,5 +1,25 @@
 # IAM
 
+## Resource
+
+* `aws_iam_role`: Role
+* `aws_iam_policy`: 独立したPolicy
+* `aws_iam_role_policy`: Inline policy
+* `aws_iam_role_policies_exclusive`: Inline policyのexclusive版
+* `aws_iam_role_policy_attachment`: 独立したPolicyのroleへのattachment
+* `aws_iam_role_policy_attachment_exclusive`: 独立したPolicyのroleへのexclusive attachment
+* `aws_iam_policy_attachment`: user,role,group対応のpolicy attachment.使わないほうがいい
+  * delete時に対象entityのすべてのpolicyをはがしていく場合がある
+
+* `aws_iam_role`
+* `aws_iam_policy`
+* `aws_iam_role_policy`
+* `aws_iam_role_policies_exclusive`
+* `aws_iam_role_policy_attachment`
+* `aws_iam_role_policy_attachment_exclusive`
+* `aws_iam_policy_attachment`
+## Role
+
 作成の流れ
 
 1. `aws_iam_role`の作成

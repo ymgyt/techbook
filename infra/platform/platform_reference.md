@@ -16,6 +16,10 @@
 * Documentation
   * [明日から始める持続可能なドキュメンテーション戦略](https://speakerdeck.com/akitok_/sustainable-documentation-strategies-documentation-as-a-product)
 
+## 戦略
+
+* [Platform Adoption Strategies: Critical Roles When Investing in Platforms](https://www.cncf.io/blog/2025/02/18/platform-adoption-strategies/)
+
 
 ## Tool
 
@@ -35,6 +39,10 @@
 * [プラットフォームエンジニアリングって何？〜基本から AWS での実現方法について](https://aws.amazon.com/jp/blogs/news/20240229-platform-engineering-event/)
 * [Class MethodのServerlessDays Tokyo 2024登壇](https://dev.classmethod.jp/articles/serverlessdays-tokyo-2024-wakatsuki-serverless-development-platform-engineering/)
 * [Spotifyが実現したPaved Pathと共通ツーリング](https://www.infoq.com/jp/news/2021/05/spotify-paved-paths/)
+
+## Security
+
+* [Shift-down](https://github.com/kubernetes/sig-security/blob/main/sig-security-docs/papers/shift-down/shift-down-security.md)
 
 ## SRE/DevOps
 

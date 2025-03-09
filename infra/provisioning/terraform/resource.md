@@ -54,6 +54,53 @@ resource "aws_db_instance" "example" {
 }
 ```
 
+## Dynamic block
+
+```hcl
+variable "ingress_rules" {
+  type = list(object({
+    port        = number
+    description = string
+    cidr_blocks = list(string)
+  }))
+  default = [
+    {
+      port        = 80
+      description = "HTTP"
+      cidr_blocks = ["0.0.0.0/0"]
+    },
+    {
+      port        = 443
+      description = "HTTPS"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
+}
+```
+
+```hcl
+resource "aws_security_group" "main" {
+  name = "main-sg"
+  vpc_id = "<vpc-id>"
+
+  dynamic "ingress" {
+    for_each = var.ingress_rules
+    content {
+      description = ingress.value.description
+      from_port   = ingress.value.port
+      to_port     = ingress.value.port
+      protocol    = "tcp"
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+  }
+}
+```
+
+* nested blockを動的に宣言する
+* `content`
+  * iteratorの変数名はdefaultではdynamic block 名になる
+
+
 ## Data Resource
 
 Terrafromの外の世界から情報を取得して、terraformで利用できるようにする手段。  

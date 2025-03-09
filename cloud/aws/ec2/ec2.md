@@ -10,3 +10,13 @@
   * 利用するresourceにcommitする契約
 * Spot instance
   * AWS側の都合で止まるが安い
+
+
+## IAM
+
+* Instance profile
+    * EC2独自の概念
+    * IAM Role のコンテナ
+      * EC2 Instance -> IAM Profile -> IAM Role という関係
+    * IAM Role と同じ名前のProfile が自動で作られる
+      * Iacの場合は意識する必要あり
