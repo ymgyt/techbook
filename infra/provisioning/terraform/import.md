@@ -60,7 +60,7 @@ resource "aws_organizations_organization" "ymgyt" {
 }
 ```
 
-3 `terraform plan`でimport blockに対応するstateを更新する
+3 `terraform plan`でimport blockに対応する設定fileを生成する
   * `terraform plan -generate-config-out=generated_resources.tf`
   * ここでdiffがでるまでresourceを更新できれば、applyが安全になると思う
 

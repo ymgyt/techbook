@@ -15,6 +15,11 @@
 * partitionedしていないと、S3のGet requestでexceptionになるかも。
 * functionはpresto準拠
 
+## 料金
+
+* Scanされた1TBあたり、5USD
+  * MB単位で切り上げられ、10MB未満は10MBと計算される
+
 ## Database
 
 tableの集合
