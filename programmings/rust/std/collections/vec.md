@@ -61,3 +61,12 @@ let s = &v[1..2];
 ```
 
 内部的には`v[ ]`がindexing expressionになって、`*v.index(Range)`になるらしいがよくわかってない
+
+## Sort
+
+```rust
+use std::cmp::Reverse;
+
+let mut v = vec![3,5,2,7];
+v.sort_unstable_by_key(|x| Reverse(*x));
+```
