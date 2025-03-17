@@ -4,8 +4,23 @@
 
 ### commandがinstallされているか
 
-```
+```sh
 command -v docker > /dev/null || { echo "dockerをインストールしてください"; exit 1; }
+```
+
+```sh
+# rustup
+check_cmd() {
+    command -v "$1" > /dev/null 2>&1
+}
+
+if check_cmd curl; then
+    _dld=curl
+elif check_cmd wget; then
+    _dld=wget
+else
+    _dld='curl or wget' # to be used in error message of need_cmd
+fi
 ```
 
 ### check

@@ -14,6 +14,7 @@ resource "aws_ce_anomaly_monitor" "aws_service" {
 resource "aws_ce_anomaly_monitor" "account" {
   monitor_dimension = null
   monitor_specification = jsonencode({
+    # 明示的な null 指定がないとplanで差分がでる
     And            = null
     CostCategories = null
     Dimensions = {
