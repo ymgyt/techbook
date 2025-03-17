@@ -14,6 +14,8 @@
 * `-v`: verbose
 * `--request|-X`: methodの指定
 * `--dump-header`: レスポンスヘッダーをdumpする。出力先のファイルを引数にとるので、`--dump-header -`とするとstdoutにだせる。
+* `--write-output`: curl実行後に、stdoutに出力したい情報を指定
+  * response codeだけ表示させるといったことができる
 
 
 ## POST

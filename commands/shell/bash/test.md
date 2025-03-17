@@ -13,6 +13,7 @@ test -d $DIR
 | ---   | ---                   |
 | `-d`  | directoryが存在するか |
 | `-z`  | 変数がunset or emptyかどうか |
+| `-n`  | stringがnot emptyでなければtrue |
 | `-e`  | fileが存在するか      |
 
 

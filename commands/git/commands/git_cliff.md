@@ -17,6 +17,16 @@
 
 * conventional commitを前提してgroupingしている
 
+* commitのskip/ignore
+  * `.cliffignore` file にcommit hashを書く
+
+```text
+# contents of .cliffignore
+
+4f88dda8c746173ea59f920b7579b7f6c74bd6c8
+10c3194381f2cc4f93eb97404369568882ed8677
+```
+
 ## Usage
 
 ```sh

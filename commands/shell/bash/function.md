@@ -1,5 +1,9 @@
 # Function
 
+* `return`
+  * scriptをsourceした場合は関数外でも`return`を処理できる
+  * `./script.sh` で、function外で、`return`を実行すると、`return: can only from a function or sourced script`になる
+
 
 ```sh
 function foo() {

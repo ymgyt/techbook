@@ -76,3 +76,48 @@ fn main() {
     }
 }
 ```
+
+## if let
+
+* edition 2024からscopeが変わった
+
+```rust
+// Before 2024 Edition
+fn f(value: &RwLock<Option<bool>>) {
+    if let Some(x) = *value.read().unwrap() {
+        println!("value is {x}");
+    } else {
+        let mut v = value.write().unwrap();
+        if v.is_none() {
+            *v = Some(true);
+        }
+    }
+    // <--- Read lock is dropped here in 2021
+}
+
+fn _f(value: &RwLock<Option<bool>>) {
+    let _lock = *value.read().unwrap();
+    {
+        if let Some(x) = _lock {
+            
+        } else {
+            // Dead lock happens
+            value.write().unwrap();
+        }
+    }
+```
+
+```rust
+// Starting with 2024
+fn f(value: &RwLock<Option<bool>>) {
+    if let Some(x) = *value.read().unwrap() {
+        println!("value is {x}");
+    }
+    // <--- Read lock is dropped here in 2024
+    else {
+        let mut s = value.write().unwrap();
+        if s.is_none() {
+            *s = Some(true);
+        }
+    }
+}```

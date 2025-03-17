@@ -56,3 +56,9 @@ where
 * `FnOnce`: valueをmoveした場合
 * `FnMut`: `&mut`を利用
 * `Fn`: `&T`を利用
+
+## async closure
+
+* `async || {}`
+  * edition 2024
+  * `AsyncFn`, `AsyncFnMut`, `AsyncFnOnce`
