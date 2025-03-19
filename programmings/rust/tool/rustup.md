@@ -90,3 +90,23 @@ rustup run nightly rustc -V
 ```
 rustup target add 
 ```
+
+## Install
+
+* `RUSTUP_HOME` で rustup が利用するdirを指定できる
+  * defaultでは `~/.rustup`
+* `CARGO_HOME` で cargo等のツールのインストール先を指定できる
+  * defaultでは `~/.cargo`
+
+### Fedora
+
+```sh
+# install rustup-init
+sudo dnf install rustup
+
+rustup
+
+rustup toolchain link system /usr
+```
+
+* [Fedora rust](https://developer.fedoraproject.org/tech/languages/rust/further-reading.html)

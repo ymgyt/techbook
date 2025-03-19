@@ -49,3 +49,4 @@ git config --global tag.gpgSign true
 * [GPG で始める暗号・署名ライフ](https://blog.livewing.net/gpg-life)
   * 鍵の公開の仕方が参考になる
 * [](https://www.math.s.chiba-u.ac.jp/~matsu/gpg/index.html)
+* [GitHubでコミットの署名を必須にする](https://blog.lufia.org/entry/2025/03/16/195658)

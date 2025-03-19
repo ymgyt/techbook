@@ -2,6 +2,10 @@
 
 * `git help <command>` でhelpを参照できる
   * `git help switch`
+* Commit
+  * Commit hashと commit SHA はほぼ同義
+  * SHA はhashのアルゴリズムaware
+  * Revision はcommit hash, branch, tag, HEADの識別子を指し、commit hashより広い意味となる
 
 ## Usecase
 
