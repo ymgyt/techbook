@@ -98,6 +98,10 @@ rustup target add
 * `CARGO_HOME` で cargo等のツールのインストール先を指定できる
   * defaultでは `~/.cargo`
 
+1. `https://sh.rustup.rs | sh` を実行すると、rustup-init.sh が実行される
+2. rustup-init.sh の中で、rustup binaryを取得して、`rustup-init` として実行する
+3. `rustup-init` として実行されたrustup は toolchainを `~/.cargo/bin`に配置する
+
 ### Fedora
 
 ```sh
