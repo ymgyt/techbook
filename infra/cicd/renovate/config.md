@@ -95,14 +95,23 @@ ENV YARN_VERSION=1.19.1
         "matchPackageNames": ["aws-sdk"],
         "schedule": ["* 21-23 * * 0"],
         "enabled": true, // 一時的にdisableにもできる
-    }
+    },
     {
       "matchFileNames": ["examples/**"],
       "extends": [":semanticCommitTypeAll(chore)"]
+    },
+    {
+      "description": "aws provider は毎週月曜日に更新する",
+      "matchManagers": ["terraform"],
+      "matchPackageNames": ["aws"],
+      "schedule": ["* * * * 1"],
     }
   ]
 }
 ```
+
+* `matchManagers` : managerでmatch
+* `matchPackageNames`: dependency(package)でmatch
 
 ### PR をまとめる
 

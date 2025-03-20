@@ -92,3 +92,13 @@ OSのsignalとは別にbashの仕組みとして、trapに指定できるsignal
 * `EXIT`: script終了時
 * `ERR`: コマンドの終了ステータスが0以外
 * `DEBUG`: コマンドが実行された 
+
+## exec
+
+* commandを新しいprocess ではなく自プロセスとして実行する
+  * fork execのexec
+* wrapper scriptでよく使う
+
+```sh
+exec command
+```

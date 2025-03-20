@@ -105,11 +105,15 @@ docker container run $(docker image build -q .) echo yay
 
 ### ENTRYPOINT or CMD
 
-ENTRYPOINT and CMD give you a way to identify which executable should be run when a contianer is started from your image
-
-特に, `docker run` command line argumentなしで imageをrunnnableにしたい場合は ENTRYPOINT と CMDの指定は MUST
-
-userは has the option to override either of theses values at run time
+* ENTRYPOINT and CMD give you a way to identify which executable should be run when a contianer is started from your image
+  * 特に, `docker run` command line argumentなしで imageをrunnnableにしたい場合は ENTRYPOINT と CMDの指定は MUST
+  * userは has the option to override either of theses values at run time
+* shell form, exec form
+  * `ENTRYPOINT ["mycommand", "args"]` のように、arraryで記述する
+  * `ENTRYPOINT mycommand args`と書くと、`bash -c` でwrapされ、PID 1はshellになる
+    * shell はSignalを子プロセスにforwardしない
+  * CMDも同じ
+  * entrypoinst.sh のようにwrapしている場合はshell側で、`exec command`するようにする
 
 ```
 FROM ubuntu:trusty

@@ -18,3 +18,5 @@
 4. `cargo build`, `cargo test` で検証
 
 5. `cargo fmt`
+
+### Edition 2024

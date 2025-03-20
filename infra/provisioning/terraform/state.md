@@ -109,6 +109,8 @@ data "terraform_remote_state" "db" {
 ```sh
 # 特定のresourceのstateを確認
 terraform state show foo_xxx.yyy
+# for_each のresourceはsingle quoteしておく
+terraform state show 'packet_device.worker["example"]'
 
 # stateの一覧を確認
 terraform state list

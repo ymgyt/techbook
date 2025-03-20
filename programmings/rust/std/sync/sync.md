@@ -82,7 +82,7 @@ fn main() {
 
 ## OnceLock
 
-複数threadからアクセスできる(Sync)、一度だけ初期化したい型を提供する
+* 複数threadからアクセスできる(Sync)、一度だけ初期化したい型を提供する
 
 ```rust
 use std::sync::OnceLock;
@@ -97,6 +97,27 @@ fn instrumentation_scope() -> &'static InstrumentationScope {
         dropped_attributes_count: 0,
     })
 }
+```
+
+## LazyLock
+
+* OnceLockをwrapしたかた
+  * LazyLockでよいならOnceLockよりこちらを使う?
+* 宣言時に初期化用のclosureを渡せる
+ 
+
+```rust
+
+// n.b. static items do not call [`Drop`] on program termination, so this won't be deallocated.
+// this is fine, as the OS can deallocate the terminated program faster than we can free memory
+// but tools like valgrind might report "memory leaks" as it isn't obvious this is intentional.
+static DEEP_THOUGHT: LazyLock<String> = LazyLock::new(|| {
+    // M3 Ultra takes about 16 million years in --release config
+    another_crate::great_question()
+});
+
+// The `String` is built, stored in the `LazyLock`, and returned as `&String`.
+let _ = &*DEEP_THOUGHT;
 ```
 
 ## Once
