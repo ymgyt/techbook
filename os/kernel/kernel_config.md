@@ -1,5 +1,7 @@
 # kernel config
 
+(kernel option)
+
 * configを確認したい場合
   * `zcat /proc/config.gz`
 
