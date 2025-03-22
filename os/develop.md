@@ -1,4 +1,0 @@
-# Develop
-
-## Linux Kernel Programmingのmemo
-

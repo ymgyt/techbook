@@ -12,6 +12,8 @@ bpf programはkernelのmemory空間で動作する。
 そして、kernelの型やデータ構造は変化する。(kernel configurationも影響する)
 結果的に、bpf programをbuildするkernelのheaderを使ってcompileしてもdeploy先のkernelで動くとは限らない
 
+* `struct task_struct` のoffset 16にアクセスしていたら、新verではoffset 24になっていた等
+
 
 ### BCC(BPF Compiler Collection)のアプローチ
 
@@ -46,3 +48,5 @@ compilerがBTF relocationsという情報を埋め込んでいる..?
 典型的にはlibbpf.  
 bpf loaderは実行時のkernelの情報をもっているので、bpf programに必要な調整を行える。(offsetの調整とか)  
 ayaはlibpbfに依存していないのでこのあたりを自前でやっている..?
+
+* libbpfがあたかもtarget kernel用にbpfをcompileしたかのような状態を実現する

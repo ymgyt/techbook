@@ -1,6 +1,4 @@
-# Etc
-
-## ABI
+# ABI
 
 Application binary interface。
 
