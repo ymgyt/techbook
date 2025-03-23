@@ -1,8 +1,12 @@
 # CO-RE
 
 * Compile Once Run Everywhere
-* 課題
-  * 異なるkernel versionでもrecompileなしでbpf programを動かしたい
+* Kernel
+  * BPF Program用にBTF情報を実行時に参照できるように提供する
+* Compiler
+  * BPFのELFに参照情報をencodeする
+* BPF Loader
+  * BPF program load時に実行対象のkernelのBTFを取得していい感じにする
 
 ## 課題
 
@@ -45,8 +49,9 @@ compilerがBTF relocationsという情報を埋め込んでいる..?
 
 #### BPF loader
 
-典型的にはlibbpf.  
-bpf loaderは実行時のkernelの情報をもっているので、bpf programに必要な調整を行える。(offsetの調整とか)  
-ayaはlibpbfに依存していないのでこのあたりを自前でやっている..?
+* 典型的にはlibbpf.  
+  * libbpfがあたかもtarget kernel用にbpfをcompileしたかのような状態を実現する
+* bpf loaderは実行時のkernelの情報をもっているので、bpf programに必要な調整を行える。(offsetの調整とか)  
+* ayaはlibpbfに依存していないのでこのあたりを自前でやっている..?
+* 実行時に`/sys/kernel/btf/vmlinux` を参照している
 
-* libbpfがあたかもtarget kernel用にbpfをcompileしたかのような状態を実現する

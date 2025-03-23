@@ -5,6 +5,10 @@
 ## CO-RE
 * [BPF CO-RE (Compile Once – Run Everywhere)](https://nakryiko.com/posts/bpf-portability-and-co-re/)
 
+### BTF
+
+* [BTFの使い道](https://atmarkit.itmedia.co.jp/ait/articles/2008/04/news004.html)
+
 ## Instructions
 
 * [iovisor　Unofficial eBPF spec](https://github.com/iovisor/bpf-docs/blob/master/eBPF.md)

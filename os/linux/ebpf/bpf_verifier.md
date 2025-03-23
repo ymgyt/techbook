@@ -12,3 +12,9 @@
 
 * Data Flow Analysis
   * 実行をemulateして、registerやstack overflowを検出する
+
+
+## Reference
+
+* [Safe Programs The Foundation of BPF](https://www.youtube.com/watch?v=AV8xY318rtc)
+  * Alexei Starrovoitov

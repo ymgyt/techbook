@@ -1,6 +1,9 @@
 # bpftrace
 
 ```sh
+# 情報の確認
+bpftrace --info
+
 bpftrace -e 'PROGRAM'
 
 # probeの検索
