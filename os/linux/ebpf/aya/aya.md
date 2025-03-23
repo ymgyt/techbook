@@ -33,10 +33,9 @@ cargo generate https://github.com/aya-rs/aya-template
 
 ## Workflow
 
-1. `cargo xtask build-ebpf`
-  * bpf codeのcompile
-2. `RUST_LOG=info cargo xtask run`
-  * userspaceのbinの実行
+```sh
+# foo-ebpf はnightlyでbuildする
+rustup toolchain install nightly --component rust-src```
 
 ### bindings(vmlinux)
 

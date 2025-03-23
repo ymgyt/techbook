@@ -10,3 +10,5 @@
   * 一時的に違う目的に利用しない
     * これを前提にできれば、stack traceを辿れる
 
+* `CONFIG_UPROBE_EVENTS`
+  * uprobeの有効化
