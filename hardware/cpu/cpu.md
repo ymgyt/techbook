@@ -4,6 +4,9 @@
 
 * IA-32: intelの32bit
   * i386: intelの16bit x86を32bitに拡張
+    * Intel 80386に由来
+    * 1985年に発表された初めての32bit arch
+    * Linuxでは32bitのx86という意味
   * i686
 * IA-64: intelの64bit
   * IA-32とは互換性なし
