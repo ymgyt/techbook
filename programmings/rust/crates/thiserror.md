@@ -40,6 +40,9 @@ pub enum CacheError {
 * `source()`の実装を`#[source]で指定できる
   * これはenumではなくstructで定義するerror用?
   * fiedld名がsourceだと`#[source]`と同じ
+  * source がloggingに含まれるから、loggingの実装次第
+    * 確実に含めたければ、`#[error()]`に含める必要がある
+      * ただし、重複してloggingされる可能性はある
 
 *`#[error(transparent)]`を指定すると`source()`と`Display`の実装がdelegateされる
   * なので、`#[error("msg")]`のように指定しなくて良い
