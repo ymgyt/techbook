@@ -1,5 +1,6 @@
 # taplo
 
+
 ## Format toml
 
 ```sh
@@ -10,6 +11,7 @@ taplo fmt foo.toml --check
 ## Config
 
 * `taplo.toml`に書く
+  * `.taplo.toml`
 
 
 ```toml

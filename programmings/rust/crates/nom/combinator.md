@@ -103,3 +103,42 @@ pub fn parse_input(s: &str) -> Vec<Line> {
     lines
 }
 ```
+
+## matchの判定はするが、parseは別処理で行う `recognize`
+
+* `recognize(parser)`でparser でマッチしたinputがoutputとして得られる
+* 判定とconsumeを分離できる
+
+```rust
+pub(crate) mod parse {
+    use nom::{
+        AsChar, IResult, Parser as _,
+        bytes::complete::take_while1,
+        character::complete::{char, digit1},
+        combinator::{map_res, opt, recognize},
+    };
+
+    use crate::Version;
+
+    pub(crate) fn semver(input: &str) -> IResult<&str, Version> {
+        map_res(
+            recognize((
+                digit1,
+                char('.'),
+                digit1,
+                char('.'),
+                digit1,
+                // pre-release
+                opt((char('-'), take_while1(is_identifier))),
+                // build
+                opt((char('+'), take_while1(is_identifier))),
+            )),
+            |s: &str| Version::parse(s),
+        )
+        .parse(input)
+    }
+
+    fn is_identifier(c: char) -> bool {
+        c.is_alphanum() || c == '.' || c == '-'
+    }
+```
