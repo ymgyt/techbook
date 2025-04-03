@@ -114,3 +114,18 @@ rustup toolchain link system /usr
 ```
 
 * [Fedora rust](https://developer.fedoraproject.org/tech/languages/rust/further-reading.html)
+
+
+## rustup自身の更新
+
+```sh
+rustup self update
+```
+
+* `https://static.rust-lang.org/rustup/release-stable.toml` に最新のversionが記載されているのでそれを確認している
+
+```sh
+curl https://static.rust-lang.org/rustup/release-stable.toml
+schema-version = '1'
+version = '1.28.1'
+```

@@ -10,3 +10,6 @@
 * Peripheral Component Interconnect
 
 ## PCI-Express
+
+* Peripheral Component Interconnect Express(PCIe)
+* 接続規格

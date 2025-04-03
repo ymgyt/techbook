@@ -31,3 +31,26 @@
 | ゴミ箱         | 共有ドライブごとにゴミ箱がある               | 30日後に削除           |
 
 * [共有ドライブとマイドライブの比較](https://support.google.com/a/users/answer/7212025)
+
+
+## ファイル削除
+
+ファイルが削除される理由
+
+* `empty_trash`
+  * The item was deleted from the trash being emptied.
+* `individual_delete`
+  * The item was deleted individually.
+* `owning_shared_drive_delete`
+  *The item was deleted because the shared drive that contained the item was deleted.
+* `subscription_canceled`
+  * The item was deleted because the Google Workspace subscription was canceled.
+* `tos_violation`
+  * The item was deleted because it violated Google's terms of service.
+* `trash_auto_delete`
+  * The item was automatically deleted after being in the trash.
+* `user_account_delete`
+    The item was deleted because the user that owned the item was deleted.
+
+
+[API Docs](https://developers.google.com/workspace/admin/reports/v1/appendix/activity/drive#delete)
