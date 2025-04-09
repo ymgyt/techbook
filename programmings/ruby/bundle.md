@@ -12,4 +12,13 @@ bundle install
 # 元に戻す
 bundle config --delete local.foo
 ```
+
+* local override を利用すると、bundleはGemfile内で、branch の指定を要求する
+  * Gemfileのbranch指定と実際にcheckoutされたlocal のbranchが一致しないとエラーになる
+
+```
+source 'https://rubygems.org'
+
+gem 'foo', git: 'https://github.com/ymgyt/foo.git', branch: 'feature-branch'
+```
   

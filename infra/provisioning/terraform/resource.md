@@ -105,3 +105,21 @@ resource "aws_security_group" "main" {
 
 Terrafromの外の世界から情報を取得して、terraformで利用できるようにする手段。  
 readしか実装していない。
+
+
+## `moved` block
+
+```hcl
+moved {
+  from = aws_instance.a
+  to   = aws_instance.b
+}
+```
+
+* plan適用前に、state の `aws_instance.a` を `aws_instance.b` として扱う
+  * あたかも初めから、`aws_instance.b` として定義したのと同じ状態になる
+  * refactor(rename)とstateの整合性がとれる
+* moved を利用しないと、`aws_instance.a` を destroyして、`aws_instance.b`がcreateされる
+
+* 一度、moved が `terraform apply` されれば、`moved` は消せる
+  * ただし、すべてのstateへのapplyが済んでいると確信できない限りは残しておくのが良い
