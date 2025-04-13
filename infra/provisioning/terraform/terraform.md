@@ -38,6 +38,12 @@ terraform fmt -recursive [-check]
 # validation
 # 再帰的でないので、directory単位で適用する必要がある
 terraform validate
+
+# provider一覧の出力
+terraform providers
+
+# lockの解除
+terraform force-unlock <lockId>
 ```
 
 * `terraform dot`で依存関係をvisualizeできる

@@ -22,7 +22,7 @@ jobs:
       - name: upload extension
         uses: actions/upload-artifact@v4
         with:
-          name: foo-${{ github.sha }}
+          name: foo
           path: path/to/artifact
           # 見つからなかったらエラーにする
           if-no-files-found: error
@@ -41,7 +41,7 @@ jobs:
       - name: download extension
         uses: actions/download-artifact@v4
         with:
-          name: foo-${{ github.sha }}
+          name: foo
           path: ./
 
       - name: create github release
@@ -52,3 +52,9 @@ jobs:
           artifactErrorsFailBuild: true
           replacesArtifacts: true
 ```
+
+* `download-artifact`
+  * `pattern`: download対象をglobで指定できる
+    * `result-*`
+  * `merge-multiple`: artifactをdirectoryごとに分けずに、1つのdirectoryにまとめる
+

@@ -12,9 +12,12 @@
   * [プラットフォームエンジニアリングに関する5つの誤解](https://cloud.google.com/blog/ja/products/application-development/common-myths-about-platform-engineering?hl=ja)
   * [5 more myths about platform engineering](https://cloud.google.com/blog/products/application-development/another-five-myths-about-platform-engineering)
     * part2もある
+  * [2025 年に向けたプラットフォームの準備: プラットフォーム エンジニアリングに関する新たな調査で成功の秘訣が明らかに](https://cloud.google.com/blog/ja/products/application-modernization/new-platform-engineering-research-report?hl=ja)
 
 * Documentation
   * [明日から始める持続可能なドキュメンテーション戦略](https://speakerdeck.com/akitok_/sustainable-documentation-strategies-documentation-as-a-product)
+
+* [独りよがりのプラットフォーム](https://speakerdeck.com/toricls/for-whom-that-platform-runs)
 
 ## 戦略
 
