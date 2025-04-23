@@ -26,7 +26,7 @@ ECSのcontainerをどこで実行するか
 
 * Standalone Task
   * `RunTask` APIで実行されたTask
-  * 停止自体は避けられない
+  * __停止自体は避けられない__
   * AWSはreplacement taskを実行しない
 
 * ask がメンテナンスで停止されたかどうか知るには

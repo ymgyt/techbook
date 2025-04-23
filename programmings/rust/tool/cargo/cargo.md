@@ -63,7 +63,12 @@ file ./target/x86_64-unknown-linux-musl/debug/binname
 [profile.dev]
 opt-level = 1
 overflow-checks = false
+panic = "abort"
 ```
+
+* `panic`
+  * `unwind` stack のunwindを実行する
+  * `abort`
 
 ## Publish
 

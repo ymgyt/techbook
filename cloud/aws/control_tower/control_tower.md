@@ -12,6 +12,9 @@
 
 ## Landing Zone
 
+* ScalableでSecureなmulti account環境のこと
+  * Control Tower はlanding zoneの実装方法の一つという位置づけ
+
 * 作成するとLog ArchiveとAudit AWS Accountが作成される
   * CloudFormation Stack
 * 複数の設定を組み合わせて目指す状態を作り出す機能をLanding zoneといっている
