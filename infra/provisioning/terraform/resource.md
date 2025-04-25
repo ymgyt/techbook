@@ -1,5 +1,9 @@
 # Terraform Resource
 
+## depends_on
+
+
+
 ## Lifecycle
 
 全resource共通で、依存関連の指定

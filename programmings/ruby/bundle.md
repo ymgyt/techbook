@@ -22,3 +22,13 @@ source 'https://rubygems.org'
 gem 'foo', git: 'https://github.com/ymgyt/foo.git', branch: 'feature-branch'
 ```
   
+
+* gem 参照している場合は、`path`の指定だけでうまくいった
+  * 逆にこの場合、bundle config local.foo はうまくいかなかった。なぜ?
+
+```
+source 'https://rubygems.org'
+
+# gem 'foo', '~> 0.2.0'
+gem 'foo', path: '/home/ymgyt/ae/foo'
+```
