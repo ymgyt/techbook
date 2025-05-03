@@ -13,5 +13,14 @@
 
 * Sink
   * Monitoring accountにある設定instance
+  * 1 Regionにひとつ
+  * Policyをもつ
 * Link
   * Source accountにある設定instance
+  * Sinkへの接続を表現
+
+
+
+## Observability Access Manager(OAM)
+
+* 複数アカウント間で、CW Metrics, Logs, Tracesを監視用アカウントに集約するサービス

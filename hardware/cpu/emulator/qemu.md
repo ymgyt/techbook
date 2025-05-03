@@ -28,3 +28,11 @@ qemu-system-riscv32 \
   * `q`で終了できる
 * `Ctrl+a h` help
 * `Ctrl+a x` exit
+
+
+## Memo
+
+```sh
+# bootableなimg.binから起動
+qemu-system-x86_64 -drive file=img.bin,format=raw
+```
