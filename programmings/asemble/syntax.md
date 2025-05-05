@@ -6,6 +6,7 @@ IntelとAT&Tで違う
 
 * register prefixなし
 * mov <dest> <source>
+  * 内向きなので外から中と覚える
 * メモリ演算は`[]`で囲む
 
 

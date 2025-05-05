@@ -9,6 +9,9 @@ fn example() {
     println!("Hello, {person}!"); // captures the local `person`
 }
 ```
+* `#`: 代替指定(普段は省かれる情報を追加する)
+  * `{:#?}` pretty print
+  * 数値の場合、`{:#X}` 0埋めで、0xのようなprefixをつける
 
 ```rust
 fn example() {
