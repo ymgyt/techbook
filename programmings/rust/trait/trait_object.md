@@ -70,3 +70,7 @@ let copy = stamp.make_copy();
 
 * Downcasting is the process of taking an item of one type and casting it to a more specific type。
 
+
+## Reference
+
+* [Rust Deep Dive: Borked Vtables and Barking Cats](https://geo-ant.github.io/blog/2023/rust-dyn-trait-objects-fat-pointers/#:~:text=When%20we%20implement%20the%20,any%20point%20in%20time%204)

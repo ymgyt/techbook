@@ -75,6 +75,26 @@ RUN apt-get update \
         wget
 ```
 
+### heredocs
+
+```dockerfile
+RUN <<EOF
+apt-get update
+apt-get install -y curl
+EOF
+```
+
+### RUN --mount
+
+* build時にアクセスできるfilesystemのmountを有効にする
+* `RUN --mount=[type=<type>][,option=<value[,option=<value>]...]`
+* type
+  * bind(default)
+    * `RUN -mount=type=bind,target=foo,source=bar,from=builder`
+  * cache
+  * secret
+
+* [Reference](https://docs.docker.com/reference/dockerfile/#run)
 
 ## CMD
 
