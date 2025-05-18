@@ -45,6 +45,10 @@ pub struct AppDescriptor {
 }
 ```
 
+* `rename_all`, `rename`
+  * `lowercase`, `UPPERCASE`, `PascalCase`, `camelCase`
+  * `snake_case`, `kebab-case`, `SCREAMING_SNAKE_CASE`
+
 ### enum
 
 ```rust

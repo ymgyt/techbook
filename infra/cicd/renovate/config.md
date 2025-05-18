@@ -1,5 +1,14 @@
 # Renovate Configuration
 
+* Priority(topが優先)
+  * Repository config
+  * Resolved presets referenced inf config
+  * CLI
+  * Environment variable
+  * File config
+  * Global config
+  * Default config
+
 ```json5
 {
   "extends": ["config:recommended", "helpers:pinGitHubActionDigests"]

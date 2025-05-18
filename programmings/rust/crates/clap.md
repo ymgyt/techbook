@@ -46,6 +46,9 @@ pub struct CloudOpsApp {
     /// ただし、default値を指定することもできる
     #[arg(long, global = true, default_value_t = "foo".into())]
     global_a: String,
+
+    #[arg(env = "SECRET", hide_env_values = true)]
+    secret: String,
 }
 
 #[derive(Subcommand, Debug)]
