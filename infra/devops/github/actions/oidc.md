@@ -12,6 +12,7 @@
 ## AWSのRoleをassumeする
 
 1. AWS上にGitHub Actions の workflowを信頼する OIDC Trust(OIDC connect provider)を設定する
+  * console > IAM > Identity providers
   * provider url: `https://token.actions.githubusercontent.com`
   * audience: `sts.amazonaws.com`
 
