@@ -51,6 +51,10 @@
 
 * [6 Reasons You Don't Need an SRE Team](https://log.andvari.net/6reasons.html)
 
+## IDP
+
+* [hako-console](https://techlife.cookpad.com/entry/2018/04/02/140846)
+
 ## Etc
 
 * [Dunbar's number: Why we can only maintain 150 relationships](https://www.bbc.com/future/article/20191001-dunbars-number-why-we-can-only-maintain-150-relationships)

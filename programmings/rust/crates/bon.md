@@ -11,11 +11,18 @@ use bon::Builder;
 pub struct ExecuteQueryInput {
     #[builder(name = db)]
     pub database: String,
+
     pub query: String,
     pub parameters: Option<Vec<String>>,
+
     #[builder(default = false)]
     pub skip_header_row: bool,
+
+    #[builder(skip = helper()]  
+    pub inner: Inner,
 }
+
+fn helper() -> Inner { todo!() }
 ```
 
 * Container
@@ -23,5 +30,10 @@ pub struct ExecuteQueryInput {
 
 * Field
   * `#[builder(name = foo)]`: Builder methodに別名を指定できる
+
   * `#[builder(default)]`: 未指定時にDefaultを使う
     *`#[builder(default = expression)]`: 未指定時にexpressionを使う
+
+  * `#[builder(skip)]`
+    * builderの対象外にできる
+    * skipの引数で利用する処理(expression)を指定できる

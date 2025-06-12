@@ -238,7 +238,8 @@ on friday and saturday
       "matchPackageNames": ["/bar/"],
       "addLabels": ["extra"] // => ["dependencies", "extra"]
     }
-  ]
+  ],
+  "stopUpdatingLabel": "renovate:stop"
 }
 ```
 
@@ -248,6 +249,9 @@ on friday and saturday
 * `stopUpdatingLabel`
   * defaultは`stop-updating`
   * このlabelが付与されているとrenovateはPRを更新しない
+
+* `stopUpdatingLabel`: renovateにPRを無視してもらうためのlabel
+  * `stop-updating`がdefault
 
 ## Cache
 

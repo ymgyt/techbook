@@ -116,3 +116,17 @@ where
 }
 ```
 
+## Deserialize
+
+```rust
+pub trait Deserialize<'de>: Sized {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>;
+
+pub trait Visitor<'de>: Sized {
+    type Value;
+
+    /* Show 28 methods */
+}
+```

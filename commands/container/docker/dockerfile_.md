@@ -80,8 +80,10 @@ RUN apt-get update \
 ```dockerfile
 RUN <<EOF
 apt-get update
-apt-get install -y curl
+apt-get install --assume-yes --quiet --no-install-recommends ca-certificates
+rm -rf /var/lib/apt/lists/*
 EOF
+
 ```
 
 ### RUN --mount

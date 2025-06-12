@@ -46,6 +46,9 @@
 * 関連操作
   * `aws organizations list-aws-service-access-for-organization`
   * `aws organizations list-delegated-administrators`
+    * どのアカウントにdelegateしたかわかる
+  * `aws organizations  list-delegated-services-for-account --account-id ${ACCOUNT_ID}`
+    * アカウントに何をdelegateしたかわかる
 
 ### 権限の委譲
 

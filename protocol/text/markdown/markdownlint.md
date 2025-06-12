@@ -6,6 +6,17 @@
   * [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
     * 2を作りたかった理由があったらしい
 
+* install
+  * `pnpm install --save-dev markdownlint-cli2`
+
+## Usage
+
+```sh
+# node_modules以外の全markdownを対象にする
+# globを複数書ける
+markdownlint-cli2 **/.*md !node_modules
+```
+
 ## Rule
 
 * `.markdownlint.jsonc` に書く
