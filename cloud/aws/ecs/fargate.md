@@ -33,8 +33,9 @@
 
 ## Debug
 
-ECS Execを使う  
-Systems Manager Session managerのpluginが必要
+* ECS Execを使う  
+* Systems Manager Session managerのpluginが必要
+  * nix `ssm-session-manager-plugin`
 
 ```sh
 aws ecs execute-command \

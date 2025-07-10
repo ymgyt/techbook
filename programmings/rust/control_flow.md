@@ -121,3 +121,15 @@ fn f(value: &RwLock<Option<bool>>) {
         }
     }
 }```
+
+## let chains
+
+```rust
+if let Channel::Stable(v) = release_info()
+    && let Semver { major, minor, .. } = v
+    && major == 1
+    && minor == 88
+{
+    println!("`let_chains` was stabilized in this version");
+}
+```

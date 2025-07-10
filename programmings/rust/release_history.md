@@ -1,5 +1,10 @@
 # Rust Release History
 
+* 1.88.0
+  * let chains
+    * 2024 editionが必要
+  * cargoのgcがstable
+
 * 1.81.0
   * [`core::error::Error`がstable](https://blog.rust-lang.org/2024/09/05/Rust-1.81.0.html#whats-in-1810-stable)
   * [sortの実装が変わった?](https://blog.rust-lang.org/2024/09/05/Rust-1.81.0.html#new-sort-implementations)

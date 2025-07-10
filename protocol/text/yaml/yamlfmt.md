@@ -2,6 +2,13 @@
 
 yaml の formatter
 
+```sh
+# lint(diffがあると失敗)
+yamlfmt -lint -output_format line -dstar **/*.yaml
+```
+
+* 引数には yaml filesを期待しているので、wildcardで探してほしい場合は`-dstar` が必要
+
 ## config file
 
 以下をconfig fileとして認識する
@@ -19,6 +26,12 @@ directory は以下を探す
 - `$HOME/.config/yamlfmt`
 
 ```yaml
+# wildcard(*)を有効にするために指定が必要
+match_type: doublestar
+output_format: line
+exclude:
+  - '**/node_modules/**'
+  - '**/.terraform/**'
 
 # https://github.com/google/yamlfmt/blob/main/docs/config-file.md
 formatter:
