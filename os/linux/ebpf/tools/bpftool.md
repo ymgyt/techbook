@@ -42,5 +42,6 @@ bpftool map dump id 123
 ### BTF
 
 ```sh
+# vmlinux.h を生成
 bpftool btf dump file /sys/kernel/btf/vmlinux format c
 ```

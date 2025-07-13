@@ -27,6 +27,12 @@ The latest longterm 4.19 version of the Linux kernel is:      4.19.313
 The latest linux-next version of the Linux kernel is:         next-20240510
 ```
 
+## srcの取得
+
+```sh
+ git clone https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+```
+
 
 ## Memo
 
