@@ -18,3 +18,14 @@ Health event は management accountに流れてくるので、これを処理す
 ```sh
 aws organizations register-delegated-administrator --account-id MEMBER_ACCOUNT_ID --service-principal  health.amazonaws.com
 ```
+
+## Troubleshoot
+
+```sh
+aws health describe-events
+
+Could not connect to the endpoint URL: "https://health.ap-northeast-1.amazonaws.com/"
+```
+
+* `aws health describe-events --region us-east-1`
+  * tokyo regionのendpointはないらしい

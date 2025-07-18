@@ -21,3 +21,11 @@
 * digest版
   * `rust-for-linux+subscribe-digest@vger.kernel.org` にsubscribeしたいアドレスからメールを送る
   * digest版らしい
+
+
+## Memo
+
+* rustc_codegen_gcc はLLVMの代替
+  * compiler front,middleは同じでbackendをLLVM非違依存にする
+  * gccrustはC++でrustcを実装する試みで別
+

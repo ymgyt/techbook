@@ -1,5 +1,53 @@
 # Github reciepe
 
+## Authentication
+
+* github cli
+  [`gh auth login`](https://cli.github.com/manual/gh_auth_login) を使う
+* PAT
+```hcl
+provider "github" {
+  token = var.token # or `GITHUB_TOKEN`
+}
+```
+* GitHub App
+```hcl
+provider "github" {
+  owner = var.github_organization
+  app_auth {
+    id              = var.app_id              # or `GITHUB_APP_ID`
+    installation_id = var.app_installation_id # or `GITHUB_APP_INSTALLATION_ID`
+    pem_file        = var.app_pem_file        # or `GITHUB_APP_PEM_FILE`
+  }
+}
+```
+> [!WARNING]
+> app経由だと利用できるendpointに制限がある
+> https://docs.github.com/en/rest/authentication/endpoints-available-for-github-app-installation-access-tokens?apiVersion=2022-11-28
+
+認証に関してはCIはappで、localでplanはgh cli 経由がよさそう。
+
+
+## Resources
+
+* Actions
+  * [actions_organization_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_secret)
+    * repository scopeもある
+  * [actions_organization_secret_repositories](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_secret_repositories)
+  * [actions_organization_variable](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_variable)
+    * repository scopeもある
+  * [actions_repository_access_level](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_repository_access_level)
+    * repositoryのworkflowを他repoから使えるかの設定
+
+* Apps
+  * [app_installation_repositories](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/app_installation_repositories)
+    * installation_id とrepositoriesの紐づけ
+    * 1:1 は [app_installation_repository](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/app_installation_repository)
+
+## Data Sources
+
+
+
 ## Member
 
 Github Organizationへのmemberの招待。  
