@@ -30,6 +30,11 @@ psql \
 
 * posgreの`admin` roleを利用する場合は以下のpolicyをIAM Identityに付与する
   * `admin` roleはDSQLが自動的に作成する
+* auth tokenを生成したIAM Entityが認可の対象になる
+* IAM Roleとpostgres上のroleのmapping
+  `AWS IAM GRANT pg_your_role TO 'arn:aws:iam::<account-id>:role/<iam-role-for-app>'`
+  * adminの場合は不要
+  * pg roleでINSERTやSELECTができるからposgreのpliviledgesで設定する
 
 ```json
 {
@@ -39,7 +44,7 @@ psql \
 }
 ```
 
-* custom database 
+* custom role(admin以外)
 
 ```json
 {
@@ -49,12 +54,31 @@ psql \
 }
 ```
 
+## Posgres roleの作成
+
+```sql
+CREATE ROLE app LOGIN;
+
+AWS IAM GRANT app TO 'arn:aws:iam::<account-id>:role/<iam-role-for-app>';
+
+GRANT USAGE, CREATE ON SCHEMA app_schema TO app;
+GRANT SELECT, INSERT, UPDATE, DELETE
+    ON ALL TABLES
+    IN SCHEMA app_schema
+    TO app;
+```
+
+renoke
+
+```sql
+AWS IAM REVOKE app FROM 'arn:aws:iam::<account-id>:role/<iam-role-for-app>';
+```
 
 ## PostgreSQL Protocol
 
 | PostgreSQL | DSQL               | Memo                      |
 |------------|--------------------|---------------------------|
-| role       | データベースロール | admin?                    |
+| role       | データベースロール | `admin` roleが作成される  |
 | hostname   | cluster endpoint   |                           |
 | port       | 5432 固定          |                           |
 | dbname     | postgres           | cluster作成時に作成       |
@@ -63,17 +87,34 @@ psql \
 
 ## 制約
 
-* `CREATE DATABSE`不可
+* `CREATE DATABSE`不可で複数databaseは利用できない
   * `postgres`のみ
-* Transaction Isolation Level は `REPETABLE READ`固定
+* Transaction
+  * Isolation Level は `REPETABLE READ`固定
+  * DDLとDMLの混在不可
+  * DDLは一つのみ
+* Connection
+  * 1時間でタイムアウト
+* Constraint
+  * Foreign keyは不可
+  * Unique 制約も不可
+* タイムゾーンはUTC固定
+* admin role以外で、`CREATE SCHEMA`不可
+ * adminのみがpublic schemaにアクセス可
 
-## Custom roleの作成
+## Backup
 
-1. `admin`で接続して
+TODO
 
-```sql
-AWS IAM GRANT custom-db-role TO 'arn:aws:iam::account-id:role/iam-role-name';
-```
+## Cost
+
+* DPU
+  * 100万ユニット/$100
+  * CWから確認できる
+* Storage
+  * 1GB/$0.4
+  * Multi regionの場合、regionごとにかかる
+
 
 ## References
 
