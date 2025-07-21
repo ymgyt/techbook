@@ -30,6 +30,8 @@ provider "github" {
 
 ## Resources
 
+使いそうなリソースの概要
+
 * Actions
   * [actions_organization_secret](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_secret)
     * repository scopeもある
@@ -44,9 +46,44 @@ provider "github" {
     * installation_id とrepositoriesの紐づけ
     * 1:1 は [app_installation_repository](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/app_installation_repository)
 
+* Branch
+  * [branch](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch)
+  * [branch_default](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_default)
+  * [branch_protection_v3](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_protection_v3)
+
+* Issue
+  * [issue_labels](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/issue_labels)
+
+* Membership
+  * [membership](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/membership)
+
+* Team
+  * [team](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team)
+  * [team_members](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_members)
+  * [team_membership](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership)
+  * [team_repository](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository)
+
+* Organization
+  * [organization_custom_role](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_custom_role)
+  * [organization_settings](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_settings)
+  * [organization_webhook](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/organization_webhook)
+
+* Repository
+  * [repository](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository)
+  * [repository_collaborators](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborators)
+
 ## Data Sources
 
+* Apps
+  * [app](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/app)
 
+* Repository
+  * [repositories](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/repositories)
+    * [query](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/repositories)がかける
+      * ex. `org:arkedge`
+
+* Users
+  * [users](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/users)
 
 ## Member
 

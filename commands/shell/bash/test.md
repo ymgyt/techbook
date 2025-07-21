@@ -17,6 +17,13 @@ test -d $DIR
 | `-e`  | fileが存在するか      |
 
 
+```sh
+if [ "foo" != "bar" ]; then
+  echo "Not Equal"
+fi
+```
+
+
 # `[ ]`と`[[ ]]`の違い
 
 * `test`と`[` は基本同じ

@@ -2,9 +2,16 @@
 
 * `docker compose`で実行できる
 
-## Network
+## 環境変数
 
-### Hostとnetworkを共有する
+意外なことにdocker-composeで環境変数のsubstitutionが使える。
+https://docs.docker.com/compose/environment-variables/
+
+## `services`
+
+### Network
+
+#### Hostとnetworkを共有する
 
 ```yaml
 version: '3.8'
@@ -18,12 +25,7 @@ services:
 * containerがhostのport8302でアクセルできるようになる
 * `ports`の指定は無効になる
 
-## 環境変数
-
-意外なことにdocker-composeで環境変数のsubstitutionが使える。
-https://docs.docker.com/compose/environment-variables/
-
-## `depends_on`
+### `depends_on`
 
 ```yaml
 services:
@@ -44,7 +46,7 @@ services:
   * `service_completed_successfully`
 
 
-## `healthcheck`
+### `healthcheck`
 
 ```yaml
 services:
@@ -63,6 +65,33 @@ services:
   * 1: unhealthy - the container is not working correctly
   * 2: reserved - do not use this exit code
 * `start_period`期間中のtest commandの失敗はretry回数を減らさない。が、成功したらtestは通る。
+
+
+### `volumes`
+
+```yaml
+services:
+  backend:
+    image: example/backend
+    volumes:
+      - type: volume
+        source: db-data
+        target: /data
+        volume:
+          nocopy: true
+          subpath: sub
+      - type: bind
+        source: /var/run/postgres/postgres.sock
+        target: /var/run/postgres/postgres.sock
+
+volumes:
+  db-data:
+```
+
+* `type`
+  * `bind`
+    * `source`と`target`を指定する
+  * `volume`
 
 ## Examples
 

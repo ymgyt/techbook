@@ -26,6 +26,9 @@ profile := env_var_or_default('PROFILE', 'DEFAULT')
 # env is alias for env_var and env_var_or_default
 region := env('REGION', 'somewhere')
 
+# export environment variables
+export FOO := 1
+
 # Command evaluation
 dst := `terraform output foo`
 

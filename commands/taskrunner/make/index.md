@@ -84,6 +84,25 @@ KEY_1=VALUE_1
 
 ```
 
+## 一般的なビルドプロセス
+
+```sh
+tar -xf filename
+cd direname
+
+bat README
+bat INSTALL
+
+# Generate makefile
+./configure --some-options
+
+# Compile
+make
+
+# Update global directory
+sudo make install
+```
+
 ## 参考
 
 * [Automatic Variables](https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html)
