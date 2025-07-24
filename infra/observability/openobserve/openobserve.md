@@ -43,3 +43,10 @@ https://openobserve.ai/docs/ha_deployment/
 ## Data storage
 
 > Support of S3, MinIO, GCS, Azure blob for data storage
+
+## Configuration
+
+* [Environment Variables](https://openobserve.ai/docs/environment-variables/)
+
+## Local環境
+

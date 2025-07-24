@@ -13,5 +13,5 @@
 ```
 { $.eventType = "UpdateTrail" }
 
-{ $.span.uri != "/health" }                             
+{ $.span.uri != "/health" } 
 ```

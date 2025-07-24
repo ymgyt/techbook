@@ -11,6 +11,9 @@ CREATE TABLE example (
     b numeric,
     c numeric,
 
+    --- UUID
+    id UUID DEFAULT gen_random_uuid(),
+
     PRIMARY KEY (a)
     --- CONSTRAINT const_a CHECK (a > b)
     CHECK (a > b),

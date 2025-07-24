@@ -37,3 +37,5 @@ fn helper() -> Inner { todo!() }
   * `#[builder(skip)]`
     * builderの対象外にできる
     * skipの引数で利用する処理(expression)を指定できる
+
+  * Option<T>にOption<T>を渡したいときは、`maybe_field`がある
