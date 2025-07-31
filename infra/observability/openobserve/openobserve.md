@@ -46,6 +46,9 @@ https://openobserve.ai/docs/ha_deployment/
 
 ## Configuration
 
+* `ZO_ALLOW_USER_DEFINED_SCHEMAS`
+  * UIにAdd Streamを出す
+
 * [Environment Variables](https://openobserve.ai/docs/environment-variables/)
 
 ## Local環境

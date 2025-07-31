@@ -91,3 +91,28 @@ resource "aws_iam_openid_connect_provider" "gha" {
     * `repo:ymgyt/handson:environment:production`
 
   * [参考](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#example-subject-claims)
+
+
+## 自分で発行する
+
+* RunnerにsetされているEnvironment variable
+  * `ACTIONS_ID_TOKEN_REQUEST_URL`
+  * `ACTIONS_ID_TOKEN_REQUEST_TOKEN`
+
+```sh
+TOKEN=$(curl -sS -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+    "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=YOUR_API_IDENTIFIER" | jq -r '.value')
+```
+
+* `audience`がJWTの`aud` claimになる
+
+
+### 検証
+
+* 公開鍵のURL: `https://token.actions.githubusercontent.com/.well-known/jwks`
+
+* [メタデータ(OpenID Connect Discovery)ドキュメント](https://token.actions.githubusercontent.com/.well-known/openid-configuration)
+
+* [JWKセットのエンドポイント (公開鍵一覧)](
+    https://token.actions.githubusercontent.com/.well-known/jwks)
+

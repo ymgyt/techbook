@@ -16,10 +16,15 @@
 | `xtrace`    | `-x`  | 変数展開をdebugする                                                             |
 | `noglob`    | ?     | `echo Hello "${NAME} *"`のような場合に\*をliteralに扱う                         |
 | `noclobber` | `-C`  | `echo "1" > important.txt` redirectによる既存のfileの上書きをできないようにする |
+|  `errtrace`  | `-E` | trapを関数サブシェル内でも発火させる |
 
 ```bash
 set -o nounset
-set -o errexit
 set -o pipefail
 set -o noclobber
+set -o errexit
+set -o errtrace
+
+# 有効なoptionの表示
+set -o
 ```

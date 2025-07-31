@@ -93,6 +93,9 @@ volumes:
     * `source`と`target`を指定する
   * `volume`
 
+* 名前付きvolumeを宣言する
+  * `docker compose up`時にまだ存在しなければ作成される。存在すれば再利用される。
+
 ## Examples
 
 ### minio

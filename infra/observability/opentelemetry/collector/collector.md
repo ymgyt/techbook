@@ -2,17 +2,44 @@
 
 ## Config
 
+### Template
+
 ```yaml
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+processors:
+  batch:
+
+exporters:
+  otlp:
+    endpoint: otelcol:4317
+
+extensions:
+  health_check:
+  pprof:
+  zpages:
+
 service:
+  extensions: [health_check, pprof, zpages]
   pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
     metrics:
-      receivers: [hostmetrics, kubeletstats]
-      processors: [memory_limiter, resourcedetection, batch]
-      exporters: [otlp/elastic]
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
     logs:
-      receivers: [filelog]
-      processors: [memory_limiter, resourcedetection, batch]
-      exporters: [otlp/elastic]
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
 ```
 
 ## Service

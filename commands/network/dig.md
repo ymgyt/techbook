@@ -1,12 +1,15 @@
 # dig
 
 ```sh
-# dig <domain> <record-type>
+# dig <record-name> <record-type> [options...]
 
 dig blog.ymgyt.io A
 
 # 最小出力
 dig blog.ymgyt.io A +short
+
+# 読みやすくする
+dig blog.ymgyt.io soa +multiline
 ```
 
 * record-type
@@ -17,3 +20,4 @@ dig blog.ymgyt.io A +short
 * options
   * `+short` 出力を短くする
   * `+trace` rootからのtrace
+  * `+multiline` 読みやすくする

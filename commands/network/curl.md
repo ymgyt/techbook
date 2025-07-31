@@ -64,3 +64,7 @@ curl -H "X-Test: Hello" http://localhost:18888
 ``--user-agent|-A``
 
 ``-H "User-Agent": Mozilla/5.0"`` と明示的に指定しても同じ
+
+## `-w|--write-out`
+
+* [利用できる変数](https://everything.curl.dev/usingcurl/verbose/writeout.html)
