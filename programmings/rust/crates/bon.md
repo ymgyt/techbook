@@ -5,6 +5,7 @@
 use bon::Builder;
 
 #[derive(Debug, Builder)]
+// intoの一括実装
 #[builder(on(String, into))]
 #[builder(start_fn = builder)] // default
 #[builder(finish_fn = build)]  // default
@@ -20,6 +21,10 @@ pub struct ExecuteQueryInput {
 
     #[builder(skip = helper()]  
     pub inner: Inner,
+
+    // fieldごとに指定もでいる
+    #[builder(into)]
+    pub name: Cow<'static,str>,
 }
 
 fn helper() -> Inner { todo!() }

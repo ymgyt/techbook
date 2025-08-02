@@ -1,0 +1,3 @@
+# jq
+
+* `-R|--raw-input`

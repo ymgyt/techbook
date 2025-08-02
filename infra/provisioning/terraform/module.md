@@ -38,6 +38,8 @@ module "vault_dev" {
 
 1. module用のdirectoryを作成する
 2. `main.tf`, `variables.tf`, `outputs.tf`を作成する
+  * `terraform.tf`にterraform定義
+  * `providers.tf`にproviders定義
 
 ### Providerの定義
 
