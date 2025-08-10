@@ -49,6 +49,18 @@ https://openobserve.ai/docs/ha_deployment/
 * `ZO_ALLOW_USER_DEFINED_SCHEMAS`
   * UIにAdd Streamを出す
 
+* `ZO_TELEMETRY`: o2に情報を送信するかどうか
+
+### Single Mode
+
+* `ZO_LOCAL_MODE`: true
+* `ZO_LOCAL_MODE_STORAGE`: `disk` or `s3`
+
+### S3
+
+* `ZO_S3_BUCKET`: s3 bucket name
+* `ZO_S3_REGION_NAME`: aws region
+
 * [Environment Variables](https://openobserve.ai/docs/environment-variables/)
 
 ## Local環境

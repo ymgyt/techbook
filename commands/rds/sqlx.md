@@ -17,3 +17,14 @@ cargo install sqlx-cli
 * currentの`.env`に書く
 
 どのような値(format)かはDBのdriverに依存するので、ここには書かない。
+
+
+## Offline Mode
+
+```sh
+$env.DATABASE_URL = "postgres://postgres@localhost/mydb"
+cargo sqlx prepare
+
+# Check
+cargo sqlx preapre --check
+```

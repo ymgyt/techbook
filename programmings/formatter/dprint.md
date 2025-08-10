@@ -42,10 +42,9 @@ dprint fmt **/*.yaml
   "excludes": [
     "**/node_modules",
     "**/*-lock.json",
-    "**/.terrafomr",
+    "**/.terraform",
     "pnpm-lock.yaml",
-    "infra/grafana/provisioning/**",
-    "dev/slack/manifests/**"
+    "path/to/**",
   ],
   "plugins": [
     "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.1.wasm"
