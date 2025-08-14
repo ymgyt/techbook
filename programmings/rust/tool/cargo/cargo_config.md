@@ -25,6 +25,17 @@ runnerを指定すると、`cargo run`実行時に、runnerをよびだしてく
 * `[alias]`でcargo 以降のサブコマンドのaliasを設定できる
   * `cargo m`とすると`cargo make`になる
 
+## `[build]`
+
+```toml
+[build]
+rustflags = ["-C", "force-frame-pointers=yes"]
+```
+
+* `force-frame-pointers=yes`
+  * frame pointerを省略させない
+
+* `-C`, `XXX`と`-CXXX`は同じ意味らしい
 
 ## `[net]`
 

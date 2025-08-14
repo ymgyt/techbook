@@ -5,6 +5,9 @@
 
 `:set auto-format false`してから`:write`したのち`:set auto-format true`
 
+* `:w[rite] --no-format`がサポートされた!
+  * 一時的にformatを無効化できる
+
 ## 一時的にgitignoreされたfileをfile pickerで検索したい
 
 `:set file-picker.git-ignore false`
