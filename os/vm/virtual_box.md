@@ -5,6 +5,32 @@
   * defaultのcredential `osboxes/osboxes.org`
 * [Ubuntuのturoial](https://ubuntu.com/tutorials/how-to-run-ubuntu-desktop-on-a-virtual-machine-using-virtualbox#1-overview)
 
+## Console mode
+
+GUIではなくconsole mode?にする
+
+```sh
+sudo systemctl set-default multi-user.target
+sudo systemctl reboot
+
+# 必要ならsshの起動
+sudo apt install -y openssh-server
+systemctl status ssh
+
+
+# 元に戻すには
+sudo systemctl set-default graphical.target
+```
+
+## User追加
+
+```sh
+# user meの場合
+sudo useradd -m me -s /bin/bash
+sudo passwd me
+sudo usermod -a -G adm,sudo,vboxsf me 
+```
+
 ## SSH
 
 Settings > Network > Adapeter > Advanced > Port Forwarding
@@ -30,4 +56,6 @@ vdi>`
 
 ### VirtualBox Guest Additions?
 
-なんかいれるとはやくなるらしい
+* UI > Machine
+* mount
+* run .run

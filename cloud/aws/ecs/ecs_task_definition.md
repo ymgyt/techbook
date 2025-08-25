@@ -20,6 +20,8 @@
    "requiresCompatibilities": [
       "FARGATE"
    ],
+   // Volume設定
+   "volumes": [ ],
    // Container定義
    "containerDefinitions": [
       {
@@ -49,6 +51,10 @@
             {
                "name": "RUST_LOG",
                "value": "info,opsbot=debug,octocrab=debug"
+            },
+            {
+               "name": "ZO_TELEMETRY",
+               "value": "false"
             }
          ],
          "essential": true,
@@ -124,4 +130,31 @@
    }
 ]
 }
+```
+
+## Volumes
+
+```json
+{
+   "containerDefinitions": [
+      {
+         "mountPoints": [
+            {
+               "sourceVolume": "volume-name",
+               "containerPath": "/mount/efs",
+               "readOnly": false,
+            }
+         ]
+      }
+   ]
+   "volumes": [
+      {
+         "name": "volume-name",
+         "efsVolumeConfiguration": {
+            
+         }
+      }
+   ]
+}
+
 ```
