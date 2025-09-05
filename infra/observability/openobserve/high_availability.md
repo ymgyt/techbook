@@ -26,6 +26,11 @@
   * DashboardのPDF生成
   * headlessなchrominumを利用
 
+
+### Ingester
+
+* `ZO_MEMORY_CIRCUIT_BREAKER_ENABLED`
+
 ## Helm
 
 ```sh
