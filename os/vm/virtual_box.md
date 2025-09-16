@@ -58,4 +58,11 @@ vdi>`
 
 * UI > Machine
 * mount
+  * `sudo mount /dev/sr0 /media/cdrom`
 * run .run
+
+  ```sh
+  sudo apt update
+  sudo apt install -y build-essential dkms linux-headers-$(uname -r)
+
+  ```
