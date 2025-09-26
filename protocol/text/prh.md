@@ -33,6 +33,17 @@ rules:
       - from: 又、その後に
         to: また、その後に
 
+  # なんかregexMustEmptyが効かなかったケース
+  # (?!)は否定先読みで、"は"がない場合のみマッチ
+  - expected: また
+    pattern: /又(?!は)/
+    specs:
+      - from: 又、その後に
+        to: また、その後に
+      - from: A又はB
+        to: A又はB
+
+
   # expectedで参照できる
   - expected: １$1
     pattern: /一(次|回)/

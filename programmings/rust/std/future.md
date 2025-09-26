@@ -29,3 +29,7 @@ async fn do() {
   }
 }
 ```
+
+## Cancel safety
+
+* [Dealing with cancel safety in async Rust](https://github.com/prh/rules/blob/master/media/techbooster.yml)
