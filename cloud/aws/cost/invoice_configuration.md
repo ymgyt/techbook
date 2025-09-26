@@ -35,3 +35,12 @@
 1. 請求ユニットを作成
 1. Invoice Receiverを決める
 1. アカウントを請求ユニットに含める
+
+
+## CLI
+
+
+```sh
+# 一覧
+aws invoicing list-invoice-units
+```

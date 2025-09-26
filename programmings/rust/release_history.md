@@ -1,5 +1,8 @@
 # Rust Release History
 
+* [1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+  * `x86_64-unknown-linux-gnu`でlld linkerがdefaultになった
+
 * 1.88.0
   * let chains
     * 2024 editionが必要

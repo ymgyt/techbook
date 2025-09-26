@@ -8,3 +8,9 @@
 * [ACP: Add nul-terminated version of core::panic::Location::file](https://github.com/rust-lang/libs-team/issues/466)
 
 
+## kernel
+
+* [How many ways are there to configure the Linux kernel?](https://lwn.net/Articles/1034811/)
+  * CONFIG_XXX の数について言及あり
+
+
