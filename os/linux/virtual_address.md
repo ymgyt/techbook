@@ -24,7 +24,3 @@ let page_addr = page_table[vir_addr / 4096] + (vir_addr % 4096);
 * メモリに保持できない分をSSD等に逃がせる
 
 
-## TLB
-
-CPU側に記載。
-

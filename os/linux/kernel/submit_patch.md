@@ -1,13 +1,23 @@
 # Submit Patch
 
+* `git commit -s`で `Signed-off-by`をつける
+
 ## Memo
 
 ```sh
+scripts/get_maintainer.pl -f path/to/changed.rs
 
-git format-patch -3 HEAD
-git format-patch --cover-letter -3 HEAD
+git format-patch -2 --cover-letter -o /tmp/patch
+
+scripts/checkpatch.pl /tmp/patch
+
+git send-email \
+  --dry-run \
+  --annotate \
+  --thread \
+  --no-chain-reply-to \
+  --confirm=always \
+  --to $to \
+  --cc-cmd "scripts/get_maintainer.pl --norolestats --no-sub"
+  /tmp/patch
 ```
-
-* coverletter
-  * `[PATCH 0/N]` から始まる
-  * これ自体はpatchではない

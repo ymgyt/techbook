@@ -1,5 +1,11 @@
 # apt
 
+## Environment variables
+
+* `DEBIAN_FRONTEND`: apt commandのcliとしての振る舞いを制御できる
+  * `noninteractive`: Dockerfile等のinteractiveが発生しない場合に指定する
+  * https://manpages.debian.org/jessie/debconf-doc/debconf.7.en.html
+
 ## apt-get
 
 * `apt-get install --assume-yes --quiet --no-install-recommends`
@@ -18,6 +24,16 @@
 # update local repository
 apt update
 ```
+
+```dockerfile
+RUN <<EOF
+DEBIAN_FRONTEND=noninteractive apt-get update
+DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --quiet --no-install-recommends -o Dpkg::Use-Pty=0 ca-certificates
+rm -rf /var/lib/apt/lists/*
+EOF
+```
+
+* `-o Dpkg::Use-Pty=0` でprogress barの表示を抑制できる
 
 ## Repository管理
 
