@@ -21,3 +21,7 @@ git send-email \
   --cc-cmd "scripts/get_maintainer.pl --norolestats --no-sub"
   /tmp/patch
 ```
+
+## References
+
+* [Submitting patches](https://docs.kernel.org/process/submitting-patches.html)
