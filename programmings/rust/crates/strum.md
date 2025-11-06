@@ -1,5 +1,26 @@
 # strum
 
+```rust
+#[derive(Debug, Clone, Copy, PartialEq, Eq, EnumString, strum::Display)]
+#[strum(ascii_case_insensitive)]
+#[strum(serialize_all = "PascalCase")]
+pub enum Metrics {
+    UnblendedCost,
+    BlendedCost,
+    AmortizedCost,
+    NetAmortizedCost,
+    NetUnblendedCost,
+    UsageQuantity,
+}
+```
+
+* `EnumString`
+  * `FromStr`を生やす
+  * top levelの`ascii_case_insensitive`を指定できる
+* `Display`
+  * Displayを生やす
+  * top levelの`serialize_allでformatを一括で指定できる
+
 ## FromStrを生やす
 
 ```rust

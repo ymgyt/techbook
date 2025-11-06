@@ -32,6 +32,25 @@
 
 * {Region}-BoxUsage:{InstanceType}: InstanceTypeごとの ondemandの料金(実行時間)
 
+## API
+
+### Cost and Usage
+
+#### Metrics
+
+* UnblendedCost
+  * 課金単価で算出されたコスト。default
+* BlendedCost
+  * 割引を考慮したコスト
+* AmortizedCost
+  * RI/Savings Planの前払いを月単位で按分(amortize)したコスト
+* NetAmortizedCost
+  * AmortizedCostからcredit, リファンドを差し引いた最終的な実コスト
+* NetUnblendedCost
+  * UnblendedCostにcredit, リファンドを反映した実コスト
+* UsageQuantity
+  * Costではなく最終的にどれくらいつかったか
+
 
 ## References
 
