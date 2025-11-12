@@ -7,6 +7,8 @@
   * `--config <path>`でも渡せる
     * `--config`を渡すと`app-config.yaml`はデフォルトではloadされないので明示的に複数渡す
     * `--config a.yaml --config b.yaml`
+
+  * `BACKSTAGE_ENV`を設定すると、`app-config.<BACKSTAGE_ENV>.yaml`を読むので環境ごとに分けられる
 * appとbackendで共有される
 
 ### Environment substitution

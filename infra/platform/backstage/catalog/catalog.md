@@ -2,9 +2,16 @@
 
 > The Backstage Software Catalog is a centralized system that keeps track of ownership and metadata for all the software in your ecosystem (services, websites, libraries, data pipelines, etc).
 
+* 実態はyaml fileなので、なんらかの方法でこのyamlをbackstageに教える
+
 ## Catalogの追加
 
-* metadata yamlのURLを手動で追加する
+* UIから手動で追加する
+　* REGISTER EXISTING COMPONENT
+  * metadata yamlのURLを手動で追加する
+
+* Software templateからsotwareを作成する
+  * 自動でcatalogに登録される
 
 * static file
 ```yaml
@@ -35,3 +42,4 @@ spec:
   providesApis:
     - artist-api
 ```
+
