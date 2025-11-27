@@ -23,7 +23,8 @@ app:
 
 * [Deploy to k8s](https://breaking.computer/blog/deploying-a-backstage-app-on-kubernetes#:~:text=By%20default%2C%20Backstage%27s%20frontend%20and,UI%20directly%20from%20the%20backend)
 * [AWSへのDeploy](https://stratusgrid.com/blog/aws-backstage-production#:~:text=Backstage%20consists%20primarily%20of%20two,is%20stored%20in%20Aurora%20PostgreSQL)
-
+* [公式 Demo](https://github.com/backstage/demo)
+* [Community Plugins](https://github.com/backstage/community-plugins/tree/main/workspaces)
 
 ## Memo
 

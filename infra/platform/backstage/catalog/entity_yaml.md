@@ -36,3 +36,24 @@ spec:
     * Must consist of sequences of [a-z0-9A-Z] possibly separated by one of [-_.]
 
   * `namespace`(optional)
+
+
+## Annotations
+
+* [Well-known annotations](https://backstage.io/docs/features/software-catalog/well-known-annotations/#githubcomproject-slug)
+
+* `github.com/project-slug`
+  * `github.com/project-slug: ymgyt/foo`
+  * github repositoryの参照
+
+## Substitutions
+
+* `$text`, `$json`, `$yaml` で参照先ファイルの中身に置換できる
+* URL or relative path
+
+
+```yaml
+spec:
+  definition:
+    $yaml: path/to/openapi.yaml
+```

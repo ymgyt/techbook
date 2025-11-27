@@ -96,6 +96,23 @@ volumes:
 * 名前付きvolumeを宣言する
   * `docker compose up`時にまだ存在しなければ作成される。存在すれば再利用される。
 
+### `profiles`
+
+起動するserviceをグループ化して切り替えることができる
+
+```yaml
+services:
+  # 常に起動する
+  a: {}
+  b:
+    profiles: ["foo"]
+  c:
+    profile: ["bar"]
+```
+
+`docker compose --profile foo up`: a,bが起動する
+
+
 ## Examples
 
 ### minio

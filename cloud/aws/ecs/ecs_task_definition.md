@@ -108,6 +108,56 @@
 
 ## Container definitions
 
+### secrets
+
+#### Secret Managerから読む
+
+TaskExecutionRole(Agentのrole)に以下のpolicyが必要
+
+```json
+
+{
+   Version: "2012-10-17",
+   Statement: [
+     {
+       Effect: "Allow",
+       Action: [
+         "secretsmanager:GetSecretValue"
+       ],
+       Resource: [
+         "arn:aws:secretsmanager:ap-northeast-1:111222333:secret:*"
+       ],
+     }
+   ]
+}
+```
+
+`valueFrom: <ARN>`で指定する。
+
+```json
+
+"containerDefinitions": [
+   {
+    "secrets": [
+            {
+               "name": "MY_PASSWORD",
+               "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:111222333:secret:<secret-name>-<suffix>:password::"
+            }
+      ]
+   }
+```
+
+ただし、secret managerがjsonをもっている場合、`<secret-name>-<suffix>:<json-field>:<version-stage>:<version-id>`
+という、末尾の独自拡張をECS Agentがサポート(Secret Managerの仕様ではない)している。
+この場合、以下のjsonのpasswordが抽出されて、環境変数`MY_PASSWORD`に格納される
+
+```json
+{ "username": "me", "password": "secret"}
+```
+
+`<version-stage`と`<version-id>`は同時には指定できないらしいが試せていない
+
+
 ### Healthcheck
 
 * contaienr内で実行されるhealth check
