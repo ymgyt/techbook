@@ -5,19 +5,12 @@
 * `aws_iam_role`: Role
 * `aws_iam_policy`: 独立したPolicy
 * `aws_iam_role_policy`: Inline policy
-* `aws_iam_role_policies_exclusive`: Inline policyのexclusive版
+* `aws_iam_role_policies_exclusive`: Inline policyのexclusiveを実現(policyではない)
 * `aws_iam_role_policy_attachment`: 独立したPolicyのroleへのattachment
-* `aws_iam_role_policy_attachment_exclusive`: 独立したPolicyのroleへのexclusive attachment
+* `aws_iam_role_policy_attachment_exclusive`: policy_attachmentのexclusiveを実現
 * `aws_iam_policy_attachment`: user,role,group対応のpolicy attachment.使わないほうがいい
   * delete時に対象entityのすべてのpolicyをはがしていく場合がある
 
-* `aws_iam_role`
-* `aws_iam_policy`
-* `aws_iam_role_policy`
-* `aws_iam_role_policies_exclusive`
-* `aws_iam_role_policy_attachment`
-* `aws_iam_role_policy_attachment_exclusive`
-* `aws_iam_policy_attachment`
 ## Role
 
 作成の流れ
@@ -113,3 +106,13 @@ resource "aws_iam_role_policy_attachment" "eks_cluster" {
 * dataでpolicy(statement)を定義する
 * `aws_iam_role_policy_attachment`で紐付ける
 
+
+## 設計
+
+1. policyを独立したresourceとしてAWS上で表現したいか
+  * YES: `aws_iam_policy`
+  *  NO: `aws_iam_role_policy`(inline)
+
+2. statementを再利用したいか
+  * YES: `data.aws_iam_policy_document`
+  *  NO: `jsonencode()`で直接定義

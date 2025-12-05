@@ -7,6 +7,9 @@
 
 # 状態確認
 /github subscribe list features
+
+# 設定変更
+/github settings
 ```
 
 * features

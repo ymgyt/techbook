@@ -6,6 +6,9 @@
 # List recipes
 just --list --list-submodules
 
+# moduleのrecipeはPATHを指定
+just --list foo
+
 # More concise
 just --summary
 

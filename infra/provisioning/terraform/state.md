@@ -115,3 +115,14 @@ terraform state show 'packet_device.worker["example"]'
 # stateの一覧を確認
 terraform state list
 ```
+
+
+## Stateの移行
+
+あるresourceの管理をroot module Aからroot module Bに移行する場合
+
+1. B側でimportする
+2. A側で`terraform state rm <resources>` して管理対象外にする
+3. A側のresource定義を消す
+  * stateにないのでdeleteは走らない
+4. B側で管理する

@@ -38,3 +38,12 @@ schemaとqueryがある前提
 type MyScalar = crate::client::scalar::MyScalar
 ```
 というcodeが生成されるので結果的に解決される
+
+### 生成されたstructの確認
+
+cargo docsでみるのが一番わかりやすい
+
+```sh
+# moduleのvisibilityに応じて、--document-private-itemsをつける
+cargo doc --open --document-private-items --package app --no-deps
+```
