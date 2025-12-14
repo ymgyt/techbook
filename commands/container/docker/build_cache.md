@@ -6,6 +6,45 @@
   * `ADD`, `COPY`, `RUN --mount=type=bind`はfileからcacheを計算する
 * A <- B <- C でBがinvalidateされたら、Cもinvalidteされる
 
+## mount
+
+### `--mount=type=bind`
+
+hostのfsをmountする
+defaultはread only
+
+```sh
+RUN  --mount=type=bind,target=/build \
+    cargo build --release
+```
+
+* `target` mount path
+  * `dst`,`destination`はalias
+* `source`
+* `from` build stageを指定できる
+* `rw`
+
+### `--mount=type=cache`
+
+```sh
+RUN  --mount=type=cache,target=/usr/local/cargo/registry,sharing=locked \
+    cargo build --release
+```
+
+* `id`
+* `target` mount path
+  *`dst`, `destination` alias
+* `sharing` `shared`, `private`, `locked`
+  * package managerの期待にあわせる
+* `ro` read only
+
+### `--mount=type=secret`
+
+```sh
+
+RUN --mount=type=secret,id=git-credentials,dst=/root/.git-credentials \
+    cargo build --release
+```
 
 ## RUN instructions
 
@@ -21,15 +60,6 @@ RUN apk add curl
 
 * secretが変わっても、cacheをinvalidateしないので注意
 
-
-## Rust
-
-```dockerfile
-RUN --mount=type=cache,target=/app/target/ \
-    --mount=type=cache,target=/usr/local/cargo/git/db \
-    --mount=type=cache,target=/usr/local/cargo/registry/ \
-    cargo build
-```
 
 ## External cache
 

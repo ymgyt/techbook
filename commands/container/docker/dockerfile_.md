@@ -3,7 +3,10 @@
 ## syntax
 
 fileの先頭に`syntax=docker/dockerfile:1`のように書く。  
-仕組みはわかっていないが何かが固定される。
+* buildkitはDockerfileのparserを分離しており、ここで指定できる。
+  * これにより新しい構文(RUN --mountとか)を利用できる
+  * `# syntax=<remote image ref>`
+* `# syntax=docker/dockerfile:1` がrecommend
 
 ## multi stage
 
@@ -88,15 +91,7 @@ EOF
 
 ### RUN --mount
 
-* build時にアクセスできるfilesystemのmountを有効にする
-* `RUN --mount=[type=<type>][,option=<value[,option=<value>]...]`
-* type
-  * bind(default)
-    * `RUN -mount=type=bind,target=foo,source=bar,from=builder`
-  * cache
-  * secret
-
-* [Reference](https://docs.docker.com/reference/dockerfile/#run)
+[build_cache](./build_cache.md)参照
 
 ## CMD
 

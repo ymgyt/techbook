@@ -56,3 +56,4 @@
 
 * [client Connection Flow](https://www.twingate.com/docs/client-connection-flow)
 * [Roleの権限表](https://www.twingate.com/docs/admins)
+* [AWS Reference Network Archtecture](https://www.twingate.com/docs/aws-how-to-setup-subnets-for-secure-access)
