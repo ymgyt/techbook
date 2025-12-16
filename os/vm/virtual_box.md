@@ -5,6 +5,16 @@
   * defaultのcredential `osboxes/osboxes.org`
 * [Ubuntuのturoial](https://ubuntu.com/tutorials/how-to-run-ubuntu-desktop-on-a-virtual-machine-using-virtualbox#1-overview)
 
+## Install
+
+```sh
+# install
+sudo apt install dkms ./virtualbox-<version>_amd64.deb
+
+# 自身をvboxusersに追加する
+sudo usermod -a -G vboxusers ${USER}
+```
+
 ## Console mode
 
 GUIではなくconsole mode?にする
@@ -54,15 +64,28 @@ Add new rule >
 vdi>`
 
 
-### VirtualBox Guest Additions?
+### VirtualBox Guest Additions
 
-* UI > Machine
-* mount
-  * `sudo mount /dev/sr0 /media/cdrom`
-* run .run
+0. install packages
 
   ```sh
   sudo apt update
   sudo apt install -y build-essential dkms linux-headers-$(uname -r)
 
   ```
+
+1. VirtualBox > Devices > Insert Guest Additions CD Image
+2. `sudo mount /dev/sr0 /media/cdrom`
+3. `sudo sh /media/cdrom/VBoxLinuxAddtions.run`
+4. `sudo sytemctl restart`
+5.
+  ```sh
+  lsmod | grep vbox
+  vboxsf                102400  0
+  vboxguest             507904  6 vboxsf
+  vboxvideo              61440  0
+  ```
+
+`vboxsf`,`vboxguest`,`vboxvideo`があればOK
+
+aaa
