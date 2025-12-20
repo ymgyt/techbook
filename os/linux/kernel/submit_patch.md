@@ -22,6 +22,15 @@ git send-email \
   /tmp/patch
 ```
 
+## Tags
+
+* `Acked-by`
+* `Reviewed-by`
+* `Reported-by`
+* `Tested-by`
+* `Suggested-by`
+* `Fixes`
+
 ## References
 
 * [Submitting patches](https://docs.kernel.org/process/submitting-patches.html)

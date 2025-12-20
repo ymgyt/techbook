@@ -16,6 +16,7 @@ EKS Node(Worker node)に必要なIMA Policyは以下
 
 ### VPC
 
+
 * VPCを指定する必要がある
 * 最低2つのsubnetが必要
   * 異なるAZ
@@ -49,60 +50,7 @@ worker nodeの管理方法にも選択肢がある。
 
 ## Authentication
 
-
-EKSにおける認証について。  
-まずEKS Cluster作成時に`aws-auth`というConfigMapが`kube-system` namespaceに作成される。
-
-* Clusterを作成したIAM Entityは自動で`service:masters` groupに追加される
-  * このIAM Entityはどのconfigurationにも現れない
-  * AWS以外の仕組みで誰が作ったのかを管理しておく必要がある
-
-* [EKSの認証認可の仕組み](https://zenn.dev/take4s5i/articles/aws-eks-authentication)
-
-### Authentication mode
-
-Clusterには以下のいずれかのauthentication modeの設定がある。
-
-* `aws-auth` ConfigMap (`CONFIG_MAP`)
-  * 今までの方法
-* ConfigMapとaccess entries(`API_AND_CONFIG_MAP`)
-  * ConfigMapとaccess entriesは独立している
-* Access entries only(`API`)
-
-
-* access entries(api)の利用にはkubernetesのversionとeksのplatform versionが影響する
-  * 確認するには`aws eks describe-cluster --name my-cluster --query 'cluster.{KubernetesVersion:": version, "PlatformVersion: platformVersion"}'`
-
-* 前提条件を満たすClusterの場合、Clusterを作成したIAM principalは自動的にaccess entriesに追加される
-
-* `API`を有効にすると、無効にはもどせない
-  * `aws eks update-cluster-config --name my-cluster --access-config authenticationMode=API_AND_CONFIG_MAP`
-
-* IAM PrincipalのARNとkubernetes上のgroupを紐付けられる
-  * kubernetes上のgroupへの権限付与はRoleBinding等でkubernetes側でおこなう前提
-
-* AWS側で、namespaceを指定するpolicyを定義して紐づけることもできる
-  * これはIAM Policyとは別でIAM EKS Policyというリソース
-
-* [公式Blog Handson](https://aws.amazon.com/blogs/containers/a-deep-dive-into-simplified-amazon-eks-access-management-controls/)
-
-### Authentication flow
-
-1. kubectl get pods等のrequestを行う
-1. `~/.kube/config`に指定されたcommandが実行され、sts get caller-identity requestが作成され、tokenとしてencodeされrequestに付与される
-1. Kubernetes Api serverはAWS IAM Authenticatorにそのtokenを渡す(たぶんWebhook)
-1. IAM Authenticatorはsts get-caller-identityを実行し、Api serverにIAM Principalの情報を返す
-1. ConfigMap `aws-auth`にてIAM Principalとrolebinding subject(group)のマッピングが行われる
-1. Kubernetes上のrolebindingによって認可が実施される
-
-### OIDC ID Provider
-
-EKS Clusterを建てると裏側でOIDC ID Providerが設定される
-
-## kube-apiserver Unauthorized
-
-* eks用のconfig-mapにIAM Userを登録する必要がある
-https://aws.amazon.com/jp/premiumsupport/knowledge-center/eks-api-server-unauthorized-error/
+[./api_access_control.md]を参照
 
 ## Troubleshooting
 

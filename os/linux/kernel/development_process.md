@@ -21,7 +21,7 @@
 ## 便利サイト
 
 * [Patchwork](https://patchwork.kernel.org/)
-  * 進行中のpatchの把握に便利
+  * 進行中のpatchの把握に便利なsubsystemごとのarchive
 * [lore.kernel.org](https://lore.kernel.org/)
   * 過去の検索に良い
 * [LWN.net](https://lwn.net/)

@@ -7,6 +7,10 @@ Pod, ServiceAccountとAWS IAMとの連携方法
 IAM Role for Service Accounts  
 Service accountとIAM Roleを紐づけることで、PodごとにAWS権限を制御できる仕組み。
 
+メンタルモデルとしては、EKSがOIDC Providerを建てて、service accountを表現するjwtを生成する。
+AWS SDKはそのjwtを使って、STSにcredentialをリクエストする。
+IAMに事前に、EKS OIDC Providerを登録しておくことで、STSがjwtの検証先を知れるので検証が走る。
+
 概ね以下の流れ。
 
 1. `kubectl apply -f deployment.yaml`でPodが作成される
@@ -69,6 +73,36 @@ metadata:
 ```
 
 * `metadata.annotations.eks.amazonaws.com/role-arn`で指定する
+
+### IAM OIDC Provider
+
+* AWS IAMからjwtを信頼してよいか判断するための設定(serverではない)
+* EKSは`https://oidc.eks.ap-northeast-1.amazonaws.com/id/<CLUSTER_ID>` をもつ
+  * Service account token(jwt)発行時のissuer
+
+こんなjwtが発行される
+```json
+{
+  "iss": "https://oidc.eks.ap-northeast-1.amazonaws.com/id/CLUSTER_ID",
+  "sub": "system:serviceaccount:openobserve:openobserve",
+  "aud": "sts.amazonaws.com",
+  "exp": 1730000000,
+  "iat": 1729996400
+}
+```
+
+### PodがRoleをassumeするまでの流れ
+
+1. kubectl applyでPodが作成される
+  * kube-apiserverがservice accountのjwtを生成
+  * `iss`: EKSのIAM OIDC Provider
+2. kubeletがtokenをmountしてPodにみえるようにする
+  * Podに適切な環境変数が設定される
+3. Pod内のAWS SDKが環境変数からIRSAを認識する 
+4. STSにassumeRoleWithWebidentity requestする
+5. IAMはOIDC Connect Providerによって設定された値とjwtのissを比較する
+6. EKSのOIDC Providerから公開鍵を取得してjwtを検証する
+7. Credentialを返す
 
 ### IRSA Trouble Shooting
 

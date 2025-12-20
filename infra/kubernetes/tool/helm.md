@@ -34,6 +34,9 @@ helm search repo bitnami
 helm search hub postgres
 ```
 
+* `CHART VERSION` はhelm chartのversion
+* `APP VERSION` はmainのapplicationのversion
+
 
 ## Release
 

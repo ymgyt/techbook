@@ -15,11 +15,13 @@ locals {
 
 resource "aws_eks_cluster" "main" {
   name     = local.cluster_name
+  # control planeがAWS API呼ぶためのrole
   role_arn = aws_iam_role.eks_cluster.arn
   vpc_config {
     endpoint_private_access = false
     endpoint_public_access  = true
     public_access_cidrs     = ["0.0.0.0/0"]
+    # EKSが管理するControl planeとの通信用ENIが作られるsubnet
     subnet_ids              = local.public_subnet_ids
   }
   version = local.kubernetes_version
