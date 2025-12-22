@@ -12,3 +12,6 @@
 
 * `CONFIG_UPROBE_EVENTS`
   * uprobeの有効化
+
+* `CONFIG_IKCONFIG`
+  * 適用された`.config`をimageに含める

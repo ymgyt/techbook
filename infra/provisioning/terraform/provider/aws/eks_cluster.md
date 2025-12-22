@@ -188,3 +188,9 @@ resource "aws_iam_role_policy_attachment" "pod_execution" {
   role       = aws_iam_role.pod_execution.name
 }
 ```
+
+[ids]
+*
+
+[main]
+leftalt+- = =

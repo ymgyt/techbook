@@ -31,6 +31,15 @@ git send-email \
 * `Suggested-by`
 * `Fixes`
 
+## git設定
+
+```sh
+[format]
+  signoff = true
+```
+
+* `user.email`とpatch送信時のemailが一致している必要がある
+
 ## References
 
 * [Submitting patches](https://docs.kernel.org/process/submitting-patches.html)

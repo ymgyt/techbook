@@ -34,6 +34,9 @@ rustflags = ["-C", "force-frame-pointers=yes"]
 
 * `force-frame-pointers=yes`
   * frame pointerを省略させない
+* `force-unwind-table=yes`
+  * `yes`: unwind table(.eh_frame)を生成する
+  * `no`: unwind tableを生成しない
 
 * `-C`, `XXX`と`-CXXX`は同じ意味らしい
 
