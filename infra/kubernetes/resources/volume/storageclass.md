@@ -1,5 +1,9 @@
 # StorageClass
 
+* adminが提供するstorageのclassを定義する方法
+* `metadata.annotations.storageclass.kubernetes.io/is-default-class: true` を指定するとdefault storage classになる
+  * storage classが指定されなかった場合に利用される
+
 ## Local Storage
 
 ```yaml

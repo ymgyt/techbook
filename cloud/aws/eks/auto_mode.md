@@ -57,6 +57,28 @@ EC2 nodeのagent?がassumeするrole
 
 * managed node pool(karpenterのやつ?)が作成される
 
+## Storage Class
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: auto-ebs
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+allowedTopologies:
+- matchLabelExpressions:
+  - key: eks.amazonaws.com/compute-type
+    values:
+    - auto
+provisioner: ebs.csi.eks.amazonaws.com
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: gp3
+  csi.storage.k8.io/fstype: "ext4"
+  encrypted: "true"
+```
+
 ## References
 
 * [EKS Auto Mode: Simplifying Kubernetes Management](https://atmosly.com/blog/amazon-eks-auto-mode-simplifying-kubernetes-management)

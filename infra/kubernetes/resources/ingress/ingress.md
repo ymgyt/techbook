@@ -2,6 +2,7 @@
 
 * 外からServiceへのaccessを処理するobject
   * load balancing, TLS termination
+  * protocol-aware
 * ingress controllerの存在が前提
   * ingressだけ作っても意味がない
 * LoadBalancerと違い、k8s component
