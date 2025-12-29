@@ -40,6 +40,13 @@ git send-email \
 
 * `user.email`とpatch送信時のemailが一致している必要がある
 
+## `get_maintainer.pl`
+
+```sh
+./scripts/get_maintainer.pl path/to/file
+
+```
+
 ## References
 
 * [Submitting patches](https://docs.kernel.org/process/submitting-patches.html)
