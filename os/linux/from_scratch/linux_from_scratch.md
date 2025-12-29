@@ -12,6 +12,11 @@ Version 12.4-systemd
 ## Memo
 
 ```sh
+# shがbashである必要がある
+sudo DEBIAN_FRONTEND=dialog dpkg-reconfigure dash
+```
+
+```sh
 sudo apt update
 sudo apt install -y gawk texinfo
 
