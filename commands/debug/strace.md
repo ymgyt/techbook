@@ -7,11 +7,15 @@
 ```shell
 # 出力結果をfileに書き出す
 strace -T -o trace.log ./app
+
+strace -p $(pidof foo) -f -T -s 80
 ```
 
 * `-o` 出力fileを指定
 * `-T` system callの実行時間を表示(sec)
 * `-f` 実行対象のプログラムがforkした場合、その子プロセスもtraceする
+  * threadを追う場合もつける
+* `-s`: 表示文字数
 
 
 ## 仕組み
