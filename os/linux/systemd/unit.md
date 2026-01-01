@@ -7,6 +7,9 @@ systemdの操作単位。processの起動やfile systemのmount等のtaskを抽�
 * `/etc/systemd/system/`
   * こちらのほうが同名fileの優先度が高い。基本はここらしい。
 
+* runtimeにメモリ上にunitが保持される
+  * 基本はunit fileと1:1だが、同一unit fileから複数回instantiateされる場合もある
+
 `man systemd.unit`
 
 ## Unit Type

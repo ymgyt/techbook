@@ -9,6 +9,28 @@ Version 12.4-systemd
 
 * Beginner's Guide to Installing from Source https://moi.vonos.net/linux/beginners-installing-from-source/ 
 
+## Configure VM
+
+```nu
+let vbox_base = ([$env.HOME, "VirtualBoxVMs"] | path join)
+let vm_name = "debian13-lfs"
+let vm_base = ([$vbox_base, $vm_name] | path join)
+let root_disk = ([$vm_base, "debian-root.vdi"] | path join)
+let lfs_disk = ([$vm_base, "lfs-disk.vdi"] | path join)
+
+# Create VM
+VBoxManage createvm --name $vm_name --ostype Debian13_64  --register --basefolder $vbox_base
+
+# Configure VM
+VBoxManage modifyvm $vm_name --memory 8129 --cpus 8 --firmware bios --rtc-use-utc on --audio-driver none --usb-xhci off
+
+# Create disk
+VBoxManage createmedium disk --filename $root_disk --size 20480 --format VDI
+VBoxManage createmedium disk --filename $lfs_disk --size 81920 --format VDI
+
+
+```
+
 ## Memo
 
 ```sh

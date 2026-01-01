@@ -27,8 +27,9 @@ pkg-config systemd --variable=systemdsystemconfdir
 
 ## man
 
+* `man systemd.index`: systemd関連のman一覧
 * `man systemd-system.conf`: systemdの設定file
-* `man systemd.unit`: unit file
+* `man systemd.unit`: unit file一般について
 * `man systemd.directives`: 各directiveのmanへの参照がある
 * `man systemd.kill`: Processの終了関連
 * `man systemd.exec`
