@@ -18,6 +18,7 @@ let vm_base = ([$vbox_base, $vm_name] | path join)
 let root_disk = ([$vm_base, "debian-root.vdi"] | path join)
 let lfs_disk = ([$vm_base, "lfs-disk.vdi"] | path join)
 let iso = "/home/ymgyt/iso/debian-13.2.0-amd64-netinst.iso"
+# 
 let host_if = "wlp0s20f3"
 
 # Create VM
@@ -72,6 +73,60 @@ gpt
 > Write -> YES
 > Quit
 
+# fdisk ver
+su -
+fdisk /dev/sdb
+```
+```
+# fdisk session
+Command (m for help): p
+Disk /dev/sdb: 80 GiB, 85899345920 bytes, 167772160 sectors
+Disk model: VBOX HARDDISK
+Units: sectors of 1 * 512
+= 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xa4edc04a
+
+Command (m for help): g
+Created a new GPT disklabel (GUID: 18607BAC-CC25-47A1-AB1C-BD117540E78B).
+
+Command (m for help): p
+Disk /dev/sdb: 80 GiB, 85899345920 bytes, 167772160 sectors
+Disk model: VBOX HARDDISK
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 18607BAC-CC25-47A1-AB1C-BD117540E78B
+
+Command (m for help): n
+Partition number (1-128, default 1):
+First sector (2048-167772126, default 2048):
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-167772126, default 167770111):
+
+Created a new partition 1 of type 'Linux filesystem' and of size 80 GiB.
+
+Command (m for help): p
+Disk /dev/sdb: 80 GiB, 85899345920 bytes, 167772160 sectors
+Disk model: VBOX HARDDISK
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 18607BAC-CC25-47A1-AB1C-BD117540E78B
+
+Device     Start       End   Sectors Size Type
+/dev/sdb1   2048 167770111 167768064  80G Linux filesystem
+
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+```
+
+```sh
 # filesystemをformat
 sudo /usr/sbin/mkfs -v -t ext4 /dev/sdb1
 
