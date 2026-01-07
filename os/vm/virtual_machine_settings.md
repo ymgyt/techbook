@@ -14,8 +14,8 @@ Display > Screen
 * Enable Network Adapterを有効
 * Attached to `Bridged Adapter`(ブリッジアダプター)
   * HostのnetworkのDHCPからIPをもらえる
-  * `NAT`
-    * 外には出れる
+* `NAT`
+  * 外には出れる
 
 
 ## VirtualBox Guest Additions

@@ -1,5 +1,7 @@
 # udev
 
+userspace /dev
+
 * `/dev`のdevice file(node)を動的に管理する userspace process
   * `systemd-udevd.service`
 

@@ -17,6 +17,8 @@ let vm_name = "debian13-lfs"
 let vm_base = ([$vbox_base, $vm_name] | path join)
 let root_disk = ([$vm_base, "debian-root.vdi"] | path join)
 let lfs_disk = ([$vm_base, "lfs-disk.vdi"] | path join)
+let iso = "/home/ymgyt/iso/debian-13.2.0-amd64-netinst.iso"
+let host_if = "wlp0s20f3"
 
 # Create VM
 VBoxManage createvm --name $vm_name --ostype Debian13_64  --register --basefolder $vbox_base
@@ -28,14 +30,31 @@ VBoxManage modifyvm $vm_name --memory 8129 --cpus 8 --firmware bios --rtc-use-ut
 VBoxManage createmedium disk --filename $root_disk --size 20480 --format VDI
 VBoxManage createmedium disk --filename $lfs_disk --size 81920 --format VDI
 
+# Add SATA controller
+VBoxManage storagectl $vm_name --name "SATA" --add sata --controller IntelAHCI --portcount 3 --hostiocache on
 
+# Attach disks
+VBoxManage storageattach $vm_name --storagectl "SATA" --port 0 --device 0 --type hdd --medium $root_disk
+VBoxManage storageattach $vm_name --storagectl "SATA" --port 1 --device 0 --type hdd --medium $lfs_disk
+VBoxManage storageattach $vm_name --storagectl "SATA" --port 2 --device 0 --type dvddrive --medium $iso
+
+# Modify boot order
+VBoxManage modifyvm $vm_name --boot1 dvd --boot2 disk --boot3 none --boot4 none
+
+# Configure network
+VBoxManage modifyvm $vm_name --nic1 bridged --bridgeadapter1 $host_if
+
+# Start VM
+VBoxManage startvm $vm_name --type gui
 ```
 
 ## Memo
 
 ```sh
 # shがbashである必要がある
-sudo DEBIAN_FRONTEND=dialog dpkg-reconfigure dash
+# sudo DEBIAN_FRONTEND=dialog dpkg-reconfigure dash
+rm /bin/sh
+ln -s bash /bin/sh
 ```
 
 ```sh

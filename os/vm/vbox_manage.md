@@ -56,3 +56,9 @@ VBoxManage showvminfo debian13-lfs --macineredable
 ```nu
 VBoxManage createmedium disk --filename path/root.vdi --size 20480 --format VDI
 ```
+
+## Storage controllerの追加
+
+```nu
+VBoxManage storagectl 'debian13-lfs' --name "SATA" --add sata --controller IntelAHCI --portcount 3 --hostiocache on
+```
