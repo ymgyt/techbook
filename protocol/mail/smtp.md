@@ -1,6 +1,7 @@
 # SMTP
 
 Simple Mail Transfer Protocol
+[RFC5321](https://datatracker.ietf.org/doc/html/rfc5321)
 
 ## Flow
 
