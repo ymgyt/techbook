@@ -1,6 +1,7 @@
 # test
 
 いろんな判定。
+https://ss64.com/bash/test.html
 
 
 ```sh
@@ -9,12 +10,20 @@ test -d $DIR
 
 ```
 
-| Param | Description           |
-| ---   | ---                   |
-| `-d`  | directoryが存在するか |
-| `-z`  | 変数がunset or emptyかどうか |
+| Param | Description                     |
+|-------|---------------------------------|
+| `-d`  | directoryが存在するか           |
+| `-z`  | 変数がunset or emptyかどうか    |
 | `-n`  | stringがnot emptyでなければtrue |
-| `-e`  | fileが存在するか      |
+| `-e`  | fileが存在するか                |
+
+file関連
+
+| Param | Description                 |
+|-------|-----------------------------|
+| `-d`  | directoryが存在するか       |
+| `-e`  | fileが存在するか            |
+| `-L`  | fileが存在してsymbolic link |
 
 
 ```sh

@@ -14,17 +14,25 @@
 
 ## Sections
 
-* text 機械語
-* data 初期値にある変数
-* bss(Block Started by Symbol)
-  * 初期値が未定義な変数
-  * ELFにはsize情報だけ
-  * 実行時にメモリにロードされるときにメモリを確保する?
+* linkerのための情報。kernelはみない
+  * `.text`: 機械語
+  * `.data`: 初期値のある変数
+  * `.bss`: Block started by symbol
+    * 初期値が未定義な変数
+    * ELFにはsize情報だけ
+    * 実行時にメモリにロードされるときにメモリを確保する?
+  * `.rodata`
+  * `.dynsym`
+  * `.strtab`
 
 ## Segments
 
 * ELF的にはprogram header
 * 複数のsectionをまとめたもの
+  * `.text`,`.rodata`,`.eh_frame` をまとめてRX
+  * `.data`,`.got`,`bss` はRW
+* mmapの単位
+  * 仮想メモリのページ用の属性を保持
 
 ## Reference
 
