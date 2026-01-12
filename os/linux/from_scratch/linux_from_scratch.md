@@ -62,17 +62,6 @@ ln -s bash /bin/sh
 sudo apt update
 sudo apt install -y gawk texinfo bison xz-utils build-essential
 
-# partitionを作成
-sudo cfdisk /dev/sdb
-
-> Select label type
-gpt
-
-> New
-> Size: Enter
-> Write -> YES
-> Quit
-
 # fdisk ver
 su -
 fdisk /dev/sdb
@@ -399,7 +388,7 @@ cd m4-1.4.20
             --build=$(build-aux/config.guess)
 make
 make DESTDIR=$LFS install
-
+rm -rf m4-1.4.20
 ```
 
 
