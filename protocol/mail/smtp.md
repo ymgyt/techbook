@@ -19,6 +19,33 @@ Simple Mail Transfer Protocol
   * SPF, DKIM, DMARC
 7. 送信が完了する
 
+```sh
+HELO ymgyt.io
+250 mail.example.com
+
+# Envelope From
+MAIL FROM: me@ymgyt.io
+250 2.1.0 OK
+
+# Envelope To
+RCPT TO: foo@example.com
+250 2.1.5 OK
+
+# 本文を送る
+DATA
+354 End data with <CR><LF>.<CR><LF>
+From: me@ymgyt.io
+To: foo@example.com
+Subject: Hello
+Test mail body here.
+.
+250 2.0.0 OK: queued as 123456
+
+# Close
+QUIT
+221 2.0.0 Bye
+```
+
 
 ## TLS
 
@@ -40,6 +67,9 @@ Simple Mail Transfer Protocol
 ## SMTPにおけるSenderとは
 
 * `MAIL FROM`: Envelop from
+  * 送信先が存在しない場合にエラーメールの送信先に使われる
+  * Return-Path とも
+  * BCCの場合等、Header Fromとは一致しない場合もある
 * `From:`: Header from
   * SMTPからみるとただのpayload.
   * 人間が見る送信者
