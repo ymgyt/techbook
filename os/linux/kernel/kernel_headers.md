@@ -4,3 +4,4 @@
 * `include/linux/device.h`
   * `struct device`
 * `include/linux/device/bus.h`
+  * `struct bus_type`

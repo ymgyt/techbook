@@ -89,3 +89,30 @@ make \
   HOSTAR=llvm-ar \
   HOSTLD=ld.lld
 ```
+
+### Helixでcode jump
+
+```sh
+# 依存をsetup
+nix develop github:ymgyt/derivers
+
+# ccはgcc wrapperを想定
+# clangはunwrappedだけど、ccはglibcをみせたいのでwrapperがほしい
+which cc
+/nix/store/r9wbjib6xxjkyb9yvjvrkl4sq61i2lyn-gcc-wrapper-15.2.0/bin/cc
+
+make HOSTCC=cc LLVM=1 defconfig
+make HOSTCC=cc LLVM=1 prepare
+
+bear -- make HOSTCC=cc LLVM=1 -j8
+# compile_commands.jsonができる
+
+# clangdがみえている
+hx --health c
+```
+
+### HOSTCC
+
+cで書かれた補助プログラムをbuildすることがある。
+kernelではなく普通のcをbuildするのでglibc headerが必要になる
+nixでsetupしたunwrapped clangだとglibcがみえなかったりする、一方で、wrapped clangだとkernelのflagと食合せが悪い

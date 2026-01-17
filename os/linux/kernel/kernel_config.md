@@ -15,3 +15,6 @@
 
 * `CONFIG_IKCONFIG`
   * 適用された`.config`をimageに含める
+
+* `CONFIG_SYSFS`
+  * sysfs(`/sys`) を有効にする

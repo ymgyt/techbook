@@ -11,6 +11,16 @@ userspace /dev
   * `/sysfs`を読む
   * ruleは`/etc/udev/rules.d`に定義する
     * `/usr/lib/udev/rules.d`
+  * MODALIASに基づいて`modprove`でmoduleをloadしている
+  * device nodeのアクセス権限を設定する
+  * symbolic linkを作る
+
+## Rules
+
+* `man udev`だと
+  * `/etc/udev/rules.d`
+  * `/usr/lib/udev/rules.d`,`/usr/local/lib/udev/rules.d`
+  * `/run/udev/rules.d`
 
 
 ## References
