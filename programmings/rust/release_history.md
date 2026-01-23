@@ -1,5 +1,8 @@
 # Rust Release History
 
+* [1.93.3](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
+  * `*-linux-musl`が 1.2.5になった。DNS resolverの改善がなされたらしい
+
 * [1.90.0](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
   * `x86_64-unknown-linux-gnu`でlld linkerがdefaultになった
 

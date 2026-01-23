@@ -1,28 +1,18 @@
 # Helm
 
-## Install
+* Chart: packageのtemplate
+* Release: Chartをdeployした単位
 
-```console
-# Mac
-VERSION=3.7.2
-OS=darwin
-curl -sSL https://get.helm.sh/helm-v${VERSION}-${OS}-amd64.tar.gz | tar -xz
-mv ${OS}-amd64/helm /usr/local/bin/
+## Lifecycle
 
-helm version
-```
+基本的なlifecycle
 
-### Completion
+1. Add chart repository
+2. Find chart to install
+3. Install chart
+4. Upgrade installation(release)
+5. Uninstall release
 
-```console
-source <(helm completion zsh)
-```
-
-## Repository
-
-```console
-helm repo add bitnami https://charts.bitnami.com/bitnami
-```
 
 ## Search Charts
 
@@ -36,17 +26,6 @@ helm search hub postgres
 
 * `CHART VERSION` はhelm chartのversion
 * `APP VERSION` はmainのapplicationのversion
-
-
-## Release
-
-* Chart + values = Release
-* Releaseはsecretとしてkubernetesに保存される
-
-```console
-# list
-helm list
-```
 
 ## Helmからmanifestを作る
 
