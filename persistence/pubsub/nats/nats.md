@@ -17,6 +17,11 @@
 * NATS
   * Service discovery機能を担う
 
+## QoS
+
+* NATSはAt-Most-Onceを採用
+* NATS StreamingはAt-Least-Oneceしてくれる
+
 
 ## Handson
 

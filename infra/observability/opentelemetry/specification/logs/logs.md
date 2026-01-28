@@ -34,16 +34,23 @@
 
 * `Attributes` resourceと違い、log毎に変わる追加の情報
 
+* `EventName`: Eventの種別(分類)の識別子
+  * `user.login`等
+  * event nameが共通のlogは同じschema(attributes)を持つべき
+  * [Naming guidelines](https://opentelemetry.io/docs/specs/semconv/general/naming/) に従う
+  * [SIG Proposal](https://github.com/open-telemetry/opentelemetry-specification/issues/4260)
+
+
 ### Severity
 
-| SeverityNumber range | Range name | Meaning |
-| --- | --- | --- |
-|  1-4  | TRACE | debugging event |
-|  5-8  | DEBUG | debugging event |
-|  9-12 | INFO  | information     |
-| 13-16 | WARN  | warning         |
-| 17-20 | ERROR | error           |
-| 21-24 | FATAL | fatal           |
+| SeverityNumber range | Range name | Meaning         |
+|----------------------|------------|-----------------|
+| 1-4                  | TRACE      | debugging event |
+| 5-8                  | DEBUG      | debugging event |
+| 9-12                 | INFO       | information     |
+| 13-16                | WARN       | warning         |
+| 17-20                | ERROR      | error           |
+| 21-24                | FATAL      | fatal           |
 
 ## References
 

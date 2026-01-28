@@ -53,3 +53,7 @@ SECTIONS {
 
 * `__bss = .`は`__bss`というシンボルに現在のアドレスを割り当てる
   * Cでは、`extern char __bss`で参照できる
+
+## References
+
+* [linux-insides Linker](https://0xax.gitbook.io/linux-insides/summary/misc/linux-misc-3)
