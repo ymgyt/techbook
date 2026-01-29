@@ -24,6 +24,15 @@ features = ["foo"]
 imports.group.enable = true
 ```
 
+### Project固有設定
+
+`path/to/pj/.helix/languages.toml`に以下を設定すればfeaturesだけ指定できる
+
+```toml
+[language-server.rust-analyzer.config.cargo]
+features = ["foo"]
+```
+
 ## Nix
 
 ```toml

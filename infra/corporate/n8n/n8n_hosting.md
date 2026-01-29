@@ -17,3 +17,7 @@
 * `N8N_SMTP_SSL`
   * true: SMTPS(最初からTLSなSMTP)を使う
   * false: `STARTTLS`を使う
+
+* `N8N_ENCRYPTION_KEY`
+  * Credentialの暗号化に利用する
+  * 指定されないと初回に作成して、`~/.n8n`に保存する
