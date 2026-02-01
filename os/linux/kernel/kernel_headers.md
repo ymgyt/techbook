@@ -1,8 +1,14 @@
 # kernel headers
 
-* `include/linux/platform_device.h`: platform device定義
-* `include/linux/device.h`
+*`include/linux`配下のheader
+
+* `platform_device.h`: platform device定義
+
+* `device.h`
   * `struct device`
   * `class_create`
-* `include/linux/device/bus.h`
-  * `struct bus_type`
+  * `device/bus.h`
+    * `struct bus_type`
+
+* `wait.h`: wait/sleep関連
+  * `wait_event_timeout()`
