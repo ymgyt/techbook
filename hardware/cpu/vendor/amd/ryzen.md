@@ -4,7 +4,7 @@
 
 - Processor Architecture: Zen 5
 - CPU Core: 8
-- Threads: 18
+- Threads: 16
 - Multithreading(SMT): Yes
 - Clock Base/Max: 3.8/5.5 GHz
 - Cache L1/L2/L3: 640KB/8MB/32MB

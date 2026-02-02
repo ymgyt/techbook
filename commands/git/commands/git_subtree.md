@@ -42,8 +42,17 @@ git subtree pull --prefix tools child main --squash
 ## ChildにParentの変更を反映する
 
 ```sh
-# Childに書き込み権限がある場合
-git subtree push --prefix tools child branch
+# Localにbranchとして切り出す
+git subtree split --prefix tools -b child-update
+
+# rebaseで履歴を整理できる
+git checkout child-update && git rebase -i HEAD~2
+
+# Childに変更をpush
+git push child child-update:pr-branch
+
+# いきなりpushする場合
+# git subtree push --prefix tools child branch
 ```
 
 * childに書き込み権限がある場合
