@@ -36,6 +36,7 @@
   * 請求をまとめる機能だけ有効
 * All features
   * AWS Organizationの全機能を有効
+  * `aws organization describe-organization`で`Organization.FeatureSet`で確認可能
 
 
 ## Delegated Administorator

@@ -1,0 +1,5 @@
+# wpctl
+
+```sh
+wpctl status
+```
