@@ -31,4 +31,4 @@ SESを有効化したRegionの初期状態
 
 ## References
 
-* [What Happens When Your Reach Your Sending Limits?](https://aws.amazon.com/blogs/messaging-and-targeting/what-happens-when-you-reach-your-sending-limits/?utm_source=chatgpt.com)  
+* [What Happens When Your Reach Your Sending Limits?](https://aws.amazon.com/blogs/messaging-and-targeting/what-happens-when-you-reach-your-sending-limits/)  

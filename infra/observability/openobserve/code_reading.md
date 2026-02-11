@@ -43,3 +43,4 @@
 
 * どこでroot userが作成される？
 * grpcはどうやってroutingされている？
+* ui queryとalert queryの負荷を分散する機構

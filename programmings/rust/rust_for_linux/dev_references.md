@@ -14,3 +14,8 @@
   * CONFIG_XXX の数について言及あり
 * [The state of the kernel Rust Experiment](https://lwn.net/Articles/1050174/)
   * 2025/12あたりにrustのexperimantal がはずれた
+
+
+## Changelog
+
+* [6.19](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=784faa8eca8270671e0ed6d9d21f04bbb80fc5f7)
