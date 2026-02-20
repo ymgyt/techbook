@@ -73,3 +73,10 @@ openssl req -text -noout -in csr.pem
 ```
 
 * SAN(Subject Alternate.. Name)はどうやって入力する?
+
+## Certificate
+
+```sh
+# 確認
+openssl x509 -in my.crt -noout -text
+```

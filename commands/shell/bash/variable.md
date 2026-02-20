@@ -8,6 +8,10 @@
 * `${VAR:=defalt}`: `VAR`が未設定or空の場合に`default`を設定する(変数にsetする)
 * `${VAR:+var}`: `VAR`が未定義or空でない場合は`var`を返す。
 * `${VAR#prefix}`: `VAR`からprefixを取り除く, `#`はshort `##`はlongest
+* `${VAR%suffix}`: `VAR`からsuffixを取り除く, `%`はshort `%%`はlongest
+* `${VAR^^}`: `VAR`の内容を大文字に置換する
+　* `${VAR^}`なら先頭だけ大文字
+  * bash 4かららしい
 
 * `:x` `:`がある場合はunsetと空文字(null, `""`)両対応, `:`がない場合はunset限定。
   * 基本的には`:`をつけておけばよいが人の書いた処理だと`:`ないこともあるので読める必要はある

@@ -19,6 +19,8 @@
 
 * commitのskip/ignore
   * `.cliffignore` file にcommit hashを書く
+  * どうやら`.cliff.toml`と同じdirectoryの`.cliffignore`が参照されるっぽい
+    * `--config paht/to/cliff.toml`で指定した場合は`path/to/.cliffignore`にある必要がありそう
 
 ```text
 # contents of .cliffignore
