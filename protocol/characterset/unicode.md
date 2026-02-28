@@ -14,3 +14,4 @@ Graphemeを構成するcodepointを表す。  Grapheme Cluste = 1文字?
 
 * 歴史的経緯からとてもわかりやすい
     * https://www.buildinsider.net/language/csharpunicode/01
+
