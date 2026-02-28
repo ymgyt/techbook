@@ -6,6 +6,13 @@
   * 非0を返すと処理が止まる
   * trigger毎に複数scriptを指定はできない
 
+## Repositoryで管理する方法
+
+1. `.githooks` dirを作る(名前はなんでもOK, `.git/hooks`ではない)
+2. `.githooks/pre-commit` file を作成する
+3. `git config core.hooksPath .githooks`を設定する
+    * 当該repo限定でhooksのpathが設定される
+
 ## Hooks
 
 ### pre-commit
