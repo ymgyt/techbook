@@ -87,6 +87,8 @@ function main() {
 main ${@+"$@"}
 ```
 
+* bashだと`"$@"` と `${@+"$@"}` は同じ挙動らしい？
+
 ### Header
 
 ```shell
