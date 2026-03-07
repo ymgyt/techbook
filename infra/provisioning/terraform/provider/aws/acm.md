@@ -1,6 +1,7 @@
 # ACM
 
 1. certificate requestの作成
+  * 発行依頼
 
 ```hcl
 resource "aws_acm_certificate" "foo" {

@@ -1,5 +1,10 @@
 # Rust Release History
 
+* [2026/05 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
+  * iteratorに`array_windows()`が追加
+  * `.cargo/config.toml`に`include`が追加
+  * cargoがTOML1.1をparseできるようになった。inline table対応
+
 * [1.93.3](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
   * `*-linux-musl`が 1.2.5になった。DNS resolverの改善がなされたらしい
 

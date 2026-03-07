@@ -8,7 +8,11 @@
 
 ## AWS Credential取得までの流れ
 
-1. identity_idの取得
+### enhanced(simplified) authentication flow
+
+1. IdPからID Token(認証結果情報)を取得
+
+2. identity_idの取得
 
   ```nu
   let identity_pool_id = "xxx"
@@ -20,7 +24,7 @@
     | from json | get "...")
   ```
 
-2. IAM Role credentialの取得
+3. IAM Role credentialの取得
 
   ```nu
   aws cognito-identity get-credentials-for-identity --identity-id $identity_id
@@ -32,8 +36,26 @@
   ```
 
 
+### basic(classic) authentication flow
+
+ClientがAssumeRoleWithWebidentityを呼ぶ方法
+
+
 ## 認証結果とIAM Roleの紐づけ
 
 
 * ruleベースでassumeさせるroleを管理できる
   * claimsが見える
+
+* Cognito UserPool側でグループを作成して、そのグループにIAM Roleを設定
+  * ID Pool側の設定で、tokenからroleを解決するを設定するとグループに設定したroleに解決される
+
+
+## IdentityPoolが受け入れる認証結果
+
+認証アーティファクトとも
+
+* Cognito UserPool ID Token
+* OIDC ID Token
+* SAML 2.0 SAML Assertion
+* SocialProvider Access token

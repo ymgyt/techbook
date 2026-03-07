@@ -128,3 +128,24 @@ moved {
 
 * 一度、moved が `terraform apply` されれば、`moved` は消せる
   * ただし、すべてのstateへのapplyが済んでいると確信できない限りは残しておくのが良い
+
+
+## argumentとblock
+
+```hcl
+# argument
+key = value
+
+# これは値としてのmapを設定したargument
+tags = {
+  name = "foo"
+}
+
+# block
+foo {
+  key = value
+}
+```
+
+* blockはresource schema側でそう宣言されている
+

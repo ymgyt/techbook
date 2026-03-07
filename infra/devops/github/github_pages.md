@@ -76,3 +76,13 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
   ```
+
+
+## Custom Domain
+
+* Repositoryのpages設定で事前にcustom domainを設定しておく
+* DNS CNAMEで`foo.pages.myorg.io` を`myorg.github.io`にむける
+
+1. Userが`foo.pages.myorg.io`にアクセス
+2. CNAMEで`myorg.github.io`に解決
+3. GitHub側のpages設定が参照され、repoのpagesが表示される
