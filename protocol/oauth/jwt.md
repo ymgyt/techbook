@@ -24,4 +24,31 @@
 意味: Authorized Party（認可された当事者）
 用途: クライアントアプリケーションがどのトークンを使用することが許可されているかを指定するため。
 
+### `iat`
+
+* Issued At. いつ発行されたか
+
+### `jti`
+
+* JWT ID. tokenの識別子
+
+
+## Components
+
+`<header>.<payload>.<signature>`
+
+作成方法は
+
+1. b64url(header_json)とb64url(payload_json)を`.`で連結
+2. 電子署名して、`.`で連結
+
+### Header
+
+```json
+{
+  "typ": "JWT",
+  "alg": "HS256"
+}
+```
+をbase64url encodeしたもの
 

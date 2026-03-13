@@ -2,8 +2,31 @@
 
 * `man 5 elf`
 * linkerによって作成され、loaderによって読まれる
-* ELF header, section header, program header(segment)の３つのheaderからなる
+* Header
+  * ELF header
+  * secprogram header(segment)
+    * header entryの配列
+  * section header
+    * header entryの配列
+
 * kernel `include/uapi/linux/elf.h`に定義がある
+
+## ELF Header
+
+先頭16byteは
+
+```c
+unsigned char e_ident [EI_NIDENT]
+```
+というchar配列になっており、endianによらずにparseできるようになってので
+
+```c
+Elf_Ehdr *ehdr;
+if (ehdr->e_ident[EI_CLASS] == ELF_CLASS)
+```
+
+のような判定を使える
+
 
 ## Memo
 

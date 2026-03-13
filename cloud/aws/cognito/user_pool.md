@@ -22,17 +22,28 @@
 
 ## Attributes
 
-UserPoolが管理するuser entity毎の属性情報
+* UserPoolが管理するuser entity毎の属性情報
+* defaultのattributesと追加で定義するcustom attributesがある
 
 * `username`
   * 識別子として機能する
   * 外部IdP由来の場合は、`MyIDP_yuta@ymgyt.io`のように固定識別子がつく
+    * `<idp_id>@<idp_sub>`
   * 設定次第ではsignin時に利用される
   * 変更不可
 
 * `sub`
   * これも識別子
+  * Cognitoが自動生成?
   * 変更不可
+
+* `email`
+* `email_verified`
+  * `email`が検証すみかどうか
+
+### Attributes mapping
+
+外部IdPのclaimsを編集するlayer
 
 
 ## Tier
@@ -91,3 +102,7 @@ UserPoolが管理するuser entity毎の属性情報
     }
   }
   ```
+
+### Well known endpoints
+
+* `.well-known/openid-configuration`はではなくカスタムドメイン`https://cognito-idp.<region>.amazonaws.com/<user_pool_id>/.well-known/openid-configurationにある
