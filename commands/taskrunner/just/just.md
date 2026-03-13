@@ -120,3 +120,50 @@ bar:
 * 変数の受け渡し
   * import側がexportすると環境変数として被import側にみえる
 * `set shell`は受け継がれなかった
+
+
+## 引数渡し方
+
+```just
+# 位置引数
+# just greet world → "hello world"
+greet name:
+    echo "hello {{name}}"
+
+# デフォルト値付き
+# just serve → port="8080" / just serve 9090 → port="9090"
+serve port="8080":
+    cargo run -- --port {{port}}
+
+# 可変長(0個以上)
+# just build → flags="" / just build --release --verbose → flags="--release --verbose"
+build *flags:
+    cargo build {{flags}}
+
+# 可変長(1個以上、引数なしはエラー)
+# just test integration → args="integration"
+test +args:
+    cargo nextest run {{args}}
+
+# 変数オーバーライド (呼出時はレシピ名の前: just env=prod deploy)
+env := "dev"
+deploy:
+    echo "deploying to {{env}}"
+
+# env変数エクスポート ($付きパラメータが子プロセスの環境変数になる)
+# just run-with-env production → $APP_ENV=production
+run-with-env $APP_ENV:
+    printenv APP_ENV
+
+# [arg] long option (v1.46.0+)
+# just create --name foo → name="foo"
+[arg("name", long="name")]
+create name:
+    echo "creating {{name}}"
+
+# [arg] flag (v1.46.0+)
+# just serve-app → no_auth="" / just serve-app --no-auth → no_auth="true"
+[arg("no_auth", long="no-auth", value="true")]
+serve-app no_auth="":
+    echo "auth disabled: {{no_auth}}"
+```
