@@ -20,5 +20,12 @@ sudo tcpdump -i en3 -s 0 <expression>
 * `-w`: 保存file名
   * `--print`: stdoutにも表示する(tee like)
 
-* expression
-  * `port 502`: portの指定
+## Expression
+
+```sh
+# hostとportを指定
+host blog.ymgyt.io and tcp port 443'
+```
+
+* port指定
+  * `port 502`

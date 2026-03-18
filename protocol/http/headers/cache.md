@@ -141,12 +141,12 @@ Cache-Control: public
 Cache-Control: must-revalidate
 ```
 
-* stale になったレスポンスを勝手に再利用しない
-* 再利用前に origin に確認する
+max-age を設定している場合、must-revalidate がなくても max-age 経過後はキャッシュが stale
+えｋ  になります。ただし stale 後の挙動が異なります:
 
-主に「stale の扱い」を制御する directive。
+  - must-revalidate なし: ブラウザはネットワーク不通時などに stale キャッシュをそのまま返すことがある
+  - must-revalidate あり: stale になったら必ずサーバーに再検証する。検証できなければエラーを返す
 
----
 
 #### max-age
 

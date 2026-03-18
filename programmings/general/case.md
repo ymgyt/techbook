@@ -6,3 +6,4 @@
 * `snake_case`
 * `SCREAMING_SNAKE_CASE`
 * `kebab-case`
+* `SCREAMING-KEBAB-CASE"`
