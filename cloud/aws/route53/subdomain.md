@@ -1,6 +1,4 @@
-# Route53
-
-## Subdomainの作成
+# Subdomainの作成
 
 * 前提
   * hosted zone `ymgyt.io`が既に作成されている
