@@ -2,6 +2,7 @@
 
 * 外部/内部の(login済) tokenを受取、STSからCredential(AccessKeyId, SecretAccessKey, SessionToken)を払い出す
   * 認証を前提にしているので認可処理といえる
+  * Credential broker
 
 * 必ずCognito UserPoolを利用しなければいけないわけではなく、外部のIdPを利用できる?
 
@@ -39,7 +40,8 @@
 ### basic(classic) authentication flow
 
 ClientがAssumeRoleWithWebidentityを呼ぶ方法
-
+* SPA → GetId → GetOpenIdToken → AssumeRoleWithWebIdentity → 一時クレデンシャル
+  * SPA が直接 STS を呼ぶ。Role の条件（Condition）を細かく制御できる。
 
 ## 認証結果とIAM Roleの紐づけ
 

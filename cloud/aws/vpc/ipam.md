@@ -75,3 +75,10 @@ aws ec2 allocate-ipam-pool-cidr \
 1. Management AccountからIPAM管理 AccにDelegateする
 2. IPAM Instanceの作成
 3. TopLevel IPAM Poolの作成
+
+## CLI
+
+```sh
+# list pools
+aws ec2 describe-ipam-pools
+```
