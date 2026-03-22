@@ -38,3 +38,25 @@
   * 一般的にはaudか?
 
 Roleをassumeする際はstsの`AssumeRoleWithIdentity` apiを利用する。  その際にOIDC ID Providerが発行したtoken(jwt)を付与する
+
+### Cross Account
+
+Cross Accountでのtrust policyの書き方
+
+```json
+{
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "arn:aws:iam::[ASSUMER_ACCOUNT_ID]:root"
+  },
+  "Action": "sts:AssumeRole",
+  "Condition": {
+    "StringLike": {
+      "aws:PrincipalArn": "arn:aws:iam::[ASSUMER_ACCOUNT_ID]:role/[ROLE_NAME]"
+    }
+  }
+}
+```
+
+* Principalでアカウントを指定して,　`aws:PrincipalArn` conditionを付与しておくとRoleの再作成が行われても壊れない
+* PrincipalにRoleARNを指定すると内部的にPrincipal IDの解決が作成時に行われ、Role再作成で壊れるらしい
