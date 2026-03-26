@@ -6,6 +6,7 @@
 
 * Invoice Receiver
   * 請求書の受取人となるアカウント
+    * payer, memberどちらのアカウントも選べる
   * 請求書を分割しつつ、配信先はManagement accountのままということも可能
 
 * 請求ユニットに含まれないアカウントはこれまで同様、management accountへの請求に含まれる
