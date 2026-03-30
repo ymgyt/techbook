@@ -92,7 +92,7 @@ SESをSMTP Serverとして利用する場合
   # SES_ACCESS_KEY_ID=xxx SES_SECRET_ACCESS_KEY=yyy ./send-test-mail.nu
   def main [
     to: string,
-    --from: string = "noreply@akeg.me"
+    --from: string = "noreply@ymgyt.io"
     --subject: string = "SES SMTP test"
     --body: string = "test"
     --dry-run # 実際にメールを送らない
