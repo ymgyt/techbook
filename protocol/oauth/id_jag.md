@@ -4,9 +4,11 @@ Identity Assertion JWT Aurhorization Grant
 
 https://datatracker.ietf.org/doc/html/draft-ietf-oauth-identity-assertion-authz-grant-02
 
-## 1. 一言でいうと
+Abstruct:
+> This specification provides a mechanism for an application to use an identity assertion to obtain an access token for a third-party API by coordinating through a common enterprise identity provider using Token Exchange [RFC8693] and JWT Profile for OAuth 2.0 Authorization Grants
 
-**信頼された発行者が署名した JWT を Authorization Server のトークンエンドポイントに提示し、ブラウザリダイレクトなしでアクセストークンを取得するグラントタイプ。**
+Third party APIのaccess tokenをenterprise IdPのjwtを利用して取得するmechanism.
+Token Exchange [RFC8693] とJWT Profile for OAuth 2.0 Authorization Grants [RFC7523]を利用する
 
 ## 2. なぜ必要か
 
@@ -97,11 +99,11 @@ grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer
 
 パラメータ:
 
-| パラメータ | 値 | 説明 |
-|---|---|---|
-| `grant_type` | `urn:ietf:params:oauth:grant-type:jwt-bearer` | JWT Bearer グラントを示す固定値 |
-| `assertion` | JWT 文字列 | 発行者が署名した JWT。1 つだけ含む |
-| `scope` | (任意) | 要求するスコープ |
+| パラメータ   | 値                                            | 説明                               |
+|--------------|-----------------------------------------------|------------------------------------|
+| `grant_type` | `urn:ietf:params:oauth:grant-type:jwt-bearer` | JWT Bearer グラントを示す固定値    |
+| `assertion`  | JWT 文字列                                    | 発行者が署名した JWT。1 つだけ含む |
+| `scope`      | (任意)                                        | 要求するスコープ                   |
 
 ### ステップ 3: AS の検証処理
 
@@ -206,122 +208,3 @@ grant_type=authorization_code
 | 何を証明するか | ユーザーまたは主体の identity | クライアントの identity |
 | 何を置き換えるか | Authorization Code 等のグラント | `client_id` + `client_secret` |
 
-## 7. MCP Enterprise-Managed Authorization での利用
-
-MCP (Model Context Protocol) の Enterprise-Managed Authorization は、RFC 7523 の具体的な適用例。
-
-### 概要
-
-企業環境で MCP Server へのアクセスを企業 IdP (Okta, Azure AD 等) で一元管理する仕組み。従業員は MCP Server ごとに個別認可する必要がなく、企業の IdP がポリシーに基づいてアクセス可否を判断する。
-
-### ID-JAG とは
-
-Identity Assertion JWT Authorization Grant (ID-JAG) は、企業 IdP が発行する専用の JWT。JWT ヘッダに `"typ": "oauth-id-jag+jwt"` を含む。
-
-ID-JAG の claim:
-
-| Claim | 必須 | 説明 |
-|---|---|---|
-| `iss` | REQUIRED | IdP の issuer URL |
-| `sub` | REQUIRED | MCP Server におけるユーザー識別子 |
-| `aud` | REQUIRED | MCP AS の issuer URL |
-| `resource` | REQUIRED | MCP Server のリソース識別子 |
-| `client_id` | REQUIRED | MCP AS に登録された MCP Client の ID |
-| `jti` | REQUIRED | JWT の一意識別子 |
-| `exp` | REQUIRED | 有効期限 |
-| `iat` | REQUIRED | 発行時刻 |
-| `scope` | OPTIONAL | 要求するスコープ |
-
-RFC 7523 の汎用的な JWT assertion と比較して、`resource` と `client_id` が追加されている点が特徴。
-
-### フロー
-
-```
-1. MCP Client が企業 IdP で認証 → ID Token を取得
-2. MCP Client が IdP に ID-JAG を要求 (RFC 8693 Token Exchange)
-3. IdP がポリシーを評価し、ID-JAG を発行
-4. MCP Client が MCP Server の AS に ID-JAG を提示 (RFC 7523 jwt-bearer)
-5. MCP AS が ID-JAG を検証し、アクセストークンを発行
-```
-
-ステップ 2 の Token Exchange リクエスト (MCP Client → 企業 IdP):
-
-```http
-POST /oauth2/token HTTP/1.1
-Host: idp.enterprise.com
-Content-Type: application/x-www-form-urlencoded
-
-grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Atoken-exchange
-&requested_token_type=urn%3Aietf%3Aparams%3Aoauth%3Atoken-type%3Aid-jag
-&audience=https%3A%2F%2Fauth.mcp-server.example
-&resource=https%3A%2F%2Fmcp-server.example
-&subject_token=eyJhbG...
-&subject_token_type=urn%3Aietf%3Aparams%3Aoauth%3Atoken-type%3Aid_token
-&scope=read+write
-```
-
-ステップ 4 の jwt-bearer リクエスト (MCP Client → MCP AS):
-
-```http
-POST /oauth2/token HTTP/1.1
-Host: auth.mcp-server.example
-Authorization: Basic <client-credentials>
-Content-Type: application/x-www-form-urlencoded
-
-grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer
-&assertion=eyJhbGciOiJSUzI1NiIsInR5cCI6Im9hdXRoLWlkLWphZytqd3QifQ...
-```
-
-### 使用する仕様の組み合わせ
-
-| ステップ | 仕様 | 用途 |
-|---|---|---|
-| ID-JAG の取得 | RFC 8693 (Token Exchange) | IdP に ID Token を渡して ID-JAG を取得 |
-| アクセストークンの取得 | RFC 7523 (JWT Bearer) | MCP AS に ID-JAG を提示してアクセストークンを取得 |
-
-## 8. Cognito との関係
-
-### Cognito は jwt-bearer をサポートしない
-
-Amazon Cognito のトークンエンドポイントがサポートする `grant_type` は以下の 3 つのみ:
-
-- `authorization_code`
-- `refresh_token`
-- `client_credentials`
-
-`urn:ietf:params:oauth:grant-type:jwt-bearer` を送信すると `unsupported_grant_type` エラーが返る。
-
-## 9. 関連する仕様
-
-### 仕様の階層構造
-
-```
-RFC 7521  Assertion Framework for OAuth 2.0 (抽象フレームワーク)
-├── RFC 7522  SAML 2.0 Bearer Assertion Profile
-└── RFC 7523  JWT Bearer Assertion Profile    ← 本レポートの対象
-```
-
-RFC 7521 が「assertion を使った OAuth 2.0 拡張」の抽象フレームワークを定義し、RFC 7522 (SAML) と RFC 7523 (JWT) がその具体的なプロファイルを定義している。
-
-### 各仕様の関係
-
-| 仕様 | grant\_type | 概要 |
-|---|---|---|
-| RFC 7521 | - | Assertion フレームワークの抽象定義。assertion の要件、トークンリクエストの形式を規定 |
-| RFC 7522 | `urn:ietf:params:oauth:grant-type:saml2-bearer` | SAML 2.0 assertion を使うプロファイル。JWT の代わりに SAML assertion を提示する。SAML ベースのエンタープライズ環境向け |
-| RFC 7523 | `urn:ietf:params:oauth:grant-type:jwt-bearer` | JWT を使うプロファイル。JSON ベースで扱いやすく、現代の Web/API 環境で広く採用 |
-| RFC 8693 | `urn:ietf:params:oauth:grant-type:token-exchange` | Token Exchange。RFC 7523 より汎用的で、JWT 以外のトークンタイプも扱える。delegation/impersonation のセマンティクスを持つ `act` claim を定義 |
-
-### RFC 7523 と RFC 8693 の違い
-
-| 観点 | RFC 7523 (JWT Bearer) | RFC 8693 (Token Exchange) |
-|---|---|---|
-| 入力トークン | JWT のみ | JWT, SAML, OAuth トークン等、複数形式 |
-| セマンティクス | 「この JWT を信頼してアクセストークンをくれ」 | 「このトークンを別のトークンに交換してくれ」 |
-| Delegation | なし | `act` claim で delegation/impersonation を表現可能 |
-| パラメータ | `assertion` | `subject_token`, `actor_token`, `audience`, `resource` 等 |
-| 用途 | IdP 間のトークン交換 | より広範なトークン変換 (downscoping, delegation 等) |
-
-### ID-JAG との関係
-
-MCP の ID-JAG は RFC 7523 の JWT assertion を特殊化したもの。`typ` ヘッダで区別し、`resource` や `client_id` 等の追加 claim を定義している。ID-JAG の取得には RFC 8693 を使い、ID-JAG の提示には RFC 7523 を使う。

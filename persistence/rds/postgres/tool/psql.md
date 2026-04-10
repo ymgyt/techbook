@@ -27,6 +27,7 @@ PGPASSWORD="$password" psql --username $user --dbname $dbname --host $host $port
 * `\du` : 権限(priviledge)確認
 * `\c<dbname>`: connect database
 * `\x`: display形式の変更。縦に伸びる。
+  * `\x on`
 * `SHOW SEARCH_PATH`
 
 ### Table

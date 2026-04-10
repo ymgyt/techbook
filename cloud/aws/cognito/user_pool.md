@@ -4,6 +4,33 @@
   * IdPに機能を追加したlayer
   * identity federation, app integration, ux customization
 
+## エンティティ関係図
+
+```
+User Pool (1)
+  │
+  ├── (1:N) Users
+  │           ├── (N:M) Groups          ... cognito:groups claim
+  │           ├── (1:N) Linked Identities (max 5)
+  │           └── (1:N) Attributes      ... standard + custom:*
+  │
+  ├── (1:N) Groups
+  │           └── (N:1) IAM Role (optional)
+  │
+  ├── (1:N) App Clients
+  │           ├── (N:M) Identity Providers  ... SupportedIdentityProviders
+  │           ├── (N:M) Scopes              ... AllowedOAuthScopes
+  │           └── ReadAttributes / WriteAttributes (属性アクセス制御)
+  │
+  ├── (1:N) Identity Providers
+  │           └── Attribute Mapping (IdP claims → User attributes)
+  │
+  ├── (1:N) Resource Servers
+  │           └── (1:N) Custom Scopes (max 100/RS)
+  │
+  └── (1:1) Domain
+```
+
 ## SignUp(ユーザ登録)
 
 * user-driven
