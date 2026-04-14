@@ -80,7 +80,7 @@ provider "github" {
 * Repository
   * [repositories](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/repositories)
     * [query](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/repositories)がかける
-      * ex. `org:arkedge`
+      * ex. `org:foo`
 
 * Users
   * [users](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/users)

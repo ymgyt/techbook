@@ -4,7 +4,7 @@
 
 * 時系列データの集合
 * namespace + name + dimensionsで一意に特定できる
-  * namespace: `SRE/OPSBOT` ,name: `cloudbilling`, dimensions `service=xxx, region=yyy`
+  * namespace: `SRE/BOT` ,name: `cloudbilling`, dimensions `service=xxx, region=yyy`
 
 
 ### Metrics関連のconsept

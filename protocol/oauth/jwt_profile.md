@@ -31,7 +31,7 @@
 
 4. idpstack が access token を発行
    → scope: styx-api/write
-   → カスタム claims: repository=arkedge/foo
+   → カスタム claims: repository=me/foo
 
 5. workflow が access token で社内 API を呼ぶ
 ```

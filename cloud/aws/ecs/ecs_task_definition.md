@@ -3,7 +3,7 @@
 ```json5
 {
    // Taskの名前
-   "family": "opsbot",
+   "family": "MyAPP",
    // Task全体のCPU割当
    "cpu": "512",
    // Task全体の割当メモリ(MiB)
@@ -12,7 +12,7 @@
    // ECS Agentに割り当てるrole
    "executionRoleArn": "arn:aws:iam::238523969192:role/EcsTaskExecutionRole",
    // containerがassumeするrole
-   "taskRoleArn": "arn:aws:iam::238523969192:role/EcsOpsbot",
+   "taskRoleArn": "arn:aws:iam::238523969192:role/EcsMyAPP",
 
    "networkMode": "awsvpc",
 
@@ -37,20 +37,20 @@
                "value": "production"
             },
             {
-               "name": "OPSBOT_BIND_ADDR",
+               "name": "MyAPP_BIND_ADDR",
                "value": "0.0.0.0"
             },
             {
-               "name": "OPSBOT_BIND_PORT",
+               "name": "MyAPP_BIND_PORT",
                "value": "8080"
             },
             {
-               "name": "OPSBOT_RENOVATE_EVENT_DISPATCH_REPO",
-               "value": "arkedge/renovate-wrapper"
+               "name": "MyAPP_RENOVATE_EVENT_DISPATCH_REPO",
+               "value": "me/foo"
             },
             {
                "name": "RUST_LOG",
-               "value": "info,opsbot=debug,octocrab=debug"
+               "value": "info,MyAPP=debug,octocrab=debug"
             },
             {
                "name": "ZO_TELEMETRY",
@@ -58,14 +58,14 @@
             }
          ],
          "essential": true,
-         "image": "238523969192.dkr.ecr.ap-northeast-1.amazonaws.com/opsbot:latest",
+         "image": "111111111111.dkr.ecr.ap-northeast-1.amazonaws.com/MyAPP:latest",
          "logConfiguration": {
             "logDriver": "awslogs",
             "options": {
                "awslogs-create-group": "true",
-               "awslogs-group": "opsbot",
+               "awslogs-group": "MyAPP",
                "awslogs-region": "ap-northeast-1",
-               "awslogs-stream-prefix": "opsbot",
+               "awslogs-stream-prefix": "MyAPP",
                "max-buffer-size": "5m",
                "mode": "non-blocking"
             }
