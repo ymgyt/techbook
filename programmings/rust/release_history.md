@@ -1,6 +1,10 @@
 # Rust Release History
 
-* [2026/05 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
+* [2026/04/16 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)
+  * `cfg_select!`
+  * if-let guards in matches
+
+* [2026/03 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
   * iteratorに`array_windows()`が追加
   * `.cargo/config.toml`に`include`が追加
   * cargoがTOML1.1をparseできるようになった。inline table対応
