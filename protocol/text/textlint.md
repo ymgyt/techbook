@@ -48,3 +48,7 @@ npx textlint [--debug] README.md
 
 * https://github.com/textlint/textlint-filter-rule-comments
   * コメントでdisableを制御できるやつ
+
+```markdown
+<!-- textlint-disable @textlint-ja/no-synonyms -->
+```
