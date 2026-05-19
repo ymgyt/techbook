@@ -158,3 +158,11 @@ int main(void) {
     }
 }
 ```
+
+
+## References
+
+* [gihyo 連載 プロセッサの仮想をソースから知るその1](https://gihyo.jp/dev/serial/01/vm_work/0006)
+  * KVM src reading
+* [gihyo 連載 プロセッサの仮想をソースから知るその2](https://gihyo.jp/dev/serial/01/vm_work/0007)
+  * qemu-kvm src reading
