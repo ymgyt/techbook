@@ -16,3 +16,8 @@
 
 * Guest OSにはPCI Deviceのようにみせている
   * virtio要のvendor,deviceをもっているので、virtio用のdriverがprobeされる
+
+
+## References
+
+* [Redhat Virtqueues and virtio ring: How the data travels](https://www.redhat.com/en/blog/virtqueues-and-virtio-ring-how-data-travels)
