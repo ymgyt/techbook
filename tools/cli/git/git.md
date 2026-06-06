@@ -21,7 +21,7 @@ git fetch --prune
 
 ### Amend previous commit
 
-[./git commit](/commands/git/commands/git_commit.md)を参照
+[./git commit](/tools/cli/git/commands/git_commit.md)を参照
 
 ### Handle Conflicts
 
