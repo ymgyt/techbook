@@ -1,5 +1,9 @@
 # Rust Release History
 
+* [2026/05/28 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
+  * `assert_matches!()` がstdになった(`core::assert_matches`)
+  * `core::range::Range*` 型がCopy + IntoIterator 実装になった
+
 * [2026/04/16 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)
   * `cfg_select!`
   * if-let guards in matches

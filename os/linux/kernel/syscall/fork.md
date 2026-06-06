@@ -1,10 +1,11 @@
-# process
+# fork
 
-## `fork()`
-
-`fork()` system callを呼び出すと当該プロセスのメモリのcopyが作成される。  
+`fork()` system callを呼び出すと当該プロセスのメモリのcopyが作成される。
 `fork()`の戻り値が呼び出したプロセス(親)とコピーされた側(子)で違うので処理を分岐させることができる。
 
+* 親processをcopyして子processを生成する。
+  * 親processのmemoryをそのまま子processのメモリに展開する
+  * 親processとはPIDが違う
 
 ```python
 #!/usr/bin/python3

@@ -37,6 +37,9 @@ git cliff --bump patch --config cliff.toml --output CHANGELOG
 
 # 認識したcommit の debug
 git cliff --context
+
+# Offline mode
+GIT_CLIFF_OFFLINE=true git cliff 
 ```
 
 ## cliff.toml

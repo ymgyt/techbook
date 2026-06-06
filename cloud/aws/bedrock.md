@@ -22,7 +22,7 @@ aws bedrock list-inference-profiles \
 * model初回呼び出し時にmarketplace subscribeが実行される
   * Principalに`aws-marketplace:Subscribe` 権限が必要になる
     * `Subscribe`権限がない場合は初回に呼び出してもなにも起きない
-  * Console から playground chatでも初回呼び出しとなり、console loginuerが権限をもっていれば、subscribe処理が走る
+  * Console から playground chatでも初回呼び出しとなり、console login userが権限をもっていれば、subscribe処理が走る
 
 
 ## Inference Profile
