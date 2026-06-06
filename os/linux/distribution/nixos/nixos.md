@@ -4,7 +4,7 @@
 
 ```sh
 # 電源off
-# or shtudown
+# or shutdown
 systemctl poweroff
 
 # Reboot
@@ -16,7 +16,7 @@ systemctl reboot
 
 ### Network
 
-`/etc/nixos/configuratin.nix`
+`/etc/nixos/configuration.nix`
 
 ```nix
 networking = {
@@ -76,7 +76,7 @@ sudo dd if=nixos-sd-image-23.11pre500597.0fbe93c5a7c-aarch64-linux.img of=/dev/s
 SD Cardをさして電源をいれる
 
 
-5. `/etx/nixos/configuration.nix`の設定
+5. `/etc/nixos/configuration.nix`の設定
 
 6. `nixos-rebuild boot`
 
@@ -125,5 +125,4 @@ nix profile install github:ymgyt/helix/explorer
 ```
 
 ## References
-
 

@@ -155,7 +155,7 @@ Cargo.*
 
 * `assignees: ["ymgyt"]`: assignees の指定
 * `assigneesFromCodeOwners: <bool>`: CODEOWNER からassigneeを決める
-* `assigneesSampleSize: <interger>`: assignees から sample size人 randomにassigneする 
+* `assigneesSampleSize: <integer>`: assignees から sample size人 randomにassignする
 * `expandCodeOwnersGroups: <bool>`: CODEOWNER で指定されているgroup を memberに分解してassigneeする
 
 ## preset

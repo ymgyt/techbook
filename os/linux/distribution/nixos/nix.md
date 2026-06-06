@@ -19,7 +19,7 @@ experimental-features = nix-command flakes repl-flake
 access-tokens = github.com=ghp_<REDACED>
 ```
 
-* `experimenta-features`で有効にしたいfeatureを指定する
+* `experimental-features`で有効にしたいfeatureを指定する
 * `access-tokens` private repo取得時に設定される
 
 ### sudoをつけた時にBad Credential

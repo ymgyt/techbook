@@ -1,6 +1,5 @@
 # sqlx
 
-## Cli
+## CLI
 
-commandのほう参照!
-
+[sqlx CLI](../../../persistence/rds/tool/sqlx.md)

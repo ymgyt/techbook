@@ -7,7 +7,7 @@
   * namespace: `SRE/BOT` ,name: `cloudbilling`, dimensions `service=xxx, region=yyy`
 
 
-### Metrics関連のconsept
+### Metrics関連のconcept
 
 * namespace
   * metrics nameの名前空間
