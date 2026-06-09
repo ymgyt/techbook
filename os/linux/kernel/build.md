@@ -94,7 +94,7 @@ make \
 
 ```sh
 # 依存をsetup
-nix develop github:ymgyt/derivers
+nix develop github:ymgyt/drivers
 
 # ccはgcc wrapperを想定
 # clangはunwrappedだけど、ccはglibcをみせたいのでwrapperがほしい
