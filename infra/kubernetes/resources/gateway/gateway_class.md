@@ -1,0 +1,12 @@
+# GatewayClass
+
+## Example
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1 
+kind: GatewayClass 
+metadata: 
+  name: aws-alb 
+spec: 
+    controllerName: gateway.k8s.aws/alb
+```
