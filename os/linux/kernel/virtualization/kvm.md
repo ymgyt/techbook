@@ -166,3 +166,4 @@ int main(void) {
   * KVM src reading
 * [gihyo 連載 プロセッサの仮想をソースから知るその2](https://gihyo.jp/dev/serial/01/vm_work/0007)
   * qemu-kvm src reading
+* [新Linuxカーネル解読室 - KVM (概要)](https://www.valinux.co.jp/blog/entry/20251204)
