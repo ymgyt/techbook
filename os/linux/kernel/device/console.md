@@ -1,6 +1,7 @@
 # console
 
 * Kernelが`printk()`を出力する対象デバイス
+  * log buffer管理subsystem
 * `/dev/console`はprintkの出力先に設定されたTTY
 
 `printk()`の出力候補は複数ある、UART,画面(VGA),仮想端末、log buffer

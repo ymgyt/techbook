@@ -3,6 +3,8 @@
 * deviceの発見とdriverとのbindingを管理
 * `/sys/bus`
 * `include/linux/device/bus.h`に`bus_type`として表現される
+* PCIeのように本当に"bus"がある場合もあるが、software的にlifecycle管理だけを担う場合もbus
+  * platform bus
 
 
 ```c
