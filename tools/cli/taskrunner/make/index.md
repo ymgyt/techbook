@@ -66,6 +66,16 @@ targetが実在しないファイルであることを表す。
 all: $(TARGET)
 ```
 
+## Functions
+
+### `if`
+
+`$(if <condition>, <true-action>, <false-action>)`
+
+```make
+$(if $(if-changed-cond),$(cmd), @:)
+```
+
 ## Shellscriptの参照
 
 shellで別fileに変数を定義してそれをmakefileから参照できる

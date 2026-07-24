@@ -49,13 +49,58 @@ IRSAはEKS(EKS Anyware, Redhat OpenShift, EC2 Self host)に限らないが、Pod
 
 * `CreatePodIdentityAssociation` APIを利用する
 
+```hcl
+resource "aws_eks_pod_identity_association" "foo" {
+  cluster_name    = "my-cluster"
+  namespace       = "myns"
+  service_account = "foo"
+  role_arn        = aws_iam_role.foo_role.arn
+}
+```
 
-3. AssociationしてService AccountでPodを作成する
+3. Pod作成時のAdmission Webhook
 
-* [EKS Pod Identity webhook](https://github.com/aws/amazon-eks-pod-identity-webhook)が実行される
-* AWS SDKが確認する場所にcredentialがsetされる
-* CredentialはHTTP経由で取得され、EndpointはEKS Pod Identity Agetnがserveする
-  * Pod Identity Agentはworker nodeで動いている
-  * DaemonSet
-  * Add-on管理
-* AWS SDKはEKS Pod Identityの処理をしっている必要があるのでversionに注意
+mutating admission webhook が以下を注入する
+
+```yaml
+env:
+  - name: AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE
+    value: "/var/run/secrets/pods.eks.amazonaws.com/serviceaccount/eks-pod-identity-token"
+  - name: AWS_CONTAINER_CREDENTIALS_FULL_URI
+    value: "http://169.254.170.23/v1/credentials"
+volumeMounts:
+  - mountPath: "/var/run/secrets/pods.eks.amazonaws.com/serviceaccount/"
+    name: eks-pod-identity-token
+volumes:
+  - name: eks-pod-identity-token
+    projected:
+      sources:
+        - serviceAccountToken:
+            audience: pods.eks.amazonaws.com
+            expirationSeconds: 86400
+            path: eks-pod-identity-token  
+```
+
+4. SDKによるcredential解決
+
+  1. env の static credential (AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY)
+  2. web identity token (AWS_WEB_IDENTITY_TOKEN_FILE がある場合。これが IRSA の口)
+  3. shared config file (~/.aws/ の profile)
+  4. container credentials (AWS_CONTAINER_CREDENTIALS_FULL_URI がある場合。これが Pod Identity の口。もともと ECS 用の口の再利用)
+  5. IMDS (EC2 instance role)
+
+5. Credential 取得
+
+`GET http://169.254.170.23/v1/credentials`
+`Authorization: eyJhbGciOiJSUzI1NiIs...`   ← token file の中身をそのまま
+
+response は ECS の credential endpoint と同じ形の JSON です:
+
+```json
+  {
+    "AccessKeyId": "ASIA...",
+    "SecretAccessKey": "...",
+    "Token": "...",
+    "Expiration": "2026-07-14T12:34:56Z"
+  }
+```
