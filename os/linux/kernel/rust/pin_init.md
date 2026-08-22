@@ -97,3 +97,4 @@ let value: Pin<Box<SelfRef>> = unsafe {
 * [Initialization in Rust with pin-init](https://lpc.events/event/19/contributions/2018/attachments/1769/3837/handout.pdf)
   * LPC2025 Rust sectionのスライド
 * [Pinning in Rust](https://kangrejos.com/Pinning%20in%20Rust.pdf)
+* [For levels of in-place Initialization](https://blog.yoshuawuyts.com/four-levels-of-in-place-initialization/)
