@@ -1,5 +1,10 @@
 # Rust Release History
 
+* [2026/08/20 1.98.0](https://blog.rust-lang.org/2026/08/20/Rust-1.98.0/)
+  * `core::fmt::NumBuffer` が追加
+  * `f64` に `algebraic_add()` が追加
+  * `ManuallyDrop<Box<T>>` の `drop()` 後のmoveがUBでなくなる
+
 * [2026/05/28 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
   * `assert_matches!()` がstdになった(`core::assert_matches`)
   * `core::range::Range*` 型がCopy + IntoIterator 実装になった

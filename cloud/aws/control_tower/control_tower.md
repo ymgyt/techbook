@@ -3,17 +3,19 @@
 * 実態としては他サービスを設定するサービス
   * AWS OrganizationのSCP(Service Control Policy)とAWS Configを設定したり
 
+* やりたいことは、全アカウントにAWS ConfigとCloudtrailを配り、SCPで壊せないようにする
+
 * Control Towerが作成したResourceの変更はSCPで禁止される
 
-## Log集約
+## Components
 
-* Log 集約用のS3 bucketがLog Archive accountに作成される
-* 各accountのAWS Configのdelivery 先にlog archiveを指定する
+* Landing zone
+* Baseline
+* Control
 
-## Landing Zone
+### Landing Zone
 
-* ScalableでSecureなmulti account環境のこと
-  * Control Tower はlanding zoneの実装方法の一つという位置づけ
+* Orgに一つだけ作る
 
 * 作成するとLog ArchiveとAudit AWS Accountが作成される
   * CloudFormation Stack
@@ -28,6 +30,12 @@
     * `aws configservice --profile profile describe-configuration-aggregators --region ap-northeast-1`
   * 被管理accountで、Config Delivery Channel
 
+* Log 集約用のS3 bucketがLog Archive accountに作成される
+  * 各accountのAWS Configのdelivery 先にlog archiveを指定する
+
+### Baseline
+
+* account毎に設定する監査部品関連設定
 
 ## Guardrail
 

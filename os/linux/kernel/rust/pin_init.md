@@ -3,6 +3,42 @@
 * object(struct)を最終配置先で初期化する
 * 初期化後そのアドレスから動かさない
 
+## 課題
+
+Cではまず未初期化のmemory(buffer)を確保して、初期化処理に渡す
+
+```c
+void buf_init(struct buf *p, u8 val)
+{
+    memset(p->data, val, 1024 * 1024);
+}
+```
+
+Rustでは一度値を作って、return by valueする
+
+```rust
+impl Buf {
+    fn new(val: u8) -> Buf {
+        Buf {
+            data: [val; 1024 * 1024],
+        }
+    }
+}
+```
+
+* kernel stackは小さいので、一時的にも1MiBもstackを使いたくない
+
+ただし、これは定義できない。`&mut Buf`の時点で有効な値でなければいけない。
+`&mut Buf` は未初期化のBufを初期化するためのpointer型ではない
+
+```rust
+impl Buf {
+    fn init(p: &mut Buf, val: u8) { /* ... */ }
+}
+```
+
+
+
 以下にように、heapに未初期化(MybeUninit)を確保して、Tに初期化させたのちPinする
 
 ## Mental Model

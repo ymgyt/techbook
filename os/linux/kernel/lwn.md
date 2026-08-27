@@ -8,3 +8,8 @@
 
 * [How many ways are there to configure the Linux kernel?](https://lwn.net/Articles/1034811/)
   * `.config` にいくつの設定項目があるか
+
+* IRQ
+  * irq_sim
+    * [simulated interrutps](https://lwn.net/Articles/729430/)
+  * [A new generic IRQ layer](https://lwn.net/Articles/184750/)
