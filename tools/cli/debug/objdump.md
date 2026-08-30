@@ -11,3 +11,10 @@ objdump -p bin
 * `--x86-asm-syntax=intel`
   * asmをintel記法にする
   * `att`もある
+
+* `--section-headers`
+  * `--headers | -h`
+  * section headerの表示
+
+* `--disassemble`
+  * executable section のassembler表示

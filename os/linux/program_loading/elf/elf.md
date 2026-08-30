@@ -47,8 +47,20 @@ if (ehdr->e_ident[EI_CLASS] == ELF_CLASS)
     * ELFにはsize情報だけ
     * 実行時にメモリにロードされるときにメモリを確保する?
   * `.rodata`
-  * `.dynsym`
   * `.strtab`
+  * `.dynamic`
+    * dynamic linkerが処理に必要なために参照する情報
+  * `.dynsym`
+    * dynamic linkerが解決すべきsymbol
+    * `.symtab`はstripしても動くがこれはstripできない
+  * `.dynstr`
+    * `.dynsym` のstring置き場
+  * `.got.plt`
+    * dynamic linkerが解決したaddressの格納場所
+  * `.plt`
+    * GOTを利用してjumpするコード
+  * `.rela.plt`
+    * 解決すべきplt関連の情報
 
 ## Segments(Program Header)
 

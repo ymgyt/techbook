@@ -14,6 +14,14 @@ virtual Dynamic Shared Object
   * vDSOの`__vdso_clock_gettime`がvvarのデータを読んで時刻を取得
   * syscallなしで現在時刻を返す
 
+## メンタルモデル
+
+1. userspaceからkernel権限を要求せずに実行させてもいいsystem callがある
+  * 現在時刻の取得等
+2. kernel spaceの関数の実装をmmapでuserspaceにみせればいい
+3. 生の関数だと取り回しが悪いので、ELF + so 形式にしておく
+4. dynamic linkerにsymbol table処理させて普通の関数のようにみせる
+
 ## vvar
 
 * kernelがmapする読み取り専用の共有データ
