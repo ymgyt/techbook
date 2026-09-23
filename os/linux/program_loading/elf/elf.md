@@ -109,6 +109,17 @@ hexyl -s 0x318 ./hello -n 0x53
 └────────┴─────────────────────────┴─────────────────────────┴────────┴────────┘
 ```
 
+### PT_DYNAMIC
+
+* Dynamic entryの配列
+  * Dynamic entry tag,valueでenum なデータ
+  * `Elf64_Dyn`
+
+* `DT_RELA`
+  * `.rela.dyn` section 
+* `DT_JMPREL`
+  * `.rela.plt` section
+
 ## Reference
 
 * [ELFのオブジェクトファイル形式を生成する](https://tyfkda.github.io/blog/2020/04/20/elf-obj.html)
